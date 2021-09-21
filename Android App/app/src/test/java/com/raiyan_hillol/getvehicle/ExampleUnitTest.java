@@ -1,4 +1,4 @@
-package com.adetor.getvehicle;
+package com.raiyan_hillol.getvehicle;
 
 import org.junit.Test;
 
