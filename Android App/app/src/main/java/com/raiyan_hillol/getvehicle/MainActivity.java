@@ -8,11 +8,13 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     ActionBarDrawerToggle actionBarNavigationDrawerToggle;
 
@@ -35,20 +37,17 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
-        if (actionBarNavigationDrawerToggle.onOptionsItemSelected(item)) {
+        if(actionBarNavigationDrawerToggle.onOptionsItemSelected(item)){
             return true;
         }
 
         switch (item.getItemId()) {
-            case R.id.item_1:
-                Toast.makeText(this, "Item 1 is selected", Toast.LENGTH_SHORT).show();
-                return true;
-            case R.id.item_2:
-                Toast.makeText(this, "Item 2 is selected", Toast.LENGTH_SHORT).show();
-                return true;
-            case R.id.item_3:
-                Toast.makeText(this, "Item 3 is selected", Toast.LENGTH_SHORT).show();
-                return true;
+            case R.id.update_profile:
+                Toast.makeText(this, "Update Profile is selected", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.logout:
+                Toast.makeText(this, "Logout is selected", Toast.LENGTH_SHORT).show();
+                break;
             default:
                 break;
         }
@@ -58,14 +57,38 @@ public class MainActivity extends AppCompatActivity {
 
     private void setUpNavigationDrawer() {
         DrawerLayout navigationDrawerLayout;
+        NavigationView navigationView;
 
+        navigationView = (NavigationView) findViewById(R.id.navigation_view);
         navigationDrawerLayout = findViewById(R.id.navigation_drawer_layout);
+
         actionBarNavigationDrawerToggle = new ActionBarDrawerToggle(this, navigationDrawerLayout, R.string.nav_open, R.string.nav_close);
 
         navigationDrawerLayout.addDrawerListener(actionBarNavigationDrawerToggle);
+
+        navigationView.setNavigationItemSelectedListener(this);
 
         actionBarNavigationDrawerToggle.syncState();
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.item_1:
+                Toast.makeText(MainActivity.this, "Item 1 is selected", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.item_2:
+                Toast.makeText(MainActivity.this, "Item 2 is selected", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.item_3:
+                Toast.makeText(MainActivity.this, "Item 3 is selected", Toast.LENGTH_SHORT).show();
+                break;
+            default:
+                break;
+        }
+        return true;
+    }
+
 }
