@@ -2,14 +2,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/car_fragment"
-        android:title="Cars"
+        android:title="@string/cars"
         android:icon="@drawable/ic_baseline_directions_car_24"/>
     <item
         android:id="@+id/bike_fragment"
-        android:title="Bikes"
+        android:title="@string/bikes"
         android:icon="@drawable/ic_baseline_directions_bike_24"/>
     <item
         android:id="@+id/other_fragment"
-        android:title="Others"
+        android:title="@string/others"
         android:icon="@drawable/ic_baseline_bike_scooter_24"/>
 </menu>

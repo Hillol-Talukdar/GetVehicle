@@ -3,6 +3,18 @@
     <string name="title_activity_splash_screen">SplashScreenActivity</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+
+    <!--menu items-->
+    <string name="item_1">Item 1</string>
+    <string name="item_2">Item 2</string>
+    <string name="item_3">Item 3</string>
+    <string name="cars">Cars</string>
+    <string name="bikes">Bikes</string>
+    <string name="others">Others</string>
     <string name="update_profile">Update Profile</string>
     <string name="logout">Logout</string>
+
+    <!--navigation drawer-->
+    <string name="nav_open">Open</string>
+    <string name="nav_close">Close</string>
 </resources>
