@@ -1,16 +1,11 @@
-package com.adetor.getvehicle;
+package com.raiyan_hillol.getvehicle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.Window;
 import android.view.WindowManager;
-import android.view.animation.Animation;
-import android.view.animation.LinearInterpolator;
-import android.view.animation.RotateAnimation;
-import android.widget.ImageView;
 
 public class SplashScreenActivity extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package com.adetor.getvehicle;
+package com.raiyan_hillol.getvehicle;
 
 import android.content.Context;
 
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
     public void useAppContext() {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        assertEquals("com.adetor.getvehicle", appContext.getPackageName());
+        assertEquals("com.raiyan_hillol.getvehicle", appContext.getPackageName());
     }
 }
