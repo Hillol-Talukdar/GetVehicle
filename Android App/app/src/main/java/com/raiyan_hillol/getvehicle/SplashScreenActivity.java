@@ -27,6 +27,6 @@ public class SplashScreenActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             }
-        }, 10*1000);
+        }, 2*1000);
     }
 }

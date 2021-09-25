@@ -5,6 +5,9 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,9 +15,11 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity {
 
     ActionBarDrawerToggle actionBarNavigationDrawerToggle;
 
@@ -24,6 +29,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
 
         setUpNavigationDrawer();
+
+        setUpBottomNavigationView();
 
     }
 
@@ -42,6 +49,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
         switch (item.getItemId()) {
+            case R.id.car_fragment:
+                Toast.makeText(this, "Car Fragment is selected", Toast.LENGTH_SHORT).show();
+                break;
             case R.id.update_profile:
                 Toast.makeText(this, "Update Profile is selected", Toast.LENGTH_SHORT).show();
                 break;
@@ -66,29 +76,61 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         navigationDrawerLayout.addDrawerListener(actionBarNavigationDrawerToggle);
 
-        navigationView.setNavigationItemSelectedListener(this);
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.item_1:
+                        Toast.makeText(MainActivity.this, "Item 1 is selected", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.item_2:
+                        Toast.makeText(MainActivity.this, "Item 2 is selected", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.item_3:
+                        Toast.makeText(MainActivity.this, "Item 3 is selected", Toast.LENGTH_SHORT).show();
+                        break;
+                    default:
+                        break;
+                }
+                return true;
+            }
+        });
 
         actionBarNavigationDrawerToggle.syncState();
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.item_1:
-                Toast.makeText(MainActivity.this, "Item 1 is selected", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.item_2:
-                Toast.makeText(MainActivity.this, "Item 2 is selected", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.item_3:
-                Toast.makeText(MainActivity.this, "Item 3 is selected", Toast.LENGTH_SHORT).show();
-                break;
-            default:
-                break;
-        }
-        return true;
+    private void setUpBottomNavigationView() {
+        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavigationView);
+
+        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.car_fragment:
+                        Toast.makeText(MainActivity.this, "Car Fragment is selected", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.bike_fragment:
+                        Toast.makeText(MainActivity.this, "Bike Fragment is selected", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.other_fragment:
+                        Toast.makeText(MainActivity.this, "Other Fragment is selected", Toast.LENGTH_SHORT).show();
+                        break;
+                    default:
+                        break;
+                }
+                return true;
+            }
+        });
+
+    }
+
+    public void switchFragment(Fragment fragment){
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.main_activity_frame_layout, fragment);
+        fragmentTransaction.commit();
     }
 
 }
