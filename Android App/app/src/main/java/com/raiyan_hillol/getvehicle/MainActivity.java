@@ -4,8 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
 
-import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
@@ -27,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        switchFragment(new CarsFragment());
 
         setUpNavigationDrawer();
 
@@ -107,30 +109,35 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                androidx.fragment.app.Fragment selectedFragment = null;
                 switch (item.getItemId()) {
                     case R.id.car_fragment:
-                        Toast.makeText(MainActivity.this, "Car Fragment is selected", Toast.LENGTH_SHORT).show();
+                        selectedFragment = new CarsFragment();
                         break;
                     case R.id.bike_fragment:
-                        Toast.makeText(MainActivity.this, "Bike Fragment is selected", Toast.LENGTH_SHORT).show();
+                        selectedFragment = new BikesFragment();
                         break;
                     case R.id.other_fragment:
-                        Toast.makeText(MainActivity.this, "Other Fragment is selected", Toast.LENGTH_SHORT).show();
+                        selectedFragment = new OthersFragment();
                         break;
                     default:
                         break;
                 }
-                return true;
+                return switchFragment(selectedFragment);
             }
         });
 
     }
 
-    public void switchFragment(Fragment fragment){
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.main_activity_frame_layout, fragment);
-        fragmentTransaction.commit();
+    public boolean switchFragment(Fragment fragment){
+        if (fragment != null) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.main_activity_frame_layout, fragment)
+                    .commit();
+            return true;
+        }
+        return false;
     }
 
 }
