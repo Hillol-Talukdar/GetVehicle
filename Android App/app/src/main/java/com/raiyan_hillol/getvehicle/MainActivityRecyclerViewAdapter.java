@@ -3,6 +3,7 @@ package com.raiyan_hillol.getvehicle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,12 +42,13 @@ public class MainActivityRecyclerViewAdapter extends RecyclerView.Adapter<MainAc
         return this.allVehicleData.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         ImageView vehicleThumbnail;
         TextView vehicleModel;
         TextView vehicleShortDetails;
         TextView vehicleLocation;
+        Button vehicleDetailsButton;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -55,7 +57,16 @@ public class MainActivityRecyclerViewAdapter extends RecyclerView.Adapter<MainAc
             vehicleModel = itemView.findViewById(R.id.vehicle_model);
             vehicleShortDetails = itemView.findViewById(R.id.vehicle_short_detail);
             vehicleLocation = itemView.findViewById(R.id.vehicle_location);
+            vehicleDetailsButton = itemView.findViewById(R.id.view_item_details_button);
 
+            itemView.setOnClickListener(this::onClick);
+            vehicleDetailsButton.setOnClickListener(this::onClick);
+
+        }
+
+        @Override
+        public void onClick(View v) {
+            Toast.makeText(itemView.getContext(), "Position: "+this.getAbsoluteAdapterPosition(),Toast.LENGTH_SHORT).show();
         }
     }
 }
