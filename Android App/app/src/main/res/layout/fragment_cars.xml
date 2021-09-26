@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".CarsFragment"
-    android:background="@color/teal_700">
+    android:background="#EFF1F1">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/main_activity_recycler_view"
