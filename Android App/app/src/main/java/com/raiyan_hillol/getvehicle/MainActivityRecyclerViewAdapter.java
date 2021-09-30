@@ -34,7 +34,7 @@ public class MainActivityRecyclerViewAdapter extends RecyclerView.Adapter<MainAc
     public void onBindViewHolder(@NonNull MainActivityRecyclerViewAdapter.ViewHolder holder, int position) {
         holder.vehicleModel.setText(allVehicleData.get(position).getModel());
         holder.vehicleShortDetails.setText(Tools.getFormattedShortDetails(allVehicleData.get(position)));
-        holder.vehicleLocation.setText(allVehicleData.get(position).getLocation());
+        holder.vehicleLocation.setText(allVehicleData.get(position).getCurrentLocation());
     }
 
     @Override
