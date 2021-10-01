@@ -3,6 +3,7 @@ package com.raiyan_hillol.getvehicle;
 import android.content.Context;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -40,9 +41,17 @@ public class Tools {
         return formattedShortDetails;
     }
 
-    public static void setRecyclerViewAdapter(View fragmentView, Context context) {
+    private static ArrayList<String> getStringArrayListFromJSONArray(JSONArray jsonArray) throws JSONException {
+        ArrayList<String>stringArrayList = new ArrayList<>();
 
-        Log.d("Raiyan13", "Starting now...........");
+        for(int i=0; i<jsonArray.length(); i++){
+            stringArrayList.add(jsonArray.getString(i));
+        }
+
+        return stringArrayList;
+    }
+
+    public static void setRecyclerViewAdapter(View fragmentView, Context context) {
 
         RequestQueue requestQueue;
 
@@ -64,21 +73,36 @@ public class Tools {
             @Override
             public void onResponse(JSONObject response) {
 
+                RecyclerView recyclerView;
+                MainActivityRecyclerViewAdapter recyclerViewAdapter;
                 ArrayList<VehicleData> allVehicleData = new ArrayList<>();
-                
+
                 try {
                     JSONArray jsonArray = response.getJSONArray("data");
-                    Log.d("Raiyan13", jsonArray.toString());
                     for(int i=0; i<jsonArray.length(); i++){
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
-                        allVehicleData.add(new VehicleData(jsonObject.getString("_id"), jsonObject.getString("model"), 4, jsonObject.getString("currentLocation"), jsonObject.getString("vehicleType"), jsonObject.getString("transmission")));
+                        allVehicleData.add(new VehicleData(
+                                jsonObject.getString("_id"),
+                                jsonObject.getString("model"),
+                                jsonObject.getString("vehicleType"),
+                                jsonObject.getString("genericType"),
+                                jsonObject.getString("transmission"),
+                                jsonObject.getString("fuelType"),
+                                jsonObject.getString("engine"),
+                                jsonObject.getString("bootSpace"),
+                                jsonObject.getString("groundClearance"),
+                                jsonObject.getDouble("costPerDay"),
+                                jsonObject.getInt("seatCount"),
+                                jsonObject.getDouble("Mileage"),
+                                jsonObject.getDouble("averageRating"),
+                                jsonObject.getJSONObject("currentLocation").getString("address"),
+                                jsonObject.getBoolean("bookingStatus"),
+                                getStringArrayListFromJSONArray(jsonObject.getJSONArray("photos")),
+                                jsonObject.getString("user")));
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
-                RecyclerView recyclerView;
-                MainActivityRecyclerViewAdapter recyclerViewAdapter;
 
                 recyclerView = fragmentView.findViewById(R.id.main_activity_recycler_view);
                 recyclerViewAdapter = new MainActivityRecyclerViewAdapter(allVehicleData);
@@ -88,18 +112,11 @@ public class Tools {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d("Raiyan13", error.getMessage());
+                setRecyclerViewAdapter(fragmentView, context);
+                error.printStackTrace();
             }
         });
-
         requestQueue.add(jsonArrayRequest);
-
-//
-//        allVehicleData.add(new VehicleData("1", "BMW 7 Series", 4, "Dhaka,Bangladesh", "SEDAN", "Automatic"));
-//        allVehicleData.add(new VehicleData("2", "Volvo XC90", 4, "Sylhet,Bangladesh", "HATCHBACK", "Automatic"));
-//        allVehicleData.add(new VehicleData("3", "Mahindra Thar", 4, "Rajshahi,Bangladesh", "SUV", "Manual"));
-//        allVehicleData.add(new VehicleData("4", "Mahindra XUV700", 4, "Barishal,Bangladesh", "SUV", "Automatic"));
-
     }
 }
 
