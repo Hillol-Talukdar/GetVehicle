@@ -13,10 +13,10 @@ public class VehicleData {
     private String engine;
     private String bootSpace;
     private String groundClearance;
-    private float costPerDay;
+    private double costPerDay;
     private int seatCount;
-    private float mileage;
-    private float averageRating;
+    private double mileage;
+    private double averageRating;
     private String currentLocation;
     private boolean bookingStatus;
     private ArrayList<String> photos;
@@ -33,7 +33,27 @@ public class VehicleData {
         this.transmission = transmission;
     }
 
-    public VehicleData(String id, String model, String vehicleType, String genericType, String transmission, String fuelType, String engine, String bootSpace, String groundClearance, float costPerDay, int seatCount, float mileage, float averageRating, String currentLocation, boolean bookingStatus, ArrayList<String> photos, String userId, String createTime, String updateTime) {
+    public VehicleData(String id, String model, String vehicleType, String genericType, String transmission, String fuelType, String engine, String bootSpace, String groundClearance, double costPerDay, int seatCount, double mileage, double averageRating, String currentLocation, boolean bookingStatus, ArrayList<String> photos, String userId) {
+        this.id = id;
+        this.model = model;
+        this.vehicleType = vehicleType;
+        this.genericType = genericType;
+        this.transmission = transmission;
+        this.fuelType = fuelType;
+        this.engine = engine;
+        this.bootSpace = bootSpace;
+        this.groundClearance = groundClearance;
+        this.costPerDay = costPerDay;
+        this.seatCount = seatCount;
+        this.mileage = mileage;
+        this.averageRating = averageRating;
+        this.currentLocation = currentLocation;
+        this.bookingStatus = bookingStatus;
+        this.photos = photos;
+        this.userId = userId;
+    }
+
+    public VehicleData(String id, String model, String vehicleType, String genericType, String transmission, String fuelType, String engine, String bootSpace, String groundClearance, double costPerDay, int seatCount, double mileage, double averageRating, String currentLocation, boolean bookingStatus, ArrayList<String> photos, String userId, String createTime, String updateTime) {
         this.id = id;
         this.model = model;
         this.vehicleType = vehicleType;
@@ -127,11 +147,11 @@ public class VehicleData {
         this.groundClearance = groundClearance;
     }
 
-    public float getCostPerDay() {
+    public double getCostPerDay() {
         return costPerDay;
     }
 
-    public void setCostPerDay(float costPerDay) {
+    public void setCostPerDay(double costPerDay) {
         this.costPerDay = costPerDay;
     }
 
@@ -143,19 +163,19 @@ public class VehicleData {
         this.seatCount = seatCount;
     }
 
-    public float getMileage() {
+    public double getMileage() {
         return mileage;
     }
 
-    public void setMileage(float mileage) {
+    public void setMileage(double mileage) {
         this.mileage = mileage;
     }
 
-    public float getAverageRating() {
+    public double getAverageRating() {
         return averageRating;
     }
 
-    public void setAverageRating(float averageRating) {
+    public void setAverageRating(double averageRating) {
         this.averageRating = averageRating;
     }
 
