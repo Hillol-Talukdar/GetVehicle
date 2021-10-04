@@ -20,7 +20,7 @@ public class CarsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         fragmentView = inflater.inflate(R.layout.fragment_cars, container, false);
-        Tools.setRecyclerViewAdapter(fragmentView, getActivity().getApplicationContext());
+        Tools.setRecyclerViewAdapter(fragmentView, getActivity());
         return fragmentView;
     }
 

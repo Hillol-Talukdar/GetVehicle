@@ -1,9 +1,7 @@
 package com.raiyan_hillol.getvehicle;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,9 +15,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -85,27 +81,27 @@ public class Tools {
                                 jsonObject.getString("_id"),
                                 jsonObject.getString("model"),
                                 jsonObject.getString("vehicleType"),
-                                jsonObject.getString("genericType"),
+//                                jsonObject.getString("genericType"),
                                 jsonObject.getString("transmission"),
                                 jsonObject.getString("fuelType"),
                                 jsonObject.getString("engine"),
-                                jsonObject.getString("bootSpace"),
-                                jsonObject.getString("groundClearance"),
+//                                jsonObject.getString("bootSpace"),
+//                                jsonObject.getString("groundClearance"),
                                 jsonObject.getDouble("costPerDay"),
-                                jsonObject.getInt("seatCount"),
-                                jsonObject.getDouble("Mileage"),
-                                jsonObject.getDouble("averageRating"),
-                                jsonObject.getJSONObject("currentLocation").getString("address"),
-                                jsonObject.getBoolean("bookingStatus"),
-                                getStringArrayListFromJSONArray(jsonObject.getJSONArray("photos")),
-                                jsonObject.getString("user")));
+//                                jsonObject.getInt("seatCount"),
+//                                jsonObject.getDouble("Mileage"),
+//                                jsonObject.getDouble("averageRating"),
+                                jsonObject.getJSONObject("currentLocation").getString("address")
+//                                jsonObject.getBoolean("bookingStatus"),
+//                                getStringArrayListFromJSONArray(jsonObject.getJSONArray("photos")),
+//                                jsonObject.getString("user")
+                        ));
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
                 recyclerView = fragmentView.findViewById(R.id.main_activity_recycler_view);
-                recyclerViewAdapter = new MainActivityRecyclerViewAdapter(allVehicleData);
+                recyclerViewAdapter = new MainActivityRecyclerViewAdapter(allVehicleData, context);
                 recyclerView.setAdapter(recyclerViewAdapter);
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
             }
@@ -117,6 +113,11 @@ public class Tools {
             }
         });
         requestQueue.add(jsonArrayRequest);
+    }
+
+    public static VehicleData getSingleVehicleData(String vehicleId) {
+        VehicleData vehicleData = null;
+        return vehicleData;
     }
 }
 
