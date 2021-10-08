@@ -8,12 +8,9 @@ const categorySchema = new mongoose.Schema(
             minlength: 2,
             unique: true,
         },
-        subCategory: [
+        subCategories: [
             {
                 name: String,
-                trim: true,
-                minlength: 2,
-                unique: true,
             },
         ],
     },
