@@ -7,54 +7,9 @@ const vehicleSchema = new mongoose.Schema(
             trim: true,
             required: true,
         },
-        vehicleType: {
-            type: String,
-            enum: [
-                // car
-                'SEDAN',
-                'COUPE',
-                'SPORTS CAR',
-                'STATION WAGON',
-                'HATCHBACK',
-                'CONVERTIBLE',
-                'SUV',
-                'MINIVAN',
-                'PICKUP TRUCK',
-
-                // bike
-                'Cruiser',
-                'Sport Bike',
-                'Touring',
-                'Off-Road',
-                'Dual-Sport',
-
-                // bycycle
-                'Road Bike',
-                'Mountain Bike',
-                'Touring Bike',
-                'Folding Bike',
-                'Track Bike',
-                'BMX',
-                'Recumbent Bike',
-
-                // scooter
-                'Stunt Scooter',
-                'Big wheel Scooter',
-                'Dirt Scooter',
-                'Electric Scooter',
-                'Three-Wheel Scooters',
-                'Foldable Scooter',
-                'Space Scooter',
-                'Foldable Scooter',
-            ],
-            trim: true,
-            required: true,
-        },
-        genericType: {
-            type: String,
-            enum: ['Car', 'Bike', 'Bycycle', 'Scooter'],
-            trim: true,
-            required: true,
+        categories: {
+            category: String,
+            subCategory: String,
         },
         transmission: {
             type: String,
