@@ -10,7 +10,7 @@ require('dotenv').config();
 
 app.use(...middlewares);
 
-// db.makeDb();
+db.makeDb();
 
 router.registerApplicationRoutes(app);
 
