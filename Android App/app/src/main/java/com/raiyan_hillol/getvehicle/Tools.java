@@ -1,6 +1,7 @@
 package com.raiyan_hillol.getvehicle;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -63,7 +64,7 @@ public class Tools {
 
         requestQueue.start();
 
-        String url ="http://192.168.0.5:4000/api/vehicle";
+        String url ="http://192.168.0.103:4000/api/vehicle";
 
         JsonObjectRequest jsonArrayRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
 
@@ -88,7 +89,7 @@ public class Tools {
     }
 
     //TODO: make the response things reusable
-    public static VehicleData getSingleVehicle(String vehicleId, Context context) {
+    public static void getSingleVehicle(String vehicleId, Context context) {
 
         final VehicleData[] vehicleData = new VehicleData[1];
 
@@ -105,13 +106,14 @@ public class Tools {
 
         requestQueue.start();
 
-        String url ="http://192.168.0.5:4000/api/vehicle/" + vehicleId;
+        String url ="http://192.168.0.103:4000/api/vehicle/" + vehicleId;
 
         JsonObjectRequest jsonArrayRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
 
             @Override
             public void onResponse(JSONObject response) {
                 vehicleData[0] = getVehicleFromJSONObject(response);
+                Log.d("Raiyan13", "The response: \n" + response);
             }
         }, new Response.ErrorListener() {
             @Override
@@ -122,7 +124,6 @@ public class Tools {
         });
         requestQueue.add(jsonArrayRequest);
 
-        return vehicleData[0];
     }
 
     private static VehicleData getVehicleFromJSONObject(JSONObject response) {
@@ -133,20 +134,21 @@ public class Tools {
                     jsonObject.getString("_id"),
                     jsonObject.getString("model"),
                     jsonObject.getString("vehicleType"),
-                    jsonObject.getString("genericType"),
+//                    jsonObject.getString("genericType"),
                     jsonObject.getString("transmission"),
                     jsonObject.getString("fuelType"),
                     jsonObject.getString("engine"),
-                    jsonObject.getString("bootSpace"),
-                    jsonObject.getString("groundClearance"),
+//                    jsonObject.getString("bootSpace"),
+//                    jsonObject.getString("groundClearance"),
                     jsonObject.getDouble("costPerDay"),
-                    jsonObject.getInt("seatCount"),
-                    jsonObject.getDouble("Mileage"),
-                    jsonObject.getDouble("averageRating"),
-                    jsonObject.getJSONObject("currentLocation").getString("address"),
-                    jsonObject.getBoolean("bookingStatus"),
-                    Tools.getStringArrayListFromJSONArray(jsonObject.getJSONArray("photos")),
-                    jsonObject.getString("user"));
+//                    jsonObject.getInt("seatCount"),
+//                    jsonObject.getDouble("Mileage"),
+//                    jsonObject.getDouble("averageRating"),
+                    jsonObject.getJSONObject("currentLocation").getString("address")
+//                    jsonObject.getBoolean("bookingStatus"),
+//                    Tools.getStringArrayListFromJSONArray(jsonObject.getJSONArray("photos")),
+//                    jsonObject.getString("user")
+            );
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -163,20 +165,21 @@ public class Tools {
                         jsonObjectArray.getString("_id"),
                         jsonObjectArray.getString("model"),
                         jsonObjectArray.getString("vehicleType"),
-                        jsonObjectArray.getString("genericType"),
+//                    jsonObjectArray.getString("genericType"),
                         jsonObjectArray.getString("transmission"),
                         jsonObjectArray.getString("fuelType"),
                         jsonObjectArray.getString("engine"),
-                        jsonObjectArray.getString("bootSpace"),
-                        jsonObjectArray.getString("groundClearance"),
+//                    jsonObjectArray.getString("bootSpace"),
+//                    jsonObjectArray.getString("groundClearance"),
                         jsonObjectArray.getDouble("costPerDay"),
-                        jsonObjectArray.getInt("seatCount"),
-                        jsonObjectArray.getDouble("Mileage"),
-                        jsonObjectArray.getDouble("averageRating"),
-                        jsonObjectArray.getJSONObject("currentLocation").getString("address"),
-                        jsonObjectArray.getBoolean("bookingStatus"),
-                        Tools.getStringArrayListFromJSONArray(jsonObjectArray.getJSONArray("photos")),
-                        jsonObjectArray.getString("user")));
+//                        jsonObjectArray.getInt("seatCount"),
+//                    jsonObjectArray.getDouble("Mileage"),
+//                    jsonObjectArray.getDouble("averageRating"),
+                        jsonObjectArray.getJSONObject("currentLocation").getString("address")
+//                    jsonObjectArray.getBoolean("bookingStatus"),
+//                    Tools.getStringArrayListFromJSONArray(jsonObjectArray.getJSONArray("photos")),
+//                    jsonObjectArray.getString("user")
+                ));
             }
         } catch (JSONException e) {
             e.printStackTrace();
