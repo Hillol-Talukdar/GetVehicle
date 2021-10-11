@@ -79,6 +79,17 @@ public class VehicleData {
         this.updateTime = updateTime;
     }
 
+    public VehicleData(String id, String model, String vehicleType, String transmission, String fuelType, String engine, double costPerDay, String location) {
+        this.id = id;
+        this.model = model;
+        this.vehicleType = vehicleType;
+        this.transmission = transmission;
+        this.fuelType = fuelType;
+        this.engine = engine;
+        this.costPerDay = costPerDay;
+        this.currentLocation = location;
+    }
+
     public String getId() {
         return id;
     }

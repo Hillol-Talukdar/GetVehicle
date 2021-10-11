@@ -73,7 +73,7 @@ public class Tools {
                 MainActivityRecyclerViewAdapter recyclerViewAdapter;
 
                 recyclerView = fragmentView.findViewById(R.id.main_activity_recycler_view);
-                recyclerViewAdapter = new MainActivityRecyclerViewAdapter(getAllVehiclesFromJSONObject(response));
+                recyclerViewAdapter = new MainActivityRecyclerViewAdapter(getAllVehiclesFromJSONObject(response), context);
                 recyclerView.setAdapter(recyclerViewAdapter);
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
             }
