@@ -19,16 +19,18 @@ public class VehicleDetailsActivity extends AppCompatActivity {
     private void loadVehicleDetails() {
         Intent intent = getIntent();
         String vehicleId = intent.getStringExtra("selected_vehicle_id");
-        VehicleData singleVehicleData = Tools.getSingleVehicleData(vehicleId);
+//        VehicleData singleVehicleData = Tools.getSingleVehicle(vehicleId, getApplicationContext());
 
-        TextView vehicleModel = findViewById(R.id.vehicle_model_detail);
-        TextView vehicleType = findViewById(R.id.vehicle_type_detail);
-        TextView vehicleTransmission = findViewById(R.id.vehicle_transmission_detail);
-        TextView vehicleCurrentLocation = findViewById(R.id.current_location_detail);
+        Tools.getSingleVehicle(vehicleId, getApplicationContext());
 
-        vehicleModel.setText(singleVehicleData.getModel());
-        vehicleType.setText(singleVehicleData.getVehicleType());
-        vehicleTransmission.setText(singleVehicleData.getTransmission());
-        vehicleCurrentLocation.setText(singleVehicleData.getCurrentLocation());
+//        TextView vehicleModel = findViewById(R.id.vehicle_model_detail);
+//        TextView vehicleType = findViewById(R.id.vehicle_type_detail);
+//        TextView vehicleTransmission = findViewById(R.id.vehicle_transmission_detail);
+//        TextView vehicleCurrentLocation = findViewById(R.id.current_location_detail);
+//
+//        vehicleModel.setText(singleVehicleData.getModel());
+//        vehicleType.setText(singleVehicleData.getVehicleType());
+//        vehicleTransmission.setText(singleVehicleData.getTransmission());
+//        vehicleCurrentLocation.setText(singleVehicleData.getCurrentLocation());
     }
 }

@@ -1,6 +1,7 @@
 package com.raiyan_hillol.getvehicle;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -37,7 +38,7 @@ public class Tools {
         return formattedShortDetails;
     }
 
-    private static ArrayList<String> getStringArrayListFromJSONArray(JSONArray jsonArray) throws JSONException {
+    public static ArrayList<String> getStringArrayListFromJSONArray(JSONArray jsonArray) throws JSONException {
         ArrayList<String>stringArrayList = new ArrayList<>();
 
         for(int i=0; i<jsonArray.length(); i++){
@@ -47,6 +48,7 @@ public class Tools {
         return stringArrayList;
     }
 
+    //TODO: make the response things reusable
     public static void setRecyclerViewAdapter(View fragmentView, Context context) {
 
         RequestQueue requestQueue;
@@ -62,46 +64,17 @@ public class Tools {
 
         requestQueue.start();
 
-        String url ="http://192.168.0.5:4000/api/vehicle";
+        String url ="http://192.168.0.103:4000/api/vehicle";
 
         JsonObjectRequest jsonArrayRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
 
             @Override
             public void onResponse(JSONObject response) {
-
                 RecyclerView recyclerView;
                 MainActivityRecyclerViewAdapter recyclerViewAdapter;
-                ArrayList<VehicleData> allVehicleData = new ArrayList<>();
 
-                try {
-                    JSONArray jsonArray = response.getJSONArray("data");
-                    for(int i=0; i<jsonArray.length(); i++){
-                        JSONObject jsonObject = jsonArray.getJSONObject(i);
-                        allVehicleData.add(new VehicleData(
-                                jsonObject.getString("_id"),
-                                jsonObject.getString("model"),
-                                jsonObject.getString("vehicleType"),
-//                                jsonObject.getString("genericType"),
-                                jsonObject.getString("transmission"),
-                                jsonObject.getString("fuelType"),
-                                jsonObject.getString("engine"),
-//                                jsonObject.getString("bootSpace"),
-//                                jsonObject.getString("groundClearance"),
-                                jsonObject.getDouble("costPerDay"),
-//                                jsonObject.getInt("seatCount"),
-//                                jsonObject.getDouble("Mileage"),
-//                                jsonObject.getDouble("averageRating"),
-                                jsonObject.getJSONObject("currentLocation").getString("address")
-//                                jsonObject.getBoolean("bookingStatus"),
-//                                getStringArrayListFromJSONArray(jsonObject.getJSONArray("photos")),
-//                                jsonObject.getString("user")
-                        ));
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
                 recyclerView = fragmentView.findViewById(R.id.main_activity_recycler_view);
-                recyclerViewAdapter = new MainActivityRecyclerViewAdapter(allVehicleData, context);
+                recyclerViewAdapter = new MainActivityRecyclerViewAdapter(getAllVehiclesFromJSONObject(response), context);
                 recyclerView.setAdapter(recyclerViewAdapter);
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
             }
@@ -115,9 +88,104 @@ public class Tools {
         requestQueue.add(jsonArrayRequest);
     }
 
-    public static VehicleData getSingleVehicleData(String vehicleId) {
+    //TODO: make the response things reusable
+    public static void getSingleVehicle(String vehicleId, Context context) {
+
+        final VehicleData[] vehicleData = new VehicleData[1];
+
+        RequestQueue requestQueue;
+
+        Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
+
+
+        Network network = new BasicNetwork(new HurlStack());
+
+
+        requestQueue = new RequestQueue(cache, network);
+
+
+        requestQueue.start();
+
+        String url ="http://192.168.0.103:4000/api/vehicle/" + vehicleId;
+
+        JsonObjectRequest jsonArrayRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+                vehicleData[0] = getVehicleFromJSONObject(response);
+                Log.d("Raiyan13", "The response: \n" + response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                getSingleVehicle(vehicleId, context);
+                error.printStackTrace();
+            }
+        });
+        requestQueue.add(jsonArrayRequest);
+
+    }
+
+    private static VehicleData getVehicleFromJSONObject(JSONObject response) {
         VehicleData vehicleData = null;
+        try {
+            JSONObject jsonObject = response.getJSONObject("data");
+            vehicleData = new VehicleData(
+                    jsonObject.getString("_id"),
+                    jsonObject.getString("model"),
+                    jsonObject.getString("vehicleType"),
+//                    jsonObject.getString("genericType"),
+                    jsonObject.getString("transmission"),
+                    jsonObject.getString("fuelType"),
+                    jsonObject.getString("engine"),
+//                    jsonObject.getString("bootSpace"),
+//                    jsonObject.getString("groundClearance"),
+                    jsonObject.getDouble("costPerDay"),
+//                    jsonObject.getInt("seatCount"),
+//                    jsonObject.getDouble("Mileage"),
+//                    jsonObject.getDouble("averageRating"),
+                    jsonObject.getJSONObject("currentLocation").getString("address")
+//                    jsonObject.getBoolean("bookingStatus"),
+//                    Tools.getStringArrayListFromJSONArray(jsonObject.getJSONArray("photos")),
+//                    jsonObject.getString("user")
+            );
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         return vehicleData;
     }
+
+    public static ArrayList<VehicleData> getAllVehiclesFromJSONObject(JSONObject jsonObject) {
+        ArrayList<VehicleData> allVehicleData = new ArrayList<>();
+        try {
+            JSONArray jsonArray = jsonObject.getJSONArray("data");
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject jsonObjectArray = jsonArray.getJSONObject(i);
+                allVehicleData.add(new VehicleData(
+                        jsonObjectArray.getString("_id"),
+                        jsonObjectArray.getString("model"),
+                        jsonObjectArray.getString("vehicleType"),
+//                    jsonObjectArray.getString("genericType"),
+                        jsonObjectArray.getString("transmission"),
+                        jsonObjectArray.getString("fuelType"),
+                        jsonObjectArray.getString("engine"),
+//                    jsonObjectArray.getString("bootSpace"),
+//                    jsonObjectArray.getString("groundClearance"),
+                        jsonObjectArray.getDouble("costPerDay"),
+//                        jsonObjectArray.getInt("seatCount"),
+//                    jsonObjectArray.getDouble("Mileage"),
+//                    jsonObjectArray.getDouble("averageRating"),
+                        jsonObjectArray.getJSONObject("currentLocation").getString("address")
+//                    jsonObjectArray.getBoolean("bookingStatus"),
+//                    Tools.getStringArrayListFromJSONArray(jsonObjectArray.getJSONArray("photos")),
+//                    jsonObjectArray.getString("user")
+                ));
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return allVehicleData;
+    }
+
 }
 
