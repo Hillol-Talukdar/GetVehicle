@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -38,7 +39,6 @@ public class MainActivity extends AppCompatActivity {
         setUpNavigationDrawer();
 
         setUpBottomNavigationView();
-
     }
 
     @Override
@@ -143,6 +143,13 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
         return false;
+    }
+
+    public void startVehicleDetailActivity(String vehicleId){
+        Intent intent = new Intent(this, VehicleDetailsActivity.class);
+        intent.putExtra("selected_vehicle_id", vehicleId);
+        startActivity(intent);
+        finish();
     }
 
 }

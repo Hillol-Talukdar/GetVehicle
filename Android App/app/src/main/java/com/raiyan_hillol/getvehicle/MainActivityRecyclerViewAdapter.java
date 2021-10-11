@@ -1,5 +1,8 @@
 package com.raiyan_hillol.getvehicle;
 
+import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,9 +21,11 @@ import java.util.ArrayList;
 public class MainActivityRecyclerViewAdapter extends RecyclerView.Adapter<MainActivityRecyclerViewAdapter.ViewHolder> {
 
     ArrayList<VehicleData> allVehicleData;
+    Context context;
 
-    public MainActivityRecyclerViewAdapter(ArrayList<VehicleData> vehicleData) {
+    public MainActivityRecyclerViewAdapter(ArrayList<VehicleData> vehicleData, Context context) {
         this.allVehicleData = vehicleData;
+        this.context = context;
     }
 
     @NonNull
@@ -66,7 +71,9 @@ public class MainActivityRecyclerViewAdapter extends RecyclerView.Adapter<MainAc
 
         @Override
         public void onClick(View v) {
-            Toast.makeText(itemView.getContext(), "Position: "+this.getAbsoluteAdapterPosition(),Toast.LENGTH_SHORT).show();
+            if(context instanceof MainActivity){
+                ((MainActivity)context).startVehicleDetailActivity(allVehicleData.get(this.getAbsoluteAdapterPosition()).getId());
+            }
         }
     }
 }
