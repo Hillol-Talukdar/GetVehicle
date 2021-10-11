@@ -1,5 +1,9 @@
 package com.raiyan_hillol.getvehicle;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 public class VehicleData {
@@ -226,4 +230,5 @@ public class VehicleData {
     public void setUpdateTime(String updateTime) {
         this.updateTime = updateTime;
     }
+
 }
