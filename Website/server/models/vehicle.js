@@ -19,7 +19,7 @@ const vehicleSchema = new mongoose.Schema(
         },
         fuelType: {
             type: String,
-            enum: ['Petrol', 'Diesel', 'LPD', 'None'],
+            enum: ['Petrol', 'Diesel', 'LPG', 'None'],
             default: 'None',
             trim: true,
         },
