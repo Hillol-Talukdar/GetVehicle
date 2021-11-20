@@ -1,8 +1,10 @@
 const express = require('express');
-const authController = require('../../controllers/auth/auth.controller');
-const { authCheck } = require('../../middlewares/auth');
+const authController = require('../../controllers/user/auth/auth.controller');
+const checkAuth = require('../../middlewares/checkAuth');
 const router = express.Router();
 
-router.route('/').get(authCheck, authController.createUser);
+router
+    .route('/create-or-update')
+    .get(checkAuth, authController.userCreateOrUpdate);
 
 module.exports = router;
