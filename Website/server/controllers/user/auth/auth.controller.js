@@ -1,7 +1,8 @@
 const catchAsync = require('../../../utils/catchAsync');
+const User = require('../../../models/user');
 
 exports.userCreateOrUpdate = catchAsync(async (req, res, next) => {
-    const { name, picture, email } = req.user;
+    const { picture, email } = req.user;
 
     const user = await User.findOneAndUpdate(
         { email },
@@ -11,7 +12,10 @@ exports.userCreateOrUpdate = catchAsync(async (req, res, next) => {
 
     if (user) {
         // console.log("USER UPDATED", user);
-        res.status(200).json(user);
+        res.status(200).json({
+            status: 'Success',
+            user,
+        });
     } else {
         const newUser = await new User({
             name: email.split('@')[0],
@@ -20,6 +24,9 @@ exports.userCreateOrUpdate = catchAsync(async (req, res, next) => {
         }).save();
 
         // console.log("USER CREATED", newUser);
-        res.status(200).json(newUser);
+        res.status(200).json({
+            status: 'Success',
+            data: newUser,
+        });
     }
 });
