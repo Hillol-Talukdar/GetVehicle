@@ -13,12 +13,6 @@ const userSchema = new mongoose.Schema(
             trim: true,
             required: true,
         },
-        password: {
-            type: String,
-            required: true,
-            minLength: 6,
-            select: false,
-        },
         deleted: {
             type: Boolean,
             default: false,

@@ -5,6 +5,6 @@ const router = express.Router();
 
 router
     .route('/create-or-update')
-    .get(checkAuth, authController.userCreateOrUpdate);
+    .post(checkAuth, authController.userCreateOrUpdate);
 
 module.exports = router;

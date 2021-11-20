@@ -5,6 +5,7 @@ exports.createAVehicle = catchAsync(async (req, res, next) => {
     const newVehicle = await Vehicle.create(req.body);
 
     res.status(201).json({
+        status: 'Success',
         data: newVehicle,
     });
 });
@@ -17,6 +18,7 @@ exports.getAVehicle = catchAsync(async (req, res, next) => {
     }
 
     res.status(200).json({
+        status: 'Success',
         data: vehicle,
     });
 });
@@ -25,6 +27,7 @@ exports.getAllVehicle = catchAsync(async (req, res, next) => {
     const vehicles = await Vehicle.find({});
 
     res.status(200).json({
+        status: 'Success',
         data: vehicles,
     });
 });
@@ -43,6 +46,7 @@ exports.updateAVehicle = catchAsync(async (req, res, next) => {
     }
 
     res.status(200).json({
+        status: 'Success',
         data: updatedVehicle,
     });
 });
@@ -54,7 +58,7 @@ exports.deleteAVehicle = catchAsync(async (req, res, next) => {
         return next(new AppError('Vehicle not found!', 404));
     }
 
-    res.status(204).json({
-        status: 'successful',
+    res.status(200).json({
+        status: 'Success',
     });
 });

@@ -6,6 +6,7 @@ exports.createCategory = catchAsync(async (req, res, next) => {
     const newCategory = await Category.create(req.body);
 
     res.status(201).json({
+        status: 'Success',
         data: newCategory,
     });
 });
@@ -14,6 +15,7 @@ exports.getAllCategories = catchAsync(async (req, res, next) => {
     const categories = await Category.find({});
 
     res.status(200).json({
+        status: 'Success',
         data: categories,
     });
 });
@@ -26,6 +28,7 @@ exports.getACategory = catchAsync(async (req, res, next) => {
     }
 
     res.status(200).json({
+        status: 'Success',
         data: category,
     });
 });
@@ -40,6 +43,7 @@ exports.updateACategory = catchAsync(async (req, res, next) => {
     }
 
     res.status(200).json({
+        status: 'Success',
         data: category,
     });
 });
@@ -51,7 +55,7 @@ exports.deleteACategory = catchAsync(async (req, res, next) => {
         return next(new AppError('Category not found!', 404));
     }
 
-    res.status(204).json({
-        status: 'successful',
+    res.status(200).json({
+        status: 'Success',
     });
 });

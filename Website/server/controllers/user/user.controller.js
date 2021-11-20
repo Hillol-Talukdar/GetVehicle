@@ -10,6 +10,7 @@ exports.getAUser = catchAsync(async (req, res, next) => {
     }
 
     res.status(200).json({
+        status: 'Success',
         data: user,
     });
 });
@@ -18,6 +19,7 @@ exports.getAllUser = catchAsync(async (req, res, next) => {
     const users = await User.find({});
 
     res.status(200).json({
+        status: 'Success',
         data: users,
     });
 });
