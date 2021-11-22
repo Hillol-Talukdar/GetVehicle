@@ -16,6 +16,7 @@ exports.getAllCategories = catchAsync(async (req, res, next) => {
 
     res.status(200).json({
         status: 'Success',
+        reuslt: subCategories.length,
         data: categories,
     });
 });
