@@ -1,10 +1,12 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
+const slugify = require('slugify');
 const { ObjectId } = mongoose.Schema;
 
 const subCategorySchema = new mongoose.Schema(
     {
         name: {
             type: String,
+            trim: true,
             required: true,
             minlength: 2,
             maxlength: 32,
@@ -30,13 +32,5 @@ subCategorySchema.pre('save', async function (next) {
     next();
 });
 
-subCategorySchema.pre(/^find/, function (next) {
-    if (!this.isModified('name')) {
-        return next();
-    }
-
-    this.slug = slugify(this.name, { lower: true });
-    next();
-});
 
 module.exports = mongoose.model('SubCategory', subCategorySchema);

@@ -25,13 +25,4 @@ categorySchema.pre('save', async function (next) {
     next();
 });
 
-categorySchema.pre(/^find/, function (next) {
-    if (!this.isModified('name')) {
-        return next();
-    }
-
-    this.slug = slugify(this.name, { lower: true });
-    next();
-});
-
 module.exports = mongoose.model('Category', categorySchema);

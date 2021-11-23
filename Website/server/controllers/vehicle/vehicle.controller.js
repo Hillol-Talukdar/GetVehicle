@@ -28,6 +28,7 @@ exports.getAllVehicle = catchAsync(async (req, res, next) => {
 
     res.status(200).json({
         status: 'Success',
+        result: vehicles.length,
         data: vehicles,
     });
 });

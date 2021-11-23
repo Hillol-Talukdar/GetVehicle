@@ -1,9 +1,9 @@
-const subCategory = require('../../models/subCategory');
+const SubCategory = require('../../models/subCategory');
 const catchAsync = require('../../utils/catchAsync');
 const AppError = require('../../utils/appError');
 
 exports.createSubCategory = catchAsync(async (req, res, next) => {
-    const subCategory = await subCategory.create(req.body);
+    const subCategory = await SubCategory.create(req.body);
 
     res.status(201).json({
         status: 'Success',
@@ -12,20 +12,20 @@ exports.createSubCategory = catchAsync(async (req, res, next) => {
 });
 
 exports.getAllSubCategories = catchAsync(async (req, res, next) => {
-    const subCategories = await subCategory.find({}).populate({
+    const subCategories = await SubCategory.find({}).populate({
         path: 'category',
         select: 'name slug',
     });
 
     res.status(200).json({
         status: 'Success',
-        reuslt: subCategories.length,
+        result: subCategories.length,
         data: subCategories,
     });
 });
 
 exports.getASubCategory = catchAsync(async (req, res, next) => {
-    const subCategory = await subCategory.findById(req.params.id).populate({
+    const subCategory = await SubCategory.findById(req.params.id).populate({
         path: 'category',
         select: 'name slug',
     });
@@ -41,7 +41,7 @@ exports.getASubCategory = catchAsync(async (req, res, next) => {
 });
 
 exports.updateASubCategory = catchAsync(async (req, res, next) => {
-    const subCategory = await subCategory.findByIdAndUpdate(
+    const subCategory = await SubCategory.findByIdAndUpdate(
         req.params.id,
         req.body,
         {
@@ -60,7 +60,7 @@ exports.updateASubCategory = catchAsync(async (req, res, next) => {
 });
 
 exports.deleteASubCategory = catchAsync(async (req, res, next) => {
-    const subCategory = await subCategory.findByIdAndRemove(req.params.id);
+    const subCategory = await SubCategory.findByIdAndRemove(req.params.id);
 
     if (!subCategory) {
         return next(new AppError('SubCategory not found!', 404));
