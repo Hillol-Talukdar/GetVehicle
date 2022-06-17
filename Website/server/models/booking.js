@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { ObjectId } = mongoose.Schema;
 
 const bookingSchema = new mongoose.Schema(
     {
@@ -33,14 +34,16 @@ const bookingSchema = new mongoose.Schema(
         },
         receiveDate: {
             type: Date,
-            required: true,
+            // required: true,
         },
         user: {
-            type: String,
+            type: ObjectId,
+            ref: 'User',
             required: true,
         },
         vehicle: {
-            type: String,
+            type: ObjectId,
+            ref: 'Vehicle',
             required: true,
         },
     },
