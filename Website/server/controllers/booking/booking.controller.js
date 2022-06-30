@@ -55,7 +55,7 @@ const updateABooking = catchAsync(async (req, res, next) => {
 });
 
 const deleteABooking = catchAsync(async (req, res, next) => {
-    const booking = await Booking.findByIdAndRemove(req, params.id);
+    const booking = await Booking.findByIdAndRemove(req.params.id);
 
     if (!booking) {
         return next(new AppError('Booking not found!', 404));
