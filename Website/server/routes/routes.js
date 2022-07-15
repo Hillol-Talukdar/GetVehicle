@@ -5,4 +5,5 @@ module.exports = {
     '/api/user': require('./user'),
     '/api/booking': require('./booking'),
     '/api/auth': require('./auth'),
+    '/api/review': require('./review'),
 };
