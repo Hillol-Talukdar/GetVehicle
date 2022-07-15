@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { ObjectId } = mongoose.Schema;
 
 const reviewSchema = new mongoose.Schema(
     {
@@ -15,11 +16,13 @@ const reviewSchema = new mongoose.Schema(
             default: false,
         },
         user: {
-            type: String,
+            type: ObjectId,
+            ref: 'User',
             required: true,
         },
         vehicle: {
-            type: String,
+            type: ObjectId,
+            ref: 'Vehicle',
             required: true,
         },
     },
