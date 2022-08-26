@@ -43,7 +43,7 @@ const vehicleSchema = new mongoose.Schema(
             type: Number,
             default: 1,
         },
-        Mileage: {
+        mileage: {
             type: Number,
         },
         averageRating: {
