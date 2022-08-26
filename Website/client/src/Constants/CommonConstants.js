@@ -13,3 +13,7 @@ export const VehicleInfoConstants = {
     BOOT_SPACE: 'Boot Space',
     MILEAGE: 'Mileage'
 }
+
+export const ColorConstants = {
+    HOMEPAGE_BACKGROUND_COLOR: "#f2f2f2"
+}

@@ -1,25 +1,24 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Container } from "react-bootstrap";
 import Footer from "./Components/Footer";
 import Header from "./Components/Header";
 import HomePage from "./Components/HomePage";
+import ItemDetails from "./Components/ItemDetails";
 
 const App = () => {
     return (
-        <Container fluid>
-
+        <>
             <Header />
 
             <BrowserRouter>
                 <Routes>
-                    <Route path="/" element={<HomePage/>}/>
+                    <Route path="/" element={ <HomePage /> }/>
+                    <Route path="/details/:id" element={ <ItemDetails /> }/>
                 </Routes>
             </BrowserRouter>
                
             <Footer />
-
-        </Container>
+        </>
     );
 };
 
