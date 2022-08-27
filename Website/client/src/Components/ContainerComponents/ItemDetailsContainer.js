@@ -1,6 +1,6 @@
 import { React } from "react";
 
-const ItemDetails = (props) => {
+const ItemDetailsContainer = (props) => {
 
     return (
        <h3>Item Details Page</h3>
@@ -8,4 +8,4 @@ const ItemDetails = (props) => {
 
 }
 
-export default ItemDetails;
+export default ItemDetailsContainer;

@@ -6,7 +6,7 @@ const Header = () => {
     return (
         <Container fluid>
             <Navbar>
-                <Navbar.Brand href="#">{AppConstants.APP_NAME}</Navbar.Brand>
+                <Navbar.Brand href="/">{AppConstants.APP_NAME}</Navbar.Brand>
                 <Navbar.Toggle aria-controls="navbarScroll" />
                 <Navbar.Collapse id="navbarScroll">
                     <Nav
