@@ -7,7 +7,7 @@ import {
 export const vehicleDetailsReducer = (state = { vehicle: {} }, action) => {
   switch (action.type) {
     case VEHICLE_DETAILS_REQUEST:
-      return { laoding: true };
+      return { ...state, laoding: true };
     case VEHICLE_DETAILS_SUCCESS:
       return { loading: false, vehicle: action.payload };
     case VEHICLE_DETAILS_FAIL:

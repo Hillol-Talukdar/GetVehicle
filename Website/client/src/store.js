@@ -4,7 +4,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { vehicleDetailsReducer } from './reducers/vehicleReducers';
 
 const reducer = combineReducers({
-    vehicleDetailsReducer
+    vehicleDetailsReducer: vehicleDetailsReducer, 
 })
 
 const middleware = [thunk];
