@@ -1,9 +1,9 @@
 import { React, Component } from "react";
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
-import { VehicleInfoConstants } from "../Constants/CommonConstants";
+import { VehicleInfoConstants } from "../../Constants/CommonConstants";
 
-const Item = (props) => {
+const HomeItem = (props) => {
     const currentItem = props.item;
     
     return (
@@ -25,4 +25,4 @@ const Item = (props) => {
     )
 }
 
-export default Item;
+export default HomeItem;

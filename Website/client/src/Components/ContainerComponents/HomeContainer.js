@@ -1,10 +1,10 @@
 import { React, Component, useState, useEffect } from "react";
 import { Container, Row, Col } from 'react-bootstrap';
-import { AppConstants, ColorConstants } from "../Constants/CommonConstants";
-import { getAllVehicleList } from "../Services/VehicleDataService";
-import Item from "./Item";
+import { AppConstants, ColorConstants } from "../../Constants/CommonConstants";
+import { getAllVehicleList } from "../../Services/VehicleDataService";
+import HomeItem from "../Item/HomeItem";
 
-const HomePage = () => {
+const HomeContainer = () => {
 
     const [allItems, setAllItems] = useState([]);
 
@@ -17,7 +17,7 @@ const HomePage = () => {
     return (
         <Container fluid style={{ backgroundColor: ColorConstants.HOMEPAGE_BACKGROUND_COLOR }}>
             <div className="d-flex flex-wrap"> {
-                allItems.map(item => ( <Item item={item}></Item> ))
+                allItems.map(item => ( <HomeItem item={item}></HomeItem> ))
             }
             </div>
         </Container>
@@ -25,4 +25,4 @@ const HomePage = () => {
 
 }
 
-export default HomePage;
+export default HomeContainer;
