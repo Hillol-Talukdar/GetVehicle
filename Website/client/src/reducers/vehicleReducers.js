@@ -2,7 +2,7 @@ import {
   VEHICLE_DETAILS_REQUEST,
   VEHICLE_DETAILS_SUCCESS,
   VEHICLE_DETAILS_FAIL,
-} from '../Constants/vehicleConstants';
+} from '../Constants/ReduxConstants';
 
 export const vehicleDetailsReducer = (state = { vehicle: {} }, action) => {
   switch (action.type) {

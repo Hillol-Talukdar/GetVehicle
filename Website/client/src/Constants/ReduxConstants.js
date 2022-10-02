@@ -1,0 +1,8 @@
+//For Vehicle Details Page
+export const VEHICLE_DETAILS_REQUEST = "VEHICLE_DETAILS_REQUEST";
+export const VEHICLE_DETAILS_SUCCESS = "VEHICLE_DETAILS_SUCCESS";
+export const VEHICLE_DETAILS_FAIL = "VEHICLE_DETAILS_FAIL";
+
+//For User Authentication
+export const LOGGED_IN_USER = "LOGGED_IN_USER";
+export const NO_LOGGED_IN_USER = "NO_LOGGED_IN_USER";

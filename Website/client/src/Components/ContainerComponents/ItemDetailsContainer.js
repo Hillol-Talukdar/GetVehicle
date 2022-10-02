@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
 import { getVehicleDetails } from '../../Services/VehicleDataService';
 import { ColorConstants } from '../../Constants/CommonConstants';
-import DetailsSingleItem from '../Item/DetailsSingleItem';
+import DetailsSingleItem from '../Item/DetailsSingleItem/DetailsSingleItem';
 
 const ItemDetailsContainer = () => {
   const { id } = useParams();

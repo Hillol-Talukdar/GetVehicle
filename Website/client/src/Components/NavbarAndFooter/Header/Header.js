@@ -1,9 +1,20 @@
 import React from "react";
 import { Button, Container, Form, Nav, Navbar } from "react-bootstrap";
-import { AppConstants, NavbarConstants } from "../../Constants/CommonConstants";
+import { useDispatch, useSelector } from "react-redux";
+import { AppConstants, NavbarConstants } from "../../../Constants/CommonConstants";
+import { googleLogin } from "../../../Services/GoogleLoginService"
+import LoggedInUserInfoContainer from "../../ContainerComponents/LoggedInUserInfoContainer/LoggedInUserInfoContainer";
 import "./Header.css"
 
 const Header = () => {
+
+    const loggedInUserDetails = useSelector((state) => state.userReducer);
+
+    const dispatch = useDispatch();
+
+    const handleGoogleLogin = () => {
+        googleLogin(dispatch);
+    }
     return (
         <Container fluid id="navbarTop">
             <Navbar>
@@ -27,6 +38,16 @@ const Header = () => {
                         />
                         <Button variant="outline-secondary">{NavbarConstants.SEARCH}</Button>
                     </Form>
+                    {!loggedInUserDetails && (
+                            <Button className="ms-auto" variant="outline-primary"
+                                onClick={handleGoogleLogin}>{NavbarConstants.LOGIN}
+                            </Button>
+                        )
+                    }
+                    {loggedInUserDetails && (
+                            <LoggedInUserInfoContainer userInfo={loggedInUserDetails}></LoggedInUserInfoContainer>
+                        )
+                    }
                 </Navbar.Collapse>
             </Navbar>
         </Container>

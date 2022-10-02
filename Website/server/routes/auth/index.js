@@ -4,7 +4,11 @@ const checkAuth = require('../../middlewares/checkAuth');
 const router = express.Router();
 
 router
-    .route('/create-or-update')
-    .post(checkAuth, authController.userCreateOrUpdate);
+    .route('/user-create-or-update')
+    .post(authController.userCreateOrUpdate);
+
+router
+    .route('/current-user')
+    .post(authController.currentUser);
 
 module.exports = router;
