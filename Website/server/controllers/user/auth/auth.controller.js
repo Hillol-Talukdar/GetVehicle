@@ -30,14 +30,13 @@ exports.userCreateOrUpdate = catchAsync(async (req, res, next) => {
 });
 
 exports.currentUser = async (req, res) => {
-    console.log(req.data);
-    // User.findOne({ email: req.user.email }).exec((error, user) => {
-    //     if (error) {
-    //         throw new Error(error);
-    //     }
-    //     res.status(200).json({
-    //         status: 'Success',
-    //         user: user,
-    //     });
-    // });
+    User.findOne({ email: req.body.data.email }).exec((error, user) => {
+        if (error) {
+            throw new Error(error);
+        }
+        res.status(200).json({
+            status: 'Success',
+            user: user,
+        });
+    });
 };

@@ -2,7 +2,7 @@ import { toast } from "react-toastify";
 import { auth, provider } from "../Authentication/FirebaseConfig";
 import { userCreateOrUpdate } from "../Services/AuthService";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { LOGGED_IN_USER } from "../Constants/ReduxConstants";
+import { createUserPayloadAndDispatch } from "./ReduxService";
 
 const getUserData = function (user) {
     return {
@@ -23,17 +23,7 @@ export const googleLogin = async (dispatch) => {
 
             userCreateOrUpdate(token, userData)
                 .then((res) => {
-                    dispatch({
-                        type: LOGGED_IN_USER,
-                        payload: {
-                            name: res.data.user.name,
-                            email: res.data.user.email,
-                            imageUrl: res.data.user.image,
-                            token: token,
-                            role: res.data.user.role,
-                            _id: res.data.user._id,
-                        },
-                    });
+                    createUserPayloadAndDispatch(dispatch, token, res);
                 })
                 .catch();
 

@@ -7,8 +7,11 @@ export const userCreateOrUpdate = async (authtoken, userData) => {
     });
 };
 
-export const currentUser = async (authtoken) => {
+export const currentUser = async (authtoken, email) => {
     return await axios.post(`${process.env.REACT_APP_API}/auth/current-user`, {
         token: authtoken,
+        data: {
+            email: email
+        }
     });
 };

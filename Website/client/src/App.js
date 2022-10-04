@@ -9,8 +9,20 @@ import { currentUser } from "./Services/AuthService";
 import { LOGGED_IN_USER } from "./Constants/ReduxConstants";
 import { auth } from "./Authentication/FirebaseConfig";
 import { onAuthStateChanged } from "firebase/auth";
+import { createUserPayloadAndDispatch } from "./Services/ReduxService";
 
 const App = () => {
+
+    const dispatch = useDispatch();
+
+    onAuthStateChanged(auth, (user)=>{
+        currentUser(user.accessToken, user.email).then((res)=>{
+            createUserPayloadAndDispatch(dispatch, user.accessToken, res);
+        }).catch((error)=>{
+            console.log(error.message);
+        });
+    });
+
     return (
         <>
             <Header />
