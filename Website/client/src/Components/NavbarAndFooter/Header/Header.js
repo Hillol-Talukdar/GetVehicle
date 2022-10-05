@@ -37,7 +37,6 @@ const Header = () => {
                         <Form.Control
                             type="search"
                             placeholder={NavbarConstants.SEARCH}
-                            className="me-2"
                             aria-label="Search"
                         />
                         <Button variant="outline-secondary">{NavbarConstants.SEARCH}</Button>
