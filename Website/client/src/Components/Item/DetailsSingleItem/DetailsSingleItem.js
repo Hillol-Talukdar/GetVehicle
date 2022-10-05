@@ -11,30 +11,25 @@ const DetailsSingleItem = ({ data }) => {
   return (
     <Row className="p-3">
       <Col md={7}>
-        {/* {data?.photo && data?.photo.length ? (
-                <Carousel showArrows={true} autoPlay infiniteLoop>
-                  {data?.photo &&
-                    data?.photo.map((photo) => (
-                      <img src={photo.url} key={photo.public_id} />
-                    ))}
-                </Carousel>
-              ) : (
-                <Image
-                  src={
-                    data?.categories?.category == 'Bike'
-                      ? '/templateBike.jpg'
-                      : '/templateCar.jpg'
-                  }
-                  alt="Card image cap"
-                  fluid
-                />
-              )} */}
-
-        <Carousel showArrows={true} showThumbs={false} autoPlay infiniteLoop>
-          {coverImages.map((photo) => (
-            <Image src={photo} key={photo.public_id} />
-          ))}
-        </Carousel>
+        <div className="mt-3">
+          {data?.photo && data?.photo.length ? (
+            <Carousel showArrows={true} showThumbs={false} autoPlay infiniteLoop>
+              {data?.photo.map((photo, idx) => (
+                <img src={photo} key={idx} />
+              ))}
+            </Carousel>
+          ) : (
+            <Image
+              src={
+                data?.categories?.category == 'Bike'
+                  ? '/templateBike.jpg'
+                  : '/templateCar.jpg'
+              }
+              alt="Card image cap"
+              fluid
+            />
+          )}
+        </div>
 
         <Tabs
           defaultActiveKey="description"
