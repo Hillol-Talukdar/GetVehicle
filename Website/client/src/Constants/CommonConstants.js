@@ -18,3 +18,12 @@ export const VehicleInfoConstants = {
 export const ColorConstants = {
     HOMEPAGE_BACKGROUND_COLOR: "#f2f2f2"
 }
+
+export const TooltipConstants = {
+    LOGGED_IN_USER_IMAGE_HOVER_TOOLTIP: "View Profile / Logout"
+}
+
+export const DropDownContants = {
+    VIEW_PROFILE: "View Profile",
+    LOGOUT: "Logout"
+}
