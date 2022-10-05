@@ -1,8 +1,8 @@
 import { toast } from "react-toastify";
 import { auth, provider } from "../Authentication/FirebaseConfig";
-import { userCreateOrUpdate } from "../Services/AuthService";
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { createUserPayloadAndDispatch } from "./ReduxService";
+import { userCreateOrUpdate } from "./AuthService";
+import { GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
+import { createUserPayloadAndDispatch, removeUserAndDispatch } from "./ReduxService";
 
 const getUserData = function (user) {
     return {
@@ -36,3 +36,11 @@ export const googleLogin = async (dispatch) => {
         });
 
 };
+
+export const googleLogout = async (dispatch) => {
+    signOut(auth).then(() => {
+        removeUserAndDispatch(dispatch);
+    }).catch((error) => {
+        
+    });
+}

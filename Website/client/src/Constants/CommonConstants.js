@@ -24,6 +24,12 @@ export const TooltipConstants = {
 }
 
 export const DropDownContants = {
-    VIEW_PROFILE: "View Profile",
-    LOGOUT: "Logout"
+    VIEW_PROFILE: {
+        DISPLAY_VALUE: "View Profile",
+        EVENT_KEY: "view_profile"
+    },
+    LOGOUT: {
+        DISPLAY_VALUE: "Logout",
+        EVENT_KEY: "logout"
+    }
 }

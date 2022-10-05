@@ -15,12 +15,14 @@ const App = () => {
 
     const dispatch = useDispatch();
 
-    onAuthStateChanged(auth, (user)=>{
-        currentUser(user.accessToken, user.email).then((res)=>{
-            createUserPayloadAndDispatch(dispatch, user.accessToken, res);
-        }).catch((error)=>{
-            console.log(error.message);
-        });
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            currentUser(user.accessToken, user.email).then((res) => {
+                createUserPayloadAndDispatch(dispatch, user.accessToken, res);
+            }).catch((error) => {
+                console.log(error.message);
+            });
+        }
     });
 
     return (

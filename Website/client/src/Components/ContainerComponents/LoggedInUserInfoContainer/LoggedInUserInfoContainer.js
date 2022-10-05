@@ -4,10 +4,25 @@ import "./LoggedInUserInfoContainer.css"
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
 import { TooltipConstants, DropDownContants } from "../../../Constants/CommonConstants";
+import { useDispatch } from "react-redux";
+import { googleLogout } from "../../../Services/GoogleAuthService";
 
 
 const LoggedInUserInfoContainer = ({ userInfo }) => {
+
+    const dispatch = useDispatch();
     
+    const handleSelection = (eventKey) => {
+        switch(eventKey) {
+            case DropDownContants.VIEW_PROFILE.EVENT_KEY:
+              //TODO
+              break;
+            case DropDownContants.LOGOUT.EVENT_KEY:
+              googleLogout(dispatch);
+              break;
+          }
+    }
+
     const renderTooltip = (props) => (
         <Tooltip id="button-tooltip" {...props}>
             {TooltipConstants.LOGGED_IN_USER_IMAGE_HOVER_TOOLTIP}
@@ -32,10 +47,11 @@ const LoggedInUserInfoContainer = ({ userInfo }) => {
                 }
                 size="sm"
                 variant="light"
+                onSelect={handleSelection}
             >
-                <Dropdown.Item eventKey="1">{DropDownContants.VIEW_PROFILE}</Dropdown.Item>
+                <Dropdown.Item eventKey={DropDownContants.VIEW_PROFILE.EVENT_KEY}>{DropDownContants.VIEW_PROFILE.DISPLAY_VALUE}</Dropdown.Item>
                 <Dropdown.Divider />
-                <Dropdown.Item eventKey="2">{DropDownContants.LOGOUT}</Dropdown.Item>
+                <Dropdown.Item eventKey={DropDownContants.LOGOUT.EVENT_KEY}>{DropDownContants.LOGOUT.DISPLAY_VALUE}</Dropdown.Item>
             </DropdownButton>
         </div>
     )
