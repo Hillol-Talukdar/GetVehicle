@@ -4,7 +4,8 @@ export const AppConstants = {
 
 export const NavbarConstants = {
     HOME: 'Home',
-    SEARCH: 'Search'
+    SEARCH: 'Search',
+    LOGIN: 'Login'
 };
 
 export const VehicleInfoConstants = {

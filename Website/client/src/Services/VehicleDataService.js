@@ -3,7 +3,7 @@ import {
   VEHICLE_DETAILS_REQUEST,
   VEHICLE_DETAILS_SUCCESS,
   VEHICLE_DETAILS_FAIL,
-} from '../Constants/vehicleConstants';
+} from '../Constants/ReduxConstants';
 
 export const getAllVehicleList = async () => {
   console.log(process.env.REACT_APP_API);

@@ -12,7 +12,7 @@ const HomeContainer = () => {
         getAllVehicleList().then((response) => {
             setAllItems(response.data.data);
         });
-    });
+    }, []);
 
     return (
         <Container fluid style={{ backgroundColor: ColorConstants.HOMEPAGE_BACKGROUND_COLOR }}>

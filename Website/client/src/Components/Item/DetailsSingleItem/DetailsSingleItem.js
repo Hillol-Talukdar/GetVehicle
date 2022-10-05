@@ -3,7 +3,7 @@ import { Row, Col, Image, Tabs, Tab, Card, ListGroup } from 'react-bootstrap';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import './DetailsSingleItem.css';
-import VehicleDatalistItem from './VehicleDatalistItem';
+import VehicleDatalistItem from '../VehicleDatalistItem';
 
 const DetailsSingleItem = ({ data }) => {
   let coverImages = ['/templateBike.jpg', '/templateCar.jpg'];
