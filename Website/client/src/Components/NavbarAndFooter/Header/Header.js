@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { auth } from "../../../Authentication/FirebaseConfig";
 import { AppConstants, NavbarConstants } from "../../../Constants/CommonConstants";
 import { currentUser } from "../../../Services/AuthService";
-import { googleLogin } from "../../../Services/GoogleLoginService"
+import { googleLogin } from "../../../Services/GoogleAuthService"
 import { createUserPayloadAndDispatch } from "../../../Services/ReduxService";
 import LoggedInUserInfoContainer from "../../ContainerComponents/LoggedInUserInfoContainer/LoggedInUserInfoContainer";
 import "./Header.css"
