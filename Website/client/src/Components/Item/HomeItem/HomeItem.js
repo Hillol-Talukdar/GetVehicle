@@ -1,7 +1,8 @@
 import { React, Component } from 'react';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
-import { VehicleInfoConstants } from '../../Constants/CommonConstants';
+import { VehicleInfoConstants } from '../../../Constants/CommonConstants';
+import './HomeItem.css'
 
 const HomeItem = (props) => {
   const currentItem = props.item;
@@ -13,7 +14,7 @@ const HomeItem = (props) => {
       : 'templateCar.jpg';
 
   return (
-    <Card style={{ width: '15rem', margin: '8px' }} className="flex-fill">
+    <Card style={{ width: '15rem', margin: '8px' }} className="HomeItemCard flex-fill">
       <Card.Img variant="top" src={coverPhoto} alt="Card image cap" />
       <Card.Body>
         <Card.Title>{currentItem.model}</Card.Title>

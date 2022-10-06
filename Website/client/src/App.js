@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
-import Footer from "./Components/NavbarAndFooter/Footer";
 import Header from "./Components/NavbarAndFooter/Header/Header";
 import HomeContainer from "./Components/ContainerComponents/HomeContainer";
 import ItemDetailsContainer from "./Components/ContainerComponents/ItemDetailsContainer";
@@ -10,6 +9,7 @@ import { LOGGED_IN_USER } from "./Constants/ReduxConstants";
 import { auth } from "./Authentication/FirebaseConfig";
 import { onAuthStateChanged } from "firebase/auth";
 import { createUserPayloadAndDispatch } from "./Services/ReduxService";
+import Footer from "./Components/NavbarAndFooter/Footer/Footer";
 
 const App = () => {
 
