@@ -3,8 +3,8 @@ import { AppConstants } from '../../../Constants/CommonConstants';
 import './Footer.css';
 
 const Footer = () => (
-  <footer id="footer">
-    <div className="footer-copyright text-center py-3">
+  <footer style={{ position: 'fixed', bottom: '0', left: '0', right: '0' }}>
+    <div className="footer text-center py-3">
       &copy; 2022 Copyright:
       <span className="fw-bold"> {AppConstants.APP_NAME}</span>
     </div>

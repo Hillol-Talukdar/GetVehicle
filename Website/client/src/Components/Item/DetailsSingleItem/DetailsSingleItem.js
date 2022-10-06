@@ -10,75 +10,77 @@ const DetailsSingleItem = ({ data }) => {
   let coverImages = ['/templateBike.jpg', '/templateCar.jpg'];
 
   return (
-    <Row className="p-3">
-      <Col md={7}>
-        <div className="mt-3">
-          {data?.photo && data?.photo.length ? (
-            <Carousel
-              showArrows={true}
-              showThumbs={false}
-              autoPlay
-              infiniteLoop
-            >
-              {data?.photo.map((photo, idx) => (
-                <Image
-                  id="CarouselImage"
-                  src={photo}
-                  alt="Card image cap"
-                  key={idx}
-                  fluid
-                />
-              ))}
-            </Carousel>
-          ) : (
-            <Image
-              id="CarouselImage"
-              src={
-                data?.categories?.category == 'Bike'
-                  ? '/templateBike.jpg'
-                  : '/templateCar.jpg'
-              }
-              alt="Card image cap"
-              fluid
-            />
-          )}
-        </div>
+    <>
+      <Row className="p-3">
+        <Col md={7}>
+          <div className="mt-3">
+            {data?.photo && data?.photo.length ? (
+              <Carousel
+                showArrows={true}
+                showThumbs={false}
+                autoPlay
+                infiniteLoop
+              >
+                {data?.photo.map((photo, idx) => (
+                  <Image
+                    id="CarouselImage"
+                    src={photo}
+                    alt="Card image cap"
+                    key={idx}
+                    fluid
+                  />
+                ))}
+              </Carousel>
+            ) : (
+              <Image
+                id="CarouselImage"
+                src={
+                  data?.categories?.category == 'Bike'
+                    ? '/templateBike.jpg'
+                    : '/templateCar.jpg'
+                }
+                alt="Card image cap"
+                fluid
+              />
+            )}
+          </div>
 
-        <Tabs
-          defaultActiveKey={TabsConstants.DESCRIPTION}
-          id="uncontrolled-tab-example"
-          className="mb-3 mt-3"
-        >
-          <Tab eventKey={TabsConstants.DESCRIPTION} title="Description">
-            Description
-          </Tab>
-          <Tab eventKey={TabsConstants.MORE} title="More">
-            More
-          </Tab>
-        </Tabs>
-      </Col>
+          <Tabs
+            defaultActiveKey={TabsConstants.DESCRIPTION}
+            id="uncontrolled-tab-example"
+            className="mb-3 mt-3"
+          >
+            <Tab eventKey={TabsConstants.DESCRIPTION} title="Description">
+              Description
+            </Tab>
+            <Tab eventKey={TabsConstants.MORE} title="More">
+              More
+            </Tab>
+          </Tabs>
+        </Col>
 
-      <Col md={5}>
-        <h1>{data?.model}</h1>
+        <Col md={5}>
+          <h1>{data?.model}</h1>
 
-        <Card id="itemDetailsCard">
-          <Card.Body>
-            <Card.Text>
-              <VehicleDatalistItem data={data} />
-            </Card.Text>
-          </Card.Body>
+          <Card id="itemDetailsCard">
+            <Card.Body>
+              <Card.Text>
+                <VehicleDatalistItem data={data} />
+              </Card.Text>
+            </Card.Body>
 
-          <ListGroup className="list-group-flush">
-            <ListGroup.Item>
-              <>
-                <Card.Link href="#">Book now</Card.Link>
-                <Card.Link href="#">Rate now</Card.Link>
-              </>
-            </ListGroup.Item>
-          </ListGroup>
-        </Card>
-      </Col>
-    </Row>
+            <ListGroup className="list-group-flush">
+              <ListGroup.Item>
+                <>
+                  <Card.Link href="#">Book now</Card.Link>
+                  <Card.Link href="#">Rate now</Card.Link>
+                </>
+              </ListGroup.Item>
+            </ListGroup>
+          </Card>
+        </Col>
+      </Row>
+    </>
   );
 };
 
