@@ -4,6 +4,7 @@ import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import './DetailsSingleItem.css';
 import VehicleDatalistItem from '../VehicleDatalistItem';
+import { TabsConstants } from '../../../Constants/CommonConstants';
 
 const DetailsSingleItem = ({ data }) => {
   let coverImages = ['/templateBike.jpg', '/templateCar.jpg'];
@@ -13,13 +14,25 @@ const DetailsSingleItem = ({ data }) => {
       <Col md={7}>
         <div className="mt-3">
           {data?.photo && data?.photo.length ? (
-            <Carousel showArrows={true} showThumbs={false} autoPlay infiniteLoop>
+            <Carousel
+              showArrows={true}
+              showThumbs={false}
+              autoPlay
+              infiniteLoop
+            >
               {data?.photo.map((photo, idx) => (
-                <img src={photo} key={idx} />
+                <Image
+                  id="CarouselImage"
+                  src={photo}
+                  alt="Card image cap"
+                  key={idx}
+                  fluid
+                />
               ))}
             </Carousel>
           ) : (
             <Image
+              id="CarouselImage"
               src={
                 data?.categories?.category == 'Bike'
                   ? '/templateBike.jpg'
@@ -32,14 +45,14 @@ const DetailsSingleItem = ({ data }) => {
         </div>
 
         <Tabs
-          defaultActiveKey="description"
+          defaultActiveKey={TabsConstants.DESCRIPTION}
           id="uncontrolled-tab-example"
-          className="mb-3"
+          className="mb-3 mt-3"
         >
-          <Tab eventKey="description" title="Description">
+          <Tab eventKey={TabsConstants.DESCRIPTION} title="Description">
             Description
           </Tab>
-          <Tab eventKey="more" title="More">
+          <Tab eventKey={TabsConstants.MORE} title="More">
             More
           </Tab>
         </Tabs>

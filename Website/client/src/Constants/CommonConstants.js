@@ -33,3 +33,8 @@ export const DropDownContants = {
         EVENT_KEY: "logout"
     }
 }
+
+export const TabsConstants = {
+    DESCRIPTION: 'description',
+    MORE: 'more',
+}
