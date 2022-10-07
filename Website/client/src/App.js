@@ -9,7 +9,7 @@ import { auth } from './Authentication/FirebaseConfig';
 import { onAuthStateChanged } from 'firebase/auth';
 import { createUserPayloadAndDispatch } from './Services/ReduxService';
 import Footer from './Components/NavbarAndFooter/Footer/Footer';
-import CreateItem from './Components/ContainerComponents/Admin/Item/CreateItem/CreateItem';
+import CreateItemContainer from './Components/ContainerComponents/Admin/Item/CreateItem/CreateItemContainer';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 
 const App = () => {
@@ -32,7 +32,7 @@ const App = () => {
       <Header />
       <Routes>
         <Route exact path="/" element={<HomeContainer />} />
-        <Route exact path="/admin/create-item" element={<CreateItem />} />
+        <Route exact path="/admin/create-item" element={<CreateItemContainer />} />
         <Route exact path="/details/:id" element={<ItemDetailsContainer />} />
       </Routes>
       <Footer />
