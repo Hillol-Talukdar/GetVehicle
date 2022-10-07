@@ -5,6 +5,7 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import './DetailsSingleItem.css';
 import VehicleDatalistItem from '../VehicleDatalistItem';
 import { TabsConstants } from '../../../Constants/CommonConstants';
+import { Link } from 'react-router-dom';
 
 const DetailsSingleItem = ({ data }) => {
   let coverImages = ['/templateBike.jpg', '/templateCar.jpg'];
@@ -71,10 +72,10 @@ const DetailsSingleItem = ({ data }) => {
 
             <ListGroup className="list-group-flush">
               <ListGroup.Item>
-                <>
-                  <Card.Link href="#">Book now</Card.Link>
-                  <Card.Link href="#">Rate now</Card.Link>
-                </>
+                <div className="d-flex justify-content-around">
+                  <Link to={'/details'}>View Details</Link>
+                  <Link to="#">Book Now</Link>
+                </div>
               </ListGroup.Item>
             </ListGroup>
           </Card>

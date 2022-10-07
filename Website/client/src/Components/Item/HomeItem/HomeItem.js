@@ -1,8 +1,8 @@
-import { React, Component } from 'react';
+import { React } from 'react';
 import Card from 'react-bootstrap/Card';
-import ListGroup from 'react-bootstrap/ListGroup';
+import { Link } from 'react-router-dom';
 import { VehicleInfoConstants } from '../../../Constants/CommonConstants';
-import './HomeItem.css'
+import './HomeItem.css';
 
 const HomeItem = (props) => {
   const currentItem = props.item;
@@ -14,7 +14,10 @@ const HomeItem = (props) => {
       : 'templateCar.jpg';
 
   return (
-    <Card style={{ width: '15rem', margin: '8px' }} className="HomeItemCard flex-fill">
+    <Card
+      style={{ width: '15rem', margin: '8px' }}
+      className="HomeItemCard flex-fill"
+    >
       <Card.Img variant="top" src={coverPhoto} alt="Card image cap" />
       <Card.Body>
         <Card.Title>{currentItem.model}</Card.Title>
@@ -23,9 +26,12 @@ const HomeItem = (props) => {
           {VehicleInfoConstants.ENGINE + ': ' + currentItem.engine}
         </Card.Text>
       </Card.Body>
+
       <Card.Body>
-        <Card.Link href={'/details/' + currentItem._id}>View Details</Card.Link>
-        <Card.Link href="#">Book Now</Card.Link>
+        <div className="d-flex justify-content-around">
+          <Link to={'/details/' + currentItem._id}>View Details</Link>
+          <Link to="#">Book Now</Link>
+        </div>
       </Card.Body>
     </Card>
   );
