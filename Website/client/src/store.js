@@ -6,11 +6,13 @@ import {
   vehicleCreateReducer,
 } from './Reducers/VehicleReducers';
 import { userReducer } from './Reducers/UserReducers';
+import { categoryListReducer } from './Reducers/CategoryReducers';
 
 const reducer = combineReducers({
   vehicleDetailsReducer: vehicleDetailsReducer,
   vehicleCreateReducer: vehicleCreateReducer,
   userReducer: userReducer,
+  categoryListReducer: categoryListReducer,
 });
 
 const middleware = [thunk];

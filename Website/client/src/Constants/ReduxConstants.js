@@ -11,3 +11,8 @@ export const VEHICLE_CREATE_FAIL = 'VEHICLE_CREATE_FAIL';
 //For User Authentication
 export const LOGGED_IN_USER = 'LOGGED_IN_USER';
 export const NO_LOGGED_IN_USER = 'NO_LOGGED_IN_USER';
+
+//For all categories
+export const CATEGORY_LIST_REQUEST = 'CATEGORY_LIST_REQUEST';
+export const CATEGORY_LIST_SUCCESS = 'CATEGORY_LIST_SUCCESS';
+export const CATEGORY_LIST_FAIL = 'CATEGORY_LIST_FAIL';
