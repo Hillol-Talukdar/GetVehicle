@@ -1,5 +1,10 @@
-import React, { useState } from 'react';
-import { useSelector } from "react-redux";
+import React, { useState, useEffect } from 'react';
+import { Container } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
+import { getAllCategories } from '../../../../../Services/CategoryDataService';
+import { createVehicle } from '../../../../../Services/VehicleDataService';
+import CreateOrUpdateItemForm from '../../../../Forms/CreateOrUpdateItemForm';
 
 const initState = {
   model: '',
@@ -21,14 +26,49 @@ const initState = {
 };
 
 const CreateItemContainer = () => {
+  const dispatch = useDispatch();
   const [values, setValues] = useState(initState);
-  const { user } = useSelector((state) => ({ ...state }));
-  const [loading, setLoading] = useState(false);
+  const user = useSelector((state) => state.userReducer);
+
+  useEffect(() => {
+    loadAllCategories();
+  }, []);
+
+  const loadAllCategories = () =>
+    getAllCategories().then((cat) =>
+      setValues({ ...values, categories: cat.data })
+    );
+
+  const changeHandler = (e) => {
+    setValues({ ...values, [e.target.name]: e.target.value });
+  };
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+
+    createVehicle(values, user.token, user.email)
+      .then((res) => {
+        window.alert(`"${res.data.model}" is created!`);
+        window.location.reload();
+      })
+      .catch((err) => {
+        toast.error(err.response.data.err);
+      });
+  };
 
   return (
-    <>
-      <div>CreateItemContainer</div>
-    </>
+    <Container fluid>
+      <div className="d-flex justify-content-between border-bottom mb-3 border-2">
+        <h4 className="ml-auto">Create New Vehicle</h4>
+      </div>
+
+      <CreateOrUpdateItemForm
+        submitHandler={submitHandler}
+        changeHandler={changeHandler}
+        values={values}
+        btnName="Create"
+      />
+    </Container>
   );
 };
 

@@ -10,9 +10,7 @@ import { categoryListReducer } from './Reducers/CategoryReducers';
 
 const reducer = combineReducers({
   vehicleDetailsReducer: vehicleDetailsReducer,
-  vehicleCreateReducer: vehicleCreateReducer,
   userReducer: userReducer,
-  categoryListReducer: categoryListReducer,
 });
 
 const middleware = [thunk];
