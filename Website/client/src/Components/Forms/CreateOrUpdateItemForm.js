@@ -130,26 +130,13 @@ const CreateOrUpdateItemForm = ({
       <div className="row justify-content-between text-left">
         <Form.Group
           className="form-group col-sm-4 flex-column d-flex mb-3"
-          controlId="formBasiBootSpace"
+          controlId="formBasicTransmission"
         >
-          <Form.Label>Boot Space</Form.Label>
-
-          <Form.Control
-            type="Text"
-            name="bootSpace"
-            placeholder="boot Space"
-            value={values?.bootSpace}
-            onChange={changeHandler}
-            required
-          />
-        </Form.Group>
-
-        <Form.Group className="form-group col-sm-4 flex-column d-flex mb-3">
           <Form.Label>Transmission</Form.Label>
 
           <Form.Select name="transmission" onChannge={changeHandler}>
-            <option value="Auto">Auto</option>
             <option value="Manual">Manual</option>
+            <option value="Auto">Auto</option>
           </Form.Select>
         </Form.Group>
 
@@ -161,10 +148,11 @@ const CreateOrUpdateItemForm = ({
             <option value={true}>True</option>
           </Form.Select>
         </Form.Group>
-      </div>
 
-      <div className="row justify-content-between text-left">
-        <Form.Group className="form-group col-sm-4 flex-column d-flex mb-3">
+        <Form.Group
+          className="form-group col-sm-4 flex-column d-flex mb-3"
+          controlId="formBasicFuelType"
+        >
           <Form.Label>Fuel Type</Form.Label>
 
           <Form.Select name="fuelType" onChannge={changeHandler}>
@@ -174,7 +162,9 @@ const CreateOrUpdateItemForm = ({
             <option value="LPG">LPG</option>
           </Form.Select>
         </Form.Group>
+      </div>
 
+      <div className="row justify-content-between text-left">
         <Form.Group className="form-group col-sm-4 flex-column d-flex mb-3">
           <Form.Label>Cateogory</Form.Label>
 
@@ -185,15 +175,6 @@ const CreateOrUpdateItemForm = ({
                   {cat.name}
                 </option>
               ))}
-          </Form.Select>
-        </Form.Group>
-
-        <Form.Group className="form-group col-sm-4 flex-column d-flex mb-3">
-          <Form.Label>Booking Status</Form.Label>
-
-          <Form.Select name="bookingStatus" onChannge={changeHandler}>
-            <option value={false}>False</option>
-            <option value={true}>True</option>
           </Form.Select>
         </Form.Group>
       </div>
