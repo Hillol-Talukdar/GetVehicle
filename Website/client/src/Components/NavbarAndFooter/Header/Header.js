@@ -50,7 +50,7 @@ const Header = () => {
             <NavDropdown title="Admin" id="basic-nav-dropdown">
               <NavDropdown.Item className="p-2" to="/admin/create-item">
                 <NavLink
-                  to="/admin/create-item"
+                  to="/admin/create-or-update-vehicle"
                   className="textColorAndDecoration"
                 >
                   Create Product

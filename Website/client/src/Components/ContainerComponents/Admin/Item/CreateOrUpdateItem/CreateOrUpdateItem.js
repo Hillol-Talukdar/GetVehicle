@@ -10,7 +10,7 @@ const initState = {
   model: '',
   categories: [],
   subCategory: '',
-  category: '',
+  category: '619d38aca306e0f2928e1cfc',
   transmission: 'Manual',
   fuelType: 'None',
   engine: '',
@@ -24,7 +24,7 @@ const initState = {
   photo: [],
 };
 
-const CreateItemContainer = () => {
+const CreateOrUpdateItemContainer = () => {
   const dispatch = useDispatch();
   const [values, setValues] = useState(initState);
   const user = useSelector((state) => state.userReducer);
@@ -78,4 +78,4 @@ const CreateItemContainer = () => {
   );
 };
 
-export default CreateItemContainer;
+export default CreateOrUpdateItemContainer;

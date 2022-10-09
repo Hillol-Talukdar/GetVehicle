@@ -9,7 +9,7 @@ const HomeItem = (props) => {
   const coverPhoto =
     currentItem?.photo && currentItem?.photo.length
       ? currentItem?.photo[0]
-      : currentItem?.categories?.category === 'Bike'
+      : currentItem?.category?.name === 'Bike'
       ? 'templateBike.jpg'
       : 'templateCar.jpg';
 

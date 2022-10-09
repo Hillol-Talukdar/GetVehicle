@@ -51,12 +51,12 @@ const VehicleDatalistItem = ({ data }) => {
 
       <ListGroup.Item className="d-flex justify-content-between">
         Category:
-        <span>{data?.categories?.category}</span>
+        <span>{data?.category?.name}</span>
       </ListGroup.Item>
 
       <ListGroup.Item className="d-flex justify-content-between">
         Sub Category:
-        <span>{data?.categories?.subCategory}</span>
+        <span>{data?.subCategory?.name}</span>
       </ListGroup.Item>
 
       <ListGroup.Item className="d-flex justify-content-between">
