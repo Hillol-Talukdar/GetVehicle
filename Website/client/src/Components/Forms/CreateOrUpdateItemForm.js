@@ -76,6 +76,128 @@ const CreateOrUpdateItemForm = ({
         </Form.Group>
       </div>
 
+      <div className="row justify-content-between text-left">
+        <Form.Group
+          className="form-group col-sm-4 flex-column d-flex mb-3"
+          controlId="formBasiCostPerDay"
+        >
+          <Form.Label>Cost Per Day</Form.Label>
+
+          <Form.Control
+            type="Number"
+            name="costPerDay"
+            placeholder={0}
+            min="0"
+            value={values?.costPerDay}
+            onChange={changeHandler}
+            required
+          />
+        </Form.Group>
+
+        <Form.Group
+          className="form-group col-sm-4 flex-column d-flex mb-3"
+          controlId="formBasicSeatCount"
+        >
+          <Form.Label>Seat Count</Form.Label>
+          <Form.Control
+            type="Number"
+            name="seatCount"
+            placeholder={1}
+            min="1"
+            value={values?.seatCount}
+            onChange={changeHandler}
+            required
+          />
+        </Form.Group>
+
+        <Form.Group
+          className="form-group col-sm-4 flex-column d-flex mb-3"
+          controlId="formBasicMileage"
+        >
+          <Form.Label>Mileage</Form.Label>
+          <Form.Control
+            type="Number"
+            name="mileage"
+            placeholder={1}
+            min="1"
+            value={values?.mileage}
+            onChange={changeHandler}
+            required
+          />
+        </Form.Group>
+      </div>
+
+      <div className="row justify-content-between text-left">
+        <Form.Group
+          className="form-group col-sm-4 flex-column d-flex mb-3"
+          controlId="formBasiBootSpace"
+        >
+          <Form.Label>Boot Space</Form.Label>
+
+          <Form.Control
+            type="Text"
+            name="bootSpace"
+            placeholder="boot Space"
+            value={values?.bootSpace}
+            onChange={changeHandler}
+            required
+          />
+        </Form.Group>
+
+        <Form.Group className="form-group col-sm-4 flex-column d-flex mb-3">
+          <Form.Label>Transmission</Form.Label>
+
+          <Form.Select name="transmission" onChannge={changeHandler}>
+            <option value="Auto">Auto</option>
+            <option value="Manual">Manual</option>
+          </Form.Select>
+        </Form.Group>
+
+        <Form.Group className="form-group col-sm-4 flex-column d-flex mb-3">
+          <Form.Label>Booking Status</Form.Label>
+
+          <Form.Select name="bookingStatus" onChannge={changeHandler}>
+            <option value={false}>False</option>
+            <option value={true}>True</option>
+          </Form.Select>
+        </Form.Group>
+      </div>
+
+      <div className="row justify-content-between text-left">
+        <Form.Group className="form-group col-sm-4 flex-column d-flex mb-3">
+          <Form.Label>Fuel Type</Form.Label>
+
+          <Form.Select name="fuelType" onChannge={changeHandler}>
+            <option value="None">None</option>
+            <option value="Petrol">Petrol</option>
+            <option value="Diesel">Diesel</option>
+            <option value="LPG">LPG</option>
+          </Form.Select>
+        </Form.Group>
+
+        <Form.Group className="form-group col-sm-4 flex-column d-flex mb-3">
+          <Form.Label>Cateogory</Form.Label>
+
+          <Form.Select name="cateogory" onChannge={changeHandler}>
+            {values?.categories?.length > 0 &&
+              values?.categories?.map((cat) => (
+                <option keys={cat._id} value={cat._id}>
+                  {cat.name}
+                </option>
+              ))}
+          </Form.Select>
+        </Form.Group>
+
+        <Form.Group className="form-group col-sm-4 flex-column d-flex mb-3">
+          <Form.Label>Booking Status</Form.Label>
+
+          <Form.Select name="bookingStatus" onChannge={changeHandler}>
+            <option value={false}>False</option>
+            <option value={true}>True</option>
+          </Form.Select>
+        </Form.Group>
+      </div>
+
       <Button variant="primary" type="submit">
         {btnName}
       </Button>

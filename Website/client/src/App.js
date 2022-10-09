@@ -4,6 +4,8 @@ import Header from './Components/NavbarAndFooter/Header/Header';
 import HomeContainer from './Components/ContainerComponents/HomeContainer';
 import ItemDetailsContainer from './Components/ContainerComponents/ItemDetailsContainer';
 import { useDispatch } from 'react-redux';
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { currentUser } from './Services/AuthService';
 import { auth } from './Authentication/FirebaseConfig';
 import { onAuthStateChanged } from 'firebase/auth';
@@ -29,6 +31,7 @@ const App = () => {
 
   return (
     <>
+      <ToastContainer />
       <Header />
       <Routes>
         <Route exact path="/" element={<HomeContainer />} />

@@ -9,7 +9,7 @@ import CreateOrUpdateItemForm from '../../../../Forms/CreateOrUpdateItemForm';
 const initState = {
   model: '',
   categories: [],
-  subCategory: [],
+  subCategory: '',
   category: '',
   transmission: '',
   fuelType: '',
@@ -36,7 +36,7 @@ const CreateItemContainer = () => {
 
   const loadAllCategories = () =>
     getAllCategories().then((cat) =>
-      setValues({ ...values, categories: cat.data })
+      setValues({ ...values, categories: cat.data.data })
     );
 
   const changeHandler = (e) => {
@@ -46,13 +46,20 @@ const CreateItemContainer = () => {
   const submitHandler = (e) => {
     e.preventDefault();
 
-    createVehicle(values, user.token, user.email)
+    createVehicle(values, user.token)
       .then((res) => {
         window.alert(`"${res.data.model}" is created!`);
         window.location.reload();
       })
       .catch((err) => {
-        toast.error(err.response.data.err);
+        console.log(user.token);
+        console.log(err.response.data.message);
+
+        toast.error(
+          err.response && err.response.data.message
+            ? err.response.data.message
+            : err.message
+        );
       });
   };
 

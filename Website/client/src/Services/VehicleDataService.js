@@ -32,11 +32,9 @@ export const getVehicleDetails = (id) => async (dispatch) => {
   }
 };
 
-export const createVehicle = async (vehicleData, authtoken, email) => {
-  return await axios.post(`${process.env.REACT_APP_API}/vehicle`, vehicleData, {
+export const createVehicle = async (vehicleData, authtoken) => {
+  return await axios.post(`${process.env.REACT_APP_API}/vehicle`, {
     token: authtoken,
-    data: {
-      email: email,
-    },
+    vehicleData,
   });
 };
