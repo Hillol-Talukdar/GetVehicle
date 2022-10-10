@@ -16,7 +16,6 @@ const vehicleSchema = new mongoose.Schema(
         subCategory: {
             type: ObjectId,
             ref: 'SubCategory',
-            required: true,
         },
         transmission: {
             type: String,
@@ -33,10 +32,12 @@ const vehicleSchema = new mongoose.Schema(
         engine: {
             type: String,
             trim: true,
+            required: true,
         },
         bootSpace: {
             type: String,
             trim: true,
+            required: true,
         },
         groundClearance: {
             type: String,
@@ -50,6 +51,7 @@ const vehicleSchema = new mongoose.Schema(
         seatCount: {
             type: Number,
             default: 1,
+            min: 1,
         },
         mileage: {
             type: Number,
@@ -61,7 +63,11 @@ const vehicleSchema = new mongoose.Schema(
             default: 0,
             min: 0,
         },
-        currentLocation: {
+        currentLocationString: {
+            type: String,
+            trim: true,
+        },
+        currentLocationCoordinate: {
             type: {
                 type: String,
                 default: 'Point',

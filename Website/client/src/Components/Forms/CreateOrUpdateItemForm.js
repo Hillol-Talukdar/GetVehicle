@@ -49,7 +49,9 @@ const CreateOrUpdateItemForm = ({
           className="form-group col-sm-4 flex-column d-flex mb-3"
           controlId="formBasicEngine"
         >
-          <Form.Label>Engine</Form.Label>
+          <Form.Label>
+            Engine<span className="text-danger"> *</span>
+          </Form.Label>
           <Form.Control
             type="Text"
             name="engine"
@@ -64,7 +66,9 @@ const CreateOrUpdateItemForm = ({
           className="form-group col-sm-4 flex-column d-flex mb-3"
           controlId="formBasicBootSpace"
         >
-          <Form.Label>Boot Space</Form.Label>
+          <Form.Label>
+            Boot Space<span className="text-danger"> *</span>
+          </Form.Label>
           <Form.Control
             type="Text"
             name="bootSpace"
@@ -81,7 +85,9 @@ const CreateOrUpdateItemForm = ({
           className="form-group col-sm-4 flex-column d-flex mb-3"
           controlId="formBasiCostPerDay"
         >
-          <Form.Label>Cost Per Day</Form.Label>
+          <Form.Label>
+            Cost Per Day<span className="text-danger"> *</span>
+          </Form.Label>
 
           <Form.Control
             type="Number"
@@ -134,8 +140,10 @@ const CreateOrUpdateItemForm = ({
         >
           <Form.Label>Transmission</Form.Label>
 
-          <Form.Select name="transmission" onChannge={changeHandler}>
-            <option value="Manual">Manual</option>
+          <Form.Select name="transmission" onChange={changeHandler}>
+            <option value="Manual" selected>
+              Manual
+            </option>
             <option value="Auto">Auto</option>
           </Form.Select>
         </Form.Group>
@@ -143,8 +151,10 @@ const CreateOrUpdateItemForm = ({
         <Form.Group className="form-group col-sm-4 flex-column d-flex mb-3">
           <Form.Label>Booking Status</Form.Label>
 
-          <Form.Select name="bookingStatus" onChannge={changeHandler}>
-            <option value={false}>False</option>
+          <Form.Select name="bookingStatus" onChange={changeHandler}>
+            <option value={false} selected>
+              False
+            </option>
             <option value={true}>True</option>
           </Form.Select>
         </Form.Group>
@@ -155,8 +165,10 @@ const CreateOrUpdateItemForm = ({
         >
           <Form.Label>Fuel Type</Form.Label>
 
-          <Form.Select name="fuelType" onChannge={changeHandler}>
-            <option value="None">None</option>
+          <Form.Select name="fuelType" onChange={changeHandler}>
+            <option value="None" selected>
+              None
+            </option>
             <option value="Petrol">Petrol</option>
             <option value="Diesel">Diesel</option>
             <option value="LPG">LPG</option>
@@ -165,10 +177,45 @@ const CreateOrUpdateItemForm = ({
       </div>
 
       <div className="row justify-content-between text-left">
+        <Form.Group
+          className="form-group col-sm-4 flex-column d-flex mb-3"
+          controlId="formBasicCurrentLocationString"
+        >
+          <Form.Label>
+            Current Location<span className="text-danger"> *</span>
+          </Form.Label>
+          <Form.Control
+            type="Text"
+            name="currentLocationString"
+            placeholder="Current Location"
+            value={values?.currentLocationString}
+            onChange={changeHandler}
+            required
+          />
+        </Form.Group>
+
+        <Form.Group
+          className="form-group col-sm-4 flex-column d-flex mb-3"
+          controlId="formBasicGroundClearance"
+        >
+          <Form.Label>Ground Clearance</Form.Label>
+          <Form.Control
+            type="Text"
+            name="groundClearance"
+            placeholder="Ground Clearance"
+            value={values?.groundClearance}
+            onChange={changeHandler}
+          />
+        </Form.Group>
+
         <Form.Group className="form-group col-sm-4 flex-column d-flex mb-3">
           <Form.Label>Cateogory</Form.Label>
 
-          <Form.Select name="cateogory" onChannge={changeHandler}>
+          <Form.Select name="cateogory" onChange={changeHandler}>
+            <option selected disabled>
+              Select Category
+            </option>
+
             {values?.categories?.length > 0 &&
               values?.categories?.map((cat) => (
                 <option keys={cat._id} value={cat._id}>
@@ -179,7 +226,11 @@ const CreateOrUpdateItemForm = ({
         </Form.Group>
       </div>
 
-      <Button variant="primary" type="submit">
+      <Button
+        className="mx-auto mt-3 d-grid gap-2 col-5 mb-3"
+        variant="primary"
+        type="submit"
+      >
         {btnName}
       </Button>
     </Form>
