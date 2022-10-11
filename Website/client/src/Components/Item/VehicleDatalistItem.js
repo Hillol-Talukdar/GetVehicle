@@ -1,5 +1,6 @@
 import React from 'react';
 import { ListGroup } from 'react-bootstrap';
+import { BookingStatus } from '../../Constants/CommonConstants';
 
 const VehicleDatalistItem = ({ data }) => {
   return (
@@ -41,7 +42,7 @@ const VehicleDatalistItem = ({ data }) => {
 
       <ListGroup.Item className="d-flex justify-content-between">
         Booking Status:
-        <span>{data?.bookingStatus}</span>
+        <span>{data?.bookingStatus ? BookingStatus.RESERVED : BookingStatus.UNRESERVED}</span>
       </ListGroup.Item>
 
       <ListGroup.Item className="d-flex justify-content-between">
@@ -61,7 +62,7 @@ const VehicleDatalistItem = ({ data }) => {
 
       <ListGroup.Item className="d-flex justify-content-between">
         Currrent Location:
-        <span>{data?.currrentLocation}</span>
+        <span>{data?.currentLocationString}</span>
       </ListGroup.Item>
     </ListGroup>
   );

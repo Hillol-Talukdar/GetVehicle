@@ -38,3 +38,8 @@ export const TabsConstants = {
     DESCRIPTION: 'description',
     MORE: 'more',
 }
+
+export const BookingStatus = {
+    RESERVED: 'Reserved',
+    UNRESERVED: 'Unreserved'
+}

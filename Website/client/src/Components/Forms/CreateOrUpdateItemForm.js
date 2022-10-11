@@ -209,9 +209,9 @@ const CreateOrUpdateItemForm = ({
         </Form.Group>
 
         <Form.Group className="form-group col-sm-4 flex-column d-flex mb-3">
-          <Form.Label>Cateogory</Form.Label>
+          <Form.Label>Category</Form.Label>
 
-          <Form.Select name="cateogory" onChange={changeHandler}>
+          <Form.Select name="category" onChange={changeHandler}>
             <option selected disabled>
               Select Category
             </option>
