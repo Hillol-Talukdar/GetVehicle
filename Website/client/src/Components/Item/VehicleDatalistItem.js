@@ -1,67 +1,70 @@
 import React from 'react';
 import { ListGroup } from 'react-bootstrap';
-import { BookingStatus } from '../../Constants/CommonConstants';
+import {
+  BookingStatus,
+  VehicleInfoConstants,
+} from '../../Constants/CommonConstants';
 
 const VehicleDatalistItem = ({ data }) => {
   return (
     <ListGroup variant="flush">
       <ListGroup.Item className="d-flex justify-content-between">
-        Transmission:
-        <span>{data?.transmission}</span>
+        {VehicleInfoConstants.TRANSMISSON}:<span>{data?.transmission}</span>
       </ListGroup.Item>
 
       <ListGroup.Item className="d-flex justify-content-between">
-        Fuel Type:
-        <span>{data?.fuelType}</span>
+        {VehicleInfoConstants.FUAL_TYPE}:<span>{data?.fuelType}</span>
       </ListGroup.Item>
 
       <ListGroup.Item className="d-flex justify-content-between">
-        Engine:
-        <span>{data?.engine}</span>
+        {VehicleInfoConstants.ENGINE}:<span>{data?.engine}</span>
       </ListGroup.Item>
 
       <ListGroup.Item className="d-flex justify-content-between">
-        Boot Space:
-        <span>{data?.bootSpace}</span>
+        {VehicleInfoConstants.MILEAGE}:<span>{data?.mileage}</span>
       </ListGroup.Item>
 
       <ListGroup.Item className="d-flex justify-content-between">
-        Ground Clearance:
+        {VehicleInfoConstants.BOOT_SPACE}:<span>{data?.bootSpace}</span>
+      </ListGroup.Item>
+
+      <ListGroup.Item className="d-flex justify-content-between">
+        {VehicleInfoConstants.GROUND_CLEARANCE}:
         <span>{data?.groundClearance}</span>
       </ListGroup.Item>
 
       <ListGroup.Item className="d-flex justify-content-between">
-        Cost Per Day:
-        <span>{data?.costPerDay}</span>
+        {VehicleInfoConstants.COST_PER_DAY}:<span>{data?.costPerDay}</span>
       </ListGroup.Item>
 
       <ListGroup.Item className="d-flex justify-content-between">
-        Seat Count:
-        <span>{data?.seatCount}</span>
+        {VehicleInfoConstants.SEAT_COUNT}:<span>{data?.seatCount}</span>
       </ListGroup.Item>
 
       <ListGroup.Item className="d-flex justify-content-between">
-        Booking Status:
-        <span>{data?.bookingStatus ? BookingStatus.RESERVED : BookingStatus.UNRESERVED}</span>
+        {VehicleInfoConstants.BOOKING_STATUS}:
+        <span>
+          {data?.bookingStatus
+            ? BookingStatus.RESERVED
+            : BookingStatus.UNRESERVED}
+        </span>
       </ListGroup.Item>
 
       <ListGroup.Item className="d-flex justify-content-between">
-        Rating:
-        <span>{data?.averageRating}</span>
+        {VehicleInfoConstants.RATING}:<span>{data?.averageRating}</span>
       </ListGroup.Item>
 
       <ListGroup.Item className="d-flex justify-content-between">
-        Category:
-        <span>{data?.category?.name}</span>
+        {VehicleInfoConstants.CATEGORY}:<span>{data?.category?.name}</span>
       </ListGroup.Item>
 
       <ListGroup.Item className="d-flex justify-content-between">
-        Sub Category:
+        {VehicleInfoConstants.SUB_CATEGORY}:
         <span>{data?.subCategory?.name}</span>
       </ListGroup.Item>
 
       <ListGroup.Item className="d-flex justify-content-between">
-        Currrent Location:
+        {VehicleInfoConstants.CURRENT_LOCATION}:
         <span>{data?.currentLocationString}</span>
       </ListGroup.Item>
     </ListGroup>

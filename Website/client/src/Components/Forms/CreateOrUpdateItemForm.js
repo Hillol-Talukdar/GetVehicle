@@ -1,29 +1,19 @@
 import React from 'react';
 import { Button, Form } from 'react-bootstrap';
+import {
+  BookingStatus,
+  fuelTypeStatus,
+  TransmissionStatus,
+  VehicleInfoConstants,
+} from '../../Constants/CommonConstants';
 
 const CreateOrUpdateItemForm = ({
   submitHandler,
   changeHandler,
+  showSubCategory,
   values,
   btnName,
 }) => {
-  // const {
-  //   model,
-  //   categories,
-  //   subCategory,
-  //   transmission,
-  //   fuelType,
-  //   engine,
-  //   shipping,
-  //   bootSpace,
-  //   groundClearance,
-  //   costPerDay,
-  //   seatCount,
-  //   mileage,
-  //   currentLocation,
-  //   bookingStatus,
-  // } = values;
-
   return (
     <Form onSubmit={submitHandler}>
       <div className="row justify-content-between text-left">
@@ -32,13 +22,14 @@ const CreateOrUpdateItemForm = ({
           controlId="formBasicModelName"
         >
           <Form.Label>
-            Model Name<span className="text-danger"> *</span>
+            {VehicleInfoConstants.MODEL}
+            <span className="text-danger"> *</span>
           </Form.Label>
 
           <Form.Control
             type="Text"
-            name="model"
-            placeholder="Model Name"
+            name={VehicleInfoConstants.MODEL_IN_MODEL}
+            placeholder={VehicleInfoConstants.MODEL}
             value={values?.model}
             onChange={changeHandler}
             required
@@ -50,12 +41,13 @@ const CreateOrUpdateItemForm = ({
           controlId="formBasicEngine"
         >
           <Form.Label>
-            Engine<span className="text-danger"> *</span>
+            {VehicleInfoConstants.ENGINE}
+            <span className="text-danger"> *</span>
           </Form.Label>
           <Form.Control
             type="Text"
-            name="engine"
-            placeholder="Engine Name"
+            name={VehicleInfoConstants.ENGINE_IN_MODEL}
+            placeholder={VehicleInfoConstants.ENGINE}
             value={values?.engine}
             onChange={changeHandler}
             required
@@ -67,12 +59,13 @@ const CreateOrUpdateItemForm = ({
           controlId="formBasicBootSpace"
         >
           <Form.Label>
-            Boot Space<span className="text-danger"> *</span>
+            {VehicleInfoConstants.BOOT_SPACE}
+            <span className="text-danger"> *</span>
           </Form.Label>
           <Form.Control
             type="Text"
-            name="bootSpace"
-            placeholder="Boot Space"
+            name={VehicleInfoConstants.BOOT_SPACE_IN_MODEL}
+            placeholder={VehicleInfoConstants.BOOT_SPACE}
             value={values?.bootSpace}
             onChange={changeHandler}
             required
@@ -86,12 +79,13 @@ const CreateOrUpdateItemForm = ({
           controlId="formBasiCostPerDay"
         >
           <Form.Label>
-            Cost Per Day<span className="text-danger"> *</span>
+            {VehicleInfoConstants.COST_PER_DAY}
+            <span className="text-danger"> *</span>
           </Form.Label>
 
           <Form.Control
             type="Number"
-            name="costPerDay"
+            name={VehicleInfoConstants.COST_PER_DAY_MODEL}
             placeholder={0}
             min="0"
             value={values?.costPerDay}
@@ -104,10 +98,10 @@ const CreateOrUpdateItemForm = ({
           className="form-group col-sm-4 flex-column d-flex mb-3"
           controlId="formBasicSeatCount"
         >
-          <Form.Label>Seat Count</Form.Label>
+          <Form.Label>{VehicleInfoConstants.SEAT_COUNT}</Form.Label>
           <Form.Control
             type="Number"
-            name="seatCount"
+            name={VehicleInfoConstants.SEAT_COUNT_IN_MODEL}
             placeholder={1}
             min="1"
             value={values?.seatCount}
@@ -120,10 +114,10 @@ const CreateOrUpdateItemForm = ({
           className="form-group col-sm-4 flex-column d-flex mb-3"
           controlId="formBasicMileage"
         >
-          <Form.Label>Mileage</Form.Label>
+          <Form.Label>{VehicleInfoConstants.MILEAGE}</Form.Label>
           <Form.Control
             type="Number"
-            name="mileage"
+            name={VehicleInfoConstants.MILEAGE_IN_MODEL}
             placeholder={1}
             min="1"
             value={values?.mileage}
@@ -138,24 +132,29 @@ const CreateOrUpdateItemForm = ({
           className="form-group col-sm-4 flex-column d-flex mb-3"
           controlId="formBasicTransmission"
         >
-          <Form.Label>Transmission</Form.Label>
+          <Form.Label>{VehicleInfoConstants.TRANSMISSON}</Form.Label>
 
-          <Form.Select name="transmission" onChange={changeHandler}>
-            <option value="Manual" selected>
-              Manual
+          <Form.Select
+            name={VehicleInfoConstants.TRANSMISSON_IN_MODEL}
+            onChange={changeHandler}
+          >
+            <option value={TransmissionStatus.MANUAL} selected>
+              {TransmissionStatus.MANUAL}
             </option>
-            <option value="Auto">Auto</option>
+            <option value={TransmissionStatus.AUTO}>
+              {TransmissionStatus.AUTO}
+            </option>
           </Form.Select>
         </Form.Group>
 
         <Form.Group className="form-group col-sm-4 flex-column d-flex mb-3">
-          <Form.Label>Booking Status</Form.Label>
+          <Form.Label>{VehicleInfoConstants.BOOKING_STATUS}</Form.Label>
 
           <Form.Select name="bookingStatus" onChange={changeHandler}>
             <option value={false} selected>
-              False
+              {BookingStatus.UNRESERVED}
             </option>
-            <option value={true}>True</option>
+            <option value={true}>{BookingStatus.RESERVED}</option>
           </Form.Select>
         </Form.Group>
 
@@ -163,15 +162,22 @@ const CreateOrUpdateItemForm = ({
           className="form-group col-sm-4 flex-column d-flex mb-3"
           controlId="formBasicFuelType"
         >
-          <Form.Label>Fuel Type</Form.Label>
+          <Form.Label>{VehicleInfoConstants.FUAL_TYPE}</Form.Label>
 
-          <Form.Select name="fuelType" onChange={changeHandler}>
-            <option value="None" selected>
-              None
+          <Form.Select
+            name={VehicleInfoConstants.FUAL_TYPE_IN_MODEL}
+            onChange={changeHandler}
+          >
+            <option value={fuelTypeStatus.NONE} selected>
+              {fuelTypeStatus.NONE}
             </option>
-            <option value="Petrol">Petrol</option>
-            <option value="Diesel">Diesel</option>
-            <option value="LPG">LPG</option>
+            <option value={fuelTypeStatus.PETROL}>
+              {fuelTypeStatus.PETROL}
+            </option>
+            <option value={fuelTypeStatus.DIESEL}>
+              {fuelTypeStatus.DIESEL}
+            </option>
+            <option value={fuelTypeStatus.LPG}>{fuelTypeStatus.LPG}</option>
           </Form.Select>
         </Form.Group>
       </div>
@@ -182,15 +188,15 @@ const CreateOrUpdateItemForm = ({
           controlId="formBasicCurrentLocationString"
         >
           <Form.Label>
-            Current Location<span className="text-danger"> *</span>
+            {VehicleInfoConstants.CURRENT_LOCATION}
+            <span className="text-danger"> *</span>
           </Form.Label>
           <Form.Control
             type="Text"
-            name="currentLocationString"
-            placeholder="Current Location"
+            name={VehicleInfoConstants.CURRENT_LOCATION_IN_MODEL}
+            placeholder={VehicleInfoConstants.CURRENT_LOCATION}
             value={values?.currentLocationString}
             onChange={changeHandler}
-            required
           />
         </Form.Group>
 
@@ -198,10 +204,10 @@ const CreateOrUpdateItemForm = ({
           className="form-group col-sm-4 flex-column d-flex mb-3"
           controlId="formBasicGroundClearance"
         >
-          <Form.Label>Ground Clearance</Form.Label>
+          <Form.Label>{VehicleInfoConstants.GROUND_CLEARANCE}</Form.Label>
           <Form.Control
             type="Text"
-            name="groundClearance"
+            name={VehicleInfoConstants.GROUND_CLEARANCE_IN_MODEL}
             placeholder="Ground Clearance"
             value={values?.groundClearance}
             onChange={changeHandler}
@@ -209,11 +215,14 @@ const CreateOrUpdateItemForm = ({
         </Form.Group>
 
         <Form.Group className="form-group col-sm-4 flex-column d-flex mb-3">
-          <Form.Label>Category</Form.Label>
+          <Form.Label>{VehicleInfoConstants.CATEGORY}</Form.Label>
 
-          <Form.Select name="category" onChange={changeHandler}>
+          <Form.Select
+            name={VehicleInfoConstants.CATEGORY_IN_MODEL}
+            onChange={changeHandler}
+          >
             <option selected disabled>
-              Select Category
+              Select {VehicleInfoConstants.CATEGORY}
             </option>
 
             {values?.categories?.length > 0 &&
@@ -224,6 +233,30 @@ const CreateOrUpdateItemForm = ({
               ))}
           </Form.Select>
         </Form.Group>
+      </div>
+
+      <div className="row justify-content-between text-left">
+        {showSubCategory && (
+          <Form.Group className="form-group col-sm-4 flex-column d-flex mb-3">
+            <Form.Label>{VehicleInfoConstants.SUB_CATEGORY}</Form.Label>
+
+            <Form.Select
+              name={VehicleInfoConstants.SUB_CATEGORY_IN_MODEL}
+              onChange={changeHandler}
+            >
+              <option selected disabled>
+                Select {VehicleInfoConstants.SUB_CATEGORY}
+              </option>
+
+              {values?.subCategories?.length > 0 &&
+                values?.subCategories?.map((subCategory) => (
+                  <option keys={subCategory._id} value={subCategory._id}>
+                    {subCategory.name}
+                  </option>
+                ))}
+            </Form.Select>
+          </Form.Group>
+        )}
       </div>
 
       <Button

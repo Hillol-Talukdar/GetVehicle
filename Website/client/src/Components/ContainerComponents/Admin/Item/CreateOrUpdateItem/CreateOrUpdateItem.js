@@ -1,18 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { Container } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
-import { getAllCategories } from '../../../../../Services/CategoryDataService';
+import { VehicleInfoConstants } from '../../../../../Constants/CommonConstants';
+import {
+  getAllCategories,
+  getAllSUbCategoriesOfACategory,
+} from '../../../../../Services/CategoryDataService';
 import { createVehicle } from '../../../../../Services/VehicleDataService';
 import CreateOrUpdateItemForm from '../../../../Forms/CreateOrUpdateItemForm';
 
 const initState = {
   model: '',
   categories: [],
-  // subCategory: '',
+  subCategories: [],
+  subCategory: '',
   category: '',
-  transmission: '',
-  fuelType: '',
+  transmission: 'Manual',
+  fuelType: 'None',
   engine: '',
   bootSpace: '',
   groundClearance: '',
@@ -25,8 +30,8 @@ const initState = {
 };
 
 const CreateOrUpdateItemContainer = () => {
-  const dispatch = useDispatch();
   const [values, setValues] = useState(initState);
+  const [showSubCategory, setShowSubCategory] = useState(false);
   const user = useSelector((state) => state.userReducer);
 
   useEffect(() => {
@@ -38,8 +43,22 @@ const CreateOrUpdateItemContainer = () => {
       setValues({ ...values, categories: cat.data.data })
     );
 
+  const categorySelectorHandler = (e) => {
+    e.preventDefault();
+
+    getAllSUbCategoriesOfACategory(e.target.value).then((res) => {
+      setValues({ ...values, subCategories: res.data.data });
+    });
+
+    setShowSubCategory(true);
+  };
+
   const changeHandler = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
+
+    if (e.target.name == VehicleInfoConstants.CATEGORY_IN_MODEL) {
+      categorySelectorHandler(e);
+    }
   };
 
   const submitHandler = (e) => {
@@ -47,13 +66,10 @@ const CreateOrUpdateItemContainer = () => {
 
     createVehicle(values, user.token)
       .then((res) => {
-        window.alert(`"${res.data.model}" is created!`);
+        window.alert(`"${res.data.data.model}" is created!`);
         window.location.reload();
       })
       .catch((err) => {
-        console.log(user.token);
-        console.log(err.response.data.message);
-
         toast.error(
           err.response && err.response.data.message
             ? err.response.data.message
@@ -71,6 +87,7 @@ const CreateOrUpdateItemContainer = () => {
       <CreateOrUpdateItemForm
         submitHandler={submitHandler}
         changeHandler={changeHandler}
+        showSubCategory={showSubCategory}
         values={values}
         btnName="Create"
       />
