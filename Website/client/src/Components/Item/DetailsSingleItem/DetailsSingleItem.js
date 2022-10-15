@@ -12,7 +12,7 @@ const DetailsSingleItem = ({ data }) => {
 
   return (
     <>
-      <Row className="p-3">
+      <Row className="p-2">
         <Col md={7}>
           <div className="mt-3">
             {data?.photo && data?.photo.length ? (
@@ -61,7 +61,7 @@ const DetailsSingleItem = ({ data }) => {
         </Col>
 
         <Col md={5}>
-          <h1>{data?.model}</h1>
+          
 
           <Card id="itemDetailsCard">
             <Card.Body>
