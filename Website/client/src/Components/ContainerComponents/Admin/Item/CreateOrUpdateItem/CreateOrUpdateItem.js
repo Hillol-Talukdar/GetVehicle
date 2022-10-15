@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import { VehicleInfoConstants } from '../../../../../Constants/CommonConstants';
 import {
   getAllCategories,
-  getAllSUbCategoriesOfACategory,
+  getAllSubCategoriesOfACategory,
 } from '../../../../../Services/CategoryDataService';
 import { createVehicle } from '../../../../../Services/VehicleDataService';
 import CreateOrUpdateItemForm from '../../../../Forms/CreateOrUpdateItemForm';
@@ -46,7 +46,7 @@ const CreateOrUpdateItemContainer = () => {
   const categorySelectorHandler = (e) => {
     e.preventDefault();
 
-    getAllSUbCategoriesOfACategory(e.target.value).then((res) => {
+    getAllSubCategoriesOfACategory(e.target.value).then((res) => {
       setValues({ ...values, subCategories: res.data.data });
     });
 
@@ -55,8 +55,10 @@ const CreateOrUpdateItemContainer = () => {
 
   const changeHandler = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
+    
 
-    if (e.target.name == VehicleInfoConstants.CATEGORY_IN_MODEL) {
+    if (e.target.name === VehicleInfoConstants.CATEGORY_IN_MODEL) {
+      values[e.target.name] = e.target.value;
       categorySelectorHandler(e);
     }
   };
