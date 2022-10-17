@@ -12,6 +12,7 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { createUserPayloadAndDispatch } from './Services/ReduxService';
 import Footer from './Components/NavbarAndFooter/Footer/Footer';
 import CreateOrUpdateItemContainer from './Components/ContainerComponents/Admin/Item/CreateOrUpdateItem/CreateOrUpdateItem';
+import CreateOrUpdateCategoryContainer from './Components/ContainerComponents/Admin/Item/CreateOrUpdateCategoryContainer/CreateOrUpdateCategoryContainer';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 
 const App = () => {
@@ -39,6 +40,11 @@ const App = () => {
           exact
           path="/admin/create-or-update-vehicle"
           element={<CreateOrUpdateItemContainer />}
+        />
+        <Route
+          exact
+          path="/admin/create-or-update-category"
+          element={<CreateOrUpdateCategoryContainer />}
         />
         <Route exact path="/details/:id" element={<ItemDetailsContainer />} />
       </Routes>

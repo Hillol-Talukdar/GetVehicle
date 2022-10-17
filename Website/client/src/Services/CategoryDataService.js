@@ -5,5 +5,19 @@ export const getAllCategories = async () => {
 };
 
 export const getAllSubCategoriesOfACategory = async (id) => {
-  return await axios.get(`${process.env.REACT_APP_API}/category/subCategory/${id}`);
+  return await axios.get(
+    `${process.env.REACT_APP_API}/category/subCategory/${id}`
+  );
+};
+
+export const createCategory = async (categoryData, authtoken) => {
+  return await axios.post(
+    `${process.env.REACT_APP_API}/category`,
+    categoryData,
+    {
+      headers: {
+        authtoken,
+      },
+    }
+  );
 };

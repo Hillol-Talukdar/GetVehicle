@@ -48,12 +48,27 @@ const Header = () => {
             </Navbar.Text>
 
             <NavDropdown title="Admin" id="basic-nav-dropdown">
-              <NavDropdown.Item className="p-2" to="/admin/create-item">
+              <NavDropdown.Item
+                className="p-2"
+                to="/admin/create-or-update-vehicle"
+              >
                 <NavLink
                   to="/admin/create-or-update-vehicle"
                   className="textColorAndDecoration"
                 >
                   Create Product
+                </NavLink>
+              </NavDropdown.Item>
+
+              <NavDropdown.Item
+                className="p-2"
+                to="/admin/create-or-update-category"
+              >
+                <NavLink
+                  to="/admin/create-or-update-category"
+                  className="textColorAndDecoration"
+                >
+                  Create Category
                 </NavLink>
               </NavDropdown.Item>
             </NavDropdown>
