@@ -7,6 +7,7 @@ import {
   getAllCategories,
 } from '../../../../../Services/CategoryDataService';
 import CreateOrUpdateCategoryForm from '../../../../Forms/CreateOrUpdateCategoryForm';
+import './CreateOrUpdateCategory.css';
 
 const CreateOrUpdateCategoryContainer = () => {
   const user = useSelector((state) => state.userReducer);
@@ -30,7 +31,7 @@ const CreateOrUpdateCategoryContainer = () => {
 
     setLoading(true);
 
-    createCategory({name}, user.token)
+    createCategory({ name }, user.token)
       .then((res) => {
         setLoading(false);
         toast.success(`"${res.data.data.name}" is created!`);
@@ -63,6 +64,20 @@ const CreateOrUpdateCategoryContainer = () => {
         changeHandler={changeHandler}
         buttonName="Create"
       />
+
+      <hr className="mt-3" />
+
+      <div className="d-flex flex-wrap justify-content-start">
+        {categories.map((category) => (
+          <div
+            className="CategoryCard m-3 row"
+            style={{ width: '18rem', height: '2rem' }}
+            key={category._id}
+          >
+            <div>{category.name}</div>
+          </div>
+        ))}
+      </div>
     </Container>
   );
 };
