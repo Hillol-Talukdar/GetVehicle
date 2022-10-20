@@ -30,7 +30,7 @@ const CreateOrUpdateCategoryContainer = () => {
 
     setLoading(true);
 
-    createCategory(name, user.token)
+    createCategory({name}, user.token)
       .then((res) => {
         setLoading(false);
         toast.success(`"${res.data.data.name}" is created!`);

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Form } from 'react-bootstrap';
-import { VehicleInfoConstants } from '../../Constants/CommonConstants';
+import { CategoryInfoConstants, VehicleInfoConstants } from '../../Constants/CommonConstants';
 
 const CreateOrUpdateCategoryForm = ({
   name,
@@ -15,14 +15,14 @@ const CreateOrUpdateCategoryForm = ({
         controlId="formBasicCategoryName"
       >
         <Form.Label>
-          {VehicleInfoConstants.CATEGORY}
+          {CategoryInfoConstants.NAME}
           <span className="text-danger"> *</span>
         </Form.Label>
 
         <Form.Control
           type="Text"
-          name="name"
-          placeholder={VehicleInfoConstants.CATEGORY}
+          name={CategoryInfoConstants.NAME_IN_MODEL}
+          placeholder={CategoryInfoConstants.NAME}
           value={name}
           onChange={changeHandler}
           required

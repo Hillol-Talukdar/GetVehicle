@@ -4,6 +4,7 @@ const catchAsync = require('../../utils/catchAsync');
 const AppError = require('../../utils/appError');
 
 exports.createCategory = catchAsync(async (req, res, next) => {
+    console.log(req.body);
     const newCategory = await Category.create(req.body);
 
     res.status(201).json({
@@ -11,6 +12,7 @@ exports.createCategory = catchAsync(async (req, res, next) => {
         data: newCategory,
     });
 });
+
 
 exports.getAllCategories = catchAsync(async (req, res, next) => {
     const categories = await Category.find({});

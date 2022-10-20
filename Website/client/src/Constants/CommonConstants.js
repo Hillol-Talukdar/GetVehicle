@@ -41,6 +41,11 @@ export const VehicleInfoConstants = {
   RATING_IN_MODEL: 'rating',
 };
 
+export const CategoryInfoConstants = {
+  NAME: 'Name',
+  NAME_IN_MODEL: 'name'
+}
+
 export const ColorConstants = {
   HOMEPAGE_BACKGROUND_COLOR: '#f2f2f2',
 };
