@@ -1,11 +1,15 @@
-import React from 'react';
-import { Button, Form } from 'react-bootstrap';
+import React, { useState } from 'react';
+import Avatar from 'react-avatar';
+import { Badge, Button, Form } from 'react-bootstrap';
+import Dropzone from 'react-dropzone';
 import {
   BookingStatus,
   fuelTypeStatus,
   TransmissionStatus,
   VehicleInfoConstants,
 } from '../../Constants/CommonConstants';
+
+
 
 const CreateOrUpdateItemForm = ({
   submitHandler,
@@ -14,6 +18,21 @@ const CreateOrUpdateItemForm = ({
   values,
   btnName,
 }) => {
+  const [images, setImages] = useState([]);
+
+  const onChangePicture = e => {
+    changeHandler(e);
+    for (let i = 0; i < e.target.files.length; i++) {
+      if (e.target.files[i]) {
+        const reader = new FileReader();
+        reader.addEventListener("load", () => {
+          setImages(oldImages => [...oldImages, reader.result]);
+
+        });
+        reader.readAsDataURL(e.target.files[i]);
+      }
+    }
+  };
   return (
     <Form onSubmit={submitHandler}>
       <div className="row justify-content-between text-left">
@@ -212,6 +231,40 @@ const CreateOrUpdateItemForm = ({
             value={values?.groundClearance}
             onChange={changeHandler}
           />
+        </Form.Group>
+        <Form.Group>
+          <div className="row">
+            {images &&
+              images.map((image) => (
+                <div className="mb-3 mt-1 col-auto">
+                  <Badge
+                    count="X"
+                    style={{ cursor: "pointer" }}
+                  // onClick={() => handleRemove(image.public_id)}
+                  >
+                    <Avatar
+                      key={image}
+                      src={image}
+                      size={60}
+                      shape="circle"
+                    />
+                  </Badge>
+                </div>
+              ))}
+          </div>
+          <div className="row m-auto">
+            <label className="btn btn-outline-primary">
+              Choose and Upload File
+              <input
+                type="file"
+                multiple
+                accept="images/*"
+                name={VehicleInfoConstants.PHOTO_IN_MODEL}
+                hidden
+                onChange={onChangePicture}
+              />
+            </label>
+          </div>
         </Form.Group>
 
         <Form.Group className="form-group col-sm-4 flex-column d-flex mb-3">

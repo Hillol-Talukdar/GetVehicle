@@ -39,6 +39,8 @@ export const VehicleInfoConstants = {
   SUB_CATEGORY_IN_MODEL: 'subCategory',
   RATING: 'Rating',
   RATING_IN_MODEL: 'rating',
+  PHOTO: 'Photo',
+  PHOTO_IN_MODEL: 'photo',
 };
 
 export const ColorConstants = {

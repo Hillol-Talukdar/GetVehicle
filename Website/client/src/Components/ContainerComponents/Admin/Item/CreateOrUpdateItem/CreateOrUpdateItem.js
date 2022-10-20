@@ -1,5 +1,7 @@
+import axios, { Axios } from 'axios';
 import React, { useState, useEffect } from 'react';
 import { Container } from 'react-bootstrap';
+import FileResizer from 'react-image-file-resizer';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { VehicleInfoConstants } from '../../../../../Constants/CommonConstants';
@@ -7,7 +9,7 @@ import {
   getAllCategories,
   getAllSubCategoriesOfACategory,
 } from '../../../../../Services/CategoryDataService';
-import { createVehicle } from '../../../../../Services/VehicleDataService';
+import { createVehicle, uploadImagesOnCloudinary } from '../../../../../Services/VehicleDataService';
 import CreateOrUpdateItemForm from '../../../../Forms/CreateOrUpdateItemForm';
 
 const initState = {
@@ -53,10 +55,35 @@ const CreateOrUpdateItemContainer = () => {
     setShowSubCategory(true);
   };
 
-  const changeHandler = (e) => {
-    setValues({ ...values, [e.target.name]: e.target.value });
-    
+  const resizeFile = (file) =>
+  new Promise((resolve) => {
+    FileResizer.imageFileResizer(
+      file,
+      720,
+      720,
+      "JPEG",
+      100,
+      0,
+      (uri) => {
+        resolve(uri);
+      },
+      "base64"
+    );
+  });
 
+  const changeHandler = (e) => {
+    if(e.target.name === VehicleInfoConstants.PHOTO_IN_MODEL) {
+      for(let i=0; i<e.target.files.length; i++) {
+        resizeFile(e.target.files[i]).then((imageUri)=>{
+          values[e.target.name].push(imageUri);
+        }).catch((error) => {
+          console.log(error.message);
+        });
+      } 
+    } else {
+      setValues({ ...values, [e.target.name]: e.target.value });
+    }
+    
     if (e.target.name === VehicleInfoConstants.CATEGORY_IN_MODEL) {
       values[e.target.name] = e.target.value;
       categorySelectorHandler(e);
@@ -65,20 +92,35 @@ const CreateOrUpdateItemContainer = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-
-    createVehicle(values, user.token)
-      .then((res) => {
-        window.alert(`"${res.data.data.model}" is created!`);
-        window.location.reload();
-      })
-      .catch((err) => {
-        toast.error(
-          err.response && err.response.data.message
-            ? err.response.data.message
-            : err.message
-        );
+    
+    if(values[VehicleInfoConstants.PHOTO_IN_MODEL]) {
+      new Promise((resolve, reject) => {
+        uploadImagesOnCloudinary(values[VehicleInfoConstants.PHOTO_IN_MODEL], resolve, reject);
+      }).then((response) => {
+        values[VehicleInfoConstants.PHOTO_IN_MODEL] = response;
+        createNewVehicle();
+      }).catch((error)=>{
+        toast.error(error.message);
       });
+    } else {
+      createNewVehicle();
+    }
   };
+
+  const createNewVehicle = () => {
+    createVehicle(values, user.token)
+    .then((res) => {
+      window.alert(`"${res.data.data.model}" is created!`);
+      window.location.reload();
+    })
+    .catch((err) => {
+      toast.error(
+        err.response && err.response.data.message
+          ? err.response.data.message
+          : err.message
+      );
+    });
+  }
 
   return (
     <Container fluid>

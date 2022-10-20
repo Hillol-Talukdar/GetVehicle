@@ -13,8 +13,12 @@ import { createUserPayloadAndDispatch } from './Services/ReduxService';
 import Footer from './Components/NavbarAndFooter/Footer/Footer';
 import CreateOrUpdateItemContainer from './Components/ContainerComponents/Admin/Item/CreateOrUpdateItem/CreateOrUpdateItem';
 // import 'bootstrap/dist/css/bootstrap.min.css';
+import {Cloudinary} from "@cloudinary/url-gen";
+import {AdvancedImage} from '@cloudinary/react';
+import {fill} from "@cloudinary/url-gen/actions/resize";
 
 const App = () => {
+
   const dispatch = useDispatch();
 
   onAuthStateChanged(auth, (user) => {
