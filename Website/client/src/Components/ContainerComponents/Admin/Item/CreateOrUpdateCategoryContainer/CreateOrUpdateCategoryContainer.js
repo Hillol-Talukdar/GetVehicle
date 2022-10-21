@@ -65,16 +65,24 @@ const CreateOrUpdateCategoryContainer = () => {
         buttonName="Create"
       />
 
-      <hr className="mt-3" />
+
+      <div className="d-flex justify-content-between border-bottom mb-3 border-2">
+          <h4 className="ml-auto mt-3">All Categories</h4>
+      </div>
 
       <div className="d-flex flex-wrap justify-content-start">
         {categories.map((category) => (
           <div
-            className="CategoryCard m-3 row"
-            style={{ width: '18rem', height: '2rem' }}
+            className="alert CategoryCard d-flex justify-content-between m-3"
+            style={{ width: '18rem' }}
             key={category._id}
           >
             <div>{category.name}</div>
+
+            <div>
+              <i class="fa-solid fa-pen px-3" style={{ color: 'blue' }}></i>
+              <i class="fa-solid fa-trash" style={{ color: 'red' }}></i>
+            </div>
           </div>
         ))}
       </div>
