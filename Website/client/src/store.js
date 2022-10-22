@@ -4,9 +4,9 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import {
   vehicleDetailsReducer,
   vehicleCreateReducer,
-} from './Reducer/VehicleReducer';
-import { userReducer } from './Reducer/UserReducers';
-import { categoryListReducer } from './Reducer/CategoryReducers';
+} from './Reducers/VehicleReducers';
+import { userReducer } from './Reducers/UserReducers';
+import { categoryListReducer } from './Reducers/CategoryReducers';
 
 const reducer = combineReducers({
   vehicleDetailsReducer: vehicleDetailsReducer,
