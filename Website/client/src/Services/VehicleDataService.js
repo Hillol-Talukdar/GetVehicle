@@ -6,8 +6,6 @@ import {
 } from '../Constants/ReduxConstants';
 
 export const getAllVehicleList = async () => {
-  console.log(process.env.REACT_APP_API);
-
   return await axios.get(`${process.env.REACT_APP_API}/vehicle`);
 };
 
@@ -32,4 +30,35 @@ export const getVehicleDetails = (id) => async (dispatch) => {
           : error.message,
     });
   }
+};
+
+export const createVehicle = async (vehicleData, authtoken) => {
+  return await axios.post(`${process.env.REACT_APP_API}/vehicle`, vehicleData, {
+    headers: {
+      authtoken,
+    },
+  });
+};
+
+export const uploadImagesOnCloudinary = (imageFiles, resolve, reject) => {
+
+  let allSecureUrl = [];
+
+  const uploaders = imageFiles.map(file => {
+    let formData = new FormData();
+    formData.append('file', file);
+    formData.append("upload_preset", "ynv8wlxz");
+
+    return axios.post('https://api.cloudinary.com/v1_1/getvehicle/image/upload', formData).then((response)=>{
+      allSecureUrl.push(response.data.secure_url);
+    });
+  });
+
+  axios.all(uploaders).then((response) => {
+    console.log(allSecureUrl);
+    console.log("/////////////////////////////////////");
+    console.log(response);
+    resolve(allSecureUrl);
+  });
+  
 };

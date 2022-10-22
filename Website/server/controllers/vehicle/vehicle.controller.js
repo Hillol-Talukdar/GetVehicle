@@ -11,7 +11,15 @@ exports.createAVehicle = catchAsync(async (req, res, next) => {
 });
 
 exports.getAVehicle = catchAsync(async (req, res, next) => {
-    const vehicle = await Vehicle.findById(req.params.id);
+    const vehicle = await Vehicle.findById(req.params.id)
+        .populate({
+            path: 'category',
+            select: 'name slug',
+        })
+        .populate({
+            path: 'subCategory',
+            select: 'name slug',
+        });
 
     if (!vehicle) {
         return next(new AppError('Vehicle not found!', 404));
@@ -24,7 +32,10 @@ exports.getAVehicle = catchAsync(async (req, res, next) => {
 });
 
 exports.getAllVehicle = catchAsync(async (req, res, next) => {
-    const vehicles = await Vehicle.find({});
+    const vehicles = await Vehicle.find({}).populate({
+        path: 'category',
+        select: 'name slug',
+    });
 
     res.status(200).json({
         status: 'Success',

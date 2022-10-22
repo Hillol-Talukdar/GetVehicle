@@ -21,7 +21,7 @@ const ItemDetailsContainer = () => {
   return (
     <Container
       fluid
-      style={{ backgroundColor: ColorConstants.HOMEPAGE_BACKGROUND_COLOR }}
+      // style={{ backgroundColor: ColorConstants.HOMEPAGE_BACKGROUND_COLOR }}
     >
       {loading ? (
         <p>Loading...</p>

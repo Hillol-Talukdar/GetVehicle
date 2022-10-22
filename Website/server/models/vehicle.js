@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { ObjectId } = mongoose.Schema;
 
 const vehicleSchema = new mongoose.Schema(
     {
@@ -7,9 +8,14 @@ const vehicleSchema = new mongoose.Schema(
             trim: true,
             required: true,
         },
-        categories: {
-            category: String,
-            subCategory: String,
+        category: {
+            type: ObjectId,
+            ref: 'Category',
+            required: true,
+        },
+        subCategory: {
+            type: ObjectId,
+            ref: 'SubCategory',
         },
         transmission: {
             type: String,
@@ -26,10 +32,12 @@ const vehicleSchema = new mongoose.Schema(
         engine: {
             type: String,
             trim: true,
+            required: true,
         },
         bootSpace: {
             type: String,
             trim: true,
+            required: true,
         },
         groundClearance: {
             type: String,
@@ -38,19 +46,28 @@ const vehicleSchema = new mongoose.Schema(
         costPerDay: {
             type: Number,
             default: 0,
+            min: 0,
         },
         seatCount: {
             type: Number,
             default: 1,
+            min: 1,
         },
         mileage: {
             type: Number,
+            default: 1,
+            min: 1,
         },
         averageRating: {
             type: Number,
             default: 0,
+            min: 0,
         },
-        currentLocation: {
+        currentLocationString: {
+            type: String,
+            trim: true,
+        },
+        currentLocationCoordinate: {
             type: {
                 type: String,
                 default: 'Point',

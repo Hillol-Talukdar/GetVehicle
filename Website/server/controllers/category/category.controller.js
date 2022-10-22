@@ -1,4 +1,5 @@
 const Category = require('../../models/category');
+const SubCategory = require('../../models/subCategory');
 const catchAsync = require('../../utils/catchAsync');
 const AppError = require('../../utils/appError');
 
@@ -60,3 +61,13 @@ exports.deleteACategory = catchAsync(async (req, res, next) => {
         status: 'Success',
     });
 });
+
+exports.getAllSUbCategoriesOfACategory = catchAsync(async(req,res,next) =>{
+    const subCategories = await SubCategory.find({category: req.params.id})
+
+    res.status(200).json({
+        status: 'Success',
+        result: subCategories.length,
+        data: subCategories,
+    });
+})
