@@ -3,7 +3,7 @@ import Avatar from 'react-avatar';
 import { Button, Form } from 'react-bootstrap';
 import {
   BookingStatus,
-  fuelTypeStatus,
+  FuelTypeStatus,
   TransmissionStatus,
   VehicleInfoConstants,
 } from '../../Constants/CommonConstants';
@@ -186,16 +186,16 @@ const CreateOrUpdateItemForm = ({
             name={VehicleInfoConstants.FUAL_TYPE_IN_MODEL}
             onChange={changeHandler}
           >
-            <option value={fuelTypeStatus.NONE} selected>
-              {fuelTypeStatus.NONE}
+            <option value={FuelTypeStatus.NONE} selected>
+              {FuelTypeStatus.NONE}
             </option>
-            <option value={fuelTypeStatus.PETROL}>
-              {fuelTypeStatus.PETROL}
+            <option value={FuelTypeStatus.PETROL}>
+              {FuelTypeStatus.PETROL}
             </option>
-            <option value={fuelTypeStatus.DIESEL}>
-              {fuelTypeStatus.DIESEL}
+            <option value={FuelTypeStatus.DIESEL}>
+              {FuelTypeStatus.DIESEL}
             </option>
-            <option value={fuelTypeStatus.LPG}>{fuelTypeStatus.LPG}</option>
+            <option value={FuelTypeStatus.LPG}>{FuelTypeStatus.LPG}</option>
           </Form.Select>
         </Form.Group>
       </div>

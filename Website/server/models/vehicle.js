@@ -36,8 +36,7 @@ const vehicleSchema = new mongoose.Schema(
         },
         bootSpace: {
             type: String,
-            trim: true,
-            required: true,
+            trim: true
         },
         groundClearance: {
             type: String,
@@ -85,6 +84,10 @@ const vehicleSchema = new mongoose.Schema(
             type: mongoose.Schema.ObjectId,
             ref: 'User',
         },
+        isTrashed: {
+            type: Boolean,
+            default: false,
+        }
     },
     { timestamps: true }
 );
