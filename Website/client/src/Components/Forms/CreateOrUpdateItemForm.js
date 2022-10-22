@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Avatar from 'react-avatar';
-import { Badge, Button, Form } from 'react-bootstrap';
-import Dropzone from 'react-dropzone';
+import { Button, Form } from 'react-bootstrap';
 import {
   BookingStatus,
   fuelTypeStatus,
@@ -232,40 +231,7 @@ const CreateOrUpdateItemForm = ({
             onChange={changeHandler}
           />
         </Form.Group>
-        <Form.Group>
-          <div className="row">
-            {images &&
-              images.map((image) => (
-                <div className="mb-3 mt-1 col-auto">
-                  <Badge
-                    count="X"
-                    style={{ cursor: "pointer" }}
-                  // onClick={() => handleRemove(image.public_id)}
-                  >
-                    <Avatar
-                      key={image}
-                      src={image}
-                      size={60}
-                      shape="circle"
-                    />
-                  </Badge>
-                </div>
-              ))}
-          </div>
-          <div className="row m-auto">
-            <label className="btn btn-outline-primary">
-              Choose and Upload File
-              <input
-                type="file"
-                multiple
-                accept="images/*"
-                name={VehicleInfoConstants.PHOTO_IN_MODEL}
-                hidden
-                onChange={onChangePicture}
-              />
-            </label>
-          </div>
-        </Form.Group>
+        
 
         <Form.Group className="form-group col-sm-4 flex-column d-flex mb-3">
           <Form.Label>{VehicleInfoConstants.CATEGORY}</Form.Label>
@@ -288,7 +254,7 @@ const CreateOrUpdateItemForm = ({
         </Form.Group>
       </div>
 
-      <div className="row justify-content-between text-left">
+      <div className="row justify-content-between text-left mb-3">
         {showSubCategory && (
           <Form.Group className="form-group col-sm-4 flex-column d-flex mb-3">
             <Form.Label>{VehicleInfoConstants.SUB_CATEGORY}</Form.Label>
@@ -309,8 +275,40 @@ const CreateOrUpdateItemForm = ({
                 ))}
             </Form.Select>
           </Form.Group>
+        
         )}
       </div>
+
+      <Form.Group>
+          <div className="row">
+            {images &&
+              images.map((image) => (
+                <div className="mb-3 col-auto">
+                  
+                    <Avatar
+                      key={image}
+                      src={image}
+                      size={60}
+                      shape="circle"
+                    />
+                  
+                </div>
+              ))}
+          </div>
+          <div className="row m-auto">
+            <label className="btn btn-outline-primary">
+              Choose and Upload File
+              <input
+                type="file"
+                multiple
+                accept="images/*"
+                name={VehicleInfoConstants.PHOTO_IN_MODEL}
+                hidden
+                onChange={onChangePicture}
+              />
+            </label>
+          </div>
+        </Form.Group>
 
       <Button
         className="mx-auto mt-3 d-grid gap-2 col-5 mb-3"

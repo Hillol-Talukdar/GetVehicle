@@ -124,8 +124,8 @@ const CreateOrUpdateItemContainer = () => {
 
   return (
     <Container fluid>
-      <div className="d-flex justify-content-between border-bottom mb-3 border-2">
-        <h4 className="ml-auto">Create New Vehicle</h4>
+      <div className="d-flex justify-content-between mb-3 mt-2">
+        <h4 className="m-auto">Create New Vehicle</h4>
       </div>
 
       <CreateOrUpdateItemForm

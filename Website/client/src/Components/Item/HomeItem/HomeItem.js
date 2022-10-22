@@ -1,7 +1,10 @@
 import { React } from 'react';
+import { Button } from 'react-bootstrap';
 import Card from 'react-bootstrap/Card';
 import { Link } from 'react-router-dom';
 import { VehicleInfoConstants } from '../../../Constants/CommonConstants';
+import { MdDoubleArrow } from 'react-icons/md'
+import { FaRegHandPointRight } from 'react-icons/fa'
 import './HomeItem.css';
 
 const HomeItem = (props) => {
@@ -29,8 +32,16 @@ const HomeItem = (props) => {
 
       <Card.Body>
         <div className="d-flex justify-content-around">
-          <Link to={'/details/' + currentItem._id}>View Details</Link>
-          <Link to="#">Book Now</Link>
+          
+            <Link to={'/details/' + currentItem._id}>
+              <Button variant="outline-primary" size="sm">View Details <MdDoubleArrow className='mb-1'/></Button>
+            </Link>
+            
+            <Link to="#">
+              <Button variant="outline-primary" size="sm"><FaRegHandPointRight className='mb-1'/> Book Now</Button>
+            </Link>
+
+          
         </div>
       </Card.Body>
     </Card>
