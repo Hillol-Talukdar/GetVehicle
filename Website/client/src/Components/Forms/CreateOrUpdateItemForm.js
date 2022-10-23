@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
+import Avatar from 'react-avatar';
 import { Button, Form } from 'react-bootstrap';
 import {
   BookingStatus,
-  fuelTypeStatus,
+  FuelTypeStatus,
   TransmissionStatus,
   VehicleInfoConstants,
 } from '../../Constants/CommonConstants';
+
+
 
 const CreateOrUpdateItemForm = ({
   submitHandler,
@@ -14,6 +17,21 @@ const CreateOrUpdateItemForm = ({
   values,
   btnName,
 }) => {
+  const [images, setImages] = useState([]);
+
+  const onChangePicture = e => {
+    changeHandler(e);
+    for (let i = 0; i < e.target.files.length; i++) {
+      if (e.target.files[i]) {
+        const reader = new FileReader();
+        reader.addEventListener("load", () => {
+          setImages(oldImages => [...oldImages, reader.result]);
+
+        });
+        reader.readAsDataURL(e.target.files[i]);
+      }
+    }
+  };
   return (
     <Form onSubmit={submitHandler}>
       <div className="row justify-content-between text-left">
@@ -168,16 +186,16 @@ const CreateOrUpdateItemForm = ({
             name={VehicleInfoConstants.FUAL_TYPE_IN_MODEL}
             onChange={changeHandler}
           >
-            <option value={fuelTypeStatus.NONE} selected>
-              {fuelTypeStatus.NONE}
+            <option value={FuelTypeStatus.NONE} selected>
+              {FuelTypeStatus.NONE}
             </option>
-            <option value={fuelTypeStatus.PETROL}>
-              {fuelTypeStatus.PETROL}
+            <option value={FuelTypeStatus.PETROL}>
+              {FuelTypeStatus.PETROL}
             </option>
-            <option value={fuelTypeStatus.DIESEL}>
-              {fuelTypeStatus.DIESEL}
+            <option value={FuelTypeStatus.DIESEL}>
+              {FuelTypeStatus.DIESEL}
             </option>
-            <option value={fuelTypeStatus.LPG}>{fuelTypeStatus.LPG}</option>
+            <option value={FuelTypeStatus.LPG}>{FuelTypeStatus.LPG}</option>
           </Form.Select>
         </Form.Group>
       </div>
@@ -213,6 +231,7 @@ const CreateOrUpdateItemForm = ({
             onChange={changeHandler}
           />
         </Form.Group>
+        
 
         <Form.Group className="form-group col-sm-4 flex-column d-flex mb-3">
           <Form.Label>{VehicleInfoConstants.CATEGORY}</Form.Label>
@@ -235,7 +254,7 @@ const CreateOrUpdateItemForm = ({
         </Form.Group>
       </div>
 
-      <div className="row justify-content-between text-left">
+      <div className="row justify-content-between text-left mb-3">
         {showSubCategory && (
           <Form.Group className="form-group col-sm-4 flex-column d-flex mb-3">
             <Form.Label>{VehicleInfoConstants.SUB_CATEGORY}</Form.Label>
@@ -256,8 +275,40 @@ const CreateOrUpdateItemForm = ({
                 ))}
             </Form.Select>
           </Form.Group>
+        
         )}
       </div>
+
+      <Form.Group>
+          <div className="row">
+            {images &&
+              images.map((image) => (
+                <div className="mb-3 col-auto">
+                  
+                    <Avatar
+                      key={image}
+                      src={image}
+                      size={60}
+                      shape="circle"
+                    />
+                  
+                </div>
+              ))}
+          </div>
+          <div className="row m-auto">
+            <label className="btn btn-outline-primary">
+              Choose and Upload File
+              <input
+                type="file"
+                multiple
+                accept="images/*"
+                name={VehicleInfoConstants.PHOTO_IN_MODEL}
+                hidden
+                onChange={onChangePicture}
+              />
+            </label>
+          </div>
+        </Form.Group>
 
       <Button
         className="mx-auto mt-3 d-grid gap-2 col-5 mb-3"

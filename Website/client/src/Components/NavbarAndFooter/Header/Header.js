@@ -79,10 +79,7 @@ const Header = () => {
               type="search"
               placeholder={NavbarConstants.SEARCH}
               aria-label="Search"
-            />
-            <Button variant="outline-secondary">
-              {NavbarConstants.SEARCH}
-            </Button>
+          />
           </Form>
           {loggedInUserDetails && (
             <LoggedInUserInfoContainer

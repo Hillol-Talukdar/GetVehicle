@@ -39,6 +39,8 @@ export const VehicleInfoConstants = {
   SUB_CATEGORY_IN_MODEL: 'subCategory',
   RATING: 'Rating',
   RATING_IN_MODEL: 'rating',
+  PHOTO: 'Photo',
+  PHOTO_IN_MODEL: 'photo',
 };
 
 export const CategoryInfoConstants = {
@@ -80,9 +82,14 @@ export const TransmissionStatus = {
   MANUAL: 'Manual',
 };
 
-export const fuelTypeStatus = {
+export const FuelTypeStatus = {
   PETROL: 'Petrol',
   DIESEL: 'Diesel',
   LPG: 'LPG',
   NONE: 'None',
 };
+
+export const UserRole = {
+  ADMIN: 'Admin',
+  USER: 'User'
+}

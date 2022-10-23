@@ -23,6 +23,10 @@ const subCategorySchema = new mongoose.Schema(
             ref: 'Category',
             required: true,
         },
+        isTrashed: {
+            type: Boolean,
+            default: false,
+        }
     },
     { timestamps: true }
 );

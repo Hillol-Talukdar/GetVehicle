@@ -17,7 +17,7 @@ const HomeContainer = () => {
     <Container fluid>
       <div className="d-flex flex-wrap">
         {allItems.map((item) => (
-          <HomeItem item={item}></HomeItem>
+          !item.isTrashed && ( <HomeItem item={item}></HomeItem> )
         ))}
       </div>
     </Container>

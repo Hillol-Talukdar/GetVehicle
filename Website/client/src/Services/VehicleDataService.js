@@ -39,3 +39,23 @@ export const createVehicle = async (vehicleData, authtoken) => {
     },
   });
 };
+
+export const uploadImagesOnCloudinary = (imageFiles, resolve, reject) => {
+
+  let allSecureUrl = [];
+
+  const uploaders = imageFiles.map(file => {
+    let formData = new FormData();
+    formData.append('file', file);
+    formData.append("upload_preset", process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET_KEY);
+
+    return axios.post(`${process.env.REACT_APP_CLOUDINARY_API}/image/upload`, formData).then((response)=>{
+      allSecureUrl.push(response.data.secure_url);
+    });
+  });
+
+  axios.all(uploaders).then(() => {
+    resolve(allSecureUrl);
+  });
+  
+};

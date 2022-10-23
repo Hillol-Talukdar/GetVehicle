@@ -17,6 +17,10 @@ const categorySchema = new mongoose.Schema(
             lowercase: true,
             index: true,
         },
+        isTrashed: {
+            type: Boolean,
+            default: false,
+        }
     },
     { timestamps: true }
 );
