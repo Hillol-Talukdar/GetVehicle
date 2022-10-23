@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import {
   createCategory,
+  deleteACategory,
   getAllCategories,
 } from '../../../../../Services/CategoryDataService';
 import CreateOrUpdateCategoryForm from '../../../../Forms/CreateOrUpdateCategoryForm';
@@ -48,6 +49,26 @@ const CreateOrUpdateCategoryContainer = () => {
       });
   };
 
+  const handleDelete = async (id) => {
+    if (window.confirm('Are you sure, you want to delete?')) {
+      setLoading(true);
+      deleteACategory(id, user.token)
+        .then((res) => {
+          setLoading(false);
+          toast.success(`Category is Deleted!`);
+          loadAllCategories();
+        })
+        .catch((err) => {
+          setLoading(false);
+          toast.error(
+            err.response && err.response.data.message
+              ? err.response.data.message
+              : err.message
+          );
+        });
+    }
+  };
+
   return (
     <Container fluid>
       <div className="d-flex justify-content-between border-bottom mb-3 border-2">
@@ -65,9 +86,8 @@ const CreateOrUpdateCategoryContainer = () => {
         buttonName="Create"
       />
 
-
       <div className="d-flex justify-content-between border-bottom mb-3 border-2">
-          <h4 className="ml-auto mt-3">All Categories</h4>
+        <h4 className="ml-auto mt-3">All Categories</h4>
       </div>
 
       <div className="d-flex flex-wrap justify-content-start">
@@ -80,8 +100,15 @@ const CreateOrUpdateCategoryContainer = () => {
             <div>{category.name}</div>
 
             <div>
-              <i class="fa-solid fa-pen px-3" style={{ color: 'blue' }}></i>
-              <i class="fa-solid fa-trash" style={{ color: 'red' }}></i>
+              <i
+                class="fa-solid fa-pen px-3"
+                style={{ color: 'blue', cursor: 'pointer' }}
+              ></i>
+              <i
+                class="fa-solid fa-trash"
+                style={{ color: 'red', cursor: 'pointer' }}
+                onClick={() => handleDelete(category._id)}
+              ></i>
             </div>
           </div>
         ))}

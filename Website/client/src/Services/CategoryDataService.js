@@ -21,3 +21,23 @@ export const createCategory = async (categoryData, authtoken) => {
     }
   );
 };
+
+export const deleteACategory = async (id, authtoken) => {
+  return await axios.delete(`${process.env.REACT_APP_API}/category/${id}`, {
+    headers: {
+      authtoken,
+    },
+  });
+};
+
+export const updateACategory = async (id, categoryData, authtoken) => {
+  return await axios.put(
+    `${process.env.REACT_APP_API}/category/${id}`,
+    categoryData,
+    {
+      headers: {
+        authtoken,
+      },
+    }
+  );
+};
