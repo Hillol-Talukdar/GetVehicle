@@ -13,22 +13,22 @@ import { createVehicle, uploadImagesOnCloudinary } from '../../../../../Services
 import CreateOrUpdateItemForm from '../../../../Forms/CreateOrUpdateItemForm';
 
 const initState = {
-  model: '',
-  categories: [],
-  subCategories: [],
-  subCategory: '',
-  category: '',
-  transmission: 'Manual',
-  fuelType: 'None',
-  engine: '',
-  bootSpace: '',
-  groundClearance: '',
-  costPerDay: 0,
-  seatCount: 1,
-  mileage: 1,
-  currentLocationString: '',
-  bookingStatus: false,
-  photo: [],
+  [VehicleInfoConstants.MODEL_IN_MODEL]: '',
+  [VehicleInfoConstants.CATEGORIES]: [],
+  [VehicleInfoConstants.SUB_CATEGORIES]: [],
+  [VehicleInfoConstants.SUB_CATEGORY_IN_MODEL]: '',
+  [VehicleInfoConstants.CATEGORY_IN_MODEL]: '',
+  [VehicleInfoConstants.TRANSMISSON_IN_MODEL]: VehicleInfoConstants.MANUAL_TRANSMISSION_IN_MODEL,
+  [VehicleInfoConstants.FUAL_TYPE_IN_MODEL]: VehicleInfoConstants.NONE_FUEL_TYPE_IN_MODEL,
+  [VehicleInfoConstants.ENGINE_IN_MODEL]: '',
+  [VehicleInfoConstants.BOOT_SPACE_IN_MODEL]: '',
+  [VehicleInfoConstants.GROUND_CLEARANCE_IN_MODEL]: '',
+  [VehicleInfoConstants.COST_PER_DAY_MODEL]: 0,
+  [VehicleInfoConstants.SEAT_COUNT_IN_MODEL]: 1,
+  [VehicleInfoConstants.COST_PER_DAY_MODEL]: 1,
+  [VehicleInfoConstants.CURRENT_LOCATION_IN_MODEL]: '',
+  [VehicleInfoConstants.BOOKING_STATUS_IN_MODEL]: false,
+  [VehicleInfoConstants.PHOTO_IN_MODEL]: [],
 };
 
 const CreateOrUpdateItemContainer = () => {

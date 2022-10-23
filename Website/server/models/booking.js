@@ -46,6 +46,10 @@ const bookingSchema = new mongoose.Schema(
             ref: 'Vehicle',
             required: true,
         },
+        isTrashed: {
+            type: Boolean,
+            default: false,
+        }
     },
     { timestamps: true }
 );
