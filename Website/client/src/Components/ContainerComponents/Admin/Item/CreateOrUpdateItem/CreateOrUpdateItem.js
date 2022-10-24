@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Container } from 'react-bootstrap';
 import FileResizer from 'react-image-file-resizer';
 import { useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { VehicleInfoConstants } from '../../../../../Constants/CommonConstants';
 import {
@@ -32,7 +33,13 @@ const initState = {
 };
 
 const CreateOrUpdateItemContainer = () => {
-  const [values, setValues] = useState(initState);
+  const location = useLocation();
+  const { currentItem } = location.state || initState;
+  const [values, setValues] = useState(currentItem);
+  if(true) {
+    console.log(location.state);
+  }
+  
   const [showSubCategory, setShowSubCategory] = useState(false);
   const user = useSelector((state) => state.userReducer);
 
