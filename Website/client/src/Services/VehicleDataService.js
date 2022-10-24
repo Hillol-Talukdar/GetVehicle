@@ -40,6 +40,18 @@ export const createVehicle = async (vehicleData, authtoken) => {
   });
 };
 
+export const updateAVehicle = async (slug, vehicleData, authtoken) => {
+  return await axios.patch(
+      `${process.env.REACT_APP_API}/vehicle/${slug}`,
+      vehicleData,
+      {
+          headers: {
+              authtoken,
+          },
+      }
+  );
+};
+
 export const uploadImagesOnCloudinary = (imageFiles, resolve, reject) => {
 
   let allSecureUrl = [];
