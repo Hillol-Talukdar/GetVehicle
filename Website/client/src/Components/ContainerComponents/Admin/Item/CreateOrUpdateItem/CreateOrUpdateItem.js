@@ -34,12 +34,8 @@ const initState = {
 
 const CreateOrUpdateItemContainer = () => {
   const location = useLocation();
-  const { currentItem } = location.state || initState;
+  const currentItem = location.state || initState;
   const [values, setValues] = useState(currentItem);
-  if(true) {
-    console.log(location.state);
-  }
-  
   const [showSubCategory, setShowSubCategory] = useState(false);
   const user = useSelector((state) => state.userReducer);
 
@@ -53,7 +49,7 @@ const CreateOrUpdateItemContainer = () => {
     );
 
   const categorySelectorHandler = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
 
     getAllSubCategoriesOfACategory(e.target.value).then((res) => {
       setValues({ ...values, subCategories: res.data.data });
@@ -61,6 +57,15 @@ const CreateOrUpdateItemContainer = () => {
 
     setShowSubCategory(true);
   };
+
+  // if(values[VehicleInfoConstants.CATEGORY_IN_MODEL]!=='') {
+  //   let category = {
+  //     target: {
+  //       value: values[VehicleInfoConstants.CATEGORY_IN_MODEL]._id
+  //     }
+  //   }
+  //   categorySelectorHandler(category);
+  // }
 
   const resizeFile = (file) =>
   new Promise((resolve) => {

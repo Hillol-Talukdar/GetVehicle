@@ -156,10 +156,10 @@ const CreateOrUpdateItemForm = ({
             name={VehicleInfoConstants.TRANSMISSON_IN_MODEL}
             onChange={changeHandler}
           >
-            <option value={TransmissionStatus.MANUAL} selected>
+            <option value={TransmissionStatus.MANUAL} selected={values[VehicleInfoConstants.TRANSMISSON_IN_MODEL] === TransmissionStatus.MANUAL}>
               {TransmissionStatus.MANUAL}
             </option>
-            <option value={TransmissionStatus.AUTO}>
+            <option value={TransmissionStatus.AUTO} selected={values[VehicleInfoConstants.TRANSMISSON_IN_MODEL] === TransmissionStatus.AUTO}>
               {TransmissionStatus.AUTO}
             </option>
           </Form.Select>
@@ -169,10 +169,12 @@ const CreateOrUpdateItemForm = ({
           <Form.Label>{VehicleInfoConstants.BOOKING_STATUS}</Form.Label>
 
           <Form.Select name="bookingStatus" onChange={changeHandler}>
-            <option value={false} selected>
+            <option value={false} selected={!values[VehicleInfoConstants.BOOKING_STATUS_IN_MODEL]}>
               {BookingStatus.UNRESERVED}
             </option>
-            <option value={true}>{BookingStatus.RESERVED}</option>
+            <option value={true} selected={values[VehicleInfoConstants.BOOKING_STATUS_IN_MODEL]}>
+              {BookingStatus.RESERVED}
+            </option>
           </Form.Select>
         </Form.Group>
 
@@ -186,16 +188,18 @@ const CreateOrUpdateItemForm = ({
             name={VehicleInfoConstants.FUAL_TYPE_IN_MODEL}
             onChange={changeHandler}
           >
-            <option value={FuelTypeStatus.NONE} selected>
+            <option value={FuelTypeStatus.NONE} selected={values[VehicleInfoConstants.FUAL_TYPE_IN_MODEL] === FuelTypeStatus.NONE}>
               {FuelTypeStatus.NONE}
             </option>
-            <option value={FuelTypeStatus.PETROL}>
+            <option value={FuelTypeStatus.PETROL} selected={values[VehicleInfoConstants.FUAL_TYPE_IN_MODEL] === FuelTypeStatus.PETROL}>
               {FuelTypeStatus.PETROL}
             </option>
-            <option value={FuelTypeStatus.DIESEL}>
+            <option value={FuelTypeStatus.DIESEL} selected={values[VehicleInfoConstants.FUAL_TYPE_IN_MODEL] === FuelTypeStatus.DIESEL}>
               {FuelTypeStatus.DIESEL}
             </option>
-            <option value={FuelTypeStatus.LPG}>{FuelTypeStatus.LPG}</option>
+            <option value={FuelTypeStatus.LPG} selected={values[VehicleInfoConstants.FUAL_TYPE_IN_MODEL] === FuelTypeStatus.LPG}>
+              {FuelTypeStatus.LPG}
+            </option>
           </Form.Select>
         </Form.Group>
       </div>
@@ -240,13 +244,13 @@ const CreateOrUpdateItemForm = ({
             name={VehicleInfoConstants.CATEGORY_IN_MODEL}
             onChange={changeHandler}
           >
-            <option selected disabled>
+            <option selected={values[VehicleInfoConstants.CATEGORY_IN_MODEL] === ''} disabled>
               Select {VehicleInfoConstants.CATEGORY}
             </option>
 
             {values?.categories?.length > 0 &&
               values?.categories?.map((cat) => (
-                <option keys={cat._id} value={cat._id}>
+                <option keys={cat._id} value={cat._id} selected={values[VehicleInfoConstants.CATEGORY_IN_MODEL]._id === cat._id}>
                   {cat.name}
                 </option>
               ))}
