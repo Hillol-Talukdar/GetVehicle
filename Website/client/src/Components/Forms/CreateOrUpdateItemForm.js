@@ -19,7 +19,7 @@ const CreateOrUpdateItemForm = ({
   isUpdatingItem,
   btnName,
 }) => {
-  const [images, setImages] = useState([]);
+  const [images, setImages] = useState(values[VehicleInfoConstants.PHOTO_IN_MODEL] || []);
 
   if(isUpdatingItem) {
     getAllSubCategoriesOfACategory(values[VehicleInfoConstants.CATEGORY_IN_MODEL]._id).then((res) => {
