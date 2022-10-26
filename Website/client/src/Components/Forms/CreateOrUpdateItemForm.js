@@ -7,6 +7,7 @@ import {
   TransmissionStatus,
   VehicleInfoConstants,
 } from '../../Constants/CommonConstants';
+import { getAllSubCategoriesOfACategory } from '../../Services/CategoryDataService';
 
 
 
@@ -15,9 +16,17 @@ const CreateOrUpdateItemForm = ({
   changeHandler,
   showSubCategory,
   values,
+  isUpdatingItem,
   btnName,
 }) => {
   const [images, setImages] = useState([]);
+
+  if(isUpdatingItem) {
+    getAllSubCategoriesOfACategory(values[VehicleInfoConstants.CATEGORY_IN_MODEL]._id).then((res) => {
+      values[VehicleInfoConstants.SUB_CATEGORIES] = res.data.data;
+    });
+    showSubCategory = true;
+  }
 
   const onChangePicture = e => {
     changeHandler(e);
@@ -267,14 +276,14 @@ const CreateOrUpdateItemForm = ({
               name={VehicleInfoConstants.SUB_CATEGORY_IN_MODEL}
               onChange={changeHandler}
             >
-              <option selected disabled>
+              <option selected={values[VehicleInfoConstants.SUB_CATEGORY_IN_MODEL] === ''} disabled>
                 Select {VehicleInfoConstants.SUB_CATEGORY}
               </option>
 
               {values?.subCategories?.length > 0 &&
-                values?.subCategories?.map((subCategory) => (
-                  <option keys={subCategory._id} value={subCategory._id}>
-                    {subCategory.name}
+                values?.subCategories?.map((subCat) => (
+                  <option keys={subCat._id} value={subCat._id} selected={values[VehicleInfoConstants.SUB_CATEGORY_IN_MODEL] === subCat._id}>
+                    {subCat.name}
                   </option>
                 ))}
             </Form.Select>

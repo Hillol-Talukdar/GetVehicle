@@ -35,6 +35,7 @@ const initState = {
 const CreateOrUpdateItemContainer = () => {
   const location = useLocation();
   const currentItem = location.state || initState;
+  const isUpdatingItem  = currentItem !== initState;
   const [values, setValues] = useState(currentItem);
   const [showSubCategory, setShowSubCategory] = useState(false);
   const user = useSelector((state) => state.userReducer);
@@ -43,13 +44,14 @@ const CreateOrUpdateItemContainer = () => {
     loadAllCategories();
   }, []);
 
-  const loadAllCategories = () =>
-    getAllCategories().then((cat) =>
-      setValues({ ...values, categories: cat.data.data })
-    );
+  const loadAllCategories = () => {
+    getAllCategories().then((cat) => {
+      setValues({ ...values, categories: cat.data.data });
+    });
+  }
 
   const categorySelectorHandler = (e) => {
-    // e.preventDefault();
+    e.preventDefault();
 
     getAllSubCategoriesOfACategory(e.target.value).then((res) => {
       setValues({ ...values, subCategories: res.data.data });
@@ -57,15 +59,6 @@ const CreateOrUpdateItemContainer = () => {
 
     setShowSubCategory(true);
   };
-
-  // if(values[VehicleInfoConstants.CATEGORY_IN_MODEL]!=='') {
-  //   let category = {
-  //     target: {
-  //       value: values[VehicleInfoConstants.CATEGORY_IN_MODEL]._id
-  //     }
-  //   }
-  //   categorySelectorHandler(category);
-  // }
 
   const resizeFile = (file) =>
   new Promise((resolve) => {
@@ -145,6 +138,7 @@ const CreateOrUpdateItemContainer = () => {
         changeHandler={changeHandler}
         showSubCategory={showSubCategory}
         values={values}
+        isUpdatingItem={isUpdatingItem}
         btnName="Create"
       />
     </Container>
