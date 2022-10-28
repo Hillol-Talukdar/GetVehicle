@@ -31,7 +31,7 @@ export const deleteACategory = async (id, authtoken) => {
 };
 
 export const updateACategory = async (id, categoryData, authtoken) => {
-  return await axios.put(
+  return await axios.patch(
     `${process.env.REACT_APP_API}/category/${id}`,
     categoryData,
     {

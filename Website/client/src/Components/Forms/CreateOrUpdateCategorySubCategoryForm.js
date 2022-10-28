@@ -2,14 +2,15 @@ import React from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { CategoryInfoConstants, VehicleInfoConstants } from '../../Constants/CommonConstants';
 
-const CreateOrUpdateCategoryForm = ({
+const CreateOrUpdateCategorySubCateogoryForm = ({
+  id,
   name,
   submitHandler,
   changeHandler,
   buttonName,
 }) => {
   return (
-    <Form onSubmit={submitHandler}>
+    <Form onSubmit={e=> submitHandler(e, id)}>
       <Form.Group
         className="form-group d-flex align-items-center col-sm-4 flex-column mx-auto mb-3"
         controlId="formBasicCategoryName"
@@ -40,4 +41,4 @@ const CreateOrUpdateCategoryForm = ({
   );
 };
 
-export default CreateOrUpdateCategoryForm;
+export default CreateOrUpdateCategorySubCateogoryForm;
