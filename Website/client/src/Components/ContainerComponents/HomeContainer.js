@@ -7,17 +7,21 @@ import HomeItem from '../Item/HomeItem/HomeItem';
 const HomeContainer = () => {
   const [allItems, setAllItems] = useState([]);
 
-  useEffect(() => {
+  const loadAllVehicles = () => {
     getAllVehicleList().then((response) => {
       setAllItems(response.data.data);
     });
+  }
+
+  useEffect(() => {
+    loadAllVehicles();
   }, []);
 
   return (
     <Container fluid>
       <div className="d-flex flex-wrap">
         {allItems.map((item) => (
-          !item.isTrashed && ( <HomeItem item={item}></HomeItem> )
+          !item.isTrashed && ( <HomeItem item={item} loadAllVehicles={loadAllVehicles}></HomeItem> )
         ))}
       </div>
     </Container>

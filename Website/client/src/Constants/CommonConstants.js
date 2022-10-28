@@ -41,6 +41,11 @@ export const VehicleInfoConstants = {
   RATING_IN_MODEL: 'rating',
   PHOTO: 'Photo',
   PHOTO_IN_MODEL: 'photo',
+  IS_TRASHED_IN_MODEL: 'isTrashed',
+  CATEGORIES: 'categories',
+  SUB_CATEGORIES: 'subCategories',
+  MANUAL_TRANSMISSION_IN_MODEL: 'Manual',
+  NONE_FUEL_TYPE_IN_MODEL: 'None',
 };
 
 export const CategoryInfoConstants = {
