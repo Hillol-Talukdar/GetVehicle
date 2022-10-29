@@ -8,7 +8,7 @@ import { FaRegHandPointRight } from 'react-icons/fa'
 import { RiDeleteBin2Fill } from 'react-icons/ri'
 import './HomeItem.css';
 import { useSelector } from 'react-redux';
-import { DELETE_VEHICLE_CONFIRMATION } from '../../../Constants/AlertConstants';
+import { DELETE_CONFIRMATION } from '../../../Constants/AlertConstants';
 import { updateAVehicle } from '../../../Services/VehicleDataService';
 import { toast } from 'react-toastify';
 
@@ -25,7 +25,7 @@ const HomeItem = (props) => {
         : 'templateCar.jpg';
 
   const handleDeleteButtonClick = (e) => {
-    if (window.confirm(DELETE_VEHICLE_CONFIRMATION)) {
+    if (window.confirm(DELETE_CONFIRMATION)) {
       updateAVehicle(e.target.value, {[VehicleInfoConstants.IS_TRASHED_IN_MODEL]: true}, user.token)
       .then((res) => {
         console.log(res);

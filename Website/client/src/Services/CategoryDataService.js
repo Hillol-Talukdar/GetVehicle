@@ -4,6 +4,10 @@ export const getAllCategories = async () => {
   return await axios.get(`${process.env.REACT_APP_API}/category`);
 };
 
+export const getACategory = async (id) => {
+  return await axios.get(`${process.env.REACT_APP_API}/category/${id}`);
+};
+
 export const getAllSubCategoriesOfACategory = async (id) => {
   return await axios.get(
     `${process.env.REACT_APP_API}/category/subCategory/${id}`

@@ -1,1 +1,1 @@
-export const DELETE_VEHICLE_CONFIRMATION = 'Are you sure to delete this vehicle?';
+export const DELETE_CONFIRMATION = 'Are you sure, you want to delete?';

@@ -52,7 +52,7 @@ const App = () => {
           element={<CreateOrUpdateCategoryContainer />}
         />
         <Route exact path="/details/:id" element={<ItemDetailsContainer />} />
-        <Route exact path="/category/:id/create-or-update-category" element={<CreateOrUpdateSubCategoryContainer />} />
+        <Route exact path="/category/:categoryId/create-or-update-category" element={<CreateOrUpdateSubCategoryContainer />} />
       </Routes>
       <Footer />
     </>

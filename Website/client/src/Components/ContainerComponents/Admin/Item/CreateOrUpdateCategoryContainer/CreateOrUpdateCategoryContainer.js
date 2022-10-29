@@ -16,6 +16,7 @@ import CreateOrUpdateCategorySubCateogoryForm from '../../../../Forms/CreateOrUp
 import UpdateCategorySubCategoryModal from '../../../../Modal/UpdateCategorySubCategoryModal';
 import './CreateOrUpdateCategory.css';
 import { ButtonConstants } from '../../../../../Constants/CommonConstants';
+import { DELETE_CONFIRMATION } from '../../../../../Constants/AlertConstants';
 
 const CreateOrUpdateCategoryContainer = () => {
   const user = useSelector((state) => state.userReducer);
@@ -85,7 +86,7 @@ const CreateOrUpdateCategoryContainer = () => {
   };
 
   const handleDelete = async (e) => {
-    if (window.confirm('Are you sure, you want to delete?')) {
+    if (window.confirm(DELETE_CONFIRMATION)) {
       setLoading(true);
       deleteACategory(e.target.value, user.token)
         .then((res) => {
@@ -155,7 +156,7 @@ const CreateOrUpdateCategoryContainer = () => {
                     to={`/category/${category._id}/create-or-update-category`}
                   >
                     <Button variant="outline-primary" size="sm">
-                      <MdAdd className="mb-1" /> {ButtonConstants.ADD_BUTTON} SubCategory
+                      <MdAdd className="mb-1" /> {ButtonConstants.ADD_BUTTON} or View SubCategory
                     </Button>
                   </Link>
 
