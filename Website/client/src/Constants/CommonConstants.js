@@ -2,6 +2,15 @@ export const AppConstants = {
   APP_NAME: 'GetVehicle',
 };
 
+export const ButtonConstants = {
+  ADD_BUTTON: 'Add',
+  CREATE_BUTTON: 'Create',
+  EDIT_BUTTON: 'Edit',
+  UPDATE_BUTTON: 'Update',
+  DELETE_BUTTON: 'Deletev Now',
+};
+
+
 export const NavbarConstants = {
   HOME: 'Home',
   SEARCH: 'Search',

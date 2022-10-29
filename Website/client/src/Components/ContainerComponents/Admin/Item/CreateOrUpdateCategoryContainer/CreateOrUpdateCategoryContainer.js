@@ -15,6 +15,7 @@ import {
 import CreateOrUpdateCategorySubCateogoryForm from '../../../../Forms/CreateOrUpdateCategorySubCategoryForm';
 import UpdateCategorySubCategoryModal from '../../../../Modal/UpdateCategorySubCategoryModal';
 import './CreateOrUpdateCategory.css';
+import { ButtonConstants } from '../../../../../Constants/CommonConstants';
 
 const CreateOrUpdateCategoryContainer = () => {
   const user = useSelector((state) => state.userReducer);
@@ -118,7 +119,7 @@ const CreateOrUpdateCategoryContainer = () => {
         name={name}
         submitHandler={submitHandler}
         changeHandler={changeHandler}
-        buttonName="Create"
+        buttonName={ButtonConstants.CREATE_BUTTON}
       />
 
       <div className="d-flex justify-content-between border-bottom mb-3 border-2">
@@ -141,7 +142,7 @@ const CreateOrUpdateCategoryContainer = () => {
                   setModalName(category.name);
                 }}
               >
-                Edit <BiEditAlt className="mb-1" />
+                {ButtonConstants.EDIT_BUTTON} <BiEditAlt className="mb-1" />
               </Button>
 
               <Card.Body>
@@ -150,9 +151,11 @@ const CreateOrUpdateCategoryContainer = () => {
 
               <Card.Body>
                 <div className="d-flex justify-content-around">
-                  <Link to={`/category/${category._id}/create-or-update-category`}>
+                  <Link
+                    to={`/category/${category._id}/create-or-update-category`}
+                  >
                     <Button variant="outline-primary" size="sm">
-                      <MdAdd className="mb-1" /> Add SubCategory
+                      <MdAdd className="mb-1" /> {ButtonConstants.ADD_BUTTON} SubCategory
                     </Button>
                   </Link>
 
@@ -162,7 +165,7 @@ const CreateOrUpdateCategoryContainer = () => {
                     variant="outline-danger"
                     size="sm"
                   >
-                    <RiDeleteBin2Fill className="mb-1" /> Delete Now
+                    <RiDeleteBin2Fill className="mb-1" /> {ButtonConstants.DELETE_BUTTON}
                   </Button>
                 </div>
               </Card.Body>
@@ -175,7 +178,7 @@ const CreateOrUpdateCategoryContainer = () => {
               name={modalName}
               submitHandler={submitHandler}
               changeHandler={modalChangeHandler}
-              buttonName="Update"
+              buttonName={ButtonConstants.UPDATE_BUTTON}
               isCategory={true}
             />
           </>
