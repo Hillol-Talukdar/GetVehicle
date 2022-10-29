@@ -17,6 +17,7 @@ import CreateOrUpdateCategoryContainer from './Components/ContainerComponents/Ad
 import {Cloudinary} from "@cloudinary/url-gen";
 import {AdvancedImage} from '@cloudinary/react';
 import {fill} from "@cloudinary/url-gen/actions/resize";
+import { CreateOrUpdateSubCategoryContainer } from './Components/ContainerComponents/Admin/Item/CreateOrUpdateSubCategoryContainer/CreateOrUpdateSubCategoryContainer';
 
 const App = () => {
 
@@ -51,6 +52,7 @@ const App = () => {
           element={<CreateOrUpdateCategoryContainer />}
         />
         <Route exact path="/details/:id" element={<ItemDetailsContainer />} />
+        <Route exact path="/category/:id/create-or-update-category" element={<CreateOrUpdateSubCategoryContainer />} />
       </Routes>
       <Footer />
     </>
