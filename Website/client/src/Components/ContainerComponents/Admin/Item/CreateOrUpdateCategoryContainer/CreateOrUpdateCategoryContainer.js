@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Container } from 'react-bootstrap';
+import { Button, Card, Container } from 'react-bootstrap';
+import { MdAdd } from 'react-icons/md';
+import { RiDeleteBin2Fill } from 'react-icons/ri';
+import { BiEditAlt } from 'react-icons/bi';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import {
   createCategory,
@@ -31,7 +35,7 @@ const CreateOrUpdateCategoryContainer = () => {
     getAllCategories().then((res) => setCategories(res.data.data));
 
   const changeHandler = (e) => {
-    setModalName(e.target.value);
+    setName(e.target.value);
   };
 
   const modalChangeHandler = (e) => {
@@ -79,10 +83,10 @@ const CreateOrUpdateCategoryContainer = () => {
     }
   };
 
-  const handleDelete = async (id) => {
+  const handleDelete = async (e) => {
     if (window.confirm('Are you sure, you want to delete?')) {
       setLoading(true);
-      deleteACategory(id, user.token)
+      deleteACategory(e.target.value, user.token)
         .then((res) => {
           setLoading(false);
           toast.success(`Category is Deleted!`);
@@ -123,34 +127,46 @@ const CreateOrUpdateCategoryContainer = () => {
 
       <div className="d-flex flex-wrap justify-content-start">
         {categories.map((category) => (
-          <div
-            className="alert CategoryCard d-flex justify-content-between m-3"
-            style={{ width: '18rem' }}
-            key={category._id}
-          >
-            <div>{category.name}</div>
-
-            <div>
-              <i
-                class="fa-solid fa-pen px-3"
-                style={{ color: 'blue', cursor: 'pointer' }}
+          <>
+            <Card
+              style={{ width: '15rem', margin: '8px' }}
+              className="CategoryCard flex-fill"
+            >
+              <Button
+                style={{ margin: '15px' }}
+                variant="warning"
+                size="sm"
                 onClick={(e) => {
                   handleUpdateModalShow();
                   setModalName(category.name);
                 }}
-              ></i>
-              <i
-                class="fa-solid fa-trash"
-                style={{ color: 'red', cursor: 'pointer' }}
-                onClick={() => handleDelete(category._id)}
-              ></i>
+              >
+                Edit <BiEditAlt className="mb-1" />
+              </Button>
 
-              <i
-                class="fa-solid fa-add"
-                style={{ color: 'blue', cursor: 'pointer' }}
-                onClick={() => handleDelete(category._id)}
-              ></i>
-            </div>
+              <Card.Body>
+                <Card.Title>{category.name}</Card.Title>
+              </Card.Body>
+
+              <Card.Body>
+                <div className="d-flex justify-content-around">
+                  <Link to='#'>
+                    <Button variant="outline-primary" size="sm">
+                      <MdAdd className="mb-1" /> Add SubCategory
+                    </Button>
+                  </Link>
+
+                  <Button
+                    onClick={handleDelete}
+                    value={category._id}
+                    variant="outline-danger"
+                    size="sm"
+                  >
+                    <RiDeleteBin2Fill className="mb-1" /> Delete Now
+                  </Button>
+                </div>
+              </Card.Body>
+            </Card>
 
             <UpdateCategorySubCategoryModal
               id={category._id}
@@ -162,7 +178,7 @@ const CreateOrUpdateCategoryContainer = () => {
               buttonName="Update"
               isCategory={true}
             />
-          </div>
+          </>
         ))}
       </div>
     </Container>
