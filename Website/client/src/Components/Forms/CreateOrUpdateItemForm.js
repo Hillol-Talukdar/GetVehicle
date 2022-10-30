@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import Avatar from 'react-avatar';
+import 'antd/dist/antd.css';
 import { Button, Form } from 'react-bootstrap';
+import { Avatar, Badge } from "antd";
 import {
   BookingStatus,
   FuelTypeStatus,
@@ -16,6 +17,7 @@ const CreateOrUpdateItemForm = ({
   changeHandler,
   showSubCategory,
   values,
+  setValues,
   isUpdatingItem,
   btnName,
 }) => {
@@ -40,7 +42,14 @@ const CreateOrUpdateItemForm = ({
         reader.readAsDataURL(e.target.files[i]);
       }
     }
-  };
+  }
+
+  const handleRemove = (image) => {
+    let indexOfImage = images.indexOf(image);
+    images.splice(indexOfImage, 1);
+    values[VehicleInfoConstants.PHOTO_IN_MODEL] = images;
+    setValues({ ...values, [VehicleInfoConstants.PHOTO_IN_MODEL]: images });
+  }
   return (
     <Form onSubmit={submitHandler}>
       <div className="row justify-content-between text-left">
@@ -297,14 +306,18 @@ const CreateOrUpdateItemForm = ({
             {images &&
               images.map((image) => (
                 <div className="mb-3 col-auto">
-                  
+                  <Badge
+                    count="X"
+                    style={{ cursor: "pointer" }}
+                    onClick={() => handleRemove(image)}
+                  >
                     <Avatar
                       key={image}
                       src={image}
                       size={60}
-                      shape="circle"
+                      shape="square"
                     />
-                  
+                  </Badge>
                 </div>
               ))}
           </div>

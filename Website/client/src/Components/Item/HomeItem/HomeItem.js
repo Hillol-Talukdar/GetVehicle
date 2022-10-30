@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import {
   UserRole,
   VehicleInfoConstants,
+  CreateOrUpdateConstants
 } from '../../../Constants/CommonConstants';
 import { MdDoubleArrow } from 'react-icons/md';
 import { FaRegHandPointRight } from 'react-icons/fa';
@@ -54,11 +55,11 @@ const HomeItem = (props) => {
       {loggedInUserDetails && loggedInUserDetails.role === UserRole.ADMIN && (
         <Link to='/admin/create-or-update-vehicle' state={currentItem}>
           <Button
-            style={{ margin: '15px' }}
+            className="home-item-edit-button"
             variant="warning"
             size="sm"
           >
-            Edit <BiEditAlt className="mb-1" />
+            {CreateOrUpdateConstants.EDIT} <BiEditAlt className="mb-1" />
           </Button>
         </Link>
       )}

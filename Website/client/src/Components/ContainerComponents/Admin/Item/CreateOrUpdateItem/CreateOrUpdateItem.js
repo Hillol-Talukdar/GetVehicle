@@ -5,7 +5,7 @@ import FileResizer from 'react-image-file-resizer';
 import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { VehicleInfoConstants } from '../../../../../Constants/CommonConstants';
+import { CreateOrUpdateConstants, VehicleInfoConstants } from '../../../../../Constants/CommonConstants';
 import {
   getAllCategories,
   getAllSubCategoriesOfACategory,
@@ -130,7 +130,9 @@ const CreateOrUpdateItemContainer = () => {
   return (
     <Container fluid>
       <div className="d-flex justify-content-between mb-3 mt-2">
-        <h4 className="m-auto">Create New Vehicle</h4>
+        <h4 className="m-auto">
+          {isUpdatingItem ? CreateOrUpdateConstants.UPDATE_VEHICLE_TITLE : CreateOrUpdateConstants.CREATE_VEHICLE_TITLE}
+        </h4>
       </div>
 
       <CreateOrUpdateItemForm
@@ -138,8 +140,9 @@ const CreateOrUpdateItemContainer = () => {
         changeHandler={changeHandler}
         showSubCategory={showSubCategory}
         values={values}
+        setValues={setValues}
         isUpdatingItem={isUpdatingItem}
-        btnName="Create"
+        btnName={isUpdatingItem ? CreateOrUpdateConstants.UPDATE : CreateOrUpdateConstants.CREATE}
       />
     </Container>
   );
