@@ -10,7 +10,7 @@ import {
   getAllCategories,
   getAllSubCategoriesOfACategory,
 } from '../../../../../Services/CategoryDataService';
-import { createVehicle, uploadImagesOnCloudinary } from '../../../../../Services/VehicleDataService';
+import { createVehicle, updateAVehicle, uploadImagesOnCloudinary } from '../../../../../Services/VehicleDataService';
 import CreateOrUpdateItemForm from '../../../../Forms/CreateOrUpdateItemForm';
 
 const initState = {
@@ -103,20 +103,43 @@ const CreateOrUpdateItemContainer = () => {
         uploadImagesOnCloudinary(values[VehicleInfoConstants.PHOTO_IN_MODEL], resolve, reject);
       }).then((response) => {
         values[VehicleInfoConstants.PHOTO_IN_MODEL] = response;
-        createNewVehicle();
+        createOrUpdateVehicle();
       }).catch((error)=>{
         toast.error(error.message);
       });
     } else {
-      createNewVehicle();
+      createOrUpdateVehicle();
     }
   };
+
+  const createOrUpdateVehicle = () => {
+    if(isUpdatingItem) {
+      updateVehicle();
+    } else {
+      createNewVehicle();
+    }
+  }
 
   const createNewVehicle = () => {
     createVehicle(values, user.token)
     .then((res) => {
-      window.alert(`"${res.data.data.model}" is created!`);
-      window.location.reload();
+      window.alert(`"${res.data.data.model}" has created successfully!`);
+      window.location.replace("/");
+    })
+    .catch((err) => {
+      toast.error(
+        err.response && err.response.data.message
+          ? err.response.data.message
+          : err.message
+      );
+    });
+  }
+
+  const updateVehicle = () => {
+    updateAVehicle(values._id, values, user.token)
+    .then((res) => {
+      window.alert(`"${res.data.data.model}" has updated successfully!`);
+      window.location.replace("/");
     })
     .catch((err) => {
       toast.error(
