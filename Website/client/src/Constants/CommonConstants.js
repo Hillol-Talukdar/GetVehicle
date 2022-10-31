@@ -93,3 +93,11 @@ export const UserRole = {
   ADMIN: 'Admin',
   USER: 'User'
 }
+
+export const CreateOrUpdateConstants = {
+  CREATE: 'Create',
+  UPDATE: 'Update',
+  EDIT: 'Edit',
+  CREATE_VEHICLE_TITLE: 'Create New Vehicle',
+  UPDATE_VEHICLE_TITLE: 'Update Vehicle'
+}

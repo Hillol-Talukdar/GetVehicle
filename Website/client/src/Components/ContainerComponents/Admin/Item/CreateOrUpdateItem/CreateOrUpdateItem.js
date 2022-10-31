@@ -3,13 +3,14 @@ import React, { useState, useEffect } from 'react';
 import { Container } from 'react-bootstrap';
 import FileResizer from 'react-image-file-resizer';
 import { useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { VehicleInfoConstants } from '../../../../../Constants/CommonConstants';
+import { CreateOrUpdateConstants, VehicleInfoConstants } from '../../../../../Constants/CommonConstants';
 import {
   getAllCategories,
   getAllSubCategoriesOfACategory,
 } from '../../../../../Services/CategoryDataService';
-import { createVehicle, uploadImagesOnCloudinary } from '../../../../../Services/VehicleDataService';
+import { createVehicle, updateAVehicle, uploadImagesOnCloudinary } from '../../../../../Services/VehicleDataService';
 import CreateOrUpdateItemForm from '../../../../Forms/CreateOrUpdateItemForm';
 
 const initState = {
@@ -32,7 +33,10 @@ const initState = {
 };
 
 const CreateOrUpdateItemContainer = () => {
-  const [values, setValues] = useState(initState);
+  const location = useLocation();
+  const currentItem = location.state || initState;
+  const isUpdatingItem  = currentItem !== initState;
+  const [values, setValues] = useState(currentItem);
   const [showSubCategory, setShowSubCategory] = useState(false);
   const user = useSelector((state) => state.userReducer);
 
@@ -40,10 +44,11 @@ const CreateOrUpdateItemContainer = () => {
     loadAllCategories();
   }, []);
 
-  const loadAllCategories = () =>
-    getAllCategories().then((cat) =>
-      setValues({ ...values, categories: cat.data.data })
-    );
+  const loadAllCategories = () => {
+    getAllCategories().then((cat) => {
+      setValues({ ...values, categories: cat.data.data });
+    });
+  }
 
   const categorySelectorHandler = (e) => {
     e.preventDefault();
@@ -98,20 +103,43 @@ const CreateOrUpdateItemContainer = () => {
         uploadImagesOnCloudinary(values[VehicleInfoConstants.PHOTO_IN_MODEL], resolve, reject);
       }).then((response) => {
         values[VehicleInfoConstants.PHOTO_IN_MODEL] = response;
-        createNewVehicle();
+        createOrUpdateVehicle();
       }).catch((error)=>{
         toast.error(error.message);
       });
     } else {
-      createNewVehicle();
+      createOrUpdateVehicle();
     }
   };
+
+  const createOrUpdateVehicle = () => {
+    if(isUpdatingItem) {
+      updateVehicle();
+    } else {
+      createNewVehicle();
+    }
+  }
 
   const createNewVehicle = () => {
     createVehicle(values, user.token)
     .then((res) => {
-      window.alert(`"${res.data.data.model}" is created!`);
-      window.location.reload();
+      window.alert(`"${res.data.data.model}" has created successfully!`);
+      window.location.replace("/");
+    })
+    .catch((err) => {
+      toast.error(
+        err.response && err.response.data.message
+          ? err.response.data.message
+          : err.message
+      );
+    });
+  }
+
+  const updateVehicle = () => {
+    updateAVehicle(values._id, values, user.token)
+    .then((res) => {
+      window.alert(`"${res.data.data.model}" has updated successfully!`);
+      window.location.replace("/");
     })
     .catch((err) => {
       toast.error(
@@ -125,7 +153,9 @@ const CreateOrUpdateItemContainer = () => {
   return (
     <Container fluid>
       <div className="d-flex justify-content-between mb-3 mt-2">
-        <h4 className="m-auto">Create New Vehicle</h4>
+        <h4 className="m-auto">
+          {isUpdatingItem ? CreateOrUpdateConstants.UPDATE_VEHICLE_TITLE : CreateOrUpdateConstants.CREATE_VEHICLE_TITLE}
+        </h4>
       </div>
 
       <CreateOrUpdateItemForm
@@ -133,7 +163,9 @@ const CreateOrUpdateItemContainer = () => {
         changeHandler={changeHandler}
         showSubCategory={showSubCategory}
         values={values}
-        btnName="Create"
+        setValues={setValues}
+        isUpdatingItem={isUpdatingItem}
+        btnName={isUpdatingItem ? CreateOrUpdateConstants.UPDATE : CreateOrUpdateConstants.CREATE}
       />
     </Container>
   );
