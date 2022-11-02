@@ -1,26 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Card, Container } from 'react-bootstrap';
-import { MdAdd } from 'react-icons/md';
 import { RiDeleteBin2Fill } from 'react-icons/ri';
 import { BiEditAlt } from 'react-icons/bi';
 import { useSelector } from 'react-redux';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import {
-  createCategory,
-  deleteACategory,
   getACategory,
-  getAllCategories,
   getAllSubCategoriesOfACategory,
-  updateACategory,
 } from '../../../../../Services/CategoryDataService';
 import CreateOrUpdateCategorySubCateogoryForm from '../../../../Forms/CreateOrUpdateCategorySubCategoryForm';
 import UpdateCategorySubCategoryModal from '../../../../Modal/UpdateCategorySubCategoryModal';
 import './CreateOrUpdateSubCategoryContainer.css';
-import { ButtonConstants } from '../../../../../Constants/CommonConstants';
+import {
+  ButtonConstants,
+  SubCategoryInfoConstants,
+} from '../../../../../Constants/CommonConstants';
 import {
   createSubCategory,
-  getAllSubCategories,
   updateASubCategory,
   deleteASubCategory,
 } from '../../../../../Services/SubCategoryDataService';
@@ -36,9 +33,6 @@ export const CreateOrUpdateSubCategoryContainer = () => {
   const [subCategories, setSubCategories] = useState([]);
   const [showUpdateModal, setShowUpdateModal] = useState(false);
 
-  const handleUpdateModalClose = () => setShowUpdateModal(false);
-  const handleUpdateModalShow = () => setShowUpdateModal(true);
-
   useEffect(() => {
     getACategory(categoryId).then((res) => setCategory(res.data.data));
 
@@ -49,6 +43,14 @@ export const CreateOrUpdateSubCategoryContainer = () => {
     getAllSubCategoriesOfACategory(categoryId).then((res) =>
       setSubCategories(res.data.data)
     );
+
+  const handleUpdateModalClose = () => {
+    setShowUpdateModal(false);
+  };
+
+  const handleUpdateModalShow = () => {
+    setShowUpdateModal(true);
+  };
 
   const changeHandler = (e) => {
     setName(e.target.value);
@@ -128,10 +130,14 @@ export const CreateOrUpdateSubCategoryContainer = () => {
       <div className="d-flex justify-content-between border-bottom mb-3 border-2">
         {loading ? (
           <h4 className="ml-auto">
-            Createing subCategory of {category.name}...
+            {SubCategoryInfoConstants.CREATING_SUB_CATEGORY_OF}
+            {category.name}...
           </h4>
         ) : (
-          <h4 className="ml-auto">Create New subCategory of {category.name}</h4>
+          <h4 className="ml-auto">
+            {SubCategoryInfoConstants.CREATE_NEW_SUB_CATEGORY_OF}
+            {category.name}
+          </h4>
         )}
       </div>
 
@@ -144,7 +150,10 @@ export const CreateOrUpdateSubCategoryContainer = () => {
       />
 
       <div className="d-flex justify-content-between border-bottom mb-3 border-2">
-        <h4 className="ml-auto mt-3">All SubCategories of {category.name}</h4>
+        <h4 className="ml-auto mt-3">
+          {SubCategoryInfoConstants.ALL_SUB_CATEGORY_OF}
+          {category.name}
+        </h4>
       </div>
 
       <div className="d-flex flex-wrap justify-content-start">
@@ -152,7 +161,7 @@ export const CreateOrUpdateSubCategoryContainer = () => {
           <>
             <Card
               style={{ width: '15rem', margin: '8px' }}
-              className="CategoryCard flex-fill"
+              className="sub-category-card flex-fill"
             >
               <Button
                 style={{ margin: '15px' }}

@@ -15,7 +15,10 @@ import {
 import CreateOrUpdateCategorySubCateogoryForm from '../../../../Forms/CreateOrUpdateCategorySubCategoryForm';
 import UpdateCategorySubCategoryModal from '../../../../Modal/UpdateCategorySubCategoryModal';
 import './CreateOrUpdateCategory.css';
-import { ButtonConstants } from '../../../../../Constants/CommonConstants';
+import {
+  ButtonConstants,
+  CategoryInfoConstants,
+} from '../../../../../Constants/CommonConstants';
 import { DELETE_CONFIRMATION } from '../../../../../Constants/AlertConstants';
 
 const CreateOrUpdateCategoryContainer = () => {
@@ -26,15 +29,21 @@ const CreateOrUpdateCategoryContainer = () => {
   const [categories, setCategories] = useState([]);
   const [showUpdateModal, setShowUpdateModal] = useState(false);
 
-  const handleUpdateModalClose = () => setShowUpdateModal(false);
-  const handleUpdateModalShow = () => setShowUpdateModal(true);
-
   useEffect(() => {
     loadAllCategories();
   }, []);
 
-  const loadAllCategories = () =>
+  const loadAllCategories = () => {
     getAllCategories().then((res) => setCategories(res.data.data));
+  };
+
+  const handleUpdateModalClose = () => {
+    setShowUpdateModal(false);
+  };
+  
+  const handleUpdateModalShow = () => {
+    setShowUpdateModal(true);
+  };
 
   const changeHandler = (e) => {
     setName(e.target.value);
@@ -109,9 +118,11 @@ const CreateOrUpdateCategoryContainer = () => {
     <Container fluid>
       <div className="d-flex justify-content-between border-bottom mb-3 border-2">
         {loading ? (
-          <h4 className="ml-auto">Createing Category...</h4>
+          <h4 className="ml-auto">{CategoryInfoConstants.CREATING_CATEGORY}</h4>
         ) : (
-          <h4 className="ml-auto">Create New Category</h4>
+          <h4 className="ml-auto">
+            {CategoryInfoConstants.CREATING_NEW_CATEGORY}
+          </h4>
         )}
       </div>
 
@@ -124,7 +135,7 @@ const CreateOrUpdateCategoryContainer = () => {
       />
 
       <div className="d-flex justify-content-between border-bottom mb-3 border-2">
-        <h4 className="ml-auto mt-3">All Categories</h4>
+        <h4 className="ml-auto mt-3">{CategoryInfoConstants.ALL_CATEGORIES}</h4>
       </div>
 
       <div className="d-flex flex-wrap justify-content-start">
@@ -132,7 +143,7 @@ const CreateOrUpdateCategoryContainer = () => {
           <>
             <Card
               style={{ width: '15rem', margin: '8px' }}
-              className="CategoryCard flex-fill"
+              className="category-card flex-fill"
             >
               <Button
                 style={{ margin: '15px' }}
@@ -156,7 +167,8 @@ const CreateOrUpdateCategoryContainer = () => {
                     to={`/category/${category._id}/create-or-update-category`}
                   >
                     <Button variant="outline-primary" size="sm">
-                      <MdAdd className="mb-1" /> {ButtonConstants.ADD_BUTTON} or View SubCategory
+                      <MdAdd className="mb-1" /> {ButtonConstants.ADD_BUTTON} or
+                      View SubCategory
                     </Button>
                   </Link>
 
@@ -166,7 +178,8 @@ const CreateOrUpdateCategoryContainer = () => {
                     variant="outline-danger"
                     size="sm"
                   >
-                    <RiDeleteBin2Fill className="mb-1" /> {ButtonConstants.DELETE_BUTTON}
+                    <RiDeleteBin2Fill className="mb-1" />{' '}
+                    {ButtonConstants.DELETE_BUTTON}
                   </Button>
                 </div>
               </Card.Body>
