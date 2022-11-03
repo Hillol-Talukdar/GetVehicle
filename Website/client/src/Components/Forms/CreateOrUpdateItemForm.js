@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
-import Avatar from 'react-avatar';
+import 'antd/dist/antd.css';
 import { Button, Form } from 'react-bootstrap';
+import { Avatar, Badge } from "antd";
 import {
   BookingStatus,
   FuelTypeStatus,
   TransmissionStatus,
   VehicleInfoConstants,
 } from '../../Constants/CommonConstants';
+import { getAllSubCategoriesOfACategory } from '../../Services/CategoryDataService';
 
 
 
@@ -15,9 +17,18 @@ const CreateOrUpdateItemForm = ({
   changeHandler,
   showSubCategory,
   values,
+  setValues,
+  isUpdatingItem,
   btnName,
 }) => {
-  const [images, setImages] = useState([]);
+  const [images, setImages] = useState(values[VehicleInfoConstants.PHOTO_IN_MODEL] || []);
+
+  if(isUpdatingItem) {
+    getAllSubCategoriesOfACategory(values[VehicleInfoConstants.CATEGORY_IN_MODEL]._id).then((res) => {
+      values[VehicleInfoConstants.SUB_CATEGORIES] = res.data.data;
+    });
+    showSubCategory = true;
+  }
 
   const onChangePicture = e => {
     changeHandler(e);
@@ -31,7 +42,14 @@ const CreateOrUpdateItemForm = ({
         reader.readAsDataURL(e.target.files[i]);
       }
     }
-  };
+  }
+
+  const handleRemove = (image) => {
+    let indexOfImage = images.indexOf(image);
+    images.splice(indexOfImage, 1);
+    values[VehicleInfoConstants.PHOTO_IN_MODEL] = images;
+    setValues({ ...values, [VehicleInfoConstants.PHOTO_IN_MODEL]: images });
+  }
   return (
     <Form onSubmit={submitHandler}>
       <div className="row justify-content-between text-left">
@@ -156,10 +174,10 @@ const CreateOrUpdateItemForm = ({
             name={VehicleInfoConstants.TRANSMISSON_IN_MODEL}
             onChange={changeHandler}
           >
-            <option value={TransmissionStatus.MANUAL} selected>
+            <option value={TransmissionStatus.MANUAL} selected={values[VehicleInfoConstants.TRANSMISSON_IN_MODEL] === TransmissionStatus.MANUAL}>
               {TransmissionStatus.MANUAL}
             </option>
-            <option value={TransmissionStatus.AUTO}>
+            <option value={TransmissionStatus.AUTO} selected={values[VehicleInfoConstants.TRANSMISSON_IN_MODEL] === TransmissionStatus.AUTO}>
               {TransmissionStatus.AUTO}
             </option>
           </Form.Select>
@@ -169,10 +187,12 @@ const CreateOrUpdateItemForm = ({
           <Form.Label>{VehicleInfoConstants.BOOKING_STATUS}</Form.Label>
 
           <Form.Select name="bookingStatus" onChange={changeHandler}>
-            <option value={false} selected>
+            <option value={false} selected={!values[VehicleInfoConstants.BOOKING_STATUS_IN_MODEL]}>
               {BookingStatus.UNRESERVED}
             </option>
-            <option value={true}>{BookingStatus.RESERVED}</option>
+            <option value={true} selected={values[VehicleInfoConstants.BOOKING_STATUS_IN_MODEL]}>
+              {BookingStatus.RESERVED}
+            </option>
           </Form.Select>
         </Form.Group>
 
@@ -186,16 +206,18 @@ const CreateOrUpdateItemForm = ({
             name={VehicleInfoConstants.FUAL_TYPE_IN_MODEL}
             onChange={changeHandler}
           >
-            <option value={FuelTypeStatus.NONE} selected>
+            <option value={FuelTypeStatus.NONE} selected={values[VehicleInfoConstants.FUAL_TYPE_IN_MODEL] === FuelTypeStatus.NONE}>
               {FuelTypeStatus.NONE}
             </option>
-            <option value={FuelTypeStatus.PETROL}>
+            <option value={FuelTypeStatus.PETROL} selected={values[VehicleInfoConstants.FUAL_TYPE_IN_MODEL] === FuelTypeStatus.PETROL}>
               {FuelTypeStatus.PETROL}
             </option>
-            <option value={FuelTypeStatus.DIESEL}>
+            <option value={FuelTypeStatus.DIESEL} selected={values[VehicleInfoConstants.FUAL_TYPE_IN_MODEL] === FuelTypeStatus.DIESEL}>
               {FuelTypeStatus.DIESEL}
             </option>
-            <option value={FuelTypeStatus.LPG}>{FuelTypeStatus.LPG}</option>
+            <option value={FuelTypeStatus.LPG} selected={values[VehicleInfoConstants.FUAL_TYPE_IN_MODEL] === FuelTypeStatus.LPG}>
+              {FuelTypeStatus.LPG}
+            </option>
           </Form.Select>
         </Form.Group>
       </div>
@@ -240,13 +262,13 @@ const CreateOrUpdateItemForm = ({
             name={VehicleInfoConstants.CATEGORY_IN_MODEL}
             onChange={changeHandler}
           >
-            <option selected disabled>
+            <option selected={values[VehicleInfoConstants.CATEGORY_IN_MODEL] === ''} disabled>
               Select {VehicleInfoConstants.CATEGORY}
             </option>
 
             {values?.categories?.length > 0 &&
               values?.categories?.map((cat) => (
-                <option keys={cat._id} value={cat._id}>
+                <option keys={cat._id} value={cat._id} selected={values[VehicleInfoConstants.CATEGORY_IN_MODEL]._id === cat._id}>
                   {cat.name}
                 </option>
               ))}
@@ -263,14 +285,14 @@ const CreateOrUpdateItemForm = ({
               name={VehicleInfoConstants.SUB_CATEGORY_IN_MODEL}
               onChange={changeHandler}
             >
-              <option selected disabled>
+              <option selected={values[VehicleInfoConstants.SUB_CATEGORY_IN_MODEL] === ''} disabled>
                 Select {VehicleInfoConstants.SUB_CATEGORY}
               </option>
 
               {values?.subCategories?.length > 0 &&
-                values?.subCategories?.map((subCategory) => (
-                  <option keys={subCategory._id} value={subCategory._id}>
-                    {subCategory.name}
+                values?.subCategories?.map((subCat) => (
+                  <option keys={subCat._id} value={subCat._id} selected={values[VehicleInfoConstants.SUB_CATEGORY_IN_MODEL] === subCat._id}>
+                    {subCat.name}
                   </option>
                 ))}
             </Form.Select>
@@ -284,14 +306,18 @@ const CreateOrUpdateItemForm = ({
             {images &&
               images.map((image) => (
                 <div className="mb-3 col-auto">
-                  
+                  <Badge
+                    count="X"
+                    style={{ cursor: "pointer" }}
+                    onClick={() => handleRemove(image)}
+                  >
                     <Avatar
                       key={image}
                       src={image}
                       size={60}
-                      shape="circle"
+                      shape="square"
                     />
-                  
+                  </Badge>
                 </div>
               ))}
           </div>
