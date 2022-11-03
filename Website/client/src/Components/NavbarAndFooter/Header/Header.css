@@ -7,16 +7,12 @@
   transition: 0.3s;
 }
 
-.textColorAndDecoration {
+.text-color-and-decoration {
   text-decoration: none;
   color: black;
 }
 
-/* a.textColorAndDecoration:link {
-  text-decoration: none;
-} */
-
-a.textColorAndDecoration:hover {
+a.text-color-and-decoration:hover {
   cursor: pointer;
   color: gray;
 }

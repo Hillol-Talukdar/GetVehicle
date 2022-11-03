@@ -30,7 +30,7 @@ const Header = () => {
     <Container fluid id="navbarTop">
       <Navbar>
         <Navbar.Brand>
-          <Link to="/" className="textColorAndDecoration">
+          <Link to="/" className="text-color-and-decoration">
             {AppConstants.APP_NAME}
           </Link>
         </Navbar.Brand>
@@ -42,18 +42,33 @@ const Header = () => {
             navbarScroll
           >
             <Navbar.Text>
-              <NavLink to="/" className="textColorAndDecoration">
+              <NavLink to="/" className="text-color-and-decoration">
                 {NavbarConstants.HOME}
               </NavLink>
             </Navbar.Text>
 
             <NavDropdown title="Admin" id="basic-nav-dropdown">
-              <NavDropdown.Item className="p-2" to="/admin/create-item">
+              <NavDropdown.Item
+                className="p-2"
+                to="/admin/create-or-update-vehicle"
+              >
                 <NavLink
                   to="/admin/create-or-update-vehicle"
-                  className="textColorAndDecoration"
+                  className="text-color-and-decoration"
                 >
-                  Create Product
+                  {NavbarConstants.CREATE_VEHICLE}
+                </NavLink>
+              </NavDropdown.Item>
+
+              <NavDropdown.Item
+                className="p-2"
+                to="/admin/create-or-update-category"
+              >
+                <NavLink
+                  to="/admin/create-or-update-category"
+                  className="text-color-and-decoration"
+                >
+                  {NavbarConstants.CREATE_CATEGORY}
                 </NavLink>
               </NavDropdown.Item>
             </NavDropdown>

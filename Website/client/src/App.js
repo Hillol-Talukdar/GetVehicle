@@ -12,10 +12,12 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { createUserPayloadAndDispatch } from './Services/ReduxService';
 import Footer from './Components/NavbarAndFooter/Footer/Footer';
 import CreateOrUpdateItemContainer from './Components/ContainerComponents/Admin/Item/CreateOrUpdateItem/CreateOrUpdateItem';
+import CreateOrUpdateCategoryContainer from './Components/ContainerComponents/Admin/Item/CreateOrUpdateCategoryContainer/CreateOrUpdateCategoryContainer';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import {Cloudinary} from "@cloudinary/url-gen";
 import {AdvancedImage} from '@cloudinary/react';
 import {fill} from "@cloudinary/url-gen/actions/resize";
+import { CreateOrUpdateSubCategoryContainer } from './Components/ContainerComponents/Admin/Item/CreateOrUpdateSubCategoryContainer/CreateOrUpdateSubCategoryContainer';
 
 const App = () => {
 
@@ -44,7 +46,13 @@ const App = () => {
           path="/admin/create-or-update-vehicle"
           element={<CreateOrUpdateItemContainer />}
         />
+        <Route
+          exact
+          path="/admin/create-or-update-category"
+          element={<CreateOrUpdateCategoryContainer />}
+        />
         <Route exact path="/details/:id" element={<ItemDetailsContainer />} />
+        <Route exact path="/category/:categoryId/create-or-update-category" element={<CreateOrUpdateSubCategoryContainer />} />
       </Routes>
       <Footer />
     </>

@@ -12,6 +12,7 @@ exports.createCategory = catchAsync(async (req, res, next) => {
     });
 });
 
+
 exports.getAllCategories = catchAsync(async (req, res, next) => {
     const categories = await Category.find({});
 

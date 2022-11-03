@@ -2,10 +2,21 @@ export const AppConstants = {
   APP_NAME: 'GetVehicle',
 };
 
+export const ButtonConstants = {
+  ADD_BUTTON: 'Add',
+  CREATE_BUTTON: 'Create',
+  EDIT_BUTTON: 'Edit',
+  UPDATE_BUTTON: 'Update',
+  DELETE_BUTTON: 'Delete Now',
+};
+
+
 export const NavbarConstants = {
   HOME: 'Home',
   SEARCH: 'Search',
   LOGIN: 'Login',
+  CREATE_VEHICLE: 'Create Vehicle',
+  CREATE_CATEGORY: 'Create Category',
 };
 
 export const VehicleInfoConstants = {
@@ -47,6 +58,22 @@ export const VehicleInfoConstants = {
   MANUAL_TRANSMISSION_IN_MODEL: 'Manual',
   NONE_FUEL_TYPE_IN_MODEL: 'None',
 };
+
+export const CategoryInfoConstants = {
+  NAME: 'Name',
+  NAME_IN_MODEL: 'name',
+  ALL_CATEGORIES: 'All Categories',
+  CREATING_NEW_CATEGORY: 'Create New Category',
+  CREATING_CATEGORY: 'Createing Category..',
+  UPDATE_CATEGORY: 'Update Category'
+}
+
+export const SubCategoryInfoConstants = {
+  CREATING_SUB_CATEGORY_OF: 'Createing subCategory of ',
+  CREATE_NEW_SUB_CATEGORY_OF: 'Create New subCategory of ',
+  ALL_SUB_CATEGORY_OF: 'All SubCategories of ',
+  UPDATE_SUB_CATEGORY: 'Update SubCategory'
+}
 
 export const ColorConstants = {
   HOMEPAGE_BACKGROUND_COLOR: '#f2f2f2',

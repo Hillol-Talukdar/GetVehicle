@@ -13,7 +13,7 @@ import { BiEditAlt } from 'react-icons/bi';
 import { RiDeleteBin2Fill } from 'react-icons/ri';
 import './HomeItem.css';
 import { useSelector } from 'react-redux';
-import { DELETE_VEHICLE_CONFIRMATION } from '../../../Constants/AlertConstants';
+import { DELETE_CONFIRMATION } from '../../../Constants/AlertConstants';
 import { updateAVehicle } from '../../../Services/VehicleDataService';
 import { toast } from 'react-toastify';
 
@@ -31,18 +31,15 @@ const HomeItem = (props) => {
 
   const handleDeleteButtonClick = (e) => {
     if (window.confirm(DELETE_VEHICLE_CONFIRMATION)) {
-      updateAVehicle(
-        e.target.value,
-        { [VehicleInfoConstants.IS_TRASHED_IN_MODEL]: true },
-        user.token
-      )
-        .then((res) => {
-          toast.success(`Deleted ${res.data.data.model} successfully!`);
-          props.loadAllVehicles();
-        })
-        .catch((error) => {
-          toast.error(error);
-        });
+      updateAVehicle(e.target.value, {[VehicleInfoConstants.IS_TRASHED_IN_MODEL]: true}, user.token)
+      .then((res) => {
+        console.log(res);
+        toast.success(`Deleted ${res.data.data.model} successfully!`);
+        props.loadAllVehicles();
+      })
+      .catch(error => {
+        toast.error(error);
+      });
     } else {
     }
   };
