@@ -30,7 +30,7 @@ const HomeItem = (props) => {
       : 'templateCar.jpg';
 
   const handleDeleteButtonClick = (e) => {
-    if (window.confirm(DELETE_VEHICLE_CONFIRMATION)) {
+    if (window.confirm(DELETE_CONFIRMATION)) {
       updateAVehicle(e.target.value, {[VehicleInfoConstants.IS_TRASHED_IN_MODEL]: true}, user.token)
       .then((res) => {
         console.log(res);
