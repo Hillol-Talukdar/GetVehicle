@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import 'antd/dist/antd.css';
 import { Button, Form, Image } from 'react-bootstrap';
-import { Avatar, Badge } from "antd";
 import "./CreateOrUpdateItemForm.css"
 import {
   BookingStatus,
@@ -318,25 +316,6 @@ const CreateOrUpdateItemForm = ({
                         <Image src={image} width="60" height="60" alt="" />
                     </div>
                 </div>
-
-
-                // <div className="mb-3 col-auto">
-                //   <Badge
-                //     count="X"
-                //     style={{ cursor: "pointer" }}
-                //     onClick={() => handleRemove(image)}
-                //   >
-                //     <Avatar
-                //       key={image}
-                //       src={image}
-                //       size={60}
-                //       shape="square"
-                //     />
-                //   </Badge>
-                // </div>
-
-
-
               ))}
           </div>
           <div className="row m-auto">
