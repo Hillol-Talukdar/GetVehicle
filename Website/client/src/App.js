@@ -13,14 +13,10 @@ import { createUserPayloadAndDispatch } from './Services/ReduxService';
 import Footer from './Components/NavbarAndFooter/Footer/Footer';
 import CreateOrUpdateItemContainer from './Components/ContainerComponents/Admin/Item/CreateOrUpdateItem/CreateOrUpdateItem';
 import CreateOrUpdateCategoryContainer from './Components/ContainerComponents/Admin/Item/CreateOrUpdateCategoryContainer/CreateOrUpdateCategoryContainer';
-// import 'bootstrap/dist/css/bootstrap.min.css';
-import {Cloudinary} from "@cloudinary/url-gen";
-import {AdvancedImage} from '@cloudinary/react';
-import {fill} from "@cloudinary/url-gen/actions/resize";
 import { CreateOrUpdateSubCategoryContainer } from './Components/ContainerComponents/Admin/Item/CreateOrUpdateSubCategoryContainer/CreateOrUpdateSubCategoryContainer';
+import AdminPrivateRoute from './Components/Route/AdminPrivateRoute';
 
 const App = () => {
-
   const dispatch = useDispatch();
 
   onAuthStateChanged(auth, (user) => {
@@ -41,18 +37,25 @@ const App = () => {
       <Header />
       <Routes>
         <Route exact path="/" element={<HomeContainer />} />
+        <Route exact path="/details/:id" element={<ItemDetailsContainer />} />
         <Route
           exact
           path="/admin/create-or-update-vehicle"
-          element={<CreateOrUpdateItemContainer />}
-        />
+          element={<AdminPrivateRoute />}>
+            <Route exact path="/admin/create-or-update-vehicle" element={<CreateOrUpdateItemContainer/>}/>
+        </Route>
         <Route
           exact
           path="/admin/create-or-update-category"
-          element={<CreateOrUpdateCategoryContainer />}
-        />
-        <Route exact path="/details/:id" element={<ItemDetailsContainer />} />
-        <Route exact path="/category/:categoryId/create-or-update-category" element={<CreateOrUpdateSubCategoryContainer />} />
+          element={<AdminPrivateRoute />}>
+            <Route exact path="/admin/create-or-update-category" element={<CreateOrUpdateCategoryContainer/>}/>
+        </Route>
+        <Route
+          exact
+          path="/admin/category/:categoryId/create-or-update-category"
+          element={<AdminPrivateRoute />}>
+            <Route exact path="/admin/category/:categoryId/create-or-update-category" element={<CreateOrUpdateSubCategoryContainer/>}/>
+        </Route>
       </Routes>
       <Footer />
     </>

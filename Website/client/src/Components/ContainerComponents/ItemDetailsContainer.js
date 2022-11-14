@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react';
+import { Container } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { Container } from 'react-bootstrap';
 import { getVehicleDetails } from '../../Services/VehicleDataService';
-import { ColorConstants } from '../../Constants/CommonConstants';
 import DetailsSingleItem from '../Item/DetailsSingleItem/DetailsSingleItem';
 
 const ItemDetailsContainer = () => {
