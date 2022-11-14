@@ -8,8 +8,6 @@ import { TabsConstants } from '../../../Constants/CommonConstants';
 import { Link } from 'react-router-dom';
 
 const DetailsSingleItem = ({ data }) => {
-  let coverImages = ['/templateBike.jpg', '/templateCar.jpg'];
-
   return (
     <>
       <Row className="p-2">

@@ -1,12 +1,8 @@
-import { React, useState } from 'react';
+import { React } from 'react';
 import { Button } from 'react-bootstrap';
 import Card from 'react-bootstrap/Card';
 import { Link } from 'react-router-dom';
-import {
-  UserRole,
-  VehicleInfoConstants,
-  CreateOrUpdateConstants
-} from '../../../Constants/CommonConstants';
+import { UserRole, VehicleInfoConstants, ButtonConstants } from '../../../Constants/CommonConstants';
 import { MdDoubleArrow } from 'react-icons/md';
 import { FaRegHandPointRight } from 'react-icons/fa';
 import { BiEditAlt } from 'react-icons/bi';
@@ -47,7 +43,7 @@ const HomeItem = (props) => {
   return (
     <Card
       style={{ width: '15rem', margin: '8px' }}
-      className="HomeItemCard flex-fill"
+      className="home-item-card flex-fill"
     >
       {loggedInUserDetails && loggedInUserDetails.role === UserRole.ADMIN && (
         <Link to='/admin/create-or-update-vehicle' state={currentItem}>
@@ -56,7 +52,7 @@ const HomeItem = (props) => {
             variant="warning"
             size="sm"
           >
-            {CreateOrUpdateConstants.EDIT} <BiEditAlt className="mb-1" />
+            {ButtonConstants.EDIT_BUTTON} <BiEditAlt className="mb-1" />
           </Button>
         </Link>
       )}

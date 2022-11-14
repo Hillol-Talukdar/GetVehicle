@@ -1,16 +1,12 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Route } from 'react-router-dom';
-import HomeContainer from '../ContainerComponents/HomeContainer';
+import { Navigate, Outlet } from 'react-router-dom';
+import { UserRole } from '../../Constants/CommonConstants';
 
-const UserPrivateRoute = ({ children, ...rest }) => {
+const AdminPrivateRoute = () => {
   const user = useSelector((state) => state.userReducer);
 
-  return user && user.token && user.role === UserRole.ADMIN ? (
-    <Route {...rest} />
-  ) : (
-    <Route exact path="/" element={<HomeContainer />} />
-  );
+  return user && user.token && user.role === UserRole.ADMIN ? <Outlet/> : <Navigate to="/" />;
 };
 
-export default UserPrivateRoute;
+export default AdminPrivateRoute;

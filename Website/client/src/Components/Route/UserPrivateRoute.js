@@ -1,16 +1,11 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Route } from 'react-router-dom';
-import HomeContainer from '../ContainerComponents/HomeContainer';
+import { Navigate, Outlet } from 'react-router-dom';
 
-const UserPrivateRoute = ({ children, ...rest }) => {
+const UserPrivateRoute = () => {
   const user = useSelector((state) => state.userReducer);
 
-  return user && user.token ? (
-    <Route {...rest} />
-  ) : (
-    <Route exact path="/" element={<HomeContainer />} />
-  );
+  return user && user.token ? <Outlet/> : <Navigate to="/" />;
 };
 
 export default UserPrivateRoute;
