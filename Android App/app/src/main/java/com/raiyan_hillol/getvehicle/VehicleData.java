@@ -90,6 +90,15 @@ public class VehicleData {
         this.currentLocation = location;
     }
 
+    public VehicleData(String id, String model, String transmission, String fuelType, String engine, double costPerDay) {
+        this.id = id;
+        this.model = model;
+        this.transmission = transmission;
+        this.fuelType = fuelType;
+        this.engine = engine;
+        this.costPerDay = costPerDay;
+    }
+
     public String getId() {
         return id;
     }

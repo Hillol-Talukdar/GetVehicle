@@ -64,7 +64,7 @@ public class Tools {
 
         requestQueue.start();
 
-        String url ="http://192.168.0.103:4000/api/vehicle";
+        String url ="http://192.168.0.9:4000/api/vehicle";
 
         JsonObjectRequest jsonArrayRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
 
@@ -106,7 +106,7 @@ public class Tools {
 
         requestQueue.start();
 
-        String url ="http://192.168.0.103:4000/api/vehicle/" + vehicleId;
+        String url ="http://192.168.0.9:4000/api/vehicle/" + vehicleId;
 
         JsonObjectRequest jsonArrayRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
 
@@ -164,18 +164,17 @@ public class Tools {
                 allVehicleData.add(new VehicleData(
                         jsonObjectArray.getString("_id"),
                         jsonObjectArray.getString("model"),
-                        jsonObjectArray.getString("vehicleType"),
 //                    jsonObjectArray.getString("genericType"),
                         jsonObjectArray.getString("transmission"),
                         jsonObjectArray.getString("fuelType"),
                         jsonObjectArray.getString("engine"),
 //                    jsonObjectArray.getString("bootSpace"),
 //                    jsonObjectArray.getString("groundClearance"),
-                        jsonObjectArray.getDouble("costPerDay"),
+                        jsonObjectArray.getDouble("costPerDay")
 //                        jsonObjectArray.getInt("seatCount"),
 //                    jsonObjectArray.getDouble("Mileage"),
 //                    jsonObjectArray.getDouble("averageRating"),
-                        jsonObjectArray.getJSONObject("currentLocation").getString("address")
+//                        jsonObjectArray.getJSONObject("currentLocation").getString("address")
 //                    jsonObjectArray.getBoolean("bookingStatus"),
 //                    Tools.getStringArrayListFromJSONArray(jsonObjectArray.getJSONArray("photos")),
 //                    jsonObjectArray.getString("user")
