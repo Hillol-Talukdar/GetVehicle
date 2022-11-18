@@ -1,10 +1,12 @@
-package com.raiyan_hillol.getvehicle;
+package com.raiyan_hillol.getvehicle.screens.VehicleDetailsScreen.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.TextView;
+
+import com.raiyan_hillol.getvehicle.R;
+import com.raiyan_hillol.getvehicle.utils.Tools;
 
 public class VehicleDetailsActivity extends AppCompatActivity {
 

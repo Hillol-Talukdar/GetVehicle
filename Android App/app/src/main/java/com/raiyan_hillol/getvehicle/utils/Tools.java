@@ -1,4 +1,4 @@
-package com.raiyan_hillol.getvehicle;
+package com.raiyan_hillol.getvehicle.utils;
 
 import android.content.Context;
 import android.util.Log;
@@ -17,6 +17,8 @@ import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.raiyan_hillol.getvehicle.R;
+import com.raiyan_hillol.getvehicle.screens.homeScreen.adapter.HomeScreenActivityRecyclerViewAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -46,46 +48,6 @@ public class Tools {
         }
 
         return stringArrayList;
-    }
-
-    //TODO: make the response things reusable
-    public static void setRecyclerViewAdapter(View fragmentView, Context context) {
-
-        RequestQueue requestQueue;
-
-        Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
-
-
-        Network network = new BasicNetwork(new HurlStack());
-
-
-        requestQueue = new RequestQueue(cache, network);
-
-
-        requestQueue.start();
-
-        String url ="http://192.168.0.9:4000/api/vehicle";
-
-        JsonObjectRequest jsonArrayRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
-
-            @Override
-            public void onResponse(JSONObject response) {
-                RecyclerView recyclerView;
-                MainActivityRecyclerViewAdapter recyclerViewAdapter;
-
-                recyclerView = fragmentView.findViewById(R.id.main_activity_recycler_view);
-                recyclerViewAdapter = new MainActivityRecyclerViewAdapter(getAllVehiclesFromJSONObject(response), context);
-                recyclerView.setAdapter(recyclerViewAdapter);
-                recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                setRecyclerViewAdapter(fragmentView, context);
-                error.printStackTrace();
-            }
-        });
-        requestQueue.add(jsonArrayRequest);
     }
 
     //TODO: make the response things reusable

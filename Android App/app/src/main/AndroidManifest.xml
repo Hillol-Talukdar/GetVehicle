@@ -13,10 +13,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GetVehicle">
         <activity
-            android:name=".VehicleDetailsActivity"
+            android:name=".screens.VehicleDetailsScreen.view.VehicleDetailsActivity"
             android:exported="true" />
         <activity
-            android:name=".SplashScreenActivity"
+            android:name=".screens.SplashScreen.view.SplashScreenActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,7 +25,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".screens.homeScreen.view.HomeScreenActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
