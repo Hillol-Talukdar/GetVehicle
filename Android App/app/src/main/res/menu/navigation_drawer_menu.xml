@@ -4,18 +4,8 @@
     tools:ignore="HardcodedText">
 
     <item
-        android:id="@+id/item_1"
-        android:icon="@drawable/ic_baseline_directions_car_24"
-        android:title="@string/item_1" />
-
-    <item
-        android:id="@+id/item_2"
-        android:icon="@drawable/ic_baseline_directions_bike_24"
-        android:title="@string/item_2" />
-
-    <item
-        android:id="@+id/item_3"
-        android:icon="@drawable/ic_baseline_bike_scooter_24"
-        android:title="@string/item_3" />
+        android:id="@+id/itemHome"
+        android:icon="@drawable/ic_baseline_home_24"
+        android:title="@string/home" />
 
 </menu>

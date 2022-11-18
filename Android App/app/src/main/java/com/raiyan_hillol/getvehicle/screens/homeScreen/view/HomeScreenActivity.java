@@ -3,6 +3,7 @@ package com.raiyan_hillol.getvehicle.screens.homeScreen.view;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -10,24 +11,37 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 import com.raiyan_hillol.getvehicle.R;
+import com.raiyan_hillol.getvehicle.databinding.HomeScreenItemLayoutBinding;
 import com.raiyan_hillol.getvehicle.screens.VehicleDetailsScreen.view.VehicleDetailsActivity;
 import com.raiyan_hillol.getvehicle.screens.homeScreen.controller.HomeScreenController;
+import com.raiyan_hillol.getvehicle.utils.NavDrawerActions;
 
 public class HomeScreenActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
 
+    private HomeScreenItemLayoutBinding binding;
+
     ActionBarDrawerToggle actionBarNavigationDrawerToggle;
     private RecyclerView homeRecycleView;
     private HomeScreenController homeScreenController;
+    private NavDrawerActions navDrawerActions;
+
+    private DrawerLayout navigationDrawerLayout;
+    private NavigationView navigationView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
+//        binding = HomeScreenItemLayoutBinding.inflate(getLayoutInflater());
+//        View view = binding.getRoot();
+//        setContentView(view);
 
         initWidgets();
         setUpNavigationDrawer();
@@ -38,6 +52,8 @@ public class HomeScreenActivity extends AppCompatActivity {
 
         homeRecycleView = findViewById(R.id.rvHomeScreenActivity);
         homeScreenController.setRecyclerViewAdapter(homeRecycleView, this);
+
+        navDrawerActions = new NavDrawerActions(this, getSupportFragmentManager());
     }
 
     @Override
@@ -48,9 +64,6 @@ public class HomeScreenActivity extends AppCompatActivity {
     }
 
     private void setUpNavigationDrawer() {
-        DrawerLayout navigationDrawerLayout;
-        NavigationView navigationView;
-
         navigationView = (NavigationView) findViewById(R.id.navigation_view);
         navigationDrawerLayout = findViewById(R.id.navigation_drawer_layout);
 
@@ -62,15 +75,11 @@ public class HomeScreenActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
-                    case R.id.item_1:
-                        Toast.makeText(HomeScreenActivity.this, "Item 1 is selected", Toast.LENGTH_SHORT).show();
+                    case R.id.itemHome:
+                        navDrawerActions.goToHomeScreen();
+                        closeDrawer();
                         break;
-                    case R.id.item_2:
-                        Toast.makeText(HomeScreenActivity.this, "Item 2 is selected", Toast.LENGTH_SHORT).show();
-                        break;
-                    case R.id.item_3:
-                        Toast.makeText(HomeScreenActivity.this, "Item 3 is selected", Toast.LENGTH_SHORT).show();
-                        break;
+
                     default:
                         break;
                 }
@@ -83,28 +92,8 @@ public class HomeScreenActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-
-        if (actionBarNavigationDrawerToggle.onOptionsItemSelected(item)) {
-            return true;
-        }
-
-        switch (item.getItemId()) {
-            case R.id.car_fragment:
-                Toast.makeText(this, "Car Fragment is selected", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.update_profile:
-                Toast.makeText(this, "Update Profile is selected", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.logout:
-                Toast.makeText(this, "Logout is selected", Toast.LENGTH_SHORT).show();
-                break;
-            default:
-                break;
-        }
-
-        return super.onOptionsItemSelected(item);
+    private void closeDrawer() {
+//        navigation_view.closeDrawer(GravityCompat.START);
     }
 
     public void startVehicleDetailActivity(String vehicleId) {
