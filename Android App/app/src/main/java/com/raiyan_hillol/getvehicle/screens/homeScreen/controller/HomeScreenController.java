@@ -19,6 +19,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.raiyan_hillol.getvehicle.R;
 import com.raiyan_hillol.getvehicle.utils.Tools;
 import com.raiyan_hillol.getvehicle.screens.homeScreen.adapter.HomeScreenActivityRecyclerViewAdapter;
+import com.raiyan_hillol.getvehicle.utils.VehicleData;
 
 import org.json.JSONObject;
 
@@ -27,6 +28,18 @@ public class HomeScreenController {
 
     public HomeScreenController(Context context) {
         this.context = context;
+    }
+
+    public static String getVehicleFormattedShortDetails(VehicleData vehicleData) {
+        String formattedShortDetails;
+
+        formattedShortDetails = vehicleData.getVehicleType();
+        formattedShortDetails += " | ";
+        formattedShortDetails += vehicleData.getSeatCount() + " Seater ";
+        formattedShortDetails += " | ";
+        formattedShortDetails += vehicleData.getTransmission();
+
+        return formattedShortDetails;
     }
 
     public void setRecyclerViewAdapter(View view, Context context) {

@@ -37,7 +37,7 @@
             android:orientation="vertical"
             android:layout_gravity="center">
             <TextView
-                android:id="@+id/vehicle_model"
+                android:id="@+id/tvVehicleModel"
                 android:textSize="16dp"
                 android:gravity="center"
                 android:layout_weight="1"
@@ -47,8 +47,8 @@
                 android:layout_height="wrap_content" />
 
             <TextView
-                android:id="@+id/vehicle_short_detail"
-                android:textSize="14dp"
+                android:id="@+id/tvVehicleShortDetail"
+                android:textSize="14sp"
                 android:gravity="center"
                 android:layout_weight="1"
                 android:layout_width="wrap_content"
@@ -64,7 +64,7 @@
                     android:layout_height="13dp"
                     android:src="@drawable/ic_baseline_location_on_24"/>
                 <TextView
-                    android:id="@+id/vehicle_location"
+                    android:id="@+id/tvVehicleLocation"
                     android:textSize="12dp"
                     android:layout_weight="1"
                     android:text="Sylhet, Bangladesh"
@@ -82,6 +82,7 @@
             android:gravity="end">
 
             <TextView
+                android:id="@+id/tvVehiclePrice"
                 android:gravity="center"
                 android:paddingTop="5dp"
                 android:textColor="@color/black"
@@ -91,7 +92,7 @@
                 android:textSize="14dp"/>
 
             <Button
-                android:id="@+id/view_item_details_button"
+                android:id="@+id/btnViewItemDetailsButton"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:text="View Details"

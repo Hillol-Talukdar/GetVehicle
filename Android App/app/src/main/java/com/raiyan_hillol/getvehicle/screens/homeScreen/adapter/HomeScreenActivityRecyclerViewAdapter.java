@@ -1,6 +1,8 @@
 package com.raiyan_hillol.getvehicle.screens.homeScreen.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.raiyan_hillol.getvehicle.R;
+import com.raiyan_hillol.getvehicle.screens.homeScreen.controller.HomeScreenController;
 import com.raiyan_hillol.getvehicle.utils.Tools;
 import com.raiyan_hillol.getvehicle.utils.VehicleData;
 import com.raiyan_hillol.getvehicle.screens.homeScreen.view.HomeScreenActivity;
@@ -35,11 +38,14 @@ public class HomeScreenActivityRecyclerViewAdapter extends RecyclerView.Adapter<
         return new ViewHolder(view);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull HomeScreenActivityRecyclerViewAdapter.ViewHolder holder, int position) {
+//        holder.vehicleThumbnail.setImageURI(Uri.parse(allVehicleData.get(position).getPhoto().get(0)));
         holder.vehicleModel.setText(allVehicleData.get(position).getModel());
-        holder.vehicleShortDetails.setText(Tools.getFormattedShortDetails(allVehicleData.get(position)));
-        holder.vehicleLocation.setText(allVehicleData.get(position).getCurrentLocation());
+        holder.vehicleShortDetails.setText(HomeScreenController.getVehicleFormattedShortDetails(allVehicleData.get(position)));
+        holder.tvVehiclePrice.setText(Integer.toString(allVehicleData.get(position).getCostPerDay()));
+        holder.vehicleLocation.setText(allVehicleData.get(position).getCurrentLocationString());
     }
 
     @Override
@@ -52,6 +58,7 @@ public class HomeScreenActivityRecyclerViewAdapter extends RecyclerView.Adapter<
         ImageView vehicleThumbnail;
         TextView vehicleModel;
         TextView vehicleShortDetails;
+        TextView tvVehiclePrice;
         TextView vehicleLocation;
         Button vehicleDetailsButton;
 
@@ -59,12 +66,13 @@ public class HomeScreenActivityRecyclerViewAdapter extends RecyclerView.Adapter<
             super(itemView);
 
             vehicleThumbnail = itemView.findViewById(R.id.vehicle_thumbnail);
-            vehicleModel = itemView.findViewById(R.id.vehicle_model);
-            vehicleShortDetails = itemView.findViewById(R.id.vehicle_short_detail);
-            vehicleLocation = itemView.findViewById(R.id.vehicle_location);
-            vehicleDetailsButton = itemView.findViewById(R.id.view_item_details_button);
+            vehicleModel = itemView.findViewById(R.id.tvVehicleModel);
+            vehicleShortDetails = itemView.findViewById(R.id.tvVehicleShortDetail);
+            vehicleLocation = itemView.findViewById(R.id.tvVehicleLocation);
+            tvVehiclePrice = itemView.findViewById(R.id.tvVehiclePrice);
+            vehicleDetailsButton = itemView.findViewById(R.id.btnViewItemDetailsButton);
 
-            itemView.setOnClickListener(this::onClick);
+//            itemView.setOnClickListener(this::onClick);
             vehicleDetailsButton.setOnClickListener(this::onClick);
 
         }

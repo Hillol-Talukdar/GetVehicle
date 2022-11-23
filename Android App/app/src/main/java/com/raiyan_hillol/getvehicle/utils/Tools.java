@@ -2,10 +2,6 @@ package com.raiyan_hillol.getvehicle.utils;
 
 import android.content.Context;
 import android.util.Log;
-import android.view.View;
-
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Cache;
 import com.android.volley.Network;
@@ -18,7 +14,6 @@ import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.raiyan_hillol.getvehicle.R;
-import com.raiyan_hillol.getvehicle.screens.homeScreen.adapter.HomeScreenActivityRecyclerViewAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,24 +22,17 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class Tools {
-
-    public static String getFormattedShortDetails(VehicleData vehicleData){
-        String formattedShortDetails;
-
-        formattedShortDetails = vehicleData.getVehicleType();
-        formattedShortDetails += " | ";
-        formattedShortDetails += vehicleData.getSeatCount() + " Seater ";
-        formattedShortDetails += " | ";
-        formattedShortDetails += vehicleData.getTransmission();
-
-        return formattedShortDetails;
-    }
+    private static final String TAG = "Tools";
 
     public static ArrayList<String> getStringArrayListFromJSONArray(JSONArray jsonArray) throws JSONException {
-        ArrayList<String>stringArrayList = new ArrayList<>();
+        ArrayList<String> stringArrayList = new ArrayList<>();
 
-        for(int i=0; i<jsonArray.length(); i++){
-            stringArrayList.add(jsonArray.getString(i));
+        if(jsonArray == null || jsonArray.length() == 0) {
+            stringArrayList.add(String.valueOf(R.drawable.temp_car_image));
+        } else {
+            for (int i = 0; i < jsonArray.length(); i++) {
+                stringArrayList.add(jsonArray.getString(i));
+            }
         }
 
         return stringArrayList;
@@ -68,7 +56,7 @@ public class Tools {
 
         requestQueue.start();
 
-        String url ="http://192.168.0.9:4000/api/vehicle/" + vehicleId;
+        String url = "http://192.168.0.9:4000/api/vehicle/" + vehicleId;
 
         JsonObjectRequest jsonArrayRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
 
@@ -102,7 +90,7 @@ public class Tools {
                     jsonObject.getString("engine"),
 //                    jsonObject.getString("bootSpace"),
 //                    jsonObject.getString("groundClearance"),
-                    jsonObject.getDouble("costPerDay"),
+                    jsonObject.getInt("costPerDay"),
 //                    jsonObject.getInt("seatCount"),
 //                    jsonObject.getDouble("Mileage"),
 //                    jsonObject.getDouble("averageRating"),
@@ -123,25 +111,50 @@ public class Tools {
             JSONArray jsonArray = jsonObject.getJSONArray("data");
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObjectArray = jsonArray.getJSONObject(i);
+
                 allVehicleData.add(new VehicleData(
                         jsonObjectArray.getString("_id"),
                         jsonObjectArray.getString("model"),
-//                    jsonObjectArray.getString("genericType"),
+//                        jsonObjectArray.getString("category"),
+//                        jsonObjectArray.getString("subCategory"),
                         jsonObjectArray.getString("transmission"),
                         jsonObjectArray.getString("fuelType"),
                         jsonObjectArray.getString("engine"),
-//                    jsonObjectArray.getString("bootSpace"),
-//                    jsonObjectArray.getString("groundClearance"),
-                        jsonObjectArray.getDouble("costPerDay")
-//                        jsonObjectArray.getInt("seatCount"),
-//                    jsonObjectArray.getDouble("Mileage"),
-//                    jsonObjectArray.getDouble("averageRating"),
-//                        jsonObjectArray.getJSONObject("currentLocation").getString("address")
-//                    jsonObjectArray.getBoolean("bookingStatus"),
-//                    Tools.getStringArrayListFromJSONArray(jsonObjectArray.getJSONArray("photos")),
-//                    jsonObjectArray.getString("user")
+                        jsonObjectArray.getString("bootSpace"),
+                        jsonObjectArray.getString("groundClearance"),
+                        jsonObjectArray.getInt("costPerDay"),
+                        jsonObjectArray.getInt("seatCount"),
+                        jsonObjectArray.getInt("mileage"),
+                        jsonObjectArray.getDouble("averageRating"),
+                        jsonObjectArray.getString("currentLocationString"),
+                        jsonObjectArray.getBoolean("bookingStatus"),
+                        Tools.getStringArrayListFromJSONArray(jsonObjectArray.getJSONArray("photo")),
+//                        jsonObjectArray.getString("user"),
+                        jsonObjectArray.getBoolean("isTrashed")
                 ));
+
+
+//                allVehicleData.add(new VehicleData(
+//                        jsonObjectArray.getString("_id"),
+//                        jsonObjectArray.getString("model"),
+////                    jsonObjectArray.getString("genericType"),
+//                        jsonObjectArray.getString("transmission"),
+//                        jsonObjectArray.getString("fuelType"),
+//                        jsonObjectArray.getString("engine"),
+////                    jsonObjectArray.getString("bootSpace"),
+////                    jsonObjectArray.getString("groundClearance"),
+//                        jsonObjectArray.getDouble("costPerDay")
+////                        jsonObjectArray.getInt("seatCount"),
+////                    jsonObjectArray.getDouble("Mileage"),
+////                    jsonObjectArray.getDouble("averageRating"),
+////                        jsonObjectArray.getJSONObject("currentLocation").getString("address")
+////                    jsonObjectArray.getBoolean("bookingStatus"),
+////                    Tools.getStringArrayListFromJSONArray(jsonObjectArray.getJSONArray("photos")),
+////                    jsonObjectArray.getString("user")
+//                ));
             }
+
+            Log.d(TAG, "getAllVehiclesFromJSONObject: " + allVehicleData);
         } catch (JSONException e) {
             e.printStackTrace();
         }
