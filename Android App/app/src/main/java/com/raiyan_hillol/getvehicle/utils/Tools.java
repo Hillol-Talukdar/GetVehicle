@@ -14,6 +14,7 @@ import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.raiyan_hillol.getvehicle.R;
+import com.raiyan_hillol.getvehicle.data.model.VehicleData;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -23,6 +24,25 @@ import java.util.ArrayList;
 
 public class Tools {
     private static final String TAG = "Tools";
+
+    public static String getVehicleFormattedShortDetails(VehicleData vehicleData) {
+        String formattedShortDetails = "";
+        try {
+            formattedShortDetails = vehicleData.getCategory().getString("name");
+            formattedShortDetails += " | ";
+            formattedShortDetails += vehicleData.getSeatCount() + " Seater ";
+            formattedShortDetails += " | ";
+            formattedShortDetails += vehicleData.getTransmission();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            if (formattedShortDetails.length() == 0) {
+                formattedShortDetails = "";
+            }
+        }
+
+        return formattedShortDetails;
+    }
 
     public static ArrayList<String> getStringArrayListFromJSONArray(JSONArray jsonArray) throws JSONException {
         ArrayList<String> stringArrayList = new ArrayList<>();
@@ -115,8 +135,8 @@ public class Tools {
                 allVehicleData.add(new VehicleData(
                         jsonObjectArray.getString("_id"),
                         jsonObjectArray.getString("model"),
-//                        jsonObjectArray.getString("category"),
-//                        jsonObjectArray.getString("subCategory"),
+                        jsonObjectArray.getJSONObject("category"),
+//                        jsonObjectArray.getJSONObject("subCategory"),
                         jsonObjectArray.getString("transmission"),
                         jsonObjectArray.getString("fuelType"),
                         jsonObjectArray.getString("engine"),
@@ -129,29 +149,8 @@ public class Tools {
                         jsonObjectArray.getString("currentLocationString"),
                         jsonObjectArray.getBoolean("bookingStatus"),
                         Tools.getStringArrayListFromJSONArray(jsonObjectArray.getJSONArray("photo")),
-//                        jsonObjectArray.getString("user"),
                         jsonObjectArray.getBoolean("isTrashed")
                 ));
-
-
-//                allVehicleData.add(new VehicleData(
-//                        jsonObjectArray.getString("_id"),
-//                        jsonObjectArray.getString("model"),
-////                    jsonObjectArray.getString("genericType"),
-//                        jsonObjectArray.getString("transmission"),
-//                        jsonObjectArray.getString("fuelType"),
-//                        jsonObjectArray.getString("engine"),
-////                    jsonObjectArray.getString("bootSpace"),
-////                    jsonObjectArray.getString("groundClearance"),
-//                        jsonObjectArray.getDouble("costPerDay")
-////                        jsonObjectArray.getInt("seatCount"),
-////                    jsonObjectArray.getDouble("Mileage"),
-////                    jsonObjectArray.getDouble("averageRating"),
-////                        jsonObjectArray.getJSONObject("currentLocation").getString("address")
-////                    jsonObjectArray.getBoolean("bookingStatus"),
-////                    Tools.getStringArrayListFromJSONArray(jsonObjectArray.getJSONArray("photos")),
-////                    jsonObjectArray.getString("user")
-//                ));
             }
 
             Log.d(TAG, "getAllVehiclesFromJSONObject: " + allVehicleData);

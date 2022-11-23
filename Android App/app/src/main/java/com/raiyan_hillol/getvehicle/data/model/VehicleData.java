@@ -1,18 +1,19 @@
-package com.raiyan_hillol.getvehicle.utils;
+package com.raiyan_hillol.getvehicle.data.model;
 
 import java.util.ArrayList;
+import org.json.JSONObject;
 
 public class VehicleData {
     private String id;
     private String model;
-    private String category;
-    private String subCategory;
+    private JSONObject category = new JSONObject();
+    private JSONObject subCategory = new JSONObject();
     private String transmission;
     private String fuelType;
     private String engine;
     private String bootSpace;
     private String groundClearance;
-    private String user;
+    private JSONObject user;
     private String currentLocationString;
     private ArrayList<String> photo;
     private int costPerDay;
@@ -24,43 +25,21 @@ public class VehicleData {
 
 
     private String vehicleType;
-    private String genericType;
     private String userId;
     private String createTime;
     private String updateTime;
 
-    public VehicleData(String id, String model, String category, String subCategory, String transmission,
-                       String fuelType, String engine, String bootSpace, String groundClearance,
-                       int costPerDay, int seatCount, int mileage, double averageRating,
-                       String currentLocationString, boolean bookingStatus, ArrayList<String> photo,
-                       String user, boolean isTrashed) {
-        this.id = id;
-        this.model = model;
-        this.category = category;
-        this.subCategory = subCategory;
-        this.transmission = transmission;
-        this.fuelType = fuelType;
-        this.engine = engine;
-        this.bootSpace = bootSpace;
-        this.groundClearance = groundClearance;
-        this.costPerDay = costPerDay;
-        this.seatCount = seatCount;
-        this.mileage = mileage;
-        this.averageRating = averageRating;
-        this.currentLocationString = currentLocationString;
-        this.bookingStatus = bookingStatus;
-        this.photo = photo;
-        this.user = user;
-        this.isTrashed = isTrashed;
-    }
-
-    public VehicleData(String id, String model,  String transmission,
+    public VehicleData(String id, String model, JSONObject category,
+//                       JSONObject subCategory,
+                       String transmission,
                        String fuelType, String engine, String bootSpace, String groundClearance,
                        int costPerDay, int seatCount, int mileage, double averageRating,
                        String currentLocationString, boolean bookingStatus, ArrayList<String> photo,
                        boolean isTrashed) {
         this.id = id;
         this.model = model;
+        this.category = category;
+//        this.subCategory = subCategory;
         this.transmission = transmission;
         this.fuelType = fuelType;
         this.engine = engine;
@@ -74,56 +53,6 @@ public class VehicleData {
         this.bookingStatus = bookingStatus;
         this.photo = photo;
         this.isTrashed = isTrashed;
-    }
-
-//    public VehicleData(String id, String model, String vehicleType, String genericType,
-//                       String transmission, String fuelType, String engine, String bootSpace,
-//                       String groundClearance, int costPerDay, int seatCount, int mileage,
-//                       double averageRating, String currentLocationString, boolean bookingStatus,
-//                       ArrayList<String> photo, String userId) {
-//        this.id = id;
-//        this.model = model;
-//        this.vehicleType = vehicleType;
-//        this.genericType = genericType;
-//        this.transmission = transmission;
-//        this.fuelType = fuelType;
-//        this.engine = engine;
-//        this.bootSpace = bootSpace;
-//        this.groundClearance = groundClearance;
-//        this.costPerDay = costPerDay;
-//        this.seatCount = seatCount;
-//        this.mileage = mileage;
-//        this.averageRating = averageRating;
-//        this.currentLocationString = currentLocationString;
-//        this.bookingStatus = bookingStatus;
-//        this.photo = photo;
-//        this.userId = userId;
-//    }
-
-    public VehicleData(String id, String model, String vehicleType, String genericType,
-                       String transmission, String fuelType, String engine, String bootSpace,
-                       String groundClearance, int costPerDay, int seatCount, int mileage,
-                       double averageRating, String currentLocationString, boolean bookingStatus,
-                       ArrayList<String> photo, String userId, String createTime, String updateTime) {
-        this.id = id;
-        this.model = model;
-        this.vehicleType = vehicleType;
-        this.genericType = genericType;
-        this.transmission = transmission;
-        this.fuelType = fuelType;
-        this.engine = engine;
-        this.bootSpace = bootSpace;
-        this.groundClearance = groundClearance;
-        this.costPerDay = costPerDay;
-        this.seatCount = seatCount;
-        this.mileage = mileage;
-        this.averageRating = averageRating;
-        this.currentLocationString = currentLocationString;
-        this.bookingStatus = bookingStatus;
-        this.photo = photo;
-        this.userId = userId;
-        this.createTime = createTime;
-        this.updateTime = updateTime;
     }
 
     public VehicleData(String id, String model, String vehicleType, String transmission,
@@ -136,16 +65,6 @@ public class VehicleData {
         this.engine = engine;
         this.costPerDay = costPerDay;
         this.currentLocationString = location;
-    }
-
-    public VehicleData(String id, String model, String transmission, String fuelType, String engine,
-                       int costPerDay) {
-        this.id = id;
-        this.model = model;
-        this.transmission = transmission;
-        this.fuelType = fuelType;
-        this.engine = engine;
-        this.costPerDay = costPerDay;
     }
 
     public String getId() {
@@ -170,14 +89,6 @@ public class VehicleData {
 
     public void setVehicleType(String vehicleType) {
         this.vehicleType = vehicleType;
-    }
-
-    public String getGenericType() {
-        return genericType;
-    }
-
-    public void setGenericType(String genericType) {
-        this.genericType = genericType;
     }
 
     public String getTransmission() {
@@ -276,20 +187,20 @@ public class VehicleData {
         this.photo = photo;
     }
 
-    public String getUserId() {
-        return userId;
-    }
-
-    public String getUser() {
-        return user;
-    }
-
     public void setUserId(String userId) {
         this.userId = userId;
     }
 
-    public void setUser(String user) {
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUser(JSONObject user) {
         this.user = user;
+    }
+
+    public JSONObject getUser() {
+        return user;
     }
 
     public String getCreateTime() {
@@ -315,5 +226,22 @@ public class VehicleData {
     private boolean getIsTrashed() {
         return isTrashed;
     }
+
+    private void setCategory(JSONObject category) {
+        this.category = category;
+    }
+
+    public JSONObject getCategory() {
+        return category;
+    }
+
+    private void setSubCategory(JSONObject subCategory) {
+        this.subCategory = subCategory;
+    }
+
+    public JSONObject getSubCategory() {
+        return subCategory;
+    }
+
 
 }
