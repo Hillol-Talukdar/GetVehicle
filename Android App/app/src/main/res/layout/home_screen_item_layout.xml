@@ -4,72 +4,75 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="3dp"
+    android:layout_margin="5dp"
     android:background="@color/white">
 
     <ImageView
         android:id="@+id/vehicle_thumbnail"
-        android:scaleType="fitCenter"
-        android:src="@drawable/temp_car_image"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:scaleType="fitCenter"
+        android:src="@drawable/temp_car_image"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingVertical="5dp"
-        android:paddingHorizontal="10dp"
         android:background="@color/white"
+        android:orientation="horizontal"
+        android:paddingHorizontal="10dp"
+        android:paddingVertical="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/vehicle_thumbnail">
 
         <LinearLayout
-            android:layout_weight="5"
-            android:layout_marginRight="10dp"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_gravity="center">
+            android:layout_gravity="center"
+            android:layout_marginRight="10dp"
+            android:layout_weight="5"
+            android:orientation="vertical">
+
             <TextView
                 android:id="@+id/tvVehicleModel"
-                android:textSize="16dp"
-                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:gravity="center"
                 android:text="BMW 7 Series"
                 android:textColor="@color/black"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:textSize="16dp" />
 
             <TextView
                 android:id="@+id/tvVehicleShortDetail"
-                android:textSize="14sp"
-                android:gravity="center"
-                android:layout_weight="1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="SEDAN | 4 Seater | Automatic"/>
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="SEDAN | 4 Seater | Automatic"
+                android:textSize="14sp" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center">
+
                 <ImageView
                     android:layout_width="13dp"
                     android:layout_height="13dp"
-                    android:src="@drawable/ic_baseline_location_on_24"/>
+                    android:src="@drawable/ic_baseline_location_on_24" />
+
                 <TextView
                     android:id="@+id/tvVehicleLocation"
-                    android:textSize="12dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Sylhet, Bangladesh"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:textSize="12dp" />
             </LinearLayout>
 
         </LinearLayout>
@@ -77,29 +80,29 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:orientation="vertical"
             android:layout_weight="1"
-            android:gravity="end">
+            android:gravity="end"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/tvVehiclePrice"
-                android:gravity="center"
-                android:paddingTop="5dp"
-                android:textColor="@color/black"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingTop="5dp"
                 android:text="5000TK/day"
-                android:textSize="14dp"/>
+                android:textColor="@color/black"
+                android:textSize="14dp" />
 
             <Button
                 android:id="@+id/btnViewItemDetailsButton"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:text="View Details"
-                android:textSize="10dp"
-                android:textAllCaps="false"
                 android:gravity="center"
-                android:textColor="@color/white"/>
+                android:text="View Details"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="10dp" />
 
         </LinearLayout>
 

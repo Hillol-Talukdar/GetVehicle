@@ -44,18 +44,23 @@ public class Tools {
         return formattedShortDetails;
     }
 
-    public static ArrayList<String> getStringArrayListFromJSONArray(JSONArray jsonArray) throws JSONException {
-        ArrayList<String> stringArrayList = new ArrayList<>();
+    public static ArrayList<String> getSanitizedPhotos(JSONArray photosJsonArray, JSONObject vehicleCategory) throws JSONException {
+        ArrayList<String> sanitizedPhotos = new ArrayList<>();
+        String vehicleCategoryName = vehicleCategory.getString("name");
 
-        if(jsonArray == null || jsonArray.length() == 0) {
-            stringArrayList.add(String.valueOf(R.drawable.temp_car_image));
+        if(photosJsonArray == null || photosJsonArray.length() == 0) {
+            if(vehicleCategoryName.equals("Car")) {
+                sanitizedPhotos.add(String.valueOf(R.drawable.template_car_image));
+            } else {
+                sanitizedPhotos.add(String.valueOf(R.drawable.template_bike_image));
+            }
         } else {
-            for (int i = 0; i < jsonArray.length(); i++) {
-                stringArrayList.add(jsonArray.getString(i));
+            for (int i = 0; i < photosJsonArray.length(); i++) {
+                sanitizedPhotos.add(photosJsonArray.getString(i));
             }
         }
 
-        return stringArrayList;
+        return sanitizedPhotos;
     }
 
     //TODO: make the response things reusable
@@ -83,7 +88,6 @@ public class Tools {
             @Override
             public void onResponse(JSONObject response) {
                 vehicleData[0] = getVehicleFromJSONObject(response);
-                Log.d("Raiyan13", "The response: \n" + response);
             }
         }, new Response.ErrorListener() {
             @Override
@@ -128,32 +132,31 @@ public class Tools {
     public static ArrayList<VehicleData> getAllVehiclesFromJSONObject(JSONObject jsonObject) {
         ArrayList<VehicleData> allVehicleData = new ArrayList<>();
         try {
-            JSONArray jsonArray = jsonObject.getJSONArray("data");
-            for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject jsonObjectArray = jsonArray.getJSONObject(i);
+            JSONArray responseData = jsonObject.getJSONArray("data");
+            for (int i = 0; i < responseData.length(); i++) {
+                JSONObject vehicleObject = responseData.getJSONObject(i);
 
-                allVehicleData.add(new VehicleData(
-                        jsonObjectArray.getString("_id"),
-                        jsonObjectArray.getString("model"),
-                        jsonObjectArray.getJSONObject("category"),
-//                        jsonObjectArray.getJSONObject("subCategory"),
-                        jsonObjectArray.getString("transmission"),
-                        jsonObjectArray.getString("fuelType"),
-                        jsonObjectArray.getString("engine"),
-                        jsonObjectArray.getString("bootSpace"),
-                        jsonObjectArray.getString("groundClearance"),
-                        jsonObjectArray.getInt("costPerDay"),
-                        jsonObjectArray.getInt("seatCount"),
-                        jsonObjectArray.getInt("mileage"),
-                        jsonObjectArray.getDouble("averageRating"),
-                        jsonObjectArray.getString("currentLocationString"),
-                        jsonObjectArray.getBoolean("bookingStatus"),
-                        Tools.getStringArrayListFromJSONArray(jsonObjectArray.getJSONArray("photo")),
-                        jsonObjectArray.getBoolean("isTrashed")
-                ));
+                VehicleData vehicleData = new VehicleData();
+                vehicleData.setId(vehicleObject.getString("_id"));
+                vehicleData.setModel(vehicleObject.getString("model"));
+                vehicleData.setCategory(vehicleObject.getJSONObject("category"));
+                vehicleData.setSubCategory(vehicleObject.getJSONObject("subCategory"));
+                vehicleData.setTransmission(vehicleObject.getString("transmission"));
+                vehicleData.setFuelType(vehicleObject.getString("fuelType"));
+                vehicleData.setEngine(vehicleObject.getString("engine"));
+                vehicleData.setBootSpace(vehicleObject.getString("bootSpace"));
+                vehicleData.setGroundClearance(vehicleObject.getString("groundClearance"));
+                vehicleData.setCostPerDay(vehicleObject.getInt("costPerDay"));
+                vehicleData.setSeatCount(vehicleObject.getInt("seatCount"));
+                vehicleData.setMileage(vehicleObject.getInt("mileage"));
+                vehicleData.setAverageRating(vehicleObject.getDouble("averageRating"));
+                vehicleData.setCurrentLocationString(vehicleObject.getString("currentLocationString"));
+                vehicleData.setBookingStatus(vehicleObject.getBoolean("bookingStatus"));
+                vehicleData.setPhoto(Tools.getSanitizedPhotos(vehicleObject.getJSONArray("photo"), vehicleData.getCategory()));
+                vehicleData.setTrashed(vehicleObject.getBoolean("isTrashed"));
+
+                allVehicleData.add(vehicleData);
             }
-
-            Log.d(TAG, "getAllVehiclesFromJSONObject: " + allVehicleData);
         } catch (JSONException e) {
             e.printStackTrace();
         }

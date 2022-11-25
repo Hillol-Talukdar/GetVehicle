@@ -2,6 +2,7 @@ package com.raiyan_hillol.getvehicle.screens.homeScreen.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.raiyan_hillol.getvehicle.R;
 import com.raiyan_hillol.getvehicle.utils.Tools;
 import com.raiyan_hillol.getvehicle.data.model.VehicleData;
@@ -39,7 +41,15 @@ public class HomeScreenActivityRecyclerViewAdapter extends RecyclerView.Adapter<
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull HomeScreenActivityRecyclerViewAdapter.ViewHolder holder, int position) {
-//        holder.vehicleThumbnail.setImageURI(Uri.parse(allVehicleData.get(position).getPhoto().get(0)));
+        if(!allVehicleData.get(position).getPhoto().isEmpty()) {
+            String image = allVehicleData.get(position).getPhoto().get(0);
+            boolean isImage = image.endsWith(".jpg");
+            if(isImage) {
+                Glide.with(this.context).load(image).into(holder.vehicleThumbnail);
+            } else {
+                holder.vehicleThumbnail.setImageResource(Integer.parseInt(image));
+            }
+        }
         holder.vehicleModel.setText(allVehicleData.get(position).getModel());
         holder.vehicleShortDetails.setText(Tools.getVehicleFormattedShortDetails(allVehicleData.get(position)));
         holder.tvVehiclePrice.setText(Integer.toString(allVehicleData.get(position).getCostPerDay()));
@@ -53,7 +63,7 @@ public class HomeScreenActivityRecyclerViewAdapter extends RecyclerView.Adapter<
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        ImageView vehicleThumbnail;
+        ImageView  vehicleThumbnail;
         TextView vehicleModel;
         TextView vehicleShortDetails;
         TextView tvVehiclePrice;

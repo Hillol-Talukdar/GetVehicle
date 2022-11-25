@@ -29,7 +29,6 @@ const HomeItem = (props) => {
     if (window.confirm(DELETE_CONFIRMATION)) {
       updateAVehicle(e.target.value, {[VehicleInfoConstants.IS_TRASHED_IN_MODEL]: true}, user.token)
       .then((res) => {
-        console.log(res);
         toast.success(`Deleted ${res.data.data.model} successfully!`);
         props.loadAllVehicles();
       })

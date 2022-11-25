@@ -29,8 +29,12 @@ public class VehicleData {
     private String createTime;
     private String updateTime;
 
+    public VehicleData() {
+
+    }
+
     public VehicleData(String id, String model, JSONObject category,
-//                       JSONObject subCategory,
+                       JSONObject subCategory,
                        String transmission,
                        String fuelType, String engine, String bootSpace, String groundClearance,
                        int costPerDay, int seatCount, int mileage, double averageRating,
@@ -39,7 +43,7 @@ public class VehicleData {
         this.id = id;
         this.model = model;
         this.category = category;
-//        this.subCategory = subCategory;
+        this.subCategory = subCategory;
         this.transmission = transmission;
         this.fuelType = fuelType;
         this.engine = engine;
@@ -219,15 +223,15 @@ public class VehicleData {
         this.updateTime = updateTime;
     }
 
-    private void setIsTrashed(boolean isTrashed) {
+    public void setIsTrashed(boolean isTrashed) {
         this.isTrashed = isTrashed;
     }
 
-    private boolean getIsTrashed() {
+    public boolean getIsTrashed() {
         return isTrashed;
     }
 
-    private void setCategory(JSONObject category) {
+    public void setCategory(JSONObject category) {
         this.category = category;
     }
 
@@ -235,7 +239,7 @@ public class VehicleData {
         return category;
     }
 
-    private void setSubCategory(JSONObject subCategory) {
+    public void setSubCategory(JSONObject subCategory) {
         this.subCategory = subCategory;
     }
 
@@ -243,5 +247,11 @@ public class VehicleData {
         return subCategory;
     }
 
+    public boolean isTrashed() {
+        return isTrashed;
+    }
 
+    public void setTrashed(boolean trashed) {
+        isTrashed = trashed;
+    }
 }

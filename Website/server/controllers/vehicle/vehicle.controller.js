@@ -32,8 +32,13 @@ exports.getAVehicle = catchAsync(async (req, res, next) => {
 });
 
 exports.getAllVehicle = catchAsync(async (req, res, next) => {
-    const vehicles = await Vehicle.find({}).populate({
+    const vehicles = await Vehicle.find({})
+    .populate({
         path: 'category',
+        select: 'name slug',
+    })
+    .populate({
+        path: 'subCategory',
         select: 'name slug',
     });
 
