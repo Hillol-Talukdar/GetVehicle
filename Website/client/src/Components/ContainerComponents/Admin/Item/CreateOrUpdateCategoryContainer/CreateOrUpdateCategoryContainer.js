@@ -164,7 +164,7 @@ const CreateOrUpdateCategoryContainer = () => {
               <Card.Body>
                 <div className="d-flex justify-content-around">
                   <Link
-                    to={`/category/${category._id}/create-or-update-category`}
+                    to={`/admin/category/${category._id}/create-or-update-category`}
                   >
                     <Button variant="outline-primary" size="sm">
                       <MdAdd className="mb-1" /> {ButtonConstants.ADD_BUTTON} or

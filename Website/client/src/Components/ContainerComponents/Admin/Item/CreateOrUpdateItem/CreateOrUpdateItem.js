@@ -1,4 +1,3 @@
-import axios, { Axios } from 'axios';
 import React, { useState, useEffect } from 'react';
 import { Container } from 'react-bootstrap';
 import FileResizer from 'react-image-file-resizer';
