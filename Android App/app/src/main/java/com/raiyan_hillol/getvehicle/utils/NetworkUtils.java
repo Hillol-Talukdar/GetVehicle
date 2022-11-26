@@ -7,7 +7,7 @@ import java.net.NetworkInterface;
 import java.util.Collections;
 import java.util.List;
 
-public class Utilities {
+public class NetworkUtils {
     private static final String TAG = "Utilities";
 
     // @param useIPv4   true=return ipv4, false=return ipv6
