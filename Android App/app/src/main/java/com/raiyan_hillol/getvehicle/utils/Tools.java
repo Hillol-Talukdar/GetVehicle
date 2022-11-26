@@ -81,6 +81,7 @@ public class Tools {
 
         requestQueue.start();
 
+//        String url = AppUriRoutes.GET_ALL_VEHICLE_URI + vehicleId;
         String url = "http://192.168.0.9:4000/api/vehicle/" + vehicleId;
 
         JsonObjectRequest jsonArrayRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {

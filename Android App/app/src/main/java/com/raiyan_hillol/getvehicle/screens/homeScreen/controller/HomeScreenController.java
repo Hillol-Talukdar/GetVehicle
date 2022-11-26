@@ -1,6 +1,7 @@
 package com.raiyan_hillol.getvehicle.screens.homeScreen.controller;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -17,12 +18,14 @@ import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.raiyan_hillol.getvehicle.R;
+import com.raiyan_hillol.getvehicle.utils.AppUriRoutes;
 import com.raiyan_hillol.getvehicle.utils.Tools;
 import com.raiyan_hillol.getvehicle.screens.homeScreen.adapter.HomeScreenActivityRecyclerViewAdapter;
 
 import org.json.JSONObject;
 
 public class HomeScreenController {
+    private static final String TAG = "HomeScreenController";
     private Context context;
 
     public HomeScreenController(Context context) {
@@ -38,6 +41,8 @@ public class HomeScreenController {
         requestQueue.start();
 
         String url = "http://192.168.0.9:4000/api/vehicle";
+//        String url = AppUriRoutes.GET_ALL_VEHICLE_URI;
+        Log.d(TAG, "setRecyclerViewAdapter: " + AppUriRoutes.GET_ALL_VEHICLE_URI);
 
         JsonObjectRequest jsonArrayRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
