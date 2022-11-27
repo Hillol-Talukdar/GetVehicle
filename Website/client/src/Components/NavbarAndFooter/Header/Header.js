@@ -74,13 +74,6 @@ const Header = () => {
             </NavDropdown>
           </Nav>
 
-          <Form className="d-flex">
-            <Form.Control
-              type="search"
-              placeholder={NavbarConstants.SEARCH}
-              aria-label="Search"
-          />
-          </Form>
           {loggedInUserDetails && (
             <LoggedInUserInfoContainer
               userInfo={loggedInUserDetails}

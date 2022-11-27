@@ -1,7 +1,7 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Header from './Components/NavbarAndFooter/Header/Header';
-import HomeContainer from './Components/ContainerComponents/HomeContainer';
+import HomeContainer from './Components/ContainerComponents/HomeContainer/HomeContainer';
 import ItemDetailsContainer from './Components/ContainerComponents/ItemDetailsContainer';
 import { useDispatch } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
@@ -36,7 +36,7 @@ const App = () => {
       <ToastContainer />
       <Header />
       <Routes>
-        <Route exact path="/" element={<HomeContainer />} />
+        <Route exact path="/" element={<HomeContainer/>} />
         <Route exact path="/details/:id" element={<ItemDetailsContainer />} />
         <Route
           exact
