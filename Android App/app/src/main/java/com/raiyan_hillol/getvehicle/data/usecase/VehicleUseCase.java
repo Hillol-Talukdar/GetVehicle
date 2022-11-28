@@ -1,7 +1,6 @@
-package com.raiyan_hillol.getvehicle.utils;
+package com.raiyan_hillol.getvehicle.data.usecase;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.android.volley.Cache;
 import com.android.volley.Network;
@@ -23,8 +22,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class Tools {
-    private static final String TAG = "Tools";
+public class VehicleUseCase {
+    private static final String TAG = "VehicleUseCase";
 
     public static String getVehicleFormattedShortDetails(VehicleData vehicleData) {
         String formattedShortDetails = "";
@@ -154,7 +153,7 @@ public class Tools {
                 vehicleData.setAverageRating(vehicleObject.getDouble("averageRating"));
                 vehicleData.setCurrentLocationString(vehicleObject.getString("currentLocationString"));
                 vehicleData.setBookingStatus(vehicleObject.getBoolean("bookingStatus"));
-                vehicleData.setPhoto(Tools.getSanitizedPhotos(vehicleObject.getJSONArray("photo"), vehicleData.getCategory()));
+                vehicleData.setPhoto(VehicleUseCase.getSanitizedPhotos(vehicleObject.getJSONArray("photo"), vehicleData.getCategory()));
                 vehicleData.setTrashed(vehicleObject.getBoolean("isTrashed"));
 
                 allVehicleData.add(vehicleData);

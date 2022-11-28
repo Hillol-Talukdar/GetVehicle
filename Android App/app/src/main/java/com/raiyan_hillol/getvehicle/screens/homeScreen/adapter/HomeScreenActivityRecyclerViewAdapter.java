@@ -2,7 +2,6 @@ package com.raiyan_hillol.getvehicle.screens.homeScreen.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.raiyan_hillol.getvehicle.R;
-import com.raiyan_hillol.getvehicle.utils.Tools;
+import com.raiyan_hillol.getvehicle.data.usecase.VehicleUseCase;
 import com.raiyan_hillol.getvehicle.data.model.VehicleData;
 import com.raiyan_hillol.getvehicle.screens.homeScreen.view.HomeScreenActivity;
 
@@ -51,7 +50,7 @@ public class HomeScreenActivityRecyclerViewAdapter extends RecyclerView.Adapter<
             }
         }
         holder.vehicleModel.setText(allVehicleData.get(position).getModel());
-        holder.vehicleShortDetails.setText(Tools.getVehicleFormattedShortDetails(allVehicleData.get(position)));
+        holder.vehicleShortDetails.setText(VehicleUseCase.getVehicleFormattedShortDetails(allVehicleData.get(position)));
         holder.tvVehiclePrice.setText(Integer.toString(allVehicleData.get(position).getCostPerDay()));
         holder.vehicleLocation.setText(allVehicleData.get(position).getCurrentLocationString());
     }

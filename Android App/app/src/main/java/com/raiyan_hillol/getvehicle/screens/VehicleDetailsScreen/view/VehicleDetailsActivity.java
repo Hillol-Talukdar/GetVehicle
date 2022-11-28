@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.raiyan_hillol.getvehicle.R;
-import com.raiyan_hillol.getvehicle.utils.Tools;
+import com.raiyan_hillol.getvehicle.data.usecase.VehicleUseCase;
 
 public class VehicleDetailsActivity extends AppCompatActivity {
 
@@ -23,7 +23,7 @@ public class VehicleDetailsActivity extends AppCompatActivity {
         String vehicleId = intent.getStringExtra("selected_vehicle_id");
 //        VehicleData singleVehicleData = Tools.getSingleVehicle(vehicleId, getApplicationContext());
 
-        Tools.getSingleVehicle(vehicleId, getApplicationContext());
+        VehicleUseCase.getSingleVehicle(vehicleId, getApplicationContext());
 
 //        TextView vehicleModel = findViewById(R.id.vehicle_model_detail);
 //        TextView vehicleType = findViewById(R.id.vehicle_type_detail);

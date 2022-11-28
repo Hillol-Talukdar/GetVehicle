@@ -1,7 +1,6 @@
 package com.raiyan_hillol.getvehicle.screens.homeScreen.controller;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.View;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -19,7 +18,7 @@ import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.raiyan_hillol.getvehicle.R;
 import com.raiyan_hillol.getvehicle.constants.AppUriConstants;
-import com.raiyan_hillol.getvehicle.utils.Tools;
+import com.raiyan_hillol.getvehicle.data.usecase.VehicleUseCase;
 import com.raiyan_hillol.getvehicle.screens.homeScreen.adapter.HomeScreenActivityRecyclerViewAdapter;
 
 import org.json.JSONObject;
@@ -51,7 +50,7 @@ public class HomeScreenController {
                 HomeScreenActivityRecyclerViewAdapter recyclerViewAdapter;
 
                 recyclerView = view.findViewById(R.id.rvHomeScreenActivity);
-                recyclerViewAdapter = new HomeScreenActivityRecyclerViewAdapter(Tools.getAllVehiclesFromJSONObject(response), context);
+                recyclerViewAdapter = new HomeScreenActivityRecyclerViewAdapter(VehicleUseCase.getAllVehiclesFromJSONObject(response), context);
                 recyclerView.setAdapter(recyclerViewAdapter);
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
             }
