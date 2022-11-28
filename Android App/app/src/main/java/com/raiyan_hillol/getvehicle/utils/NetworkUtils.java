@@ -2,9 +2,12 @@ package com.raiyan_hillol.getvehicle.utils;
 
 import android.util.Log;
 
+import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
+import java.net.SocketException;
 import java.util.Collections;
+import java.util.Enumeration;
 import java.util.List;
 
 public class NetworkUtils {

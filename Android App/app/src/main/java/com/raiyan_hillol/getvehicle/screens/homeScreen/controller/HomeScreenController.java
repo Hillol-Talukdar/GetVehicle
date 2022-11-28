@@ -40,9 +40,9 @@ public class HomeScreenController {
 
         requestQueue.start();
 
-//        String url = "http://192.168.0.9:4000/api/vehicle";
+//        String url = "http://192.168.0.9:4000/api/vehicle/";
         String url = AppUriConstants.GET_ALL_VEHICLE_URI;
-        Log.d(TAG, "setRecyclerViewAdapter: " + AppUriConstants.GET_ALL_VEHICLE_URI);
+//        Log.d(TAG, "setRecyclerViewAdapter: " + AppUriConstants.GET_ALL_VEHICLE_URI);
 
         JsonObjectRequest jsonArrayRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override

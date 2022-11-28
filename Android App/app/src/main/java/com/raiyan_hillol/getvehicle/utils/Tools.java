@@ -14,6 +14,7 @@ import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.raiyan_hillol.getvehicle.R;
+import com.raiyan_hillol.getvehicle.constants.AppUriConstants;
 import com.raiyan_hillol.getvehicle.data.model.VehicleData;
 
 import org.json.JSONArray;
@@ -81,8 +82,8 @@ public class Tools {
 
         requestQueue.start();
 
-//        String url = AppUriRoutes.GET_ALL_VEHICLE_URI + vehicleId;
-        String url = "http://192.168.0.9:4000/api/vehicle/" + vehicleId;
+        String url = AppUriConstants.GET_ALL_VEHICLE_URI + vehicleId;
+//        String url = "http://192.168.0.9:4000/api/vehicle/" + vehicleId;
 
         JsonObjectRequest jsonArrayRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
 
