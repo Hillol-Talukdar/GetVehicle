@@ -15,4 +15,18 @@
     <!--navigation drawer-->
     <string name="nav_open">Open</string>
     <string name="nav_close">Close</string>
+    <string name="mileage">Mileage</string>
+    <string name="engine">Engine</string>
+    <string name="location">Location</string>
+    <string name="model_name">Model Name</string>
+    <string name="fuel_type">Fuel Type</string>
+    <string name="petrol">Petrol</string>
+    <string name="overview">Overview</string>
+    <string name="category">Category</string>
+    <string name="subcategory">SubCategory</string>
+    <string name="seatCount">Seat Count</string>
+    <string name="transmission">Transmission</string>
+    <string name="bootSpace">Boot Space</string>
+    <string name="groundClearance">Ground Clearance</string>
+    <string name="reviews">Reviews</string>
 </resources>
