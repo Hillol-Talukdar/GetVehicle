@@ -12,6 +12,7 @@ import { Link, NavLink } from 'react-router-dom';
 import {
   AppConstants,
   NavbarConstants,
+  UserRole,
 } from '../../../Constants/CommonConstants';
 import { googleLogin } from '../../../Services/GoogleAuthService';
 import LoggedInUserInfoContainer from '../../ContainerComponents/LoggedInUserInfoContainer/LoggedInUserInfoContainer';
@@ -46,8 +47,8 @@ const Header = () => {
                 {NavbarConstants.HOME}
               </NavLink>
             </Navbar.Text>
-
-            <NavDropdown title="Admin" id="basic-nav-dropdown">
+          {loggedInUserDetails && loggedInUserDetails.role === UserRole.ADMIN && 
+            (<NavDropdown title="Admin" id="basic-nav-dropdown">
               <NavDropdown.Item
                 className="p-2"
                 to="/admin/create-or-update-vehicle"
@@ -71,7 +72,8 @@ const Header = () => {
                   {NavbarConstants.CREATE_CATEGORY}
                 </NavLink>
               </NavDropdown.Item>
-            </NavDropdown>
+            </NavDropdown>)
+          }
           </Nav>
 
           {loggedInUserDetails && (

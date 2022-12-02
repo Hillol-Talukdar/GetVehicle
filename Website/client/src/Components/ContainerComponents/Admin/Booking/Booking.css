@@ -1,0 +1,68 @@
+.booking-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.left-container {
+    width: 65%;
+    margin-right: 15px;
+}
+
+.user-details {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    margin-bottom: 15px;
+}
+
+.vehicle-details {
+    display: flex;
+    flex-direction: row;
+}
+
+.vehicle-image {
+    width: 30%;
+    background: orange;
+    padding: 15px;
+}
+
+.vehicle-info {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    width: 70%;
+}
+
+.booking-info {
+    width: 35%;
+    padding: 15px;
+    display: flex;
+}
+
+.date-picker-container {
+    margin-left: auto;
+}
+
+.enhance-div {
+    box-shadow: 0px 2px 4px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+    transition: 0.3s;
+}
+
+.field-bottom-margin {
+    margin-bottom: 5px;
+}
+
+.location-details {
+    margin-top: auto;
+    padding: 10px;
+    text-align: center;
+}
+
+.vehicle-model {
+    font-size: large;
+}
+
+.vehicle-category {
+    font-size: small;
+}
