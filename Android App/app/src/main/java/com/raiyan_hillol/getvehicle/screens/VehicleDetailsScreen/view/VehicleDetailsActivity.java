@@ -4,18 +4,28 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import com.raiyan_hillol.getvehicle.R;
 import com.raiyan_hillol.getvehicle.data.usecase.VehicleUseCase;
+import com.raiyan_hillol.getvehicle.databinding.ActivityVehicleDetailsBinding;
 
 public class VehicleDetailsActivity extends AppCompatActivity {
+
+    private ActivityVehicleDetailsBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_vehicle_details);
+//        setContentView(R.layout.activity_vehicle_details);
+
+        binding = ActivityVehicleDetailsBinding.inflate(getLayoutInflater());
+        View view = binding.getRoot();
+        setContentView(view);
+
 
         loadVehicleDetails();
+        initWedgies();
     }
 
     private void loadVehicleDetails() {
@@ -34,5 +44,9 @@ public class VehicleDetailsActivity extends AppCompatActivity {
 //        vehicleType.setText(singleVehicleData.getVehicleType());
 //        vehicleTransmission.setText(singleVehicleData.getTransmission());
 //        vehicleCurrentLocation.setText(singleVehicleData.getCurrentLocation());
+    }
+
+    private void initWedgies() {
+//        binding.tvModel =
     }
 }

@@ -4,280 +4,291 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingStart="15dp"
-    android:paddingEnd="15dp"
     tools:context=".screens.VehicleDetailsScreen.view.VehicleDetailsActivity">
 
-    <ImageView
-        android:id="@+id/ivModelImage"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:src="@drawable/template_car_image"
-        app:layout_constraintBottom_toTopOf="@id/tvModel"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="-127dp">
 
-    <TextView
-        android:id="@+id/tvModel"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="@string/model_name"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ivModelImage" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp">
 
-    <TextView
-        android:id="@+id/tvCostPerDay"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="BDT. 1000 per day"
-        android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="@+id/tvModel"
-        app:layout_constraintTop_toBottomOf="@+id/tvModel" />
-
-    <TextView
-        android:id="@+id/tvRating"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="5.0/5.0"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1"
-        app:layout_constraintStart_toEndOf="@id/tvCostPerDay"
-        app:layout_constraintTop_toTopOf="@id/tvCostPerDay" />
-
-    <TextView
-        android:id="@+id/tvLocation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="@string/location"
-        android:textSize="14sp"
-        app:drawableStartCompat="@drawable/ic_baseline_location_on_24"
-        app:layout_constraintStart_toStartOf="@+id/tvCostPerDay"
-        app:layout_constraintTop_toBottomOf="@+id/tvCostPerDay" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/clShortOverView"
-        android:layout_width="0dp"
-        android:layout_marginTop="10dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="@id/tvRating"
-        app:layout_constraintStart_toStartOf="@id/tvLocation"
-        app:layout_constraintTop_toBottomOf="@id/tvLocation">
-
-        <LinearLayout
-            android:id="@+id/llEngineInfo"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            <ImageView
+                android:id="@+id/ivModelImage"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:src="@drawable/template_car_image"
+                app:layout_constraintBottom_toTopOf="@id/tvModel"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/tvEngineTitle"
-                android:layout_width="wrap_content"
+                android:id="@+id/tvModel"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@string/engine"
-                android:textStyle="bold" />
+                android:layout_marginTop="10dp"
+                android:text="@string/model_name"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ivModelImage" />
 
             <TextView
-                android:id="@+id/tvEngine"
+                android:id="@+id/tvCostPerDay"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1800cc" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/llMileageInfo"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/llFuelTypeInfo"
-            app:layout_constraintStart_toEndOf="@id/llEngineInfo"
-            app:layout_constraintTop_toTopOf="parent">
+                android:layout_marginTop="12dp"
+                android:text="BDT. 1000 per day"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="@+id/tvModel"
+                app:layout_constraintTop_toBottomOf="@+id/tvModel" />
 
             <TextView
-                android:id="@+id/tvMileageTitle"
+                android:id="@+id/tvRating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/mileage"
-                android:textStyle="bold" />
+                android:text="5.0/5.0"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1"
+                app:layout_constraintStart_toEndOf="@id/tvCostPerDay"
+                app:layout_constraintTop_toTopOf="@id/tvCostPerDay" />
 
             <TextView
-                android:id="@+id/tvMileage"
+                android:id="@+id/tvLocation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="55km/h" />
-        </LinearLayout>
+                android:layout_marginTop="12dp"
+                android:text="@string/location"
+                android:textSize="14sp"
+                app:drawableStartCompat="@drawable/ic_baseline_location_on_24"
+                app:layout_constraintStart_toStartOf="@+id/tvCostPerDay"
+                app:layout_constraintTop_toBottomOf="@+id/tvCostPerDay" />
 
-        <LinearLayout
-            android:id="@+id/llFuelTypeInfo"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clShortOverView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toEndOf="@id/tvRating"
+                app:layout_constraintStart_toStartOf="@id/tvLocation"
+                app:layout_constraintTop_toBottomOf="@id/tvLocation">
+
+                <LinearLayout
+                    android:id="@+id/llEngineInfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:id="@+id/tvEngineTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/engine"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvEngine"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1800cc" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llMileageInfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/llFuelTypeInfo"
+                    app:layout_constraintStart_toEndOf="@id/llEngineInfo"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:id="@+id/tvMileageTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/mileage"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvMileage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="55km/h" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llFuelTypeInfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:id="@+id/tvFuelTypeTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/fuel_type"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/llFuelType"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/petrol" />
+                </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
-                android:id="@+id/tvFuelTypeTitle"
-                android:layout_width="wrap_content"
+                android:id="@+id/tvOverview"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@string/fuel_type"
-                android:textStyle="bold" />
+                android:layout_marginTop="10dp"
+                android:text="@string/overview"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/clShortOverView" />
 
             <TextView
-                android:id="@+id/llFuelType"
+                android:id="@+id/tvCategoryTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/petrol" />
-        </LinearLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                android:layout_marginTop="10dp"
+                android:text="@string/category"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvOverview" />
 
-    <TextView
-        android:id="@+id/tvOverview"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="@string/overview"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/clShortOverView" />
+            <TextView
+                android:id="@+id/tvCategory"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:text="@string/category"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tvCategoryTitle"
+                app:layout_constraintTop_toTopOf="@id/tvCategoryTitle" />
 
-    <TextView
-        android:id="@+id/tvCategoryTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/category"
-        android:layout_marginTop="10dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvOverview"/>
+            <TextView
+                android:id="@+id/tvSubCategoryTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/subcategory"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvCategory" />
 
-    <TextView
-        android:id="@+id/tvCategory"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/category"
-        android:gravity="end"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/tvCategoryTitle"
-        app:layout_constraintStart_toEndOf="@id/tvCategoryTitle"/>
+            <TextView
+                android:id="@+id/tvSubCategory"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:text="@string/subcategory"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tvSubCategoryTitle"
+                app:layout_constraintTop_toTopOf="@id/tvSubCategoryTitle" />
 
-    <TextView
-        android:id="@+id/tvSubCategoryTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/subcategory"
-        android:layout_marginTop="10dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvCategory"/>
+            <TextView
+                android:id="@+id/tvSeatCountTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/seatCount"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvSubCategory" />
 
-    <TextView
-        android:id="@+id/tvSubCategory"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/subcategory"
-        android:gravity="end"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/tvSubCategoryTitle"
-        app:layout_constraintStart_toEndOf="@id/tvSubCategoryTitle"/>
+            <TextView
+                android:id="@+id/tvSeatCount"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:text="@string/seatCount"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tvSeatCountTitle"
+                app:layout_constraintTop_toTopOf="@id/tvSeatCountTitle" />
 
-    <TextView
-        android:id="@+id/tvSeatCountTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/seatCount"
-        android:layout_marginTop="10dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvSubCategory"/>
+            <TextView
+                android:id="@+id/tvTransmissionTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/transmission"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvSeatCount" />
 
-    <TextView
-        android:id="@+id/tvSeatCount"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/seatCount"
-        android:gravity="end"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/tvSeatCountTitle"
-        app:layout_constraintStart_toEndOf="@id/tvSeatCountTitle"/>
+            <TextView
+                android:id="@+id/tvTransmission"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:text="@string/seatCount"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tvTransmissionTitle"
+                app:layout_constraintTop_toTopOf="@id/tvTransmissionTitle" />
 
-    <TextView
-        android:id="@+id/tvTransmissionTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/transmission"
-        android:layout_marginTop="10dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvSeatCount"/>
+            <TextView
+                android:id="@+id/tvBootSpaceTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/bootSpace"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvTransmission" />
 
-    <TextView
-        android:id="@+id/tvTransmission"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/seatCount"
-        android:gravity="end"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/tvTransmissionTitle"
-        app:layout_constraintStart_toEndOf="@id/tvTransmissionTitle"/>
+            <TextView
+                android:id="@+id/tvBootSpace"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:text="@string/bootSpace"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tvBootSpaceTitle"
+                app:layout_constraintTop_toTopOf="@id/tvBootSpaceTitle" />
 
-    <TextView
-        android:id="@+id/tvBootSpaceTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/bootSpace"
-        android:layout_marginTop="10dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvTransmission"/>
+            <TextView
+                android:id="@+id/tvGroundClearanceTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/groundClearance"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvBootSpaceTitle" />
 
-    <TextView
-        android:id="@+id/tvBootSpace"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/bootSpace"
-        android:gravity="end"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/tvBootSpaceTitle"
-        app:layout_constraintStart_toEndOf="@id/tvBootSpaceTitle"/>
+            <TextView
+                android:id="@+id/tvGroundClearance"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:text="@string/groundClearance"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tvGroundClearanceTitle"
+                app:layout_constraintTop_toTopOf="@id/tvGroundClearanceTitle" />
 
-    <TextView
-        android:id="@+id/tvGroundClearanceTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/groundClearance"
-        android:layout_marginTop="10dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvBootSpaceTitle"/>
-
-    <TextView
-        android:id="@+id/tvGroundClearance"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/groundClearance"
-        android:gravity="end"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/tvGroundClearanceTitle"
-        app:layout_constraintStart_toEndOf="@id/tvGroundClearanceTitle"/>
-
-    <TextView
-        android:id="@+id/tvReviews"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="@string/reviews"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvGroundClearanceTitle" />
-
+            <TextView
+                android:id="@+id/tvReviews"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/reviews"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvGroundClearanceTitle" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
