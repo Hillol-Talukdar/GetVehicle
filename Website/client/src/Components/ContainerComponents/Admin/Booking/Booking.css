@@ -21,9 +21,9 @@
 }
 
 .vehicle-image {
-    width: 30%;
-    background: orange;
-    padding: 15px;
+    width: 28%;
+    background: #a5c3db;
+    padding: 12px;
 }
 
 .vehicle-info {
@@ -40,7 +40,9 @@
 }
 
 .date-picker-container {
-    margin-left: auto;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
 }
 
 .enhance-div {
@@ -53,7 +55,11 @@
     margin-bottom: 5px;
 }
 
-.location-details {
+.field-bottom-margin-lg {
+    margin-bottom: 10px;
+}
+
+.vehicle-info-items {
     margin-top: auto;
     padding: 10px;
     text-align: center;
@@ -65,4 +71,109 @@
 
 .vehicle-category {
     font-size: small;
+}
+
+.phone-number {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.phone-number-label {
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+
+.phone-number-input {
+    width: 30%;
+    height: 30px;
+    padding-left: 45px;
+    background: url('../../../../../public/flagBangladesh.png') no-repeat 2px;
+}
+
+.flag-bangladesh {
+    height: 24px;
+    width: auto;
+    margin-top: 2px;
+    margin-left: 5px;
+}
+
+.required-text {
+    font-size: x-small;
+    margin-left: 10px;
+}
+
+.cost-per-day {
+    margin-top: 20px;
+    padding: 10px;
+    text-align: center;
+}
+
+.vehicle-info-title {
+    display: flex;
+    flex-direction: column;
+}
+
+.enhanced-label {
+    background: #a5c3db;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-right: 10px;
+    box-shadow: 0px 2px 4px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+    transition: 0.3s;
+}
+
+.field-bottom-margin-x-lg {
+    margin-bottom: 20px;
+}
+
+.email {
+    margin-bottom: 17px;
+}
+
+@media (max-width:801px) {
+    .booking-container {
+        flex-direction: column;
+        flex-wrap: wrap;
+    }
+
+    .user-details {
+        width: 100%;
+        align-items: center;
+    }
+    
+    .left-container {
+        width: 100%;
+    }
+
+    .booking-info {
+        width: 100%;
+    }
+
+    .vehicle-details {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .vehicle-image {
+        width: 80%;
+    }
+
+    .vehicle-info {
+        width: 100%;
+    }
+
+    .phone-number {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .phone-number-label {
+        margin-bottom: 8px;
+    }
+    .phone-number-input {
+        width: auto;
+        margin-bottom: 5px;
+    }
 }
