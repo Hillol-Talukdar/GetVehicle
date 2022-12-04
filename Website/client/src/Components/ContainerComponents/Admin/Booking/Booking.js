@@ -91,7 +91,7 @@ const Booking = () => {
                     ></input>
                     <span className="text-danger required-text">Required</span>
                   </div>
-                  <div className="field-bottom-margin-semi-lg">
+                  <div className="field-bottom-margin-lg">
                     <span className="enhanced-label">Required Documents</span>
                     <span>You have to submit these
                       <Button style={{border:'none'}} variant='outline-info'>Documents</Button>
