@@ -74,7 +74,7 @@ const HomeItem = (props) => {
           </Link>
 
           {loggedInUserDetails && loggedInUserDetails.role === UserRole.USER && (
-            <Link to="#">
+            <Link to={'/booking/' + currentItem._id}>
               <Button variant="outline-primary" size="sm">
                 <FaRegHandPointRight className="mb-1" /> Book Now
               </Button>

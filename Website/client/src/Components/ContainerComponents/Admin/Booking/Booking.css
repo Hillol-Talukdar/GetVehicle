@@ -4,7 +4,6 @@
 }
 
 .left-container {
-    width: 65%;
     margin-right: 15px;
 }
 
@@ -34,15 +33,18 @@
 }
 
 .booking-info {
-    width: 35%;
     padding: 15px;
     display: flex;
+    flex-direction: column;
+    width: 30%;
 }
 
 .date-picker-container {
     display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: end;
+    margin-top: 5px;
 }
 
 .enhance-div {
@@ -57,6 +59,10 @@
 
 .field-bottom-margin-lg {
     margin-bottom: 10px;
+}
+
+.field-bottom-margin-semi-lg {
+    margin-bottom: 15px;
 }
 
 .vehicle-info-items {
@@ -122,6 +128,7 @@
     box-shadow: 0px 2px 4px 0 rgba(0, 0, 0, 0.2);
     border-radius: 6px;
     transition: 0.3s;
+    color: white;
 }
 
 .field-bottom-margin-x-lg {
@@ -130,6 +137,36 @@
 
 .email {
     margin-bottom: 17px;
+}
+
+.select-date-label {
+    width: fit-content;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+.total-cost-amount {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.button-container-div {
+    margin-top: auto;
+}
+
+.acknowledgement-div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.acknowledgement-text {
+    margin-right: 5px;
+}
+
+.acknowledgement-label {
+    padding-top: 4px;
+    padding-bottom: 4px;
 }
 
 @media (max-width:801px) {
@@ -172,6 +209,7 @@
     .phone-number-label {
         margin-bottom: 8px;
     }
+
     .phone-number-input {
         width: auto;
         margin-bottom: 5px;
