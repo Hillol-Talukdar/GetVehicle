@@ -18,10 +18,7 @@ const ItemDetailsContainer = () => {
   }, [dispatch, id]);
 
   return (
-    <Container
-      fluid
-      // style={{ backgroundColor: ColorConstants.HOMEPAGE_BACKGROUND_COLOR }}
-    >
+    <Container fluid>
       {loading ? (
         <p>Loading...</p>
       ) : error ? (

@@ -1,11 +1,11 @@
 import { React } from "react";
-import { ButtonGroup, Dropdown, DropdownButton, Image } from 'react-bootstrap';
-import "./LoggedInUserInfoContainer.css"
+import { Dropdown, DropdownButton, Image } from 'react-bootstrap';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
-import { TooltipConstants, DropDownContants } from "../../../Constants/CommonConstants";
 import { useDispatch } from "react-redux";
+import { DropDownContants, TooltipConstants } from "../../../Constants/CommonConstants";
 import { googleLogout } from "../../../Services/GoogleAuthService";
+import "./LoggedInUserInfoContainer.css";
 
 
 const LoggedInUserInfoContainer = ({ userInfo }) => {
@@ -19,6 +19,8 @@ const LoggedInUserInfoContainer = ({ userInfo }) => {
               break;
             case DropDownContants.LOGOUT.EVENT_KEY:
               googleLogout(dispatch);
+              break;
+            default:
               break;
           }
     }

@@ -5,8 +5,6 @@ import { useParams } from 'react-router-dom';
 import { googleLogin } from '../../../../Services/GoogleAuthService';
 import { getVehicleDetails } from '../../../../Services/VehicleDataService';
 import AskForLoginModal from '../../../Modal/AskForLoginModal';
-import { ImLocation } from 'react-icons/im';
-import { FcMoneyTransfer } from 'react-icons/fc';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import './Booking.css';
@@ -25,6 +23,7 @@ const Booking = () => {
 
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(null);
+  
   const onChange = (dates) => {
     const [start, end] = dates;
     setStartDate(start);
@@ -111,13 +110,13 @@ const Booking = () => {
                       </span>
                     </div>
                     <span className="field-bottom-margin vehicle-info-items enhance-div">
-                      <img src="/money-icon.png" /> Cost Per Day:{' '}
+                      <img src="/money-icon.png" alt=''/> Cost Per Day:{' '}
                       {vehicleData.costPerDay}
                     </span>
                     <div className="vehicle-info-items enhance-div">
                       <span>
                         You can pick up your vehicle from{' '}
-                        <img src="/location-icon.png" />{' '}
+                        <img src="/location-icon.png" alt=''/>{' '}
                         {vehicleData.currentLocationString}
                       </span>
                     </div>

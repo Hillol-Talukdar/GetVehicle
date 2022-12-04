@@ -1,15 +1,13 @@
 import React, { useState } from 'react';
 import { Button, Form, Image } from 'react-bootstrap';
-import "./CreateOrUpdateItemForm.css"
 import {
   BookingStatus,
   FuelTypeStatus,
   TransmissionStatus,
-  VehicleInfoConstants,
+  VehicleInfoConstants
 } from '../../Constants/CommonConstants';
 import { getAllSubCategoriesOfACategory } from '../../Services/CategoryDataService';
-
-
+import "./CreateOrUpdateItemForm.css";
 
 const CreateOrUpdateItemForm = ({
   submitHandler,

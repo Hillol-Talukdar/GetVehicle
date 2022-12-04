@@ -34,7 +34,7 @@ const DetailsSingleItem = ({ data }) => {
               <Image
                 id="CarouselImage"
                 src={
-                  data?.category?.name == 'Bike'
+                  data?.category?.name === 'Bike'
                     ? '/templateBike.jpg'
                     : '/templateCar.jpg'
                 }
