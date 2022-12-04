@@ -2,11 +2,11 @@ package com.raiyan_hillol.getvehicle.screens.VehicleDetailsScreen.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TextView;
 
 import com.android.volley.Cache;
 import com.android.volley.Network;
@@ -18,6 +18,7 @@ import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.bumptech.glide.Glide;
 import com.raiyan_hillol.getvehicle.R;
 import com.raiyan_hillol.getvehicle.constants.AppUriConstants;
 import com.raiyan_hillol.getvehicle.data.model.VehicleData;
@@ -35,16 +36,12 @@ public class VehicleDetailsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_vehicle_details);
 
         binding = ActivityVehicleDetailsBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
 
-        if(currentSelectedVehicleData == null) {
-            getCurrentVehicleDetails();
-        }
-        initWedgies();
+        getCurrentVehicleDetails();
     }
 
     private void getCurrentVehicleDetails() {
@@ -53,23 +50,29 @@ public class VehicleDetailsActivity extends AppCompatActivity {
         getSingleVehicle(vehicleId, getApplicationContext());
     }
 
-    private void setVehicleDetailsToView() {
+    @SuppressLint("SetTextI18n")
+    private void setVehicleDetailsToView() throws JSONException {
+        binding.tvModel.setText(currentSelectedVehicleData.getModel());
+        binding.tvCostPerDay.setText(getString(R.string.cost_per_day, currentSelectedVehicleData.getCostPerDay()));
+        binding.tvRating.setText(getString(R.string.rating_out_of, currentSelectedVehicleData.getAverageRating(), 5.0));
+        binding.tvLocation.setText(currentSelectedVehicleData.getCurrentLocationString());
+        binding.tvEngine.setText(currentSelectedVehicleData.getEngine());
+        binding.tvMileage.setText(currentSelectedVehicleData.getMileage() + getString(R.string.km_per_hour));
+        binding.llFuelType.setText(currentSelectedVehicleData.getFuelType());
+        binding.tvCategory.setText(currentSelectedVehicleData.getCategory().getString("name"));
+        binding.tvSubCategory.setText(currentSelectedVehicleData.getSubCategory().getString("name"));
+        binding.tvSeatCount.setText(Integer.toString(currentSelectedVehicleData.getSeatCount()));
+        binding.tvTransmission.setText(currentSelectedVehicleData.getTransmission());
+        binding.tvBootSpace.setText(currentSelectedVehicleData.getBootSpace());
+        binding.tvGroundClearance.setText(currentSelectedVehicleData.getGroundClearance());
 
-//        VehicleData singleVehicleData = Tools.getSingleVehicle(vehicleId, getApplicationContext());
-        TextView vehicleModel = findViewById(R.id.tvModel);
-        vehicleModel.setText(currentSelectedVehicleData.getModel());
-//        TextView vehicleType = findViewById(R.id.vehicle_type_detail);
-//        TextView vehicleTransmission = findViewById(R.id.vehicle_transmission_detail);
-//        TextView vehicleCurrentLocation = findViewById(R.id.current_location_detail);
-//
-//        vehicleModel.setText(singleVehicleData.getModel());
-//        vehicleType.setText(singleVehicleData.getVehicleType());
-//        vehicleTransmission.setText(singleVehicleData.getTransmission());
-//        vehicleCurrentLocation.setText(singleVehicleData.getCurrentLocation());
-    }
-
-    private void initWedgies() {
-//        binding.tvModel =
+        String image = currentSelectedVehicleData.getPhoto().get(0);
+        boolean isImage = image.endsWith(".jpg");
+        if (isImage) {
+            Glide.with(this).load(image).into(binding.ivModelImage);
+        } else {
+            binding.ivModelImage.setImageResource(Integer.parseInt(image));
+        }
     }
 
     public void getSingleVehicle(String vehicleId, Context context) {
@@ -81,7 +84,6 @@ public class VehicleDetailsActivity extends AppCompatActivity {
         requestQueue.start();
 
         String url = AppUriConstants.GET_ALL_VEHICLE_URI + vehicleId;
-//        String url = "http://192.168.0.9:4000/api/vehicle/" + vehicleId;
 
         JsonObjectRequest jsonArrayRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
 
