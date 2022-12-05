@@ -20,7 +20,7 @@ const bookingSchema = new mongoose.Schema(
             type: String,
             enum: ['Cash', 'Online'],
         },
-        delivered: {
+        handedOver: {
             type: Boolean,
             required: true,
         },
@@ -28,7 +28,7 @@ const bookingSchema = new mongoose.Schema(
             type: Boolean,
             required: true,
         },
-        deliveryDate: {
+        handOverDate: {
             type: Date,
             required: true,
         },

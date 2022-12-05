@@ -41,10 +41,17 @@
 
 .date-picker-container {
     display: flex;
-    flex-direction: row;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-end;
     justify-content: end;
     margin-top: 5px;
+}
+
+.date-related-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .enhance-div {

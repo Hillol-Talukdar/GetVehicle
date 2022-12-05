@@ -9,12 +9,17 @@ import AskForLoginModal from '../../../Modal/AskForLoginModal';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import './Booking.css';
+import DocumentDetailsModal from '../../../Modal/DocumentDetailsModal';
+import BookedSchedulesModal from '../../../Modal/BookedSchedulesModal';
 
 const Booking = () => {
   const user = useSelector((state) => state.userReducer);
-  const [showLoginModal, setShowLoginModal] = useState(user ? false : true);
+  const [showLoginModal, setShowLoginModal] = useState(false);
+  const [showDocumentDetailsModal, setShowDocumentDetailsModal] = useState(false);
+  const [showBookedSchedulesModal, setShowBookedSchedulesModal] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState('+880 ');
   const [dayDifference, setDayDifference] = useState(1);
+  const [totalPayableAmount, setTotalPayableAmount] = useState(0);
 
   const { id } = useParams();
 
@@ -38,7 +43,16 @@ const Booking = () => {
     setEndDate(end);
     let currentDayDifference = getDayDifferenceFromDate(start, end);
     setDayDifference(currentDayDifference);
+    setTotalPayableAmount(vehicleData?.costPerDay * currentDayDifference);
   };
+
+  useEffect(()=>{
+    setShowLoginModal(user == null ? true: false);
+  }, user)
+
+  useEffect(()=>{
+    setTotalPayableAmount(vehicleData?.costPerDay)
+  }, vehicleData)
 
   useEffect(() => {
     dispatch(getVehicleDetails(id));
@@ -94,7 +108,7 @@ const Booking = () => {
                   <div className="field-bottom-margin-lg">
                     <span className="enhanced-label">Required Documents</span>
                     <span>You have to submit these
-                      <Button style={{border:'none'}} variant='outline-info'>Documents</Button>
+                      <Button onClick={()=>setShowDocumentDetailsModal(true)} style={{border:'none'}} variant='outline-info'>Documents</Button>
                       to get the vehicle.
                     </span>
                   </div>
@@ -149,7 +163,11 @@ const Booking = () => {
             </div>
 
             <div className="booking-info enhance-div">
-              <span className="field-bottom-margin enhanced-label select-date-label">Select Date</span>
+              <div className='date-related-buttons'>
+                 <span className="field-bottom-margin enhanced-label select-date-label">Select Date</span>
+                 <Button onClick={()=>setShowBookedSchedulesModal(true)} size='sm' variant='outline-info' style={{border:'none'}} className='check-booked-date-button'>Check Booked Dates</Button>
+              </div>
+             
               <div className="date-picker-container field-bottom-margin-x-lg">
                 <DatePicker
                   selected={startDate}
@@ -163,18 +181,26 @@ const Booking = () => {
               <div className="field-bottom-margin-x-lg">
                 <span className="field-bottom-margin enhanced-label">Total Cost</span>
                 <span>{vehicleData?.costPerDay} * {dayDifference} = </span>
-                <span className='total-cost-amount enhance-div'>{vehicleData?.costPerDay*dayDifference} Taka</span>
+                <span className='total-cost-amount enhance-div'>{totalPayableAmount} Taka</span>
               </div>
               <div className='button-container-div'>
                 <Button size='sm' variant='outline-success' className='w-100'>Make Payment</Button>
               </div>
             </div>
           </div>
-          {/* <AskForLoginModal
+          <AskForLoginModal
             show={showLoginModal}
             handleClose={handleLoginModalClose}
             startGoogleLoginProcess={startGoogleLoginProcess}
-          ></AskForLoginModal> */}
+          ></AskForLoginModal>
+          <DocumentDetailsModal
+            show={showDocumentDetailsModal}
+            handleClose={()=>setShowDocumentDetailsModal(false)}
+          ></DocumentDetailsModal>
+          <BookedSchedulesModal
+            show={showBookedSchedulesModal}
+            handleClose={()=>setShowBookedSchedulesModal(false)}
+          ></BookedSchedulesModal>
         </>
       )}
     </Container>
