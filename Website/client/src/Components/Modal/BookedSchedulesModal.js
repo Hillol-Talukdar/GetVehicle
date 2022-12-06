@@ -1,8 +1,9 @@
 import React from 'react';
 import { Button, Modal } from 'react-bootstrap';
+import { MdDateRange } from 'react-icons/md';
+import { BiRightArrowAlt } from 'react-icons/bi';
 
-
-const BookedSchedulesModal = ({ show, handleClose }) => {
+const BookedSchedulesModal = ({ show, handleClose, scheduledBookings }) => {
   return (
     <>
       <Modal show={show} onHide={handleClose}>
@@ -10,18 +11,30 @@ const BookedSchedulesModal = ({ show, handleClose }) => {
           <Modal.Title>Booked Schedules</Modal.Title>
         </Modal.Header>
 
-        <Modal.Body>
-          <p></p>
+        <Modal.Body
+          style={{
+            maxHeight: 'calc(100vh - 200px)',
+            overflowY: 'auto',
+            textAlign: 'center',
+          }}
+        >
+          {scheduledBookings.map((booking) => (
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                marginBottom: '15px',
+              }}
+            >
+              <MdDateRange style={{ marginRight: '10px' }} />{' '}
+              {booking?.handOverDate}{' '}
+              <BiRightArrowAlt
+                style={{ marginRight: '10px', marginLeft: '10px' }}
+              />{' '}
+              {booking?.receiveDate}
+            </div>
+          ))}
         </Modal.Body>
-
-        <Modal.Footer>
-          {/* <Link className="btn btn-warning" to="/">
-            Go To Home
-          </Link>
-          <Button variant="primary" onClick={startGoogleLoginProcess}>
-            Google Login
-          </Button> */}
-        </Modal.Footer>
       </Modal>
     </>
   );

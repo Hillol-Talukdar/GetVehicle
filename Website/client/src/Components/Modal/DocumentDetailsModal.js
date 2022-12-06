@@ -1,7 +1,7 @@
 import React from 'react';
-import { Button, Modal } from 'react-bootstrap';
+import { Button, Form, Modal } from 'react-bootstrap';
 
-const DocumentDetailsModal = ({ show, handleClose }) => {
+const DocumentDetailsModal = ({ show, handleClose, acknowledgement, setAcknowledgement }) => {
   return (
     <>
       <Modal show={show} onHide={handleClose}>
@@ -10,10 +10,19 @@ const DocumentDetailsModal = ({ show, handleClose }) => {
         </Modal.Header>
 
         <Modal.Body>
-          <p></p>
+          <ul>
+            <li>Your NID(National ID Card)</li>
+            <li>Photocopy of your NID</li>
+            <li>Driving License (who will drive)</li>
+            <li>Photocopy Driving License</li>
+          </ul>
         </Modal.Body>
 
         <Modal.Footer>
+          <Form.Check onChange={()=>setAcknowledgement(!acknowledgement)} checked={acknowledgement} aria-label="acknowledge" />
+          <span className="acknowledgement-text">
+            Okay, I will submit these mentioned documents.
+          </span>
         </Modal.Footer>
       </Modal>
     </>

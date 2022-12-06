@@ -34,7 +34,7 @@ const bookingSchema = new mongoose.Schema(
         },
         receiveDate: {
             type: Date,
-            // required: true,
+            required: true,
         },
         user: {
             type: ObjectId,

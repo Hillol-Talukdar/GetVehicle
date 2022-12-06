@@ -11,15 +11,18 @@ import 'react-datepicker/dist/react-datepicker.css';
 import './Booking.css';
 import DocumentDetailsModal from '../../../Modal/DocumentDetailsModal';
 import BookedSchedulesModal from '../../../Modal/BookedSchedulesModal';
+import { getBookingDetailsByVehicleId } from '../../../../Services/BookingDataService';
 
 const Booking = () => {
   const user = useSelector((state) => state.userReducer);
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showDocumentDetailsModal, setShowDocumentDetailsModal] = useState(false);
   const [showBookedSchedulesModal, setShowBookedSchedulesModal] = useState(false);
+  const [acknowledgement, setAcknowledgement] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState('+880 ');
   const [dayDifference, setDayDifference] = useState(1);
   const [totalPayableAmount, setTotalPayableAmount] = useState(0);
+  
 
   const { id } = useParams();
 
@@ -30,7 +33,40 @@ const Booking = () => {
 
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(null);
+
+  useEffect(()=>{
+    setShowLoginModal(user == null ? true: false);
+  }, user);
+
+  useEffect(()=>{
+    setTotalPayableAmount(vehicleData?.costPerDay)
+  }, vehicleData);
+
+  useEffect(() => {
+    dispatch(getVehicleDetails(id));
+  }, [dispatch, id]);
   
+
+  const getDate = (date) => {
+    return new Date(date).toDateString();
+  }
+
+  const getSanitizedBookingDates = (bookingDetails) => {
+    let sanitizedBookingDates = [];
+    bookingDetails.forEach(bookingDetail => {
+      if(bookingDetail.vehicleId === id && new Date(bookingDetail?.receiveDate) >= new Date()) {
+          sanitizedBookingDates.push({
+          handOverDate: getDate(bookingDetail?.handOverDate),
+          receiveDate: getDate(bookingDetail?.receiveDate)
+        });
+      }
+      
+    });
+    return sanitizedBookingDates;
+  }
+
+  const scheduledBookings = getSanitizedBookingDates(getBookingDetailsByVehicleId(""));
+
   const getDayDifferenceFromDate = (startDate, endDate) => {
     const diffTime = Math.abs(endDate.getTime() - startDate.getTime());
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
@@ -46,17 +82,6 @@ const Booking = () => {
     setTotalPayableAmount(vehicleData?.costPerDay * currentDayDifference);
   };
 
-  useEffect(()=>{
-    setShowLoginModal(user == null ? true: false);
-  }, user)
-
-  useEffect(()=>{
-    setTotalPayableAmount(vehicleData?.costPerDay)
-  }, vehicleData)
-
-  useEffect(() => {
-    dispatch(getVehicleDetails(id));
-  }, [dispatch, id]);
 
   const handleLoginModalClose = () => {
     setShowLoginModal(false);
@@ -115,7 +140,7 @@ const Booking = () => {
                   <div className="acknowledgement-div">
                     <span className="enhanced-label acknowledgement-label">Acknowledgement</span>
                     <span className="acknowledgement-text">I know which documents I need to submit</span>
-                    <Form.Check aria-label="acknowledge"/>
+                    <Form.Check checked={acknowledgement} onChange={()=>setAcknowledgement(!acknowledgement)} aria-label="acknowledge"/>
                     <span className="text-danger required-text">Required</span>
                   </div>
                 </div>
@@ -192,6 +217,8 @@ const Booking = () => {
             show={showLoginModal}
             handleClose={handleLoginModalClose}
             startGoogleLoginProcess={startGoogleLoginProcess}
+            acknowledgement={acknowledgement}
+            setAcknowledgement={()=>setAcknowledgement}
           ></AskForLoginModal>
           <DocumentDetailsModal
             show={showDocumentDetailsModal}
@@ -200,6 +227,7 @@ const Booking = () => {
           <BookedSchedulesModal
             show={showBookedSchedulesModal}
             handleClose={()=>setShowBookedSchedulesModal(false)}
+            scheduledBookings={scheduledBookings}
           ></BookedSchedulesModal>
         </>
       )}
