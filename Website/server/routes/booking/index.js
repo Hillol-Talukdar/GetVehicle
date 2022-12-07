@@ -14,4 +14,8 @@ router
     .patch(checkAuth, bookingController.updateABooking)
     .delete(checkAuth, bookingController.deleteABooking);
 
+router
+    .route('/dates/:vehicleId')
+    .get(bookingController.getAllBookingDates);
+
 module.exports = router;
