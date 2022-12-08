@@ -14,64 +14,50 @@ import BookedSchedulesModal from '../../../Modal/BookedSchedulesModal';
 import { getBookingDetailsByVehicleId } from '../../../../Services/BookingDataService';
 
 const Booking = () => {
+  const dispatch = useDispatch();
   const user = useSelector((state) => state.userReducer);
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showDocumentDetailsModal, setShowDocumentDetailsModal] = useState(false);
   const [showBookedSchedulesModal, setShowBookedSchedulesModal] = useState(false);
+  const [scheduledBookings, setScheduledBookings] = useState([]);
   const [acknowledgement, setAcknowledgement] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState('+880 ');
   const [dayDifference, setDayDifference] = useState(1);
   const [totalPayableAmount, setTotalPayableAmount] = useState(0);
-  
-
-  const { id } = useParams();
-
-  const dispatch = useDispatch();
-  const vehicleDetails = useSelector((state) => state.vehicleDetailsReducer);
-  const { loading, error, vehicle } = vehicleDetails;
-  const vehicleData = vehicle && vehicle.data;
-
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(null);
 
-  useEffect(()=>{
-    setShowLoginModal(user == null ? true: false);
+  const { id } = useParams();
+  const vehicleDetails = useSelector((state) => state.vehicleDetailsReducer);
+  const { loading, error, vehicle } = vehicleDetails;
+  const vehicleData = vehicle && vehicle.data;
+  
+  useEffect(() => {
+    setShowLoginModal(user == null ? true : false);
   }, user);
 
-  useEffect(()=>{
-    setTotalPayableAmount(vehicleData?.costPerDay)
-  }, vehicleData);
+  useEffect(() => {
+    if(vehicleData?.costPerDay) {
+      setTotalPayableAmount(vehicleData?.costPerDay * dayDifference);
+    }
+  }, [vehicleData?.costPerDay, dayDifference]);
 
   useEffect(() => {
     dispatch(getVehicleDetails(id));
   }, [dispatch, id]);
-  
 
-  const getDate = (date) => {
-    return new Date(date).toDateString();
-  }
-
-  const getSanitizedBookingDates = (bookingDetails) => {
-    let sanitizedBookingDates = [];
-    bookingDetails.forEach(bookingDetail => {
-      if(bookingDetail.vehicleId === id && new Date(bookingDetail?.receiveDate) >= new Date()) {
-          sanitizedBookingDates.push({
-          handOverDate: getDate(bookingDetail?.handOverDate),
-          receiveDate: getDate(bookingDetail?.receiveDate)
-        });
-      }
-      
-    });
-    return sanitizedBookingDates;
-  }
-
-  const scheduledBookings = getSanitizedBookingDates(getBookingDetailsByVehicleId(""));
+ 
+  getBookingDetailsByVehicleId(id).then((res) => {
+    setScheduledBookings(res.data.data);
+  }).catch((err) => {
+    console.log(err.message);
+  });
 
   const getDayDifferenceFromDate = (startDate, endDate) => {
     const diffTime = Math.abs(endDate.getTime() - startDate.getTime());
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-    return diffDays+1;
-  }
+    return diffDays + 1;
+  };
 
   const onDateChange = (dates) => {
     const [start, end] = dates;
@@ -79,9 +65,7 @@ const Booking = () => {
     setEndDate(end);
     let currentDayDifference = getDayDifferenceFromDate(start, end);
     setDayDifference(currentDayDifference);
-    setTotalPayableAmount(vehicleData?.costPerDay * currentDayDifference);
   };
-
 
   const handleLoginModalClose = () => {
     setShowLoginModal(false);
@@ -97,6 +81,10 @@ const Booking = () => {
     if (phoneNumberInput.length <= 4) return;
     setPhoneNumber(e.target.value);
   };
+
+  const setAcknowledgementFromModal = (isChecked) => {
+    setAcknowledgement(isChecked);
+  }
 
   return (
     <Container fluid>
@@ -132,15 +120,30 @@ const Booking = () => {
                   </div>
                   <div className="field-bottom-margin-lg">
                     <span className="enhanced-label">Required Documents</span>
-                    <span>You have to submit these
-                      <Button onClick={()=>setShowDocumentDetailsModal(true)} style={{border:'none'}} variant='outline-info'>Documents</Button>
+                    <span>
+                      You have to submit these
+                      <Button
+                        onClick={() => setShowDocumentDetailsModal(true)}
+                        style={{ border: 'none' }}
+                        variant="outline-info"
+                      >
+                        Documents
+                      </Button>
                       to get the vehicle.
                     </span>
                   </div>
                   <div className="acknowledgement-div">
-                    <span className="enhanced-label acknowledgement-label">Acknowledgement</span>
-                    <span className="acknowledgement-text">I know which documents I need to submit</span>
-                    <Form.Check checked={acknowledgement} onChange={()=>setAcknowledgement(!acknowledgement)} aria-label="acknowledge"/>
+                    <span className="enhanced-label acknowledgement-label">
+                      Acknowledgement
+                    </span>
+                    <span className="acknowledgement-text">
+                      I know which documents I need to submit
+                    </span>
+                    <Form.Check
+                      checked={acknowledgement}
+                      onChange={() => setAcknowledgement(!acknowledgement)}
+                      aria-label="acknowledge"
+                    />
                     <span className="text-danger required-text">Required</span>
                   </div>
                 </div>
@@ -172,13 +175,13 @@ const Booking = () => {
                       </span>
                     </div>
                     <span className="field-bottom-margin vehicle-info-items enhance-div">
-                      <img src="/money-icon.png" alt=''/> Cost Per Day:{' '}
+                      <img src="/money-icon.png" alt="" /> Cost Per Day:{' '}
                       {vehicleData.costPerDay}
                     </span>
                     <div className="vehicle-info-items enhance-div">
                       <span>
                         You can pick up your vehicle from{' '}
-                        <img src="/location-icon.png" alt=''/>{' '}
+                        <img src="/location-icon.png" alt="" />{' '}
                         {vehicleData.currentLocationString}
                       </span>
                     </div>
@@ -188,11 +191,21 @@ const Booking = () => {
             </div>
 
             <div className="booking-info enhance-div">
-              <div className='date-related-buttons'>
-                 <span className="field-bottom-margin enhanced-label select-date-label">Select Date</span>
-                 <Button onClick={()=>setShowBookedSchedulesModal(true)} size='sm' variant='outline-info' style={{border:'none'}} className='check-booked-date-button'>Check Booked Dates</Button>
+              <div className="date-related-buttons">
+                <span className="field-bottom-margin enhanced-label select-date-label">
+                  Select Date
+                </span>
+                <Button
+                  onClick={() => setShowBookedSchedulesModal(true)}
+                  size="sm"
+                  variant="outline-info"
+                  style={{ border: 'none' }}
+                  className="check-booked-date-button"
+                >
+                  Check Booked Dates
+                </Button>
               </div>
-             
+
               <div className="date-picker-container field-bottom-margin-x-lg">
                 <DatePicker
                   selected={startDate}
@@ -204,12 +217,20 @@ const Booking = () => {
                 />
               </div>
               <div className="field-bottom-margin-x-lg">
-                <span className="field-bottom-margin enhanced-label">Total Cost</span>
-                <span>{vehicleData?.costPerDay} * {dayDifference} = </span>
-                <span className='total-cost-amount enhance-div'>{totalPayableAmount} Taka</span>
+                <span className="field-bottom-margin enhanced-label">
+                  Total Cost
+                </span>
+                <span>
+                  {vehicleData?.costPerDay} * {dayDifference} ={' '}
+                </span>
+                <span className="total-cost-amount enhance-div">
+                  {totalPayableAmount} Taka
+                </span>
               </div>
-              <div className='button-container-div'>
-                <Button size='sm' variant='outline-success' className='w-100'>Make Payment</Button>
+              <div className="button-container-div">
+                <Button size="sm" variant="outline-success" className="w-100">
+                  Make Payment
+                </Button>
               </div>
             </div>
           </div>
@@ -217,17 +238,17 @@ const Booking = () => {
             show={showLoginModal}
             handleClose={handleLoginModalClose}
             startGoogleLoginProcess={startGoogleLoginProcess}
-            acknowledgement={acknowledgement}
-            setAcknowledgement={()=>setAcknowledgement}
           ></AskForLoginModal>
           <DocumentDetailsModal
             show={showDocumentDetailsModal}
-            handleClose={()=>setShowDocumentDetailsModal(false)}
+            handleClose={() => setShowDocumentDetailsModal(false)}
+            acknowledgement={acknowledgement}
+            setAcknowledgementFromModal={setAcknowledgementFromModal}
           ></DocumentDetailsModal>
           <BookedSchedulesModal
             show={showBookedSchedulesModal}
-            handleClose={()=>setShowBookedSchedulesModal(false)}
-            scheduledBookings={scheduledBookings}
+            handleClose={() => setShowBookedSchedulesModal(false)}
+            scheduledBookings={scheduledBookings ? scheduledBookings : []}
           ></BookedSchedulesModal>
         </>
       )}

@@ -1,7 +1,11 @@
 import React from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
 
-const DocumentDetailsModal = ({ show, handleClose, acknowledgement, setAcknowledgement }) => {
+const DocumentDetailsModal = ({ show, handleClose, acknowledgement, setAcknowledgementFromModal }) => {
+  const setAcknowledgement = (e) => {
+    setAcknowledgementFromModal(e.target.checked);
+  }
+
   return (
     <>
       <Modal show={show} onHide={handleClose}>
@@ -19,7 +23,7 @@ const DocumentDetailsModal = ({ show, handleClose, acknowledgement, setAcknowled
         </Modal.Body>
 
         <Modal.Footer>
-          <Form.Check onChange={()=>setAcknowledgement(!acknowledgement)} checked={acknowledgement} aria-label="acknowledge" />
+          <Form.Check onChange={setAcknowledgement} defaultChecked={acknowledgement} aria-label="acknowledge" />
           <span className="acknowledgement-text">
             Okay, I will submit these mentioned documents.
           </span>

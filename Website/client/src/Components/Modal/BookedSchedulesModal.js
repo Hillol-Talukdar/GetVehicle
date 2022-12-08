@@ -18,7 +18,7 @@ const BookedSchedulesModal = ({ show, handleClose, scheduledBookings }) => {
             textAlign: 'center',
           }}
         >
-          {scheduledBookings.map((booking) => (
+          {scheduledBookings && scheduledBookings.length > 0 && scheduledBookings.map((booking) => (
             <div
               style={{
                 display: 'flex',
@@ -34,6 +34,9 @@ const BookedSchedulesModal = ({ show, handleClose, scheduledBookings }) => {
               {booking?.receiveDate}
             </div>
           ))}
+          {scheduledBookings && scheduledBookings.length === 0 && (
+            <p>It has no booked schedules. You can book any schedule!</p>
+          )}
         </Modal.Body>
       </Modal>
     </>
