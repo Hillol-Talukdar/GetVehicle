@@ -19,6 +19,8 @@ import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.bumptech.glide.Glide;
+import com.denzcoskun.imageslider.ImageSlider;
+import com.denzcoskun.imageslider.models.SlideModel;
 import com.raiyan_hillol.getvehicle.R;
 import com.raiyan_hillol.getvehicle.constants.AppUriConstants;
 import com.raiyan_hillol.getvehicle.data.model.VehicleData;
@@ -28,10 +30,13 @@ import com.raiyan_hillol.getvehicle.databinding.ActivityVehicleDetailsBinding;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 public class VehicleDetailsActivity extends AppCompatActivity {
+    private static final String TAG = "VehicleDetailsActivity";
+    private static VehicleData currentSelectedVehicleData;
 
     private ActivityVehicleDetailsBinding binding;
-    private static VehicleData currentSelectedVehicleData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,8 +55,21 @@ public class VehicleDetailsActivity extends AppCompatActivity {
         getSingleVehicle(vehicleId, getApplicationContext());
     }
 
+    private void setupImageSlider() {
+        ArrayList<String> allPhotos = currentSelectedVehicleData.getPhoto();
+        ArrayList<SlideModel> imageList = new ArrayList<>();
+
+        for (int i = 0; i < allPhotos.size(); i++) {
+            imageList.add(new SlideModel(allPhotos.get(i), null));
+        }
+
+        binding.imageSliderVehicle.setImageList(imageList);
+    }
+
     @SuppressLint("SetTextI18n")
     private void setVehicleDetailsToView() throws JSONException {
+        setupImageSlider();
+
         binding.tvModel.setText(currentSelectedVehicleData.getModel());
         binding.tvCostPerDay.setText(getString(R.string.cost_per_day, currentSelectedVehicleData.getCostPerDay()));
         binding.tvRating.setText(getString(R.string.rating_out_of, currentSelectedVehicleData.getAverageRating(), 5.0));
@@ -65,14 +83,6 @@ public class VehicleDetailsActivity extends AppCompatActivity {
         binding.tvTransmission.setText(currentSelectedVehicleData.getTransmission());
         binding.tvBootSpace.setText(currentSelectedVehicleData.getBootSpace());
         binding.tvGroundClearance.setText(currentSelectedVehicleData.getGroundClearance());
-
-        String image = currentSelectedVehicleData.getPhoto().get(0);
-        boolean isImage = image.endsWith(".jpg");
-        if (isImage) {
-            Glide.with(this).load(image).into(binding.ivModelImage);
-        } else {
-            binding.ivModelImage.setImageResource(Integer.parseInt(image));
-        }
     }
 
     public void getSingleVehicle(String vehicleId, Context context) {

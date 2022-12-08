@@ -18,15 +18,19 @@
             android:paddingStart="15dp"
             android:paddingEnd="15dp">
 
-            <ImageView
-                android:id="@+id/ivModelImage"
-                android:layout_width="match_parent"
+            <com.denzcoskun.imageslider.ImageSlider
+                android:id="@+id/imageSliderVehicle"
+                android:layout_width="0dp"
                 android:layout_height="200dp"
-                android:src="@drawable/template_car_image"
+                app:iss_auto_cycle="true"
+                app:iss_period="1000"
+                app:iss_placeholder="@drawable/template_car_image"
+                app:iss_error_image="@drawable/template_car_image"
+                app:iss_delay="0"
                 app:layout_constraintBottom_toTopOf="@id/tvModel"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"/>
 
             <TextView
                 android:id="@+id/tvModel"
@@ -38,7 +42,7 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/ivModelImage" />
+                app:layout_constraintTop_toBottomOf="@id/imageSliderVehicle" />
 
             <TextView
                 android:id="@+id/tvCostPerDay"
