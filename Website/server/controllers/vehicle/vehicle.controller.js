@@ -35,7 +35,7 @@ exports.getAllVehicle = catchAsync(async (req, res, next) => {
     const vehicles = await Vehicle.find({}).populate({
         path: 'category',
         select: 'name slug',
-    });
+    }).sort({updatedAt: -1});
 
     res.status(200).json({
         status: 'Success',
