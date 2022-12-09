@@ -68,14 +68,14 @@ const HomeItem = (props) => {
       <Card.Body>
         <div className="d-flex justify-content-around">
           <Link to={'/details/' + currentItem._id}>
-            <Button variant="outline-primary" size="sm">
+            <Button variant="info" size="sm">
               View Details <MdDoubleArrow className="mb-1" />
             </Button>
           </Link>
 
           {loggedInUserDetails && loggedInUserDetails.role === UserRole.USER && (
             <Link to={'/booking/' + currentItem._id}>
-              <Button variant="outline-primary" size="sm">
+              <Button variant="warning" size="sm">
                 <FaRegHandPointRight className="mb-1" /> Book Now
               </Button>
             </Link>

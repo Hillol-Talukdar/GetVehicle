@@ -14,30 +14,29 @@ import BookedSchedulesModal from '../../../Modal/BookedSchedulesModal';
 import { getBookingDetailsByVehicleId } from '../../../../Services/BookingDataService';
 
 const Booking = () => {
+  const { id } = useParams();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.userReducer);
+  const vehicleDetails = useSelector((state) => state.vehicleDetailsReducer);
+  const { loading, error, vehicle } = vehicleDetails;
+  const vehicleData = vehicle && vehicle.data;
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showDocumentDetailsModal, setShowDocumentDetailsModal] = useState(false);
   const [showBookedSchedulesModal, setShowBookedSchedulesModal] = useState(false);
   const [scheduledBookings, setScheduledBookings] = useState([]);
   const [acknowledgement, setAcknowledgement] = useState(false);
-  const [phoneNumber, setPhoneNumber] = useState('+880 ');
+  const [phoneNumber, setPhoneNumber] = useState('+880');
   const [dayDifference, setDayDifference] = useState(1);
   const [totalPayableAmount, setTotalPayableAmount] = useState(0);
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(null);
 
-  const { id } = useParams();
-  const vehicleDetails = useSelector((state) => state.vehicleDetailsReducer);
-  const { loading, error, vehicle } = vehicleDetails;
-  const vehicleData = vehicle && vehicle.data;
-  
   useEffect(() => {
     setShowLoginModal(user == null ? true : false);
   }, user);
 
   useEffect(() => {
-    if(vehicleData?.costPerDay) {
+    if (vehicleData?.costPerDay) {
       setTotalPayableAmount(vehicleData?.costPerDay * dayDifference);
     }
   }, [vehicleData?.costPerDay, dayDifference]);
@@ -46,12 +45,13 @@ const Booking = () => {
     dispatch(getVehicleDetails(id));
   }, [dispatch, id]);
 
- 
-  getBookingDetailsByVehicleId(id).then((res) => {
-    setScheduledBookings(res.data.data);
-  }).catch((err) => {
-    console.log(err.message);
-  });
+  getBookingDetailsByVehicleId(id)
+    .then((res) => {
+      setScheduledBookings(res.data.data);
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
 
   const getDayDifferenceFromDate = (startDate, endDate) => {
     const diffTime = Math.abs(endDate.getTime() - startDate.getTime());
@@ -77,14 +77,29 @@ const Booking = () => {
   };
 
   const checkAndSetPhoneNumber = (e) => {
-    let phoneNumberInput = e.target.value;
-    if (phoneNumberInput.length <= 4) return;
     setPhoneNumber(e.target.value);
   };
 
   const setAcknowledgementFromModal = (isChecked) => {
     setAcknowledgement(isChecked);
-  }
+  };
+
+  const isValidNumber = () => {
+    let validNumberPattern = /^(?:\+88|88)?(01[3-9]\d{8})$/;
+    return validNumberPattern.test(phoneNumber);
+  };
+
+  const startPaymentProcess = () => {
+    if (!isValidNumber() && !acknowledgement) {
+      alert('Please fill up the required fields correctly.');
+    } else if (!isValidNumber()) {
+      alert('Please enter your Phone Number correctly.');
+    } else if (!acknowledgement) {
+      alert('Please read about the required documents and check the acknowledgement.');
+    } else {
+      //start payment process
+    }
+  };
 
   return (
     <Container fluid>
@@ -228,7 +243,12 @@ const Booking = () => {
                 </span>
               </div>
               <div className="button-container-div">
-                <Button size="sm" variant="outline-success" className="w-100">
+                <Button
+                  size="sm"
+                  variant="outline-success"
+                  className="w-100"
+                  onClick={startPaymentProcess}
+                >
                   Make Payment
                 </Button>
               </div>
