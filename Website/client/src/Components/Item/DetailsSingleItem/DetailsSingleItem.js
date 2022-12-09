@@ -34,7 +34,7 @@ const DetailsSingleItem = ({ data }) => {
               <Image
                 id="CarouselImage"
                 src={
-                  data?.category?.name == 'Bike'
+                  data?.category?.name === 'Bike'
                     ? '/templateBike.jpg'
                     : '/templateCar.jpg'
                 }
@@ -72,7 +72,7 @@ const DetailsSingleItem = ({ data }) => {
               <ListGroup.Item>
                 <div className="d-flex justify-content-around">
                   <Link to={'/details'}>View Details</Link>
-                  <Link to="#">Book Now</Link>
+                  <Link to={'/booking/' + data?._id}>Book Now</Link>
                 </div>
               </ListGroup.Item>
             </ListGroup>

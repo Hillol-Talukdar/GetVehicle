@@ -128,3 +128,8 @@ export const CreateOrUpdateConstants = {
   CREATE_VEHICLE_TITLE: 'Create New Vehicle',
   UPDATE_VEHICLE_TITLE: 'Update Vehicle'
 }
+
+export const AskForLoginModalConstants = {
+  HEADER: 'Login To Continue...',
+  BODY: 'You need to login before booking the vehicle.'
+}

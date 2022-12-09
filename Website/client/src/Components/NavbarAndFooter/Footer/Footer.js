@@ -4,7 +4,7 @@ import './Footer.css';
 
 const Footer = () => (
   <footer className="footer">
-    <div className="text-center py-3">
+    <div className="text-center">
       &copy; 2022 Copyright:
       <span className="fw-bold"> {AppConstants.APP_NAME}</span>
     </div>

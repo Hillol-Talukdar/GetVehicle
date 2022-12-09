@@ -1,13 +1,10 @@
-import { React, Component, useState, useEffect } from 'react';
-import { Container, Row, Col, Form, Dropdown, Button } from 'react-bootstrap';
-import { AppConstants, CategoryInfoConstants, ColorConstants, HomePageFilterConstants, NavbarConstants } from '../../../Constants/CommonConstants';
-import { getAllVehicleList } from '../../../Services/VehicleDataService';
-import './HomeContainer.css'
-import HomeItem from '../../Item/HomeItem/HomeItem';
+import { React, useEffect, useState } from 'react';
+import { Button, Container, Form } from 'react-bootstrap';
+import { CategoryInfoConstants, NavbarConstants } from '../../../Constants/CommonConstants';
 import { getAllCategories } from '../../../Services/CategoryDataService';
-import DropdownToggle from 'react-bootstrap/esm/DropdownToggle';
-import DropdownMenu from 'react-bootstrap/esm/DropdownMenu';
-import DropdownItem from 'react-bootstrap/esm/DropdownItem';
+import { getAllVehicleList } from '../../../Services/VehicleDataService';
+import HomeItem from '../../Item/HomeItem/HomeItem';
+import './HomeContainer.css';
 
 const HomeContainer = () => {
   const [allItems, setAllItems] = useState([]);

@@ -1,0 +1,224 @@
+.booking-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.left-container {
+    margin-right: 15px;
+}
+
+.user-details {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    margin-bottom: 15px;
+}
+
+.vehicle-details {
+    display: flex;
+    flex-direction: row;
+}
+
+.vehicle-image {
+    width: 28%;
+    background: #a5c3db;
+    padding: 12px;
+}
+
+.vehicle-info {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    width: 70%;
+}
+
+.booking-info {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+}
+
+.date-picker-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: end;
+    margin-top: 5px;
+}
+
+.date-related-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.enhance-div {
+    box-shadow: 0px 2px 4px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+    transition: 0.3s;
+}
+
+.field-bottom-margin {
+    margin-bottom: 5px;
+}
+
+.field-bottom-margin-lg {
+    margin-bottom: 10px;
+}
+
+.field-bottom-margin-semi-lg {
+    margin-bottom: 15px;
+}
+
+.vehicle-info-items {
+    margin-top: auto;
+    padding: 10px;
+    text-align: center;
+}
+
+.vehicle-model {
+    font-size: large;
+}
+
+.vehicle-category {
+    font-size: small;
+}
+
+.phone-number {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.phone-number-label {
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+
+.phone-number-input {
+    width: 30%;
+    height: 30px;
+    padding-left: 45px;
+    background: url('../../../../../public/flagBangladesh.png') no-repeat 2px;
+}
+
+.flag-bangladesh {
+    height: 24px;
+    width: auto;
+    margin-top: 2px;
+    margin-left: 5px;
+}
+
+.required-text {
+    font-size: x-small;
+    margin-left: 10px;
+}
+
+.cost-per-day {
+    margin-top: 20px;
+    padding: 10px;
+    text-align: center;
+}
+
+.vehicle-info-title {
+    display: flex;
+    flex-direction: column;
+}
+
+.enhanced-label {
+    background: #a5c3db;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-right: 10px;
+    box-shadow: 0px 2px 4px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+    transition: 0.3s;
+    color: white;
+}
+
+.field-bottom-margin-x-lg {
+    margin-bottom: 20px;
+}
+
+.email {
+    margin-bottom: 17px;
+}
+
+.select-date-label {
+    width: fit-content;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+.total-cost-amount {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.button-container-div {
+    margin-top: auto;
+}
+
+.acknowledgement-div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.acknowledgement-text {
+    margin-right: 5px;
+}
+
+.acknowledgement-label {
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+@media (max-width:801px) {
+    .booking-container {
+        flex-direction: column;
+        flex-wrap: wrap;
+    }
+
+    .user-details {
+        width: 100%;
+        align-items: center;
+    }
+    
+    .left-container {
+        width: 100%;
+    }
+
+    .booking-info {
+        width: 100%;
+    }
+
+    .vehicle-details {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .vehicle-image {
+        width: 80%;
+    }
+
+    .vehicle-info {
+        width: 100%;
+    }
+
+    .phone-number {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .phone-number-label {
+        margin-bottom: 8px;
+    }
+
+    .phone-number-input {
+        width: auto;
+        margin-bottom: 5px;
+    }
+}
