@@ -70,6 +70,18 @@ const Header = () => {
                   {NavbarConstants.CREATE_CATEGORY}
                 </NavLink>
               </NavDropdown.Item>
+
+              <NavDropdown.Item
+                className="p-2"
+                to="/admin/booking-list"
+              >
+                <NavLink
+                  to="/admin/booking-list"
+                  className="text-color-and-decoration"
+                >
+                  {NavbarConstants.BOOKING_LIST}
+                </NavLink>
+              </NavDropdown.Item>
             </NavDropdown>)
           }
           </Nav>

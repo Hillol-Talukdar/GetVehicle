@@ -17,6 +17,7 @@ export const NavbarConstants = {
   LOGIN: 'Login',
   CREATE_VEHICLE: 'Create Vehicle',
   CREATE_CATEGORY: 'Create Category',
+  BOOKING_LIST: 'Booking List'
 };
 
 export const VehicleInfoConstants = {
