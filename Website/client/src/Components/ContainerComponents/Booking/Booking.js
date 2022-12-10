@@ -3,15 +3,15 @@ import { Button, Container, Image } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { googleLogin } from '../../../../Services/GoogleAuthService';
-import { getVehicleDetails } from '../../../../Services/VehicleDataService';
-import AskForLoginModal from '../../../Modal/AskForLoginModal';
+import { googleLogin } from '../../../Services/GoogleAuthService';
+import { getVehicleDetails } from '../../../Services/VehicleDataService';
+import AskForLoginModal from '../../Modal/AskForLoginModal';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import './Booking.css';
-import DocumentDetailsModal from '../../../Modal/DocumentDetailsModal';
-import BookedSchedulesModal from '../../../Modal/BookedSchedulesModal';
-import { getBookingDetailsByVehicleId } from '../../../../Services/BookingDataService';
+import DocumentDetailsModal from '../../Modal/DocumentDetailsModal';
+import BookedSchedulesModal from '../../Modal/BookedSchedulesModal';
+import { getBookingDetailsByVehicleId } from '../../../Services/BookingDataService';
 
 const Booking = () => {
   const { id } = useParams();

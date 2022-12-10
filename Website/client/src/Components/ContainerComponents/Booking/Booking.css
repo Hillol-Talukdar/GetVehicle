@@ -101,7 +101,7 @@
     width: 30%;
     height: 30px;
     padding-left: 45px;
-    background: url('../../../../../public/flagBangladesh.png') no-repeat 2px;
+    background: url('../../../../public/flagBangladesh.png') no-repeat 2px;
 }
 
 .flag-bangladesh {

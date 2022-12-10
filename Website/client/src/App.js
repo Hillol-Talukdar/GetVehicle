@@ -15,7 +15,7 @@ import CreateOrUpdateItemContainer from './Components/ContainerComponents/Admin/
 import CreateOrUpdateCategoryContainer from './Components/ContainerComponents/Admin/Item/CreateOrUpdateCategoryContainer/CreateOrUpdateCategoryContainer';
 import { CreateOrUpdateSubCategoryContainer } from './Components/ContainerComponents/Admin/Item/CreateOrUpdateSubCategoryContainer/CreateOrUpdateSubCategoryContainer';
 import AdminPrivateRoute from './Components/Route/AdminPrivateRoute';
-import Booking from './Components/ContainerComponents/Admin/Booking/Booking';
+import Booking from './Components/ContainerComponents/Booking/Booking';
 
 const App = () => {
   const dispatch = useDispatch();
