@@ -12,6 +12,7 @@ import './Booking.css';
 import DocumentDetailsModal from '../../Modal/DocumentDetailsModal';
 import BookedSchedulesModal from '../../Modal/BookedSchedulesModal';
 import { getBookingDetailsByVehicleId } from '../../../Services/BookingDataService';
+import StripeContainer from '../StripeContainer/StripeContainer';
 
 const Booking = () => {
   const { id } = useParams();
@@ -21,8 +22,10 @@ const Booking = () => {
   const { loading, error, vehicle } = vehicleDetails;
   const vehicleData = vehicle && vehicle.data;
   const [showLoginModal, setShowLoginModal] = useState(false);
-  const [showDocumentDetailsModal, setShowDocumentDetailsModal] = useState(false);
-  const [showBookedSchedulesModal, setShowBookedSchedulesModal] = useState(false);
+  const [showDocumentDetailsModal, setShowDocumentDetailsModal] =
+    useState(false);
+  const [showBookedSchedulesModal, setShowBookedSchedulesModal] =
+    useState(false);
   const [scheduledBookings, setScheduledBookings] = useState([]);
   const [acknowledgement, setAcknowledgement] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState('+880');
@@ -30,6 +33,7 @@ const Booking = () => {
   const [totalPayableAmount, setTotalPayableAmount] = useState(0);
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(null);
+  const [showStripePayment, setShowStripePayment] = useState(false);
 
   useEffect(() => {
     setShowLoginModal(user == null ? true : false);
@@ -95,9 +99,12 @@ const Booking = () => {
     } else if (!isValidNumber()) {
       alert('Please enter your Phone Number correctly.');
     } else if (!acknowledgement) {
-      alert('Please read about the required documents and check the acknowledgement.');
+      alert(
+        'Please read about the required documents and check the acknowledgement.'
+      );
     } else {
       //start payment process
+      setShowStripePayment(true);
     }
   };
 
@@ -107,6 +114,8 @@ const Booking = () => {
         <p>Loading...</p>
       ) : error ? (
         <p>{error}</p>
+      ) : showStripePayment ? (
+        <StripeContainer />
       ) : (
         <>
           <div className="booking-container">
