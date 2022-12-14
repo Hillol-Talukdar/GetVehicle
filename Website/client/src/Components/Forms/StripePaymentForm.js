@@ -5,25 +5,38 @@ import axios from 'axios';
 import './StripePaymentForm.css';
 import { toast } from 'react-toastify';
 
-const StripePaymentForm = () => {
+const StripePaymentForm = ({
+  totalPayableAmount,
+  user,
+  userPhoneNumber,
+  vehicleData,
+}) => {
   const [success, setSuccess] = useState(false);
+  const [loading, setLoading] = useState(false);
   const stripe = useStripe();
   const elements = useElements();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { error, paymentMethod } = await stripe.createPaymentMethod({
+
+    setLoading(true);
+
+    const { err, paymentMethod } = await stripe.createPaymentMethod({
       type: 'card',
       card: elements.getElement(CardElement),
     });
 
-    if (!error) {
+    if (!err) {
       try {
+        console.log('totalPayableAmount ', totalPayableAmount);
         const { id } = paymentMethod;
         const response = await axios.post(
           'http://localhost:4000/api/stripe-payment',
           {
-            amount: 1000,
+            amount: totalPayableAmount,
+            user: user,
+            userPhoneNumber: userPhoneNumber,
+            vehicleData: vehicleData,
             id,
           }
         );
@@ -31,16 +44,27 @@ const StripePaymentForm = () => {
         if (response.data.success) {
           console.log('Successful payment');
           setSuccess(true);
+          setLoading(false);
           window.alert(`Payment successful`);
           window.location.replace('/');
         }
-      } catch (error) {
-        console.log('Error', error);
-        toast.error('Error', error);
+      } catch (err) {
+        setLoading(false);
+        console.log('Error', err);
+        toast.error(
+          err.response && err.response.data.message
+            ? err.response.data.message
+            : err.message
+        );
       }
     } else {
-      console.log(error.message);
-      toast.error(error.message);
+      setLoading(false);
+      console.log(err.message);
+      toast.error(
+        err.response && err.response.data.message
+          ? err.response.data.message
+          : err.message
+      );
     }
   };
 
@@ -52,7 +76,14 @@ const StripePaymentForm = () => {
             <CardElement />
           </div>
         </fieldset>
-        <button className="stripeButton">Pay</button>
+
+        {loading ? (
+          <button className="stripeButton" disabled>
+            Paying
+          </button>
+        ) : (
+          <button className="stripeButton">Pay</button>
+        )}
       </form>
     </>
   );

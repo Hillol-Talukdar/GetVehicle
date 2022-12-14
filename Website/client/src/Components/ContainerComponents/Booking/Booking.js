@@ -115,7 +115,12 @@ const Booking = () => {
       ) : error ? (
         <p>{error}</p>
       ) : showStripePayment ? (
-        <StripeContainer />
+        <StripeContainer
+          totalPayableAmount={totalPayableAmount}
+          user={user}
+          userPhoneNumber={phoneNumber}
+          vehicleData={vehicleData}
+        />
       ) : (
         <>
           <div className="booking-container">
