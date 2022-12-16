@@ -10,8 +10,8 @@ const StripePaymentForm = ({
   user,
   userPhoneNumber,
   vehicleData,
+  changeHandlerStripePaymentSuccess
 }) => {
-  const [success, setSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
   const stripe = useStripe();
   const elements = useElements();
@@ -43,12 +43,11 @@ const StripePaymentForm = ({
 
         if (response.data.success) {
           console.log('Successful payment');
-          setSuccess(true);
+          changeHandlerStripePaymentSuccess(true)
           setLoading(false);
-          window.alert(`Payment successful`);
-          window.location.replace('/');
         }
       } catch (err) {
+        changeHandlerStripePaymentSuccess(false)
         setLoading(false);
         console.log('Error', err);
         toast.error(
@@ -58,6 +57,7 @@ const StripePaymentForm = ({
         );
       }
     } else {
+      changeHandlerStripePaymentSuccess(false)
       setLoading(false);
       console.log(err.message);
       toast.error(

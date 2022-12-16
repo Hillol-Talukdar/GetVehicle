@@ -3,6 +3,7 @@ import { Button, Container, Image } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { googleLogin } from '../../../Services/GoogleAuthService';
 import { getVehicleDetails } from '../../../Services/VehicleDataService';
 import AskForLoginModal from '../../Modal/AskForLoginModal';
@@ -11,7 +12,10 @@ import 'react-datepicker/dist/react-datepicker.css';
 import './Booking.css';
 import DocumentDetailsModal from '../../Modal/DocumentDetailsModal';
 import BookedSchedulesModal from '../../Modal/BookedSchedulesModal';
-import { getBookingDetailsByVehicleId } from '../../../Services/BookingDataService';
+import {
+  createBooking,
+  getBookingDetailsByVehicleId,
+} from '../../../Services/BookingDataService';
 import StripeContainer from '../StripeContainer/StripeContainer';
 
 const Booking = () => {
@@ -34,6 +38,7 @@ const Booking = () => {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(null);
   const [showStripePayment, setShowStripePayment] = useState(false);
+  const [stripePaymentSuccess, setStripePaymentSuccess] = useState(false);
 
   useEffect(() => {
     setShowLoginModal(user == null ? true : false);
@@ -47,15 +52,52 @@ const Booking = () => {
 
   useEffect(() => {
     dispatch(getVehicleDetails(id));
+
+    getBookingDetailsByVehicleId(id)
+      .then((res) => {
+        setScheduledBookings(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
   }, [dispatch, id]);
 
-  getBookingDetailsByVehicleId(id)
-    .then((res) => {
-      setScheduledBookings(res.data.data);
-    })
-    .catch((err) => {
-      console.log(err.message);
-    });
+  useEffect(() => {
+    if (stripePaymentSuccess) {
+      createBooking(
+        {
+          totalAmount: totalPayableAmount,
+          totalDays: dayDifference,
+          paid: true,
+          paymentMethod: 'Cash',
+          handedOver: false,
+          received: false,
+          handOverDate: startDate,
+          receiveDate: endDate,
+          userId: `${user._id}`,
+          vehicleId: `${vehicleData._id}`,
+          isTrashed: false,
+        },
+        user.token
+      )
+        .then((res) => {
+          toast.success(`"${res.data.data.name}" is created!`);
+          window.alert(`Payment successful`);
+          window.location.replace('/');
+        })
+        .catch((err) => {
+          toast.error(
+            err.response && err.response.data.message
+              ? err.response.data.message
+              : err.message
+          );
+        });
+    }
+  }, [stripePaymentSuccess]);
+
+  const changeHandlerStripePaymentSuccess = (e) => {
+    setStripePaymentSuccess(e);
+  };
 
   const getDayDifferenceFromDate = (startDate, endDate) => {
     const diffTime = Math.abs(endDate.getTime() - startDate.getTime());
@@ -120,6 +162,7 @@ const Booking = () => {
           user={user}
           userPhoneNumber={phoneNumber}
           vehicleData={vehicleData}
+          changeHandlerStripePaymentSuccess={changeHandlerStripePaymentSuccess}
         />
       ) : (
         <>

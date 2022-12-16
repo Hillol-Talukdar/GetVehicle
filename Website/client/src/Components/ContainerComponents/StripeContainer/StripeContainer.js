@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import StripePaymentForm from '../../Forms/StripePaymentForm';
@@ -9,11 +9,9 @@ const StripeContainer = ({
   user,
   userPhoneNumber,
   vehicleData,
+  changeHandlerStripePaymentSuccess
 }) => {
-  // const stripeTestPromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
-  const stripeTestPromise = loadStripe(
-    'pk_test_51MEGAdGTvGfjyIppLoVD4oiXvOL7GxNIWdPezS8VKMI6PbOyxVZY9TPjZ2OMkQhJHu4kU4ocgQVELOXCbotfxD2v00Cmq1rAgH'
-  );
+  const stripeTestPromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 
   return (
     <Elements stripe={stripeTestPromise}>
@@ -22,6 +20,7 @@ const StripeContainer = ({
         user={user}
         userPhoneNumber={userPhoneNumber}
         vehicleData={vehicleData}
+        changeHandlerStripePaymentSuccess = {changeHandlerStripePaymentSuccess}
       />
     </Elements>
   );

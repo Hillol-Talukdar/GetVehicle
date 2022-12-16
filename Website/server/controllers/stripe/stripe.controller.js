@@ -7,7 +7,7 @@ const stripePayment = catchAsync(async (req, res, next) => {
 
     const payment = await stripe.paymentIntents.create({
         amount,
-        currency: 'BDT',
+        currency: 'USD',
         description: `${vehicleData._id} | ${vehicleData.model} | ${user.email} | ${userPhoneNumber}`,
         payment_method: id,
         confirm: true,
