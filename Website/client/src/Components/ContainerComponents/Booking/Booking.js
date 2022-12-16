@@ -146,7 +146,33 @@ const Booking = () => {
       );
     } else {
       //start payment process
-      setShowStripePayment(true);
+      if (scheduledBookings.length) {
+        let booked = false;
+
+        scheduledBookings.forEach((ele) => {
+          let handOverDate = new Date(ele.handOverDate);
+          handOverDate = handOverDate.getTime();
+
+          let receiveDate = new Date(ele.receiveDate);
+          receiveDate = receiveDate.getTime();
+
+          if ((handOverDate <= startDate.getTime() && startDate.getTime() <= receiveDate) ||
+             (handOverDate <= endDate.getTime() && endDate.getTime() <= receiveDate)
+          ) {
+            booked = true;
+          }
+        });
+
+        if (booked) {
+          toast.error(
+            'This vehicle is already booked! Please check all booked dates of this vehicle.'
+          );
+        } else {
+          setShowStripePayment(true);
+        }
+      } else {
+        setShowStripePayment(true);
+      }
     }
   };
 
