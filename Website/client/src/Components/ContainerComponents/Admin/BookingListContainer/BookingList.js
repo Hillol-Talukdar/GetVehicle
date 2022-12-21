@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import { Container } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { getAllBookings } from '../../../../Services/BookingDataService';
+import BookingSingleItem from '../../../Item/BookingSingleItem/BookingSingleItem';
 import './BookingList.css';
 
 const BookingList = () => {
@@ -21,7 +23,13 @@ const BookingList = () => {
   }, []);
 
   return (
-    <p>Booking List Page</p>
+    <Container>
+      <div className="d-flex flex-wrap">
+        {allBookings.map((item) => (
+          !item.isTrashed && ( <BookingSingleItem item={item} loadAllBookings={loadAllBookings}></BookingSingleItem> )
+        ))}
+      </div>
+    </Container>
   );
 };
 

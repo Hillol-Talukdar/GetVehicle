@@ -17,7 +17,8 @@ const createBooking = catchAsync(async (req, res, next) => {
 
 const getAllBookings = catchAsync(async (req, res, next) => {
     const bookings = await Booking.find({})
-        .populate({ path: 'user', select: 'name email' });
+        .populate({ path: 'user', select: 'name email' })
+        .populate({ path: 'vehicle', select: 'model'});
 
     res.status(200).json({
         status: 'Success',
