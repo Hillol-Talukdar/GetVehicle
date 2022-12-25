@@ -4,6 +4,7 @@ import {
   BookingStatus,
   VehicleInfoConstants,
 } from '../../Constants/CommonConstants';
+import { showAverageRating } from '../showAverageRating';
 
 const VehicleDatalistItem = ({ data }) => {
   return (
@@ -55,7 +56,13 @@ const VehicleDatalistItem = ({ data }) => {
       </ListGroup.Item>
 
       <ListGroup.Item className="d-flex justify-content-between">
-        {VehicleInfoConstants.RATING}:<span>{data?.averageRating}</span>
+        {/* {VehicleInfoConstants.RATING}:<span>{data?.averageRating}</span> */}
+        {VehicleInfoConstants.RATING}:
+        <span>
+          {data?.ratings && data?.ratings?.length > 0
+            ? showAverageRating(data)
+            : 0}
+        </span>
       </ListGroup.Item>
 
       <ListGroup.Item className="d-flex justify-content-between">

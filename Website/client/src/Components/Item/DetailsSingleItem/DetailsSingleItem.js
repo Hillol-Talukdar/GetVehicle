@@ -3,11 +3,13 @@ import { Row, Col, Image, Tabs, Tab, Card, ListGroup } from 'react-bootstrap';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import './DetailsSingleItem.css';
+import Rating from 'react-star-ratings';
 import VehicleDatalistItem from '../VehicleDatalistItem';
 import { TabsConstants } from '../../../Constants/CommonConstants';
 import { Link } from 'react-router-dom';
+import RatingModal from '../../Modal/RatingModal';
 
-const DetailsSingleItem = ({ data }) => {
+const DetailsSingleItem = ({ data, onClickStar, star }) => {
   return (
     <>
       <Row className="p-2">
@@ -59,8 +61,6 @@ const DetailsSingleItem = ({ data }) => {
         </Col>
 
         <Col md={5}>
-          
-
           <Card id="itemDetailsCard">
             <Card.Body>
               <Card.Text>
@@ -71,6 +71,18 @@ const DetailsSingleItem = ({ data }) => {
             <ListGroup className="list-group-flush">
               <ListGroup.Item>
                 <div className="d-flex justify-content-around">
+                  <RatingModal>
+                    <Rating
+                      name={data?._id}
+                      numberOfStars={5}
+                      rating={star}
+                      isSelectable={true}
+                      starRatedColor="#ffd700"
+                      starHoverColor="#ffd700"
+                      changeRating={onClickStar}
+                    />
+                  </RatingModal>
+
                   <Link to={'/details'}>View Details</Link>
                   <Link to={'/booking/' + data?._id}>Book Now</Link>
                 </div>
