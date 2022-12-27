@@ -83,7 +83,6 @@ const DetailsSingleItem = ({ data, onClickStar, star }) => {
                     />
                   </RatingModal>
 
-                  <Link to={'/details'}>View Details</Link>
                   <Link to={'/booking/' + data?._id}>Book Now</Link>
                 </div>
               </ListGroup.Item>

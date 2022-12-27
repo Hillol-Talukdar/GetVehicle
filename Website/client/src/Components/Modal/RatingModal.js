@@ -25,26 +25,26 @@ const RatingModal = ({ children }) => {
   return (
     <>
       <div onClick={handleShow}>
-        <AiOutlineStar
-          style={{ fontSize: '21px', cursor: 'pointer' }}
-          className="text-warning"
-        />
-        <br />{' '}
         {user ? (
           <p
-            className="h6 small mt-1 text-primary"
-            style={{ cursor: 'pointer' }}
+            className="h6 mt-1 text-primary"
+            style={{ cursor: 'pointer', textDecoration: 'underline' }}
           >
             Rate now
           </p>
         ) : (
-          <p className="h6 small mt-1 text-primary">Login to Rate</p>
+          <p
+            className="h6 mt-1 text-primary"
+            style={{ cursor: 'pointer', textDecoration: 'underline' }}
+          >
+            Login to Rate
+          </p>
         )}
       </div>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Rate The Product</Modal.Title>
+          <Modal.Title>Rate The Vehicle</Modal.Title>
         </Modal.Header>
         <Modal.Body>{children}</Modal.Body>
       </Modal>

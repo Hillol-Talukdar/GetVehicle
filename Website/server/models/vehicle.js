@@ -90,7 +90,17 @@ const vehicleSchema = new mongoose.Schema(
             default: false,
         },
     },
-    { timestamps: true }
+    {
+        timestamps: true,
+        toObject: { virtuals: true },
+        toJSON: { virtuals: true },
+    }
 );
+
+vehicleSchema.virtual('reviews', {
+    ref: 'Review',
+    localField: '_id',
+    foreignField: 'vehicle',
+});
 
 module.exports = mongoose.model('Vehicle', vehicleSchema);

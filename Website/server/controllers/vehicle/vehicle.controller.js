@@ -20,6 +20,10 @@ exports.getAVehicle = catchAsync(async (req, res, next) => {
         .populate({
             path: 'subCategory',
             select: 'name slug',
+        })
+        .populate({
+            path: 'reviews',
+            populate: { path: 'user', select: 'name' },
         });
 
     if (!vehicle) {

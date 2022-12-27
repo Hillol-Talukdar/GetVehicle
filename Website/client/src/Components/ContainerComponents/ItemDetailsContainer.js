@@ -1,8 +1,12 @@
-import React, { useEffect,useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { getVehicleDetails,vehicleStar } from '../../Services/VehicleDataService';
+import {
+  getVehicleDetails,
+  vehicleStar,
+} from '../../Services/VehicleDataService';
+import ReviewSection from '../Item/Review/ReviewSection/ReviewSection';
 import DetailsSingleItem from '../Item/DetailsSingleItem/DetailsSingleItem';
 
 const ItemDetailsContainer = () => {
@@ -23,20 +27,20 @@ const ItemDetailsContainer = () => {
 
   useEffect(() => {
     if (data?.ratings && user) {
-        let existingRatingObject = data?.ratings.find(
-            (element) => element?.postedBy?.toString() === user?._id?.toString()
-        );
-        existingRatingObject && setStar(existingRatingObject.star);
+      let existingRatingObject = data?.ratings.find(
+        (element) => element?.postedBy?.toString() === user?._id?.toString()
+      );
+      existingRatingObject && setStar(existingRatingObject.star);
     }
-});
+  });
 
   const onClickStar = (newRating, name) => {
     setStar(newRating);
     vehicleStar(name, newRating, user.token).then((res) => {
-        console.log("Rating clicked", res.data);
-        dispatch(getVehicleDetails(id));
+      // console.log('Rating clicked', res.data);
+      dispatch(getVehicleDetails(id));
     });
-};
+  };
 
   return (
     <Container fluid>
@@ -46,7 +50,13 @@ const ItemDetailsContainer = () => {
         <p>{error}</p>
       ) : (
         <>
-          <DetailsSingleItem data={data} onClickStar = {onClickStar} star={star}/>
+          <DetailsSingleItem
+            data={data}
+            onClickStar={onClickStar}
+            star={star}
+          />
+
+          <ReviewSection vehicleData={data} star={star} />
         </>
       )}
     </Container>
