@@ -43,7 +43,7 @@ exports.getAllVehicle = catchAsync(async (req, res, next) => {
             path: 'category',
             select: 'name slug',
         })
-        .sort({ updatedAt: -1 });
+        .sort({ createdAt: -1 });
 
     res.status(200).json({
         status: 'Success',
