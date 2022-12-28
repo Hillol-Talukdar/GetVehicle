@@ -9,20 +9,22 @@ const StripeContainer = ({
   user,
   userPhoneNumber,
   vehicleData,
-  changeHandlerStripePaymentSuccess
+  changeHandlerStripePaymentSuccess,
 }) => {
   const stripeTestPromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 
   return (
-    <Elements stripe={stripeTestPromise}>
-      <StripePaymentForm
-        totalPayableAmount={totalPayableAmount}
-        user={user}
-        userPhoneNumber={userPhoneNumber}
-        vehicleData={vehicleData}
-        changeHandlerStripePaymentSuccess = {changeHandlerStripePaymentSuccess}
-      />
-    </Elements>
+    <div className="stripe-container-div">
+      <Elements stripe={stripeTestPromise}>
+        <StripePaymentForm
+          totalPayableAmount={totalPayableAmount}
+          user={user}
+          userPhoneNumber={userPhoneNumber}
+          vehicleData={vehicleData}
+          changeHandlerStripePaymentSuccess={changeHandlerStripePaymentSuccess}
+        />
+      </Elements>
+    </div>
   );
 };
 

@@ -4,13 +4,14 @@ import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import axios from 'axios';
 import './StripePaymentForm.css';
 import { toast } from 'react-toastify';
+import { Button } from 'react-bootstrap';
 
 const StripePaymentForm = ({
   totalPayableAmount,
   user,
   userPhoneNumber,
   vehicleData,
-  changeHandlerStripePaymentSuccess
+  changeHandlerStripePaymentSuccess,
 }) => {
   const [loading, setLoading] = useState(false);
   const stripe = useStripe();
@@ -43,11 +44,11 @@ const StripePaymentForm = ({
 
         if (response.data.success) {
           console.log('Successful payment');
-          changeHandlerStripePaymentSuccess(true)
+          changeHandlerStripePaymentSuccess(true);
           setLoading(false);
         }
       } catch (err) {
-        changeHandlerStripePaymentSuccess(false)
+        changeHandlerStripePaymentSuccess(false);
         setLoading(false);
         console.log('Error', err);
         toast.error(
@@ -57,7 +58,7 @@ const StripePaymentForm = ({
         );
       }
     } else {
-      changeHandlerStripePaymentSuccess(false)
+      changeHandlerStripePaymentSuccess(false);
       setLoading(false);
       console.log(err.message);
       toast.error(
@@ -69,7 +70,7 @@ const StripePaymentForm = ({
   };
 
   return (
-    <>
+    <div className="payment-container-div">
       <form onSubmit={handleSubmit}>
         <fieldset className="FormGroup">
           <div className="FormRow">
@@ -82,10 +83,16 @@ const StripePaymentForm = ({
             Paying
           </button>
         ) : (
-          <button className="stripeButton">Pay</button>
+          <Button
+            variant="light"
+            className="payment-button"
+            style={{ marginTop: '10px' }}
+          >
+            Pay {totalPayableAmount} Taka
+          </Button>
         )}
       </form>
-    </>
+    </div>
   );
 };
 

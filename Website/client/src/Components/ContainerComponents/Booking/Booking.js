@@ -37,7 +37,7 @@ const Booking = () => {
   const [totalPayableAmount, setTotalPayableAmount] = useState(0);
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(null);
-  const [showStripePayment, setShowStripePayment] = useState(false);
+  const [showStripePayment, setShowStripePayment] = useState(true);
   const [stripePaymentSuccess, setStripePaymentSuccess] = useState(false);
 
   useEffect(() => {
@@ -75,6 +75,7 @@ const Booking = () => {
           handOverDate: startDate,
           receiveDate: endDate,
           userId: `${user._id}`,
+          userPhoneNumber: phoneNumber,
           vehicleId: `${vehicleData._id}`,
           isTrashed: false,
         },
@@ -182,16 +183,9 @@ const Booking = () => {
         <p>Loading...</p>
       ) : error ? (
         <p>{error}</p>
-      ) : showStripePayment ? (
-        <StripeContainer
-          totalPayableAmount={totalPayableAmount}
-          user={user}
-          userPhoneNumber={phoneNumber}
-          vehicleData={vehicleData}
-          changeHandlerStripePaymentSuccess={changeHandlerStripePaymentSuccess}
-        />
-      ) : (
+      ) : 
         <>
+        <div>
           <div className="booking-container">
             <div className="left-container">
               {user && (
@@ -312,6 +306,7 @@ const Booking = () => {
                   endDate={endDate}
                   selectsRange
                   inline
+                  
                 />
               </div>
               <div className="field-bottom-margin-x-lg">
@@ -326,6 +321,7 @@ const Booking = () => {
                 </span>
               </div>
               <div className="button-container-div">
+                {!showStripePayment && (
                 <Button
                   size="sm"
                   variant="outline-success"
@@ -334,8 +330,22 @@ const Booking = () => {
                 >
                   Make Payment
                 </Button>
+                )}
               </div>
+            
             </div>
+          </div>
+          {
+            showStripePayment && (
+              <StripeContainer
+                totalPayableAmount={totalPayableAmount}
+                user={user}
+                userPhoneNumber={phoneNumber}
+                vehicleData={vehicleData}
+                changeHandlerStripePaymentSuccess={changeHandlerStripePaymentSuccess}
+              />
+            )
+          }
           </div>
           <AskForLoginModal
             show={showLoginModal}
@@ -354,7 +364,7 @@ const Booking = () => {
             scheduledBookings={scheduledBookings ? scheduledBookings : []}
           ></BookedSchedulesModal>
         </>
-      )}
+      }
     </Container>
   );
 };
