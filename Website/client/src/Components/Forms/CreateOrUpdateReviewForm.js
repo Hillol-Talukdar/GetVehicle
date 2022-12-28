@@ -1,14 +1,15 @@
 import React from 'react'
 import { Button, Form } from 'react-bootstrap';
 
-const CreateReviewForm = ({
+const CreateOrUpdateReviewForm = ({
+    id,
     comment,
     submitHandler,
     changeHandler,
     buttonName,
   }) => {
   return (
-    <Form onSubmit={e=> submitHandler(e)}>
+    <Form onSubmit={e=> submitHandler(e, id)}>
       <Form.Group
         className="form-group d-flex align-items-center col-sm-4 flex-column mx-auto mb-3"
         controlId="formBasicCategoryName"
@@ -28,7 +29,7 @@ const CreateReviewForm = ({
       </Form.Group>
 
       <Button
-        className="mx-auto mt-3 d-grid gap-2 col-sm-1 mb-3"
+        className="mx-auto mt-3 d-grid gap-2 col-sm-2 mb-3"
         variant="primary"
         type="submit"
       >
@@ -38,4 +39,4 @@ const CreateReviewForm = ({
   )
 }
 
-export default CreateReviewForm
+export default CreateOrUpdateReviewForm

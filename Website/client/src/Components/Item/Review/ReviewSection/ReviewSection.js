@@ -2,12 +2,11 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { createReview } from '../../../../Services/ReviewsService';
-import CreateReviewForm from '../../../Forms/CreateReviewForm';
+import CreateOrUpdateReviewForm from '../../../Forms/CreateOrUpdateReviewForm';
 import ReviewSectionCard from '../ReviewSectionCard/ReviewSectionCard';
 import './ReviewSection.css';
 
-
-const ReviewSection = ({ vehicleData, star }) => {
+const ReviewSection = ({ vehicleData, star, setReloadPage }) => {
   const [comment, setComment] = useState('');
 
   const user = useSelector((state) => state.userReducer);
@@ -16,7 +15,7 @@ const ReviewSection = ({ vehicleData, star }) => {
     setComment(e.target.value);
   };
 
-  const submitHandler = (e) => {
+  const submitHandler = (e, id) => {
     e.preventDefault();
 
     createReview(
@@ -32,7 +31,8 @@ const ReviewSection = ({ vehicleData, star }) => {
     )
       .then((res) => {
         toast.success(`Review posted successfully!`);
-        window.location.reload();
+        setComment('');
+        setReloadPage(true);
       })
       .catch((err) => {
         toast.error(
@@ -47,17 +47,22 @@ const ReviewSection = ({ vehicleData, star }) => {
     <>
       <h5 className="mt-4">{vehicleData?.reviews?.length} Reviews:</h5>
 
-      {vehicleData?.reviews?.map((review) => (
-        <ReviewSectionCard key={review._id} review={review} />
-      ))}
-
       <div className="mb-4 reviewSectionPostCommentContainer">
-        <CreateReviewForm
+        <CreateOrUpdateReviewForm
+          id=""
           submitHandler={submitHandler}
           changeHandler={changeHandler}
           buttonName="Post"
         />
       </div>
+
+      {vehicleData?.reviews?.map((review) => (
+        <ReviewSectionCard
+          key={review._id}
+          review={review}
+          setReloadPage={setReloadPage}
+        />
+      ))}
     </>
   );
 };

@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
-import { toast } from 'react-toastify';
-import { Button, Modal } from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
-import { AiOutlineStar } from 'react-icons/ai';
 import { useNavigate, useParams } from 'react-router-dom';
 
 const RatingModal = ({ children }) => {
@@ -10,7 +8,6 @@ const RatingModal = ({ children }) => {
   const [show, setShow] = useState(false);
 
   let navigate = useNavigate();
-  let { id } = useParams();
 
   const handleShow = () => {
     if (user && user.token) {

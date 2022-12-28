@@ -20,10 +20,12 @@ const ItemDetailsContainer = () => {
   let { data } = vehicle;
 
   const [star, setStar] = useState(0);
+  const [reloadPage, setReloadPage] = useState(false);
 
   useEffect(() => {
     dispatch(getVehicleDetails(id));
-  }, [dispatch, id]);
+    setReloadPage(false);
+  }, [dispatch, id, reloadPage]);
 
   useEffect(() => {
     if (data?.ratings && user) {
@@ -56,7 +58,11 @@ const ItemDetailsContainer = () => {
             star={star}
           />
 
-          <ReviewSection vehicleData={data} star={star} />
+          <ReviewSection
+            vehicleData={data}
+            star={star}
+            setReloadPage={setReloadPage}
+          />
         </>
       )}
     </Container>
