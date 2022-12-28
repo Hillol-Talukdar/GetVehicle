@@ -51,8 +51,8 @@ const ReviewSectionCard = ({ review, setReloadPage }) => {
     updateAReview(review?._id, { comment: comment }, user.token)
       .then((res) => {
         toast.success(`Review updated successfully!`);
-        setComment("")
-        handleUpdateModalClose()
+        setComment('');
+        handleUpdateModalClose();
         setReloadPage(true);
       })
       .catch((err) => {
@@ -72,7 +72,10 @@ const ReviewSectionCard = ({ review, setReloadPage }) => {
       >
         <Card.Body>
           <Card.Title>{review?.user?.name}</Card.Title>
-          <Card.Text>{review?.createdAt?.substr(11, 5)}</Card.Text>
+          <Card.Text>
+            {review?.createdAt?.substr(11, 5)},{' '}
+            {review?.createdAt?.substr(0, 10)}
+          </Card.Text>
         </Card.Body>
 
         <Card.Body>

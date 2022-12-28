@@ -24,6 +24,7 @@ exports.getAVehicle = catchAsync(async (req, res, next) => {
         .populate({
             path: 'reviews',
             populate: { path: 'user', select: 'name' },
+            options: { sort: { createdAt: -1 } },
         });
 
     if (!vehicle) {

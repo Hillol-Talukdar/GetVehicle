@@ -50,6 +50,7 @@ const ReviewSection = ({ vehicleData, star, setReloadPage }) => {
       <div className="mb-4 reviewSectionPostCommentContainer">
         <CreateOrUpdateReviewForm
           id=""
+          comment={comment}
           submitHandler={submitHandler}
           changeHandler={changeHandler}
           buttonName="Post"
