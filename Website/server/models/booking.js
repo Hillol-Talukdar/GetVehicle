@@ -41,6 +41,10 @@ const bookingSchema = new mongoose.Schema(
             ref: 'User',
             required: true,
         },
+        userPhoneNumber: {
+            type: String,
+            required: true
+        },
         vehicle: {
             type: ObjectId,
             ref: 'Vehicle',
