@@ -12,7 +12,7 @@ const BookingList = () => {
   const loadAllBookings = () => {
     getAllBookings(user.token).then((res)=>{
         setAllBookings(res.data.data);
-        console.log(res.data.data);
+        // console.log(res.data.data);
     }).catch((err)=>{
         console.log(err.message);
     })
