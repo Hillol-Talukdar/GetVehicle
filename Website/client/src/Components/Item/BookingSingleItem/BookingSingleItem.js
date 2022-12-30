@@ -9,10 +9,17 @@ import './BookingSingleItem.css';
 const BookingSingleItem = (props) => {
   const currentItem = props.item;
 
+  const initState = {
+    paid: `${currentItem?.paid}`,
+    handedOver: `${currentItem?.handedOver}`,
+    received: `${currentItem?.received}`,
+  };
+
   const user = useSelector((state) => state.userReducer);
 
   const [loading, setLoading] = useState(false);
   const [showUpdateModal, setShowUpdateModal] = useState(false);
+  const [values, setValues] = useState(initState);
 
   const handleUpdateModalClose = () => {
     setShowUpdateModal(false);
@@ -26,21 +33,17 @@ const BookingSingleItem = (props) => {
     return new Date(date).toUTCString().substring(0, 16);
   };
 
+  const changeHandler = (e) => {
+    setValues({ ...values, [e.target.name]: e.target.value });
+    
+  };
+
   const submitHandler = (e) => {
-    console.log("SISISISI")
     e.preventDefault();
 
     setLoading(true);
 
-    updateABooking(
-      currentItem?._id,
-      {
-        paid: `${currentItem?.paid}`,
-        handedOver: `${currentItem?.handedOver}`,
-        received: `${currentItem?.received}`,
-      },
-      user.token
-      )
+    updateABooking(currentItem?._id, values, user.token)
       .then((res) => {
         setLoading(false);
         toast.success(`Booking is updated!`);
@@ -127,8 +130,9 @@ const BookingSingleItem = (props) => {
           <div>
             <Form.Select
               className="enhanced-select"
-              name="payment_status"
+              name="paid"
               size="sm"
+              onChange={changeHandler}
             >
               <option value="true" selected={currentItem?.paid === true}>
                 Paid
@@ -145,8 +149,9 @@ const BookingSingleItem = (props) => {
           <div>
             <Form.Select
               className="enhanced-select"
-              name="is_handed_over_to_user"
+              name="handedOver"
               size="sm"
+              onChange={changeHandler}
             >
               <option value="true" selected={currentItem?.handedOver === true}>
                 Yes
@@ -163,8 +168,9 @@ const BookingSingleItem = (props) => {
           <div>
             <Form.Select
               className="enhanced-select"
-              name="is_handed_over_to_user"
+              name="received"
               size="sm"
+              onChange={changeHandler}
             >
               <option value="true" selected={currentItem?.received === true}>
                 Yes
