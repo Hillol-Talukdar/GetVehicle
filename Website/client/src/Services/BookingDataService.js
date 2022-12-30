@@ -25,3 +25,15 @@ export const createBooking = async (bookingData, authtoken) => {
     }
   );
 };
+
+export const updateABooking = async (id, bookingData, authtoken) => {
+  return await axios.patch(
+    `${process.env.REACT_APP_API}/booking/${id}`,
+    bookingData,
+    {
+      headers: {
+        authtoken,
+      },
+    }
+  );
+};

@@ -1,11 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
+import { updateABooking } from '../../../Services/BookingDataService';
 import UserDetailsModal from '../../Modal/UserDetailsModal';
 import './BookingSingleItem.css';
 
 const BookingSingleItem = (props) => {
   const currentItem = props.item;
 
+  const user = useSelector((state) => state.userReducer);
+
+  const [loading, setLoading] = useState(false);
   const [showUpdateModal, setShowUpdateModal] = useState(false);
 
   const handleUpdateModalClose = () => {
@@ -19,6 +25,37 @@ const BookingSingleItem = (props) => {
   const getFormattedDate = (date) => {
     return new Date(date).toUTCString().substring(0, 16);
   };
+
+  const submitHandler = (e) => {
+    console.log("SISISISI")
+    e.preventDefault();
+
+    setLoading(true);
+
+    updateABooking(
+      currentItem?._id,
+      {
+        paid: `${currentItem?.paid}`,
+        handedOver: `${currentItem?.handedOver}`,
+        received: `${currentItem?.received}`,
+      },
+      user.token
+      )
+      .then((res) => {
+        setLoading(false);
+        toast.success(`Booking is updated!`);
+      })
+      .catch((err) => {
+        setLoading(false);
+        toast.error(
+          err.response && err.response.data.message
+            ? err.response.data.message
+            : err.message
+         );
+      });
+    
+  };
+  
 
   return (
     <>
@@ -45,6 +82,9 @@ const BookingSingleItem = (props) => {
               size="sm"
               style={{ fontSize: 'medium' }}
               variant="outline-primary"
+              onClick={e=> {
+                submitHandler(e)
+              }}
             >
               Save Changes
             </Button>
