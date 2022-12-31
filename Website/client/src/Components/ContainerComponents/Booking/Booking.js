@@ -207,6 +207,7 @@ const Booking = () => {
                       required
                       value={phoneNumber}
                       onChange={checkAndSetPhoneNumber}
+                      disabled={showStripePayment}
                     ></input>
                     <span className="text-danger required-text">Required</span>
                   </div>
@@ -235,6 +236,7 @@ const Booking = () => {
                       checked={acknowledgement}
                       onChange={() => setAcknowledgement(!acknowledgement)}
                       aria-label="acknowledge"
+                      disabled={showStripePayment}
                     />
                     <span className="text-danger required-text">Required</span>
                   </div>

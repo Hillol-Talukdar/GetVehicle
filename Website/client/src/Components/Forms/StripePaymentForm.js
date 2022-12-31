@@ -79,17 +79,16 @@ const StripePaymentForm = ({
         </fieldset>
 
         {loading ? (
-          <button className="stripeButton" disabled>
+          <button className="btn btn-light payment-button" style={{ marginTop: '10px' }} disabled>
             Paying
           </button>
         ) : (
-          <Button
-            variant="light"
-            className="payment-button"
+          <button
+            className="btn btn-light payment-button"
             style={{ marginTop: '10px' }}
           >
             Pay {totalPayableAmount} Taka
-          </Button>
+          </button>
         )}
       </form>
     </div>
