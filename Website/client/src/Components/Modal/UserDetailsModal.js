@@ -2,7 +2,6 @@ import React from 'react';
 import { Image, ListGroup, Modal } from 'react-bootstrap';
 
 const UserDetailsModal = ({ userData, userPhoneNumber, show, handleClose }) => {
-  console.log(userData);
   return (
     <>
       <Modal show={show} onHide={handleClose}>

@@ -7,6 +7,8 @@ import UserDetailsModal from '../../Modal/UserDetailsModal';
 import './BookingSingleItem.css';
 
 const BookingSingleItem = (props) => {
+  const [isDataEdited, setIsDataEdited] = useState(false);
+
   const currentItem = props.item;
 
   const initState = {
@@ -35,7 +37,7 @@ const BookingSingleItem = (props) => {
 
   const changeHandler = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
-    
+    setIsDataEdited(true);
   };
 
   const submitHandler = (e) => {
@@ -46,6 +48,7 @@ const BookingSingleItem = (props) => {
     updateABooking(currentItem?._id, values, user.token)
       .then((res) => {
         setLoading(false);
+        setIsDataEdited(false);
         toast.success(`Booking is updated!`);
       })
       .catch((err) => {
@@ -84,7 +87,8 @@ const BookingSingleItem = (props) => {
             <Button
               size="sm"
               style={{ fontSize: 'medium' }}
-              variant="outline-primary"
+              variant={isDataEdited ? "outline-primary" : "outline-secondary"}
+              disabled={!isDataEdited}
               onClick={e=> {
                 submitHandler(e)
               }}

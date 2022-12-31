@@ -24,6 +24,7 @@ const BookingList = () => {
 
   return (
     <Container>
+      <h4>Booking List</h4>
       <div className="d-flex flex-wrap">
         {allBookings.map((item) => (
           !item.isTrashed && ( <BookingSingleItem item={item} loadAllBookings={loadAllBookings}></BookingSingleItem> )
