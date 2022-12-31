@@ -8,6 +8,8 @@ router
     .get(vehicleController.getAllVehicle)
     .post(checkAuth, vehicleController.createAVehicle);
 
+router.route('/rating/:id').patch(checkAuth, vehicleController.vehicleStar);
+
 router
     .route('/:id')
     .get(vehicleController.getAVehicle)

@@ -58,6 +58,8 @@ export const VehicleInfoConstants = {
   SUB_CATEGORIES: 'subCategories',
   MANUAL_TRANSMISSION_IN_MODEL: 'Manual',
   NONE_FUEL_TYPE_IN_MODEL: 'None',
+  VEHICLE_TYPE: 'Vehicle Type',
+  NOT_APPLICABLE: 'N/A',
 };
 
 export const CategoryInfoConstants = {

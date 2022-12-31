@@ -71,3 +71,16 @@ export const uploadImagesOnCloudinary = (imageFiles, resolve, reject) => {
   });
   
 };
+
+export const vehicleStar = async (id, star, authtoken) => {
+  return await axios.patch(
+      `${process.env.REACT_APP_API}/vehicle/rating/${id}`,
+      { star },
+      {
+          headers: {
+              authtoken,
+          },
+      }
+  );
+};
+

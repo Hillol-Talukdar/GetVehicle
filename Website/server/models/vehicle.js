@@ -36,7 +36,7 @@ const vehicleSchema = new mongoose.Schema(
         },
         bootSpace: {
             type: String,
-            trim: true
+            trim: true,
         },
         groundClearance: {
             type: String,
@@ -57,11 +57,12 @@ const vehicleSchema = new mongoose.Schema(
             default: 1,
             min: 1,
         },
-        averageRating: {
-            type: Number,
-            default: 0,
-            min: 0,
-        },
+        ratings: [
+            {
+                star: Number,
+                postedBy: { type: ObjectId, ref: 'User' },
+            },
+        ],
         currentLocationString: {
             type: String,
             trim: true,
@@ -87,9 +88,19 @@ const vehicleSchema = new mongoose.Schema(
         isTrashed: {
             type: Boolean,
             default: false,
-        }
+        },
     },
-    { timestamps: true }
+    {
+        timestamps: true,
+        toObject: { virtuals: true },
+        toJSON: { virtuals: true },
+    }
 );
+
+vehicleSchema.virtual('reviews', {
+    ref: 'Review',
+    localField: '_id',
+    foreignField: 'vehicle',
+});
 
 module.exports = mongoose.model('Vehicle', vehicleSchema);
