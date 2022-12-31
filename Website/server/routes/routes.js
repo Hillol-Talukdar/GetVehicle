@@ -6,4 +6,5 @@ module.exports = {
     '/api/booking': require('./booking'),
     '/api/auth': require('./auth'),
     '/api/review': require('./review'),
+    '/api/stripe-payment': require('./stripe'),
 };
