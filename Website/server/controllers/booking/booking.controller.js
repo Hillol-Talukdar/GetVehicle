@@ -18,7 +18,7 @@ const createBooking = catchAsync(async (req, res, next) => {
 const getAllBookings = catchAsync(async (req, res, next) => {
     const bookings = await Booking.find({})
         .populate({ path: 'user', select: 'name email' })
-        .populate({ path: 'vehicle' });
+        .populate({ path: 'vehicle', select: 'model'});
 
     res.status(200).json({
         status: 'Success',
@@ -95,9 +95,8 @@ const getSanitizedBookingDates = (bookingDatesDetails) => {
 };
 
 const getAllBookingDates = catchAsync(async (req, res, next) => {
-    console.log(req.params.vehicleId);
     const bookingDates = await Booking.find({
-        vehicleId: req.params.vehicleId,
+        vehicle: req.params.vehicleId,
     }).select('handOverDate receiveDate isTrashed');
 
     const sanitizedBookingDates = getSanitizedBookingDates(bookingDates);
