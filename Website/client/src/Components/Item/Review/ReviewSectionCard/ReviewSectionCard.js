@@ -64,6 +64,10 @@ const ReviewSectionCard = ({ review, setReloadPage }) => {
       });
   };
 
+  const getFormattedDate = (date) => {
+    return new Date(date).toUTCString();
+  };
+
   return (
     <>
       <Card
@@ -73,8 +77,7 @@ const ReviewSectionCard = ({ review, setReloadPage }) => {
         <Card.Body>
           <Card.Title>{review?.user?.name}</Card.Title>
           <Card.Text>
-            {review?.createdAt?.substr(11, 5)},{' '}
-            {review?.createdAt?.substr(0, 10)}
+            {getFormattedDate(review?.createdAt)}
           </Card.Text>
         </Card.Body>
 
