@@ -45,7 +45,7 @@ const ReviewSection = ({ vehicleData, star, setReloadPage }) => {
 
   return (
     <>
-      <h5 className="mt-4">{vehicleData?.reviews?.length} Reviews:</h5>
+      <h5 className="">Reviews of {vehicleData?.model} (Total {vehicleData?.reviews?.length} {vehicleData?.reviews?.length === 1 ? "Review" : "Reviews"})</h5>
 
       <div className="mb-4 reviewSectionPostCommentContainer">
         <CreateOrUpdateReviewForm
@@ -53,7 +53,7 @@ const ReviewSection = ({ vehicleData, star, setReloadPage }) => {
           comment={comment}
           submitHandler={submitHandler}
           changeHandler={changeHandler}
-          buttonName="Post"
+          buttonName="Post Your Review"
         />
       </div>
 

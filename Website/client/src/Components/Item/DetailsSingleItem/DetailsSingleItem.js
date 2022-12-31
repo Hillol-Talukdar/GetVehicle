@@ -14,6 +14,7 @@ const DetailsSingleItem = ({ data, onClickStar, star }) => {
     <>
       <Row className="p-2">
         <Col md={7}>
+        <h4>Details of {data?.model}</h4>
           <div className="mt-3">
             {data?.photo && data?.photo.length ? (
               <Carousel
@@ -45,19 +46,6 @@ const DetailsSingleItem = ({ data, onClickStar, star }) => {
               />
             )}
           </div>
-
-          <Tabs
-            defaultActiveKey={TabsConstants.DESCRIPTION}
-            id="uncontrolled-tab-example"
-            className="mb-3 mt-3"
-          >
-            <Tab eventKey={TabsConstants.DESCRIPTION} title="Description">
-              Description
-            </Tab>
-            <Tab eventKey={TabsConstants.MORE} title="More">
-              More
-            </Tab>
-          </Tabs>
         </Col>
 
         <Col md={5}>

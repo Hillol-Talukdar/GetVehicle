@@ -9,19 +9,16 @@ const CreateOrUpdateReviewForm = ({
     buttonName,
   }) => {
   return (
-    <Form onSubmit={e=> submitHandler(e, id)}>
+    <Form onSubmit={e=> submitHandler(e, id)} style={{background: "#fad209", padding: "15px"}}>
       <Form.Group
-        className="form-group d-flex align-items-center col-sm-4 flex-column mx-auto mb-3"
+        className="form-group d-flex align-items-center"
         controlId="formBasicCategoryName"
       >
-        <Form.Label>
-          Enter your Review...
-        </Form.Label>
-
         <Form.Control
-          type="Text"
+          as="textarea"
           name="comment"
-          placeholder="Enter your review"
+          placeholder="Enter your review here"
+          style={{ height: '120px' }}
           value={comment}
           onChange={changeHandler}
           required
@@ -29,8 +26,9 @@ const CreateOrUpdateReviewForm = ({
       </Form.Group>
 
       <Button
-        className="mx-auto mt-3 d-grid gap-2 col-sm-2 mb-3"
-        variant="primary"
+        className="d-grid gap-2"
+        style={{marginLeft: "auto", marginTop: "12px"}}
+        variant="secondary"
         type="submit"
       >
         {buttonName}
