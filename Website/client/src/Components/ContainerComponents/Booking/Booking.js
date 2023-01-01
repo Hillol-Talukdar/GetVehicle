@@ -74,16 +74,16 @@ const Booking = () => {
           received: false,
           handOverDate: startDate,
           receiveDate: endDate,
-          userId: `${user._id}`,
+          user: `${user._id}`,
           userPhoneNumber: phoneNumber,
-          vehicleId: `${vehicleData._id}`,
+          vehicle: `${vehicleData._id}`,
           isTrashed: false,
         },
         user.token
       )
         .then((res) => {
-          toast.success(`"${res.data.data.name}" is created!`);
-          window.alert(`Payment successful`);
+          toast.success("Payment successful!");
+          // window.alert(`Payment successful`);
           window.location.replace('/');
         })
         .catch((err) => {

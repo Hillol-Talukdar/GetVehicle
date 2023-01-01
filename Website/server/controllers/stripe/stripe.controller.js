@@ -12,7 +12,7 @@ const stripePayment = catchAsync(async (req, res, next) => {
         payment_method: id,
         confirm: true,
     });
-    console.log('Payment', payment);
+    // console.log('Payment', payment);
 
     res.status(200).json({
         status: 'Success',
