@@ -84,11 +84,10 @@ exports.deleteAVehicle = catchAsync(async (req, res, next) => {
 });
 
 exports.vehicleStar = catchAsync(async (req, res, next) => {
-    console.log('AISIIIIIIIIIIII');
     const vehicle = await Vehicle.findById(req.params.id);
     const user = await User.findOne({ email: req.user.email });
     const { star } = req.body;
-    console.log('AISIIIIIIIIIIII 2');
+    
     //check if logged in uuser have already added rating to this product
     let existingRatingObject = vehicle.ratings.find(
         (element) => element.postedBy.toString() === user._id.toString()

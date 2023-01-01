@@ -5,9 +5,7 @@
     <string name="dummy_content">DUMMY\nCONTENT</string>
 
     <!--menu items-->
-    <string name="item_1">Item 1</string>
-    <string name="item_2">Item 2</string>
-    <string name="item_3">Item 3</string>
+    <string name="home">Home</string>
     <string name="cars">Cars</string>
     <string name="bikes">Bikes</string>
     <string name="others">Others</string>
@@ -17,4 +15,26 @@
     <!--navigation drawer-->
     <string name="nav_open">Open</string>
     <string name="nav_close">Close</string>
+    <string name="mileage">Mileage</string>
+    <string name="engine">Engine</string>
+    <string name="location">Location</string>
+    <string name="model_name">Model Name</string>
+    <string name="fuel_type">Fuel Type</string>
+    <string name="petrol">Petrol</string>
+    <string name="overview">Overview</string>
+    <string name="category">Category</string>
+    <string name="subcategory">SubCategory</string>
+    <string name="seatCount">Seat Count</string>
+    <string name="transmission">Transmission</string>
+    <string name="bootSpace">Boot Space</string>
+    <string name="groundClearance">Ground Clearance</string>
+    <string name="reviews">Reviews</string>
+    <string name="rating_out_of">%.1f/%.1f</string>
+    <string name="km_per_hour">km/h</string>
+    <string name="cost_per_day"><b>\u09F3</b> %d per day</string>
+    <string name="about">About</string>
+    <string name="profile">Profile</string>
+    <string name="login">Log in</string>
+    <string name="user_name">User Name</string>
+    <string name="user_email">user@email.com</string>
 </resources>
