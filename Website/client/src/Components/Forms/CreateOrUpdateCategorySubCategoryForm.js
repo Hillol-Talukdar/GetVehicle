@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Form } from 'react-bootstrap';
-import { CategoryInfoConstants, VehicleInfoConstants } from '../../Constants/CommonConstants';
+import { CategoryInfoConstants } from '../../Constants/CommonConstants';
 
 const CreateOrUpdateCategorySubCateogoryForm = ({
   id,

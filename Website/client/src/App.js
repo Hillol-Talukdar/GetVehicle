@@ -1,7 +1,7 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Header from './Components/NavbarAndFooter/Header/Header';
-import HomeContainer from './Components/ContainerComponents/HomeContainer';
+import HomeContainer from './Components/ContainerComponents/HomeContainer/HomeContainer';
 import ItemDetailsContainer from './Components/ContainerComponents/ItemDetailsContainer';
 import { useDispatch } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
@@ -15,6 +15,8 @@ import CreateOrUpdateItemContainer from './Components/ContainerComponents/Admin/
 import CreateOrUpdateCategoryContainer from './Components/ContainerComponents/Admin/Item/CreateOrUpdateCategoryContainer/CreateOrUpdateCategoryContainer';
 import { CreateOrUpdateSubCategoryContainer } from './Components/ContainerComponents/Admin/Item/CreateOrUpdateSubCategoryContainer/CreateOrUpdateSubCategoryContainer';
 import AdminPrivateRoute from './Components/Route/AdminPrivateRoute';
+import Booking from './Components/ContainerComponents/Booking/Booking';
+import BookingList from './Components/ContainerComponents/Admin/BookingListContainer/BookingList';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -36,7 +38,7 @@ const App = () => {
       <ToastContainer />
       <Header />
       <Routes>
-        <Route exact path="/" element={<HomeContainer />} />
+        <Route exact path="/" element={<HomeContainer/>} />
         <Route exact path="/details/:id" element={<ItemDetailsContainer />} />
         <Route
           exact
@@ -56,6 +58,13 @@ const App = () => {
           element={<AdminPrivateRoute />}>
             <Route exact path="/admin/category/:categoryId/create-or-update-category" element={<CreateOrUpdateSubCategoryContainer/>}/>
         </Route>
+        <Route
+          exact
+          path="/admin/booking-list"
+          element={<AdminPrivateRoute />}>
+            <Route exact path="/admin/booking-list" element={<BookingList/>}/>
+        </Route>
+        <Route exact path="/booking/:id" element={<Booking/>} />
       </Routes>
       <Footer />
     </>

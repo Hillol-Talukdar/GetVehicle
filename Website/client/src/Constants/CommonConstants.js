@@ -17,6 +17,7 @@ export const NavbarConstants = {
   LOGIN: 'Login',
   CREATE_VEHICLE: 'Create Vehicle',
   CREATE_CATEGORY: 'Create Category',
+  BOOKING_LIST: 'Booking List'
 };
 
 export const VehicleInfoConstants = {
@@ -57,6 +58,8 @@ export const VehicleInfoConstants = {
   SUB_CATEGORIES: 'subCategories',
   MANUAL_TRANSMISSION_IN_MODEL: 'Manual',
   NONE_FUEL_TYPE_IN_MODEL: 'None',
+  VEHICLE_TYPE: 'Vehicle Type',
+  NOT_APPLICABLE: 'N/A',
 };
 
 export const CategoryInfoConstants = {
@@ -127,4 +130,9 @@ export const CreateOrUpdateConstants = {
   EDIT: 'Edit',
   CREATE_VEHICLE_TITLE: 'Create New Vehicle',
   UPDATE_VEHICLE_TITLE: 'Update Vehicle'
+}
+
+export const AskForLoginModalConstants = {
+  HEADER: 'Login To Continue...',
+  BODY: 'You need to login before booking the vehicle.'
 }

@@ -10,7 +10,6 @@ module.exports = async (req, res, next) => {
         req.user = decodedIdTokenFromFirebase;
         next();
     } catch (error) {
-        // console.log('Error while verifying Firebase ID token:', error);
         return next(new AppError('You are not logged in!', 403));
     }
 };

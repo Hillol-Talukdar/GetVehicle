@@ -18,7 +18,7 @@ const createBooking = catchAsync(async (req, res, next) => {
 const getAllBookings = catchAsync(async (req, res, next) => {
     const bookings = await Booking.find({})
         .populate({ path: 'user', select: 'name email' })
-        .populate({ path: 'vehicle' });
+        .populate({ path: 'vehicle', select: 'model'});
 
     res.status(200).json({
         status: 'Success',
@@ -66,10 +66,52 @@ const deleteABooking = catchAsync(async (req, res, next) => {
     });
 });
 
+const getFormattedDate = (date) => {
+    return new Date(date).toUTCString().substring(0, 16);
+};
+
+var isBeforeOrEqualToCurrentDate = function (date) {
+    const givenDate = date;
+    const currentDate = new Date();
+    if (currentDate > givenDate) return false;
+    return true;
+};
+
+const getSanitizedBookingDates = (bookingDatesDetails) => {
+    let sanitizedBookingDates = [];
+
+    bookingDatesDetails.forEach((bookingDates) => {
+        if (
+            isBeforeOrEqualToCurrentDate(bookingDates?.receiveDate) &&
+            !bookingDates?.isTrashed
+        ) {
+            sanitizedBookingDates.push({
+                handOverDate: getFormattedDate(bookingDates?.handOverDate),
+                receiveDate: getFormattedDate(bookingDates?.receiveDate),
+            });
+        }
+    });
+    return sanitizedBookingDates;
+};
+
+const getAllBookingDates = catchAsync(async (req, res, next) => {
+    const bookingDates = await Booking.find({
+        vehicle: req.params.vehicleId,
+    }).select('handOverDate receiveDate isTrashed');
+
+    const sanitizedBookingDates = getSanitizedBookingDates(bookingDates);
+
+    res.status(200).json({
+        status: 'Success',
+        data: sanitizedBookingDates,
+    });
+});
+
 module.exports = {
     createBooking,
     getAllBookings,
     getABooking,
     updateABooking,
     deleteABooking,
+    getAllBookingDates,
 };

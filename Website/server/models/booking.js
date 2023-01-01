@@ -20,7 +20,7 @@ const bookingSchema = new mongoose.Schema(
             type: String,
             enum: ['Cash', 'Online'],
         },
-        delivered: {
+        handedOver: {
             type: Boolean,
             required: true,
         },
@@ -28,18 +28,22 @@ const bookingSchema = new mongoose.Schema(
             type: Boolean,
             required: true,
         },
-        deliveryDate: {
+        handOverDate: {
             type: Date,
             required: true,
         },
         receiveDate: {
             type: Date,
-            // required: true,
+            required: true,
         },
         user: {
             type: ObjectId,
             ref: 'User',
             required: true,
+        },
+        userPhoneNumber: {
+            type: String,
+            required: true
         },
         vehicle: {
             type: ObjectId,
