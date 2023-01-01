@@ -87,7 +87,7 @@ exports.vehicleStar = catchAsync(async (req, res, next) => {
     const vehicle = await Vehicle.findById(req.params.id);
     const user = await User.findOne({ email: req.user.email });
     const { star } = req.body;
-
+    
     //check if logged in uuser have already added rating to this product
     let existingRatingObject = vehicle.ratings.find(
         (element) => element.postedBy.toString() === user._id.toString()
