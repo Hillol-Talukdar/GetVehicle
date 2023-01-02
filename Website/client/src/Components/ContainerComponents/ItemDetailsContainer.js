@@ -8,6 +8,7 @@ import {
 } from '../../Services/VehicleDataService';
 import ReviewSection from '../Item/Review/ReviewSection/ReviewSection';
 import DetailsSingleItem from '../Item/DetailsSingleItem/DetailsSingleItem';
+import { toast } from 'react-toastify';
 
 const ItemDetailsContainer = () => {
   const { id } = useParams();
@@ -40,6 +41,7 @@ const ItemDetailsContainer = () => {
     setStar(newRating);
     vehicleStar(name, newRating, user.token).then((res) => {
       // console.log('Rating clicked', res.data);
+      toast.success("Thanks For Your Valuable Review!");
       dispatch(getVehicleDetails(id));
     });
   };

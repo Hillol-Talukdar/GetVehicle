@@ -10,6 +10,7 @@ import {
   updateAReview,
 } from '../../../../Services/ReviewsService';
 import UpdateReviewModal from '../../../Modal/UpdateReviewModal';
+import Rating from 'react-star-ratings';
 
 const ReviewSectionCard = ({ review, setReloadPage }) => {
   const user = useSelector((state) => state.userReducer);
@@ -75,10 +76,19 @@ const ReviewSectionCard = ({ review, setReloadPage }) => {
         className="home-item-card flex-fill"
       >
         <Card.Body>
-          <Card.Title>{review?.user?.name}</Card.Title>
-          <Card.Text>
-            {getFormattedDate(review?.createdAt)}
-          </Card.Text>
+          <Card.Title>
+            {review?.user?.name}{' '}
+            {
+              <Rating
+                starDimension="20px"
+                starSpacing="2px"
+                starRatedColor="#ffd700"
+                editing={false}
+                rating={review?.rating ? review?.rating : 0}
+              />
+            }
+          </Card.Title>
+          <Card.Text>{getFormattedDate(review?.createdAt)}</Card.Text>
         </Card.Body>
 
         <Card.Body>
