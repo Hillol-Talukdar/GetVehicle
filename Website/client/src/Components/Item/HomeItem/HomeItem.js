@@ -1,8 +1,12 @@
 import { React } from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Carousel, Image } from 'react-bootstrap';
 import Card from 'react-bootstrap/Card';
 import { Link } from 'react-router-dom';
-import { UserRole, VehicleInfoConstants, ButtonConstants } from '../../../Constants/CommonConstants';
+import {
+  UserRole,
+  VehicleInfoConstants,
+  ButtonConstants,
+} from '../../../Constants/CommonConstants';
 import { MdDoubleArrow } from 'react-icons/md';
 import { FaRegHandPointRight } from 'react-icons/fa';
 import { BiEditAlt } from 'react-icons/bi';
@@ -27,54 +31,83 @@ const HomeItem = (props) => {
 
   const handleDeleteButtonClick = (e) => {
     if (window.confirm(DELETE_CONFIRMATION)) {
-      updateAVehicle(e.target.value, {[VehicleInfoConstants.IS_TRASHED_IN_MODEL]: true}, user.token)
-      .then((res) => {
-        toast.success(`Deleted ${res.data.data.model} successfully!`);
-        props.loadAllVehicles();
-      })
-      .catch(error => {
-        toast.error(error);
-      });
+      updateAVehicle(
+        e.target.value,
+        { [VehicleInfoConstants.IS_TRASHED_IN_MODEL]: true },
+        user.token
+      )
+        .then((res) => {
+          toast.success(`Deleted ${res.data.data.model} successfully!`);
+          props.loadAllVehicles();
+        })
+        .catch((error) => {
+          toast.error(error);
+        });
     } else {
     }
   };
 
   return (
     <Card
-      style={{ width: '15rem', margin: '8px' }}
+      style={{ width: '13rem', margin: '8px' }}
       className="home-item-card flex-fill"
     >
       {loggedInUserDetails && loggedInUserDetails.role === UserRole.ADMIN && (
-        <Link to='/admin/create-or-update-vehicle' state={currentItem}>
+        <Link to="/admin/create-or-update-vehicle" state={currentItem}>
           <Button
             className="home-item-edit-button"
             variant="warning"
             size="sm"
+            style={{ fontSize: 'small' }}
           >
             {ButtonConstants.EDIT_BUTTON} <BiEditAlt className="mb-1" />
           </Button>
         </Link>
       )}
-      <Card.Img variant="top" src={coverPhoto} alt="Card image cap"></Card.Img>
+
+      {currentItem?.photo && currentItem?.photo.length ? (
+        <Carousel controls={false} indicators={false} interval={2500}>
+          {currentItem?.photo.map((photo, idx) => (
+            <Carousel.Item>
+              <img
+                className="d-block w-100"
+                src={photo}
+                alt="Vehicle Image Missing"
+              />
+            </Carousel.Item>
+          ))}
+        </Carousel>
+      ) : (
+        <Card.Img
+          variant="top"
+          src={coverPhoto}
+          alt="Vehicle Image Missing"
+        ></Card.Img>
+      )}
+
       <Card.Body>
-        <Card.Title>{currentItem.model}</Card.Title>
-        <Card.Text>
-          {VehicleInfoConstants.MILEAGE + ': ' + currentItem.mileage} {' | '}
-          {VehicleInfoConstants.ENGINE + ': ' + currentItem.engine}
+        <Card.Title style={{ fontSize: 'medium' }}>
+          {currentItem.model}
+        </Card.Title>
+        <Card.Text className="card-text-color">
+          {/* {VehicleInfoConstants.MILEAGE + ': ' + currentItem.mileage} {' | '}
+          {VehicleInfoConstants.ENGINE + ': ' + currentItem.engine} */}
+          ৳ {currentItem.costPerDay} {' | '}{' '}
+          {VehicleInfoConstants.ENGINE + ' ' + currentItem.engine}
         </Card.Text>
       </Card.Body>
 
-      <Card.Body>
-        <div className="d-flex justify-content-around">
+      <Card.Footer style={{ border: 'none', borderWidth: 0, border: 0 }}>
+        <div className="d-flex justify-content-around card-button-div">
           <Link to={'/details/' + currentItem._id}>
-            <Button variant="info" size="sm">
+            <Button variant="info" size="sm" style={{ fontSize: 'small' }}>
               View Details <MdDoubleArrow className="mb-1" />
             </Button>
           </Link>
 
           {loggedInUserDetails && loggedInUserDetails.role === UserRole.USER && (
             <Link to={'/booking/' + currentItem._id}>
-              <Button variant="warning" size="sm">
+              <Button variant="warning" size="sm" style={{ fontSize: 'small' }}>
                 <FaRegHandPointRight className="mb-1" /> Book Now
               </Button>
             </Link>
@@ -84,14 +117,15 @@ const HomeItem = (props) => {
             <Button
               onClick={handleDeleteButtonClick}
               value={currentItem._id}
-              variant="outline-danger"
+              variant="danger"
               size="sm"
+              style={{ fontSize: 'small' }}
             >
-              <RiDeleteBin2Fill className="mb-1" /> Delete Now
+              <RiDeleteBin2Fill className="mb-1" /> Remove
             </Button>
           )}
         </div>
-      </Card.Body>
+      </Card.Footer>
     </Card>
   );
 };
