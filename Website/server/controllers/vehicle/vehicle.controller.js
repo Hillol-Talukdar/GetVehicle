@@ -1,5 +1,6 @@
 const catchAsync = require('../../utils/catchAsync');
 const Vehicle = require('../../models/vehicle');
+const Review = require('../../models/review');
 const User = require('../../models/user');
 
 exports.createAVehicle = catchAsync(async (req, res, next) => {
@@ -103,6 +104,8 @@ exports.vehicleStar = catchAsync(async (req, res, next) => {
             { new: true }
         ).exec();
 
+        await Review.updateMany({user: user}, {rating: star} );
+
         // console.log("RatingAdded", ratingAdded);
         res.status(200).json(ratingAdded);
     } else {
@@ -114,6 +117,8 @@ exports.vehicleStar = catchAsync(async (req, res, next) => {
             { $set: { 'ratings.$.star': star } },
             { new: true }
         ).exec();
+
+        await Review.updateMany({user: user}, {rating: star} );
 
         // console.log("RatingUpdated", ratingUpdated);
         res.status(200).json(ratingUpdated);
