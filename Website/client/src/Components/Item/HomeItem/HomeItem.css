@@ -2,13 +2,23 @@
     box-shadow: 0px 2px 4px 0 rgba(0, 0, 0, 0.2);
     border-radius: 6px;
     transition: 0.3s;
-  }
-  
-  .home-item-card:hover {
-    box-shadow: 1px 10px 16px 0 rgba(0, 0, 0, 0.3);
-  }
+    font-size: small;
+}
 
-  .home-item-edit-button {
-    width: calc(100% - 30px);
-    margin: 15px;
-  }
+.card-button-div {
+  bottom: 0;
+  
+}
+
+.card-text-color {
+  color: rgb(102, 102, 102);
+}
+
+.home-item-card:hover {
+  box-shadow: 1px 10px 16px 0 rgba(0, 0, 0, 0.3);
+}
+
+.home-item-edit-button {
+  width: calc(100% - 30px);
+  margin: 15px;
+}
