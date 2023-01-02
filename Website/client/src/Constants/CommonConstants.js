@@ -5,7 +5,7 @@ export const AppConstants = {
 export const ButtonConstants = {
   ADD_BUTTON: 'Add',
   CREATE_BUTTON: 'Create',
-  EDIT_BUTTON: 'Edit',
+  EDIT_BUTTON: 'Edit Now',
   UPDATE_BUTTON: 'Update',
   DELETE_BUTTON: 'Delete Now',
 };

@@ -54,18 +54,7 @@ const HomeItem = (props) => {
       style={{ width: '13rem', margin: '8px' }}
       className="home-item-card flex-fill"
     >
-      {loggedInUserDetails && loggedInUserDetails.role === UserRole.ADMIN && (
-        <Link to="/admin/create-or-update-vehicle" state={currentItem}>
-          <Button
-            className="home-item-edit-button"
-            variant="warning"
-            size="sm"
-            style={{ fontSize: 'small' }}
-          >
-            {ButtonConstants.EDIT_BUTTON} <BiEditAlt className="mb-1" />
-          </Button>
-        </Link>
-      )}
+      <Link to={'/details/' + currentItem._id} style={{textDecoration: 'none', color: 'black'}}>
 
       {currentItem?.photo && currentItem?.photo.length ? (
         <Carousel controls={false} indicators={false} interval={2500}>
@@ -96,14 +85,15 @@ const HomeItem = (props) => {
           {VehicleInfoConstants.ENGINE + ': ' + currentItem.engine} */}
           ৳ {currentItem.costPerDay} {' | '}{' '}
           {VehicleInfoConstants.ENGINE + ' ' + currentItem.engine}
+          
         </Card.Text>
         <Card.Text>
-          {currentItem?.ratings && currentItem?.ratings?.length > 0
+        {currentItem?.ratings && currentItem?.ratings?.length > 0
             ? showAverageRating(currentItem)
             : (<div className="text-center d-flex">
             <span>
                 <Rating
-                    starDimension="20px"
+                    starDimension="15px"
                     starSpacing="2px"
                     starRatedColor="#ffd700"
                     editing={false}
@@ -117,23 +107,11 @@ const HomeItem = (props) => {
         </Card.Text>
       </Card.Body>
 
-      <Card.Footer style={{ border: 'none', borderWidth: 0, border: 0 }}>
-        <div className="d-flex justify-content-around card-button-div">
-          <Link to={'/details/' + currentItem._id}>
-            <Button variant="info" size="sm" style={{ fontSize: 'small' }}>
-              View Details <MdDoubleArrow className="mb-1" />
-            </Button>
-          </Link>
-
-          {loggedInUserDetails && loggedInUserDetails.role === UserRole.USER && (
-            <Link to={'/booking/' + currentItem._id}>
-              <Button variant="warning" size="sm" style={{ fontSize: 'small' }}>
-                <FaRegHandPointRight className="mb-1" /> Book Now
-              </Button>
-            </Link>
-          )}
+      
 
           {loggedInUserDetails && loggedInUserDetails.role === UserRole.ADMIN && (
+            <Card.Footer style={{ border: 'none', borderWidth: 0, border: 0 }}>
+            <div className="d-flex justify-content-around card-button-div">
             <Button
               onClick={handleDeleteButtonClick}
               value={currentItem._id}
@@ -143,9 +121,21 @@ const HomeItem = (props) => {
             >
               <RiDeleteBin2Fill className="mb-1" /> Remove
             </Button>
-          )}
-        </div>
+            <Link to="/admin/create-or-update-vehicle" state={currentItem}>
+          <Button
+            
+            variant="warning"
+            size="sm"
+            style={{ fontSize: 'small' }}
+          >
+            {ButtonConstants.EDIT_BUTTON} <BiEditAlt className="mb-1" />
+          </Button>
+        </Link>
+            </div>
       </Card.Footer>
+          )}
+        
+      </Link>
     </Card>
   );
 };
