@@ -16,6 +16,8 @@ import { useSelector } from 'react-redux';
 import { DELETE_CONFIRMATION } from '../../../Constants/AlertConstants';
 import { updateAVehicle } from '../../../Services/VehicleDataService';
 import { toast } from 'react-toastify';
+import { showAverageRating } from '../../showAverageRating';
+import Rating from "react-star-ratings";
 
 const HomeItem = (props) => {
   const loggedInUserDetails = useSelector((state) => state.userReducer);
@@ -94,6 +96,24 @@ const HomeItem = (props) => {
           {VehicleInfoConstants.ENGINE + ': ' + currentItem.engine} */}
           ৳ {currentItem.costPerDay} {' | '}{' '}
           {VehicleInfoConstants.ENGINE + ' ' + currentItem.engine}
+        </Card.Text>
+        <Card.Text>
+          {currentItem?.ratings && currentItem?.ratings?.length > 0
+            ? showAverageRating(currentItem)
+            : (<div className="text-center d-flex">
+            <span>
+                <Rating
+                    starDimension="20px"
+                    starSpacing="2px"
+                    starRatedColor="#ffd700"
+                    editing={false}
+                    rating={0}
+                />
+            </span>
+            <span>
+                &nbsp;(0)
+            </span>
+        </div>)}
         </Card.Text>
       </Card.Body>
 
