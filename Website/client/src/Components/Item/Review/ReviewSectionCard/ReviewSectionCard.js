@@ -76,17 +76,19 @@ const ReviewSectionCard = ({ review, setReloadPage }) => {
         className="home-item-card flex-fill"
       >
         <Card.Body>
-          <Card.Title>
-            {review?.user?.name}{' '}
-            {
-              <Rating
-                starDimension="20px"
-                starSpacing="2px"
-                starRatedColor="#ffd700"
-                editing={false}
-                rating={review?.rating ? review?.rating : 0}
-              />
-            }
+          <Card.Title className="d-flex justify-content-between">
+            {review?.user?.name}
+            <span>
+              {
+                <Rating
+                  starDimension="20px"
+                  starSpacing="2px"
+                  starRatedColor="#ffd700"
+                  editing={false}
+                  rating={review?.rating ? review?.rating : 0}
+                />
+              }
+            </span>
           </Card.Title>
           <Card.Text>{getFormattedDate(review?.createdAt)}</Card.Text>
         </Card.Body>
