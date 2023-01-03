@@ -8,6 +8,7 @@ import './BookingList.css';
 const BookingList = () => {
   const user = useSelector((state) => state.userReducer);
   const [allBookings, setAllBookings] = useState([]);
+  const [isDataUpdated, setIsDataUpdated] = useState(false);
 
   const loadAllBookings = () => {
     getAllBookings(user.token).then((res)=>{
@@ -20,14 +21,15 @@ const BookingList = () => {
 
   useEffect(()=>{
     loadAllBookings();
-  }, []);
+    setIsDataUpdated(false)
+  }, [isDataUpdated]);
 
   return (
     <Container>
       <h4>Booking List</h4>
       <div className="d-flex flex-wrap">
         {allBookings.map((item) => (
-          !item.isTrashed && ( <BookingSingleItem item={item} loadAllBookings={loadAllBookings}></BookingSingleItem> )
+          (!item?.isTrashed && !item?.isCanceled) && ( <BookingSingleItem item={item} loadAllBookings={loadAllBookings} setIsDataUpdated={setIsDataUpdated}></BookingSingleItem> )
         ))}
       </div>
     </Container>

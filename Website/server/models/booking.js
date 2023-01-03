@@ -50,6 +50,10 @@ const bookingSchema = new mongoose.Schema(
             ref: 'Vehicle',
             required: true,
         },
+        isCanceled: {
+            type: Boolean,
+            default: false,
+        },
         isTrashed: {
             type: Boolean,
             default: false,

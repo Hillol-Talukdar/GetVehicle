@@ -31,6 +31,7 @@ const BookingSingleItem = (props) => {
     setShowUpdateModal(true);
   };
 
+
   const getFormattedDate = (date) => {
     return new Date(date).toUTCString().substring(0, 16);
   };
@@ -39,6 +40,27 @@ const BookingSingleItem = (props) => {
     setValues({ ...values, [e.target.name]: e.target.value });
     setIsDataEdited(true);
   };
+
+  const handleCancelBooking= (e) => {
+    setLoading(true);
+
+    if (window.confirm("Are you sure you want to cancel?")) {
+      updateABooking(currentItem?._id, { isCanceled: true}, user.token)
+        .then((res) => {
+          setLoading(false);
+          toast.success(`Booking is Canceled!`);
+          props.setIsDataUpdated(true);
+        })
+        .catch((err) => {
+          setLoading(false);
+          toast.error(
+            err.response && err.response.data.message
+              ? err.response.data.message
+              : err.message
+          );
+        });
+    }
+  }
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -83,6 +105,16 @@ const BookingSingleItem = (props) => {
               }}
             >
               User Details
+            </Button>
+            <Button
+              size="sm"
+              style={{ fontSize: 'medium', marginRight: '10px' }}
+              variant="outline-danger"
+              onClick={(e) => {
+                handleCancelBooking();
+              }}
+            >
+              Cancel Booking
             </Button>
             <Button
               size="sm"
