@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { getAllBookings } from '../../../../Services/BookingDataService';
 import BookingSingleItemDetails from '../../../Item/BookingSingleItemDetails/BookingSingleItemDetails';
 
-const CanceledBookingList = () => {
+const SuccessfulBookingList = () => {
   const user = useSelector((state) => state.userReducer);
   const [allBookings, setAllBookings] = useState([]);
   const [isDataUpdated, setIsDataUpdated] = useState(false);
@@ -27,12 +27,13 @@ const CanceledBookingList = () => {
 
   return (
     <Container>
-      <h4>Canceled Booking List</h4>
+      <h4>Successful Booking List</h4>
       <div className="d-flex flex-wrap">
         {allBookings.map(
           (item) =>
-            (!item?.isTrashed &&
-            item?.isCanceled) && (
+            !item?.isTrashed &&
+            !item?.isCanceled &&
+            item?.received && (
               <BookingSingleItemDetails
                 item={item}
                 loadAllBookings={loadAllBookings}
@@ -45,4 +46,4 @@ const CanceledBookingList = () => {
   );
 };
 
-export default CanceledBookingList;
+export default SuccessfulBookingList;
