@@ -17,6 +17,7 @@ import { CreateOrUpdateSubCategoryContainer } from './Components/ContainerCompon
 import AdminPrivateRoute from './Components/Route/AdminPrivateRoute';
 import Booking from './Components/ContainerComponents/Booking/Booking';
 import BookingList from './Components/ContainerComponents/Admin/BookingListContainer/BookingList';
+import CanceledBookingList from './Components/ContainerComponents/Admin/BookingListContainer/CanceledBookingList';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -63,6 +64,12 @@ const App = () => {
           path="/admin/booking-list"
           element={<AdminPrivateRoute />}>
             <Route exact path="/admin/booking-list" element={<BookingList/>}/>
+        </Route>
+        <Route
+          exact
+          path="/admin/cancled-booking-list"
+          element={<AdminPrivateRoute />}>
+            <Route exact path="/admin/cancled-booking-list" element={<CanceledBookingList/>}/>
         </Route>
         <Route exact path="/booking/:id" element={<Booking/>} />
       </Routes>

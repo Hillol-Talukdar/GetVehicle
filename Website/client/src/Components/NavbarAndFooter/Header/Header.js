@@ -82,6 +82,18 @@ const Header = () => {
                   {NavbarConstants.BOOKING_LIST}
                 </NavLink>
               </NavDropdown.Item>
+              
+              <NavDropdown.Item
+                className="p-2"
+                to="/admin/cancled-booking-list"
+              >
+                <NavLink
+                  to="/admin/cancled-booking-list"
+                  className="text-color-and-decoration"
+                >
+                  Canceled Booking List
+                </NavLink>
+              </NavDropdown.Item>
             </NavDropdown>)
           }
           </Nav>
