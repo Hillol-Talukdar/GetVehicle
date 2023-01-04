@@ -32,6 +32,7 @@ const HomeItem = (props) => {
       : 'templateCar.jpg';
 
   const handleDeleteButtonClick = (e) => {
+    e.preventDefault();
     if (window.confirm(DELETE_CONFIRMATION)) {
       updateAVehicle(
         e.target.value,
