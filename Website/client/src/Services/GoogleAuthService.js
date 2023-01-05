@@ -15,15 +15,16 @@ const getUserData = function (user) {
 export const googleLogin = async (dispatch) => {
 
     signInWithPopup(auth, provider)
-        .then((result) => {
-            const credential = GoogleAuthProvider.credentialFromResult(result);
-            const token = credential.accessToken;
+        .then(async (result) => {
+            // const credential = GoogleAuthProvider.credentialFromResult(result);
+            // const token = credential.accessToken;
             const user = result.user;
             const userData = getUserData(user);
+            const idTokenResult = await user.getIdTokenResult();
 
-            userCreateOrUpdate(token, userData)
+            userCreateOrUpdate(idTokenResult.token, userData)
                 .then((res) => {
-                    createUserPayloadAndDispatch(dispatch, token, res);
+                    createUserPayloadAndDispatch(dispatch, idTokenResult.token, res);
                 })
                 .catch();
 
