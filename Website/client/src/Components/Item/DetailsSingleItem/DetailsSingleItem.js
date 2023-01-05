@@ -1,20 +1,31 @@
 import React from 'react';
-import { Row, Col, Image, Tabs, Tab, Card, ListGroup } from 'react-bootstrap';
+import { Row, Col, Image, Card, ListGroup, Button } from 'react-bootstrap';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import './DetailsSingleItem.css';
 import Rating from 'react-star-ratings';
 import VehicleDatalistItem from '../VehicleDatalistItem';
-import { TabsConstants } from '../../../Constants/CommonConstants';
 import { Link } from 'react-router-dom';
 import RatingModal from '../../Modal/RatingModal';
+import { googleLogin } from '../../../Services/GoogleAuthService';
+import { useDispatch, useSelector } from 'react-redux';
 
 const DetailsSingleItem = ({ data, onClickStar, star }) => {
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.userReducer);
+
+  const handleGoogleLogin = () => {
+    googleLogin(dispatch);
+  };
+
   return (
     <>
       <Row className="p-2">
         <Col md={7}>
-        <h4>Details of {data?.model}</h4>
+          <div className="d-flex">
+            <h4 className='text-secondary'>Details of&nbsp;</h4>
+            <h4 className='text-success'>{data?.model}</h4>
+          </div>
           <div className="mt-3">
             {data?.photo && data?.photo.length ? (
               <Carousel
@@ -71,7 +82,17 @@ const DetailsSingleItem = ({ data, onClickStar, star }) => {
                     />
                   </RatingModal>
 
-                  <Link to={'/booking/' + data?._id}>Book Now</Link>
+                  {user ? (
+                    <Link style={{width: '65%'}} className='btn btn-success' to={'/booking/' + data?._id}>Book Now</Link>
+                  ) : (
+                    <Button
+                      variant='success'
+                      onClick={handleGoogleLogin}
+                      style={{width: '65%'}}
+                    >
+                      Login to Book
+                    </Button>
+                  )}
                 </div>
               </ListGroup.Item>
             </ListGroup>

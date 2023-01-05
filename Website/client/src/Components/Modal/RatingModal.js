@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Modal } from 'react-bootstrap';
+import { Button, Modal } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 
@@ -21,21 +21,11 @@ const RatingModal = ({ children }) => {
 
   return (
     <>
-      <div onClick={handleShow}>
+      <div>
         {user ? (
-          <p
-            className="h6 mt-1 text-primary"
-            style={{ cursor: 'pointer', textDecoration: 'underline' }}
-          >
-            Rate now
-          </p>
+          <Button variant='warning' onClick={handleShow}>Rate Now</Button>
         ) : (
-          <p
-            className="h6 mt-1 text-primary"
-            style={{ cursor: 'pointer', textDecoration: 'underline' }}
-          >
-            Login to Rate
-          </p>
+          <Button variant='warning' disabled>Login To Rate</Button>
         )}
       </div>
 

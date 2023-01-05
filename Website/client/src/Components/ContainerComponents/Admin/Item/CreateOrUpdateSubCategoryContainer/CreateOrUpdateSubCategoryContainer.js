@@ -172,7 +172,7 @@ export const CreateOrUpdateSubCategoryContainer = () => {
                   setModalName(subCategory.name);
                 }}
               >
-                {ButtonConstants.EDIT_BUTTON} <BiEditAlt className="mb-1" />
+                Edit Sub-Category <BiEditAlt className="mb-1" />
               </Button>
 
               <Card.Body>
@@ -184,7 +184,7 @@ export const CreateOrUpdateSubCategoryContainer = () => {
                   <Button
                     onClick={handleDelete}
                     value={subCategory._id}
-                    variant="outline-danger"
+                    variant="danger"
                     size="sm"
                   >
                     <RiDeleteBin2Fill className="mb-1" />{' '}

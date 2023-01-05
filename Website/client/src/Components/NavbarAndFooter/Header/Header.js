@@ -15,6 +15,7 @@ import {
 import { googleLogin } from '../../../Services/GoogleAuthService';
 import LoggedInUserInfoContainer from '../../ContainerComponents/LoggedInUserInfoContainer/LoggedInUserInfoContainer';
 import './Header.css';
+import { FcGoogle } from 'react-icons/fc';
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -92,13 +93,10 @@ const Header = () => {
             ></LoggedInUserInfoContainer>
           )}
           {!loggedInUserDetails && (
-            <Button
-              className="ms-auto"
-              variant="outline-primary"
-              onClick={handleGoogleLogin}
-            >
-              {NavbarConstants.LOGIN}
-            </Button>
+            <button class="content" onClick={handleGoogleLogin}> 
+              <div className='google-icon'><FcGoogle/></div>
+              <span className="google-button-text">Sign in with Google</span>
+            </button>   
           )}
         </Navbar.Collapse>
       </Navbar>

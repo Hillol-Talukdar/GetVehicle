@@ -16,3 +16,34 @@ a.text-color-and-decoration:hover {
   cursor: pointer;
   color: gray;
 }
+
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1px;
+  background-color: #4285f4;
+  width: fit-content;
+  border: none;
+  transition: 0.5s;
+}
+
+.content:hover {
+  cursor: pointer;
+  box-shadow: 0px 2px 4px 0 #91b8f8;
+}
+
+.google-icon {
+  padding-right: 10px;
+  padding-left: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-right: 12px;
+  background-color: white;
+}
+
+.google-button-text {
+  color: white;
+  font-size: small;
+  padding-right: 12px;
+}
