@@ -1,11 +1,19 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Navigate, Outlet } from 'react-router-dom';
+import {  Outlet } from 'react-router-dom';
+import LoadingToRedirect from './LoadingToRedirect';
 
 const UserPrivateRoute = () => {
   const user = useSelector((state) => state.userReducer);
+  const [ok, setOk] = useState(false);
 
-  return user && user.token ? <Outlet/> : <Navigate to="/" />;
+  useEffect(() => {
+    if (user && user.token) {
+      setOk(true);
+    }
+  }, [user]);
+
+  return ok ? <Outlet /> : <LoadingToRedirect />;
 };
 
 export default UserPrivateRoute;

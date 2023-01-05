@@ -43,6 +43,12 @@ const ItemDetailsContainer = () => {
       // console.log('Rating clicked', res.data);
       toast.success("Thanks For Your Valuable Review!");
       dispatch(getVehicleDetails(id));
+    }).catch(err => {
+      toast.error(
+        err.response && err.response.data.message
+          ? err.response.data.message
+          : err.message
+      );
     });
   };
 
