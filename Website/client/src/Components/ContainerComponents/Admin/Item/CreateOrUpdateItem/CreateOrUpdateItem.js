@@ -35,8 +35,10 @@ const CreateOrUpdateItemContainer = () => {
   const location = useLocation();
   const currentItem = location.state || initState;
   const isUpdatingItem  = currentItem !== initState;
+  const [buttonText, setButtonText] = useState(isUpdatingItem ? CreateOrUpdateConstants.UPDATE : CreateOrUpdateConstants.CREATE);
   const [values, setValues] = useState(currentItem);
   const [showSubCategory, setShowSubCategory] = useState(false);
+  const [isSubmitButtonEnabled, setIsSubmitButtonEnabled] = useState(true);
   const user = useSelector((state) => state.userReducer);
 
   useEffect(() => {
@@ -55,6 +57,9 @@ const CreateOrUpdateItemContainer = () => {
     getAllSubCategoriesOfACategory(e.target.value).then((res) => {
       setValues({ ...values, subCategories: res.data.data });
     });
+
+    values[VehicleInfoConstants.SUB_CATEGORY_IN_MODEL] = '';
+    setValues(values);
 
     setShowSubCategory(true);
   };
@@ -96,7 +101,15 @@ const CreateOrUpdateItemContainer = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    
+
+    if(isUpdatingItem) {
+      setButtonText(CreateOrUpdateConstants.UPDATING);
+      setIsSubmitButtonEnabled(false);
+    } else {
+      setButtonText(CreateOrUpdateConstants.CREATING);
+      setIsSubmitButtonEnabled(false);
+    }
+
     if(values[VehicleInfoConstants.PHOTO_IN_MODEL]) {
       new Promise((resolve, reject) => {
         uploadImagesOnCloudinary(values[VehicleInfoConstants.PHOTO_IN_MODEL], resolve, reject);
@@ -122,10 +135,12 @@ const CreateOrUpdateItemContainer = () => {
   const createNewVehicle = () => {
     createVehicle(values, user.token)
     .then((res) => {
-      window.alert(`"${res.data.data.model}" has created successfully!`);
+      toast.success(`"${res.data.data.model}" has created successfully!`);
       window.location.replace("/");
     })
     .catch((err) => {
+      setIsSubmitButtonEnabled(true);
+      setButtonText(CreateOrUpdateConstants.CREATE);
       toast.error(
         err.response && err.response.data.message
           ? err.response.data.message
@@ -137,10 +152,12 @@ const CreateOrUpdateItemContainer = () => {
   const updateVehicle = () => {
     updateAVehicle(values._id, values, user.token)
     .then((res) => {
-      window.alert(`"${res.data.data.model}" has updated successfully!`);
-      window.location.replace("/");
+      toast.success(`"${res.data.data.model}" has updated successfully!`);
+      window.location.replace(`/details/${values._id}`);
     })
     .catch((err) => {
+      setIsSubmitButtonEnabled(true);
+      setButtonText(CreateOrUpdateConstants.UPDATE);
       toast.error(
         err.response && err.response.data.message
           ? err.response.data.message
@@ -164,7 +181,8 @@ const CreateOrUpdateItemContainer = () => {
         values={values}
         setValues={setValues}
         isUpdatingItem={isUpdatingItem}
-        btnName={isUpdatingItem ? CreateOrUpdateConstants.UPDATE : CreateOrUpdateConstants.CREATE}
+        btnName={buttonText}
+        isSubmitButtonEnabled={isSubmitButtonEnabled}
       />
     </Container>
   );

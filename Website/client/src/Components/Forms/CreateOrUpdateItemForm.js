@@ -17,6 +17,7 @@ const CreateOrUpdateItemForm = ({
   setValues,
   isUpdatingItem,
   btnName,
+  isSubmitButtonEnabled,
 }) => {
   const [images, setImages] = useState(values[VehicleInfoConstants.PHOTO_IN_MODEL] || []);
 
@@ -335,6 +336,7 @@ const CreateOrUpdateItemForm = ({
         className="mx-auto mt-3 d-grid gap-2 col-5 mb-3"
         variant="primary"
         type="submit"
+        disabled={!isSubmitButtonEnabled}
       >
         {btnName}
       </Button>

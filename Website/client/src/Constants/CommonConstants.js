@@ -127,6 +127,10 @@ export const UserRole = {
 export const CreateOrUpdateConstants = {
   CREATE: 'Create',
   UPDATE: 'Update',
+  CREATING: 'Creating New Vehicle...',
+  UPDATING: 'Updating Vehicle Info...',
+  CREATED: 'New Vehicle Created!',
+  UPDATED: 'Vehicle Info Updated!',
   EDIT: 'Edit',
   CREATE_VEHICLE_TITLE: 'Create New Vehicle',
   UPDATE_VEHICLE_TITLE: 'Update Vehicle'
