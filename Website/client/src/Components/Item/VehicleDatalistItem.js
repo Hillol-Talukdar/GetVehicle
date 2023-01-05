@@ -15,10 +15,6 @@ const VehicleDatalistItem = ({ data }) => {
   return (
     <ListGroup variant="flush">
       <ListGroup.Item className="d-flex justify-content-between">
-        {VehicleInfoConstants.MODEL}:<span>{data?.model}</span>
-      </ListGroup.Item>
-
-      <ListGroup.Item className="d-flex justify-content-between">
         {VehicleInfoConstants.CATEGORY}:<span>{data?.category?.name}</span>
       </ListGroup.Item>
 
