@@ -8,8 +8,8 @@ export const getACategory = async (id) => {
   return await axios.get(`${process.env.REACT_APP_API}/category/${id}`);
 };
 
-export const getAllSubCategoriesOfACategory = async (id) => {
-  return await axios.get(
+export const getAllSubCategoriesOfACategory = (id) => {
+  return axios.get(
     `${process.env.REACT_APP_API}/category/subCategory/${id}`
   );
 };

@@ -154,7 +154,7 @@ const CreateOrUpdateCategoryContainer = () => {
                   setModalName(category.name);
                 }}
               >
-                {ButtonConstants.EDIT_BUTTON} <BiEditAlt className="mb-1" />
+                Edit Category <BiEditAlt className="mb-1" />
               </Button>
 
               <Card.Body>
@@ -166,16 +166,15 @@ const CreateOrUpdateCategoryContainer = () => {
                   <Link
                     to={`/admin/category/${category._id}/create-or-update-category`}
                   >
-                    <Button variant="outline-primary" size="sm">
-                      <MdAdd className="mb-1" /> {ButtonConstants.ADD_BUTTON} or
-                      View SubCategory
+                    <Button variant="warning" size="sm">
+                     Edit Sub-Category
                     </Button>
                   </Link>
 
                   <Button
                     onClick={handleDelete}
                     value={category._id}
-                    variant="outline-danger"
+                    variant="danger"
                     size="sm"
                   >
                     <RiDeleteBin2Fill className="mb-1" />{' '}

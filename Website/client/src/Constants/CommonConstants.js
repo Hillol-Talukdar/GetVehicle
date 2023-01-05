@@ -5,7 +5,7 @@ export const AppConstants = {
 export const ButtonConstants = {
   ADD_BUTTON: 'Add',
   CREATE_BUTTON: 'Create',
-  EDIT_BUTTON: 'Edit',
+  EDIT_BUTTON: 'Edit Now',
   UPDATE_BUTTON: 'Update',
   DELETE_BUTTON: 'Delete Now',
 };
@@ -127,6 +127,10 @@ export const UserRole = {
 export const CreateOrUpdateConstants = {
   CREATE: 'Create',
   UPDATE: 'Update',
+  CREATING: 'Creating New Vehicle...',
+  UPDATING: 'Updating Vehicle Info...',
+  CREATED: 'New Vehicle Created!',
+  UPDATED: 'Vehicle Info Updated!',
   EDIT: 'Edit',
   CREATE_VEHICLE_TITLE: 'Create New Vehicle',
   UPDATE_VEHICLE_TITLE: 'Update Vehicle'
