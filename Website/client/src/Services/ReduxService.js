@@ -1,4 +1,4 @@
-import { LOGGED_IN_USER, NO_LOGGED_IN_USER } from "../Constants/ReduxConstants";
+import { LOGGED_IN_USER, NO_LOGGED_IN_USER } from '../Constants/ReduxConstants';
 
 export const createUserPayloadAndDispatch = function (dispatch, token, res) {
     dispatch({
@@ -14,8 +14,9 @@ export const createUserPayloadAndDispatch = function (dispatch, token, res) {
     });
 }
 
-export const removeUserAndDispatch = function(dispatch) {
-    dispatch({
-        type: NO_LOGGED_IN_USER
-    });
-}
+export const removeUserAndDispatch = function (dispatch) {
+  dispatch({
+    type: NO_LOGGED_IN_USER,
+    payload: null,
+  });
+};

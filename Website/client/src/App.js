@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Header from './Components/NavbarAndFooter/Header/Header';
 import HomeContainer from './Components/ContainerComponents/HomeContainer/HomeContainer';
@@ -17,21 +17,27 @@ import { CreateOrUpdateSubCategoryContainer } from './Components/ContainerCompon
 import AdminPrivateRoute from './Components/Route/AdminPrivateRoute';
 import Booking from './Components/ContainerComponents/Booking/Booking';
 import BookingList from './Components/ContainerComponents/Admin/BookingListContainer/BookingList';
+import UserPrivateRoute from './Components/Route/UserPrivateRoute';
 
 const App = () => {
   const dispatch = useDispatch();
 
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      currentUser(user.accessToken, user.email)
-        .then((res) => {
-          createUserPayloadAndDispatch(dispatch, user.accessToken, res);
-        })
-        .catch((error) => {
-          console.log(error.message);
-        });
-    }
-  });
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        currentUser(user.accessToken, user.email)
+          .then((res) => {
+            createUserPayloadAndDispatch(dispatch, user.accessToken, res);
+           })
+          .catch((error) => {
+            console.log(error.message);
+          });
+      }
+    });
+  
+    // cleanup
+    return () => unsubscribe();
+  }, [dispatch]);
 
   return (
     <>
@@ -64,7 +70,12 @@ const App = () => {
           element={<AdminPrivateRoute />}>
             <Route exact path="/admin/booking-list" element={<BookingList/>}/>
         </Route>
-        <Route exact path="/booking/:id" element={<Booking/>} />
+        <Route 
+          exact 
+          path="/booking/:id"
+          element={<UserPrivateRoute/>} >
+            <Route exact path="/booking/:id" element={<Booking/>} />
+        </Route>
       </Routes>
       <Footer />
     </>
