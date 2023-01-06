@@ -8,6 +8,7 @@ import './BookingSingleItem.css';
 
 const BookingSingleItem = (props) => {
   const [isDataEdited, setIsDataEdited] = useState(false);
+  const [handedOverToUser, setSandedOverToUser] = useState(false);
 
   const currentItem = props.item;
 
@@ -39,6 +40,10 @@ const BookingSingleItem = (props) => {
   const changeHandler = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
     setIsDataEdited(true);
+
+    if(e.target.name == "handedOver"){
+        setSandedOverToUser(e.target.value)
+    }
   };
 
   const handleCancelBooking= (e) => {
@@ -71,6 +76,7 @@ const BookingSingleItem = (props) => {
       .then((res) => {
         setLoading(false);
         setIsDataEdited(false);
+        props.setIsDataUpdated(true);
         toast.success(`Booking is updated!`);
       })
       .catch((err) => {
@@ -187,6 +193,7 @@ const BookingSingleItem = (props) => {
               className="enhanced-select"
               name="handedOver"
               size="sm"
+              disabled={handedOverToUser}
               onChange={changeHandler}
             >
               <option value="true" selected={currentItem?.handedOver === true}>
@@ -207,6 +214,10 @@ const BookingSingleItem = (props) => {
               name="received"
               size="sm"
               onChange={changeHandler}
+              disabled={!handedOverToUser}
+              data-toggle="tooltip" 
+              data-placement="bottom"
+              title="WIl be enable if vehicle is Handed Over To User."
             >
               <option value="true" selected={currentItem?.received === true}>
                 Yes
