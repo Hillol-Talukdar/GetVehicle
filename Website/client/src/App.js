@@ -23,11 +23,13 @@ const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
+    const unsubscribe = auth.onAuthStateChanged(async (user) => {
       if (user) {
-        currentUser(user.accessToken, user.email)
+        const idTokenResult = await user.getIdTokenResult();
+
+        currentUser(idTokenResult.token, user.email)
           .then((res) => {
-            createUserPayloadAndDispatch(dispatch, user.accessToken, res);
+            createUserPayloadAndDispatch(dispatch, idTokenResult.token, res);
            })
           .catch((error) => {
             console.log(error.message);
