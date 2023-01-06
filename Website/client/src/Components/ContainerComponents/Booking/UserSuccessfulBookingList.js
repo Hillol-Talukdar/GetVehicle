@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
-import { getAllBookings } from '../../../../Services/BookingDataService';
-import BookingSingleItemDetails from '../../../Item/BookingSingleItemDetails/BookingSingleItemDetails';
+import { getAllMyBookings } from '../../../Services/BookingDataService';
+import BookingSingleItemDetails from '../../Item/BookingSingleItemDetails/BookingSingleItemDetails';
 
-const SuccessfulBookingList = () => {
+const UserSuccessfulBookingList = () => {
   const user = useSelector((state) => state.userReducer);
   const [allBookings, setAllBookings] = useState([]);
   const [isDataUpdated, setIsDataUpdated] = useState(false);
 
   const loadAllBookings = () => {
-    getAllBookings(user.token)
+    getAllMyBookings(user.token)
       .then((res) => {
         setAllBookings(res.data.data);
         // console.log(res.data.data);
@@ -39,7 +39,7 @@ const SuccessfulBookingList = () => {
                 item={item}
                 loadAllBookings={loadAllBookings}
                 setIsDataUpdated={setIsDataUpdated}
-                isAdminPanel={true}
+                isAdminPanel={false}
               ></BookingSingleItemDetails>
             )
         )}
@@ -48,4 +48,4 @@ const SuccessfulBookingList = () => {
   );
 };
 
-export default SuccessfulBookingList;
+export default UserSuccessfulBookingList;

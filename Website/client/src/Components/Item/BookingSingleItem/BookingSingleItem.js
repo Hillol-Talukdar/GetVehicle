@@ -240,21 +240,21 @@ const BookingSingleItem = (props) => {
             <div>
               <span>Payment Status: </span>
               <span className="enhanced-label">
-                {currentItem?.paid ? 'Paid' : 'Not Paid'}{' '}
+                {currentItem?.paid ? 'Paid' : 'Not Paid'}
               </span>
             </div>
  
             <div>
               <span>Recieved Vehicle: </span>
               <span className="enhanced-label">
-                {currentItem?.handedOver ? 'Yes' : 'Not yet'}{' '}
+                {currentItem?.handedOver ? 'Yes' : 'Not yet'}
               </span>
             </div>
   
             <div>
               <span>Returned vehicle: </span>
               <span className="enhanced-label">
-                {currentItem?.received ? 'Yes' : 'Not yet'}{' '}
+                {currentItem?.received ? 'Yes' : 'Not yet'}
               </span>
             </div>     
            </>

@@ -31,18 +31,22 @@ const BookingSingleItemDetails = (props) => {
             </span>
           </div>
 
-          <div style={{ marginLeft: 'auto' }}>
-            <Button
-              size="sm"
-              style={{ fontSize: 'medium', marginRight: '10px' }}
-              variant="outline-primary"
-              onClick={(e) => {
-                handleUpdateModalShow();
-              }}
-            >
-              User Details
-            </Button>
-          </div>
+          {props.isAdminPanel && (
+            <>
+              <div style={{ marginLeft: 'auto' }}>
+                <Button
+                  size="sm"
+                  style={{ fontSize: 'medium', marginRight: '10px' }}
+                  variant="outline-primary"
+                  onClick={(e) => {
+                    handleUpdateModalShow();
+                  }}
+                >
+                  User Details
+                </Button>
+              </div>
+            </>
+          )}
         </div>
 
         <div>
@@ -82,23 +86,45 @@ const BookingSingleItemDetails = (props) => {
         <div>
           <span>Payment Status: </span>
           <span className="enhanced-label">
-            {currentItem?.paid ? 'Paid' : 'Not Paid'}{' '}
+            {currentItem?.paid ? 'Paid' : 'Not Paid'}
           </span>
         </div>
 
-        <div>
-          <span>Handed Over To User: </span>
-          <span className="enhanced-label">
-            {currentItem?.handedOver ? 'Yes' : 'Not yet'}{' '}
-          </span>
-        </div>
+        {props.isAdminPanel && (
+          <>
+            <div>
+              <span>Handed Over To User: </span>
+              <span className="enhanced-label">
+                {currentItem?.handedOver ? 'Yes' : 'Not yet'}
+              </span>
+            </div>
 
-        <div>
-          <span>Got Back From User: </span>
-          <span className="enhanced-label">
-            {currentItem?.received ? 'Yes' : 'Not yet'}{' '}
-          </span>
-        </div>
+            <div>
+              <span>Got Back From User: </span>
+              <span className="enhanced-label">
+                {currentItem?.received ? 'Yes' : 'Not yet'}
+              </span>
+            </div>
+          </>
+        )}
+
+        {!props.isAdminPanel && (
+           <>
+            <div>
+              <span>Recieved Vehicle: </span>
+              <span className="enhanced-label">
+                {currentItem?.handedOver ? 'Yes' : 'Not yet'}
+              </span>
+            </div>
+  
+            <div>
+              <span>Returned vehicle: </span>
+              <span className="enhanced-label">
+                {currentItem?.received ? 'Yes' : 'Not yet'}
+              </span>
+            </div>     
+           </>
+        )}
       </div>
 
       <UserDetailsModal
