@@ -1,19 +1,7 @@
 package com.raiyan_hillol.getvehicle.data.usecase;
 
-import android.content.Context;
-
-import com.android.volley.Cache;
-import com.android.volley.Network;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.BasicNetwork;
-import com.android.volley.toolbox.DiskBasedCache;
-import com.android.volley.toolbox.HurlStack;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.raiyan_hillol.getvehicle.R;
-import com.raiyan_hillol.getvehicle.constants.AppUriConstants;
+import com.raiyan_hillol.getvehicle.data.model.Rating;
 import com.raiyan_hillol.getvehicle.data.model.VehicleData;
 
 import org.json.JSONArray;
@@ -63,7 +51,29 @@ public class VehicleUseCase {
         return sanitizedPhotos;
     }
 
+    public static Rating getRatingObject(JSONObject ratingObject) throws JSONException {
+        Rating rating = new Rating();
+        rating.setId(ratingObject.getString("_id"));
+        rating.setStar(ratingObject.getInt("star"));
+        rating.setPostedBy(ratingObject.getString("postedBy"));
+        return rating;
+    }
 
+    public static ArrayList<Rating> getRatingObjectArray(JSONArray ratingsJsonArray) throws JSONException {
+        ArrayList<Rating> ratings = new ArrayList<>();
+        for (int i = 0; i < ratingsJsonArray.length(); i++) {
+            ratings.add(getRatingObject((JSONObject) ratingsJsonArray.get(i)));
+        }
+        return ratings;
+    }
+
+    public static double getAverageRating(ArrayList<Rating> ratings) {
+        double averageRating = 0;
+        for(int i=0; i<ratings.size(); i++) {
+            averageRating+= ratings.get(i).getStar();
+        }
+        return averageRating/ratings.size();
+    }
 
     public static VehicleData getVehicleDataFromJSONObject(JSONObject vehicleObject) {
         VehicleData vehicleData = new VehicleData();
@@ -71,7 +81,7 @@ public class VehicleUseCase {
             vehicleData.setId(vehicleObject.getString("_id"));
             vehicleData.setModel(vehicleObject.getString("model"));
             vehicleData.setCategory(vehicleObject.getJSONObject("category"));
-            vehicleData.setSubCategory(vehicleObject.getJSONObject("subCategory"));
+            vehicleData.setSubCateogryId(vehicleObject.getString("subCategory"));
             vehicleData.setTransmission(vehicleObject.getString("transmission"));
             vehicleData.setFuelType(vehicleObject.getString("fuelType"));
             vehicleData.setEngine(vehicleObject.getString("engine"));
@@ -80,7 +90,8 @@ public class VehicleUseCase {
             vehicleData.setCostPerDay(vehicleObject.getInt("costPerDay"));
             vehicleData.setSeatCount(vehicleObject.getInt("seatCount"));
             vehicleData.setMileage(vehicleObject.getInt("mileage"));
-            vehicleData.setAverageRating(vehicleObject.getDouble("averageRating"));
+            vehicleData.setRating(getRatingObjectArray(vehicleObject.getJSONArray("ratings")));
+            vehicleData.setAverageRating(getAverageRating(vehicleData.getRating()));
             vehicleData.setCurrentLocationString(vehicleObject.getString("currentLocationString"));
             vehicleData.setBookingStatus(vehicleObject.getBoolean("bookingStatus"));
             vehicleData.setPhoto(VehicleUseCase.getSanitizedPhotos(vehicleObject.getJSONArray("photo"), vehicleData.getCategory()));

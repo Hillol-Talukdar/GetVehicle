@@ -8,6 +8,7 @@ public class VehicleData {
     private String model;
     private JSONObject category = new JSONObject();
     private JSONObject subCategory = new JSONObject();
+    private String subCateogryId;
     private String transmission;
     private String fuelType;
     private String engine;
@@ -19,6 +20,7 @@ public class VehicleData {
     private int costPerDay;
     private int seatCount;
     private int mileage;
+    private ArrayList<Rating> rating;
     private double averageRating;
     private boolean bookingStatus;
     private boolean isTrashed;
@@ -52,6 +54,33 @@ public class VehicleData {
         this.costPerDay = costPerDay;
         this.seatCount = seatCount;
         this.mileage = mileage;
+        this.averageRating = averageRating;
+        this.currentLocationString = currentLocationString;
+        this.bookingStatus = bookingStatus;
+        this.photo = photo;
+        this.isTrashed = isTrashed;
+    }
+
+    public VehicleData(String id, String model, JSONObject category,
+                       String subCateogryId,
+                       String transmission,
+                       String fuelType, String engine, String bootSpace, String groundClearance,
+                       int costPerDay, int seatCount, int mileage, ArrayList<Rating> rating, double averageRating,
+                       String currentLocationString, boolean bookingStatus, ArrayList<String> photo,
+                       boolean isTrashed) {
+        this.id = id;
+        this.model = model;
+        this.category = category;
+        this.subCateogryId = subCateogryId;
+        this.transmission = transmission;
+        this.fuelType = fuelType;
+        this.engine = engine;
+        this.bootSpace = bootSpace;
+        this.groundClearance = groundClearance;
+        this.costPerDay = costPerDay;
+        this.seatCount = seatCount;
+        this.mileage = mileage;
+        this.rating = rating;
         this.averageRating = averageRating;
         this.currentLocationString = currentLocationString;
         this.bookingStatus = bookingStatus;
@@ -253,5 +282,21 @@ public class VehicleData {
 
     public void setTrashed(boolean trashed) {
         isTrashed = trashed;
+    }
+
+    public String getSubCateogryId() {
+        return subCateogryId;
+    }
+
+    public void setSubCateogryId(String subCateogryId) {
+        this.subCateogryId = subCateogryId;
+    }
+
+    public ArrayList<Rating> getRating() {
+        return rating;
+    }
+
+    public void setRating(ArrayList<Rating> rating) {
+        this.rating = rating;
     }
 }
