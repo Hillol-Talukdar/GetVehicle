@@ -32,7 +32,9 @@ const BookingList = () => {
           (!item?.isTrashed &&
             !item?.isCanceled &&
             (!item?.handedOver || !item?.received)) && ( 
-              <BookingSingleItem 
+              <BookingSingleItem
+                isAdminPanel={true}
+                user={user} 
                 item={item} 
                 loadAllBookings={loadAllBookings} 
                 setIsDataUpdated={setIsDataUpdated}

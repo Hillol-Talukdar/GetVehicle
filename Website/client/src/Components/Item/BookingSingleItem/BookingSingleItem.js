@@ -10,9 +10,6 @@ const BookingSingleItem = (props) => {
   const currentItem = props.item;
   const handedOverDataFromModel = currentItem?.handedOver;
 
-  const [isDataEdited, setIsDataEdited] = useState(false);
-  const [handedOverToUser, setSandedOverToUser] = useState(handedOverDataFromModel == true ? true: false);
-
   const initState = {
     paid: `${currentItem?.paid}`,
     handedOver: `${currentItem?.handedOver}`,
@@ -24,6 +21,8 @@ const BookingSingleItem = (props) => {
   const [loading, setLoading] = useState(false);
   const [showUpdateModal, setShowUpdateModal] = useState(false);
   const [values, setValues] = useState(initState);
+  const [isDataEdited, setIsDataEdited] = useState(false);
+  const [handedOverToUser, setSandedOverToUser] = useState(handedOverDataFromModel == true ? true: false);
 
   const handleUpdateModalClose = () => {
     setShowUpdateModal(false);
@@ -103,7 +102,7 @@ const BookingSingleItem = (props) => {
           </div>
 
           <div style={{ marginLeft: 'auto' }}>
-            <Button
+            {props.isAdminPanel && user && user.role=='Admin' && (<Button
               size="sm"
               style={{ fontSize: 'medium', marginRight: '10px' }}
               variant="outline-primary"
@@ -112,7 +111,8 @@ const BookingSingleItem = (props) => {
               }}
             >
               User Details
-            </Button>
+            </Button>)}
+
             <Button
               size="sm"
               style={{ fontSize: 'medium', marginRight: '10px' }}
@@ -123,7 +123,8 @@ const BookingSingleItem = (props) => {
             >
               Cancel Booking
             </Button>
-            <Button
+            
+            {props.isAdminPanel && user && user.role=='Admin' && (<Button
               size="sm"
               style={{ fontSize: 'medium' }}
               variant={isDataEdited ? "outline-primary" : "outline-secondary"}
@@ -133,7 +134,7 @@ const BookingSingleItem = (props) => {
               }}
             >
               Save Changes
-            </Button>
+            </Button>)}
           </div>
         </div>
 
