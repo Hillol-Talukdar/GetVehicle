@@ -108,6 +108,47 @@ const Header = () => {
               </NavDropdown.Item>
             </NavDropdown>)
           }
+
+          {loggedInUserDetails && 
+            (<NavDropdown title="User" id="basic-nav-dropdown">
+
+              <NavDropdown.Item
+                className="p-2"
+                to="/booking-list"
+              >
+                <NavLink
+                  to="/booking-list"
+                  className="text-color-and-decoration"
+                >
+                  {NavbarConstants.BOOKING_LIST}
+                </NavLink>
+              </NavDropdown.Item>
+
+              <NavDropdown.Item
+                className="p-2"
+                to="/successful-booking-list"
+              >
+                <NavLink
+                  to="/successful-booking-list"
+                  className="text-color-and-decoration"
+                >
+                  SuccessFul Booking List
+                </NavLink>
+              </NavDropdown.Item>
+              
+              <NavDropdown.Item
+                className="p-2"
+                to="/cancled-booking-list"
+              >
+                <NavLink
+                  to="/cancled-booking-list"
+                  className="text-color-and-decoration"
+                >
+                  Canceled Booking List
+                </NavLink>
+              </NavDropdown.Item>
+            </NavDropdown>)
+          }
           </Nav>
 
           {loggedInUserDetails && (

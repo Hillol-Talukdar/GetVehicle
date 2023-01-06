@@ -19,6 +19,7 @@ import Booking from './Components/ContainerComponents/Booking/Booking';
 import BookingList from './Components/ContainerComponents/Admin/BookingListContainer/BookingList';
 import CanceledBookingList from './Components/ContainerComponents/Admin/BookingListContainer/CanceledBookingList';
 import SuccessfulBookingList from './Components/ContainerComponents/Admin/BookingListContainer/SuccessfulBookingList';
+import UserPrivateRoute from './Components/Route/UserPrivateRoute';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -48,6 +49,7 @@ const App = () => {
           element={<AdminPrivateRoute />}>
             <Route exact path="/admin/create-or-update-vehicle" element={<CreateOrUpdateItemContainer/>}/>
         </Route>
+
         <Route
           exact
           path="/admin/create-or-update-category"
@@ -60,6 +62,7 @@ const App = () => {
           element={<AdminPrivateRoute />}>
             <Route exact path="/admin/category/:categoryId/create-or-update-category" element={<CreateOrUpdateSubCategoryContainer/>}/>
         </Route>
+
         <Route
           exact
           path="/admin/booking-list"
@@ -79,6 +82,26 @@ const App = () => {
             <Route exact path="/admin/successful-booking-list" element={<SuccessfulBookingList/>}/>
         </Route>
         <Route exact path="/booking/:id" element={<Booking/>} />
+
+        <Route
+          exact
+          path="/booking-list"
+          element={<UserPrivateRoute />}>
+            <Route exact path="/booking-list" element={<BookingList/>}/>
+        </Route>
+        <Route
+          exact
+          path="/cancled-booking-list"
+          element={<UserPrivateRoute />}>
+            <Route exact path="/cancled-booking-list" element={<CanceledBookingList/>}/>
+        </Route>
+        <Route
+          exact
+          path="/successful-booking-list"
+          element={<UserPrivateRoute />}>
+            <Route exact path="/successful-booking-list" element={<SuccessfulBookingList/>}/>
+        </Route>
+
       </Routes>
       <Footer />
     </>
