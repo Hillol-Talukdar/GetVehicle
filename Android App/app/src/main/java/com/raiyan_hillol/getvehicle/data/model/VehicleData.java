@@ -8,7 +8,7 @@ public class VehicleData {
     private String model;
     private JSONObject category = new JSONObject();
     private JSONObject subCategory = new JSONObject();
-    private String subCateogryId;
+    private String subCategoryId;
     private String transmission;
     private String fuelType;
     private String engine;
@@ -62,7 +62,7 @@ public class VehicleData {
     }
 
     public VehicleData(String id, String model, JSONObject category,
-                       String subCateogryId,
+                       String subCategoryId,
                        String transmission,
                        String fuelType, String engine, String bootSpace, String groundClearance,
                        int costPerDay, int seatCount, int mileage, ArrayList<Rating> rating, double averageRating,
@@ -71,7 +71,7 @@ public class VehicleData {
         this.id = id;
         this.model = model;
         this.category = category;
-        this.subCateogryId = subCateogryId;
+        this.subCategoryId = subCategoryId;
         this.transmission = transmission;
         this.fuelType = fuelType;
         this.engine = engine;
@@ -284,12 +284,12 @@ public class VehicleData {
         isTrashed = trashed;
     }
 
-    public String getSubCateogryId() {
-        return subCateogryId;
+    public String getSubCategoryId() {
+        return subCategoryId;
     }
 
-    public void setSubCateogryId(String subCateogryId) {
-        this.subCateogryId = subCateogryId;
+    public void setSubCategoryId(String subCategoryId) {
+        this.subCategoryId = subCategoryId;
     }
 
     public ArrayList<Rating> getRating() {

@@ -75,13 +75,17 @@ public class VehicleUseCase {
         return averageRating/ratings.size();
     }
 
-    public static VehicleData getVehicleDataFromJSONObject(JSONObject vehicleObject) {
+    public static VehicleData getVehicleDataFromJSONObject(JSONObject vehicleObject, boolean isGettingSingleData) {
         VehicleData vehicleData = new VehicleData();
         try {
             vehicleData.setId(vehicleObject.getString("_id"));
             vehicleData.setModel(vehicleObject.getString("model"));
             vehicleData.setCategory(vehicleObject.getJSONObject("category"));
-            vehicleData.setSubCateogryId(vehicleObject.getString("subCategory"));
+            if(isGettingSingleData) {
+                vehicleData.setSubCategory(vehicleObject.getJSONObject("subCategory"));
+            } else {
+                vehicleData.setSubCategoryId(vehicleObject.getString("subCategory"));
+            }
             vehicleData.setTransmission(vehicleObject.getString("transmission"));
             vehicleData.setFuelType(vehicleObject.getString("fuelType"));
             vehicleData.setEngine(vehicleObject.getString("engine"));
@@ -107,7 +111,7 @@ public class VehicleUseCase {
         try {
             JSONArray responseData = jsonObject.getJSONArray("data");
             for (int i = 0; i < responseData.length(); i++) {
-                allVehicleData.add(getVehicleDataFromJSONObject(responseData.getJSONObject(i)));
+                allVehicleData.add(getVehicleDataFromJSONObject(responseData.getJSONObject(i), false));
             }
         } catch (JSONException e) {
             e.printStackTrace();
