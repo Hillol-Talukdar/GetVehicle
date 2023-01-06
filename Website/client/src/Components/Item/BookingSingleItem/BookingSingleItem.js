@@ -102,7 +102,7 @@ const BookingSingleItem = (props) => {
           </div>
 
           <div style={{ marginLeft: 'auto' }}>
-            {props.isAdminPanel && user && user.role=='Admin' && (<Button
+            <Button
               size="sm"
               style={{ fontSize: 'medium', marginRight: '10px' }}
               variant="outline-primary"
@@ -111,7 +111,7 @@ const BookingSingleItem = (props) => {
               }}
             >
               User Details
-            </Button>)}
+            </Button>
 
             <Button
               size="sm"

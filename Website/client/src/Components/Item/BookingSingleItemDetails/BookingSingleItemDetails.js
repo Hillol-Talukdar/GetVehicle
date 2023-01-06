@@ -30,23 +30,19 @@ const BookingSingleItemDetails = (props) => {
               {currentItem?.vehicle?.model} ({currentItem?.vehicle?._id})
             </span>
           </div>
-
-          {props.isAdminPanel && (
-            <>
-              <div style={{ marginLeft: 'auto' }}>
-                <Button
-                  size="sm"
-                  style={{ fontSize: 'medium', marginRight: '10px' }}
-                  variant="outline-primary"
-                  onClick={(e) => {
-                    handleUpdateModalShow();
-                  }}
-                >
-                  User Details
-                </Button>
-              </div>
-            </>
-          )}
+          
+          <div style={{ marginLeft: 'auto' }}>
+            <Button
+              size="sm"
+              style={{ fontSize: 'medium', marginRight: '10px' }}
+              variant="outline-primary"
+                onClick={(e) => {
+                  handleUpdateModalShow();
+                }}
+              >
+                User Details
+            </Button>
+          </div>
         </div>
 
         <div>

@@ -1,7 +1,10 @@
 import React from 'react';
 import { Image, ListGroup, Modal } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
 
 const UserDetailsModal = ({ userData, userPhoneNumber, show, handleClose }) => {
+  const user = useSelector((state) => state.userReducer);
+
   return (
     <>
       <Modal show={show} onHide={handleClose}>
@@ -22,7 +25,7 @@ const UserDetailsModal = ({ userData, userPhoneNumber, show, handleClose }) => {
             User Id:<span>{userData?._id}</span>
           </ListGroup.Item>
 
-          {userData?.role && (<ListGroup.Item className="d-flex justify-content-between">
+          {user?.role == "Admin" && userData?.role && (<ListGroup.Item className="d-flex justify-content-between">
             Role:<span>{userData?.role}</span>
           </ListGroup.Item>)}
 

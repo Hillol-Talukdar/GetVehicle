@@ -22,6 +22,7 @@ import SuccessfulBookingList from './Components/ContainerComponents/Admin/Bookin
 import UserPrivateRoute from './Components/Route/UserPrivateRoute';
 import UserBookingList from './Components/ContainerComponents/Booking/UserBookingList';
 import UserSuccessfulBookingList from './Components/ContainerComponents/Booking/UserSuccessfulBookingList';
+import UserCanceledBookingList from './Components/ContainerComponents/Booking/UserCanceledBookingList';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -95,7 +96,7 @@ const App = () => {
           exact
           path="/cancled-booking-list"
           element={<UserPrivateRoute />}>
-            <Route exact path="/cancled-booking-list" element={<CanceledBookingList/>}/>
+            <Route exact path="/cancled-booking-list" element={<UserCanceledBookingList/>}/>
         </Route>
         <Route
           exact
