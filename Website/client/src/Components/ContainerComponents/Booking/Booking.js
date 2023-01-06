@@ -69,7 +69,7 @@ const Booking = () => {
           totalAmount: totalPayableAmount,
           totalDays: dayDifference,
           paid: true,
-          paymentMethod: 'Cash',
+          paymentMethod: 'Online',
           handedOver: false,
           received: false,
           handOverDate: startDate,

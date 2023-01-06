@@ -169,67 +169,96 @@ const BookingSingleItem = (props) => {
           </span>
         </div>
 
-        <div className="d-flex">
-          <span className="dropdown-label">Payment Status: </span>
-          <div>
-            <Form.Select
-              className="enhanced-select"
-              name="paid"
-              size="sm"
-              onChange={changeHandler}
-            >
-              <option value="true" selected={currentItem?.paid === true}>
-                Paid
-              </option>
-              <option value="false" selected={currentItem?.paid === false}>
-                Unpaid
-              </option>
-            </Form.Select>
-          </div>
-        </div>
+        {props.isAdminPanel && (
+          <>
+            <div className="d-flex">
+              <span className="dropdown-label">Payment Status: </span>
+              <div>
+                <Form.Select
+                  className="enhanced-select"
+                  name="paid"
+                  size="sm"
+                  onChange={changeHandler}
+                >
+                  <option value="true" selected={currentItem?.paid === true}>
+                    Paid
+                  </option>
+                  <option value="false" selected={currentItem?.paid === false}>
+                    Unpaid
+                  </option>
+                </Form.Select>
+              </div>
+            </div>
 
-        <div className="d-flex">
-          <span className="dropdown-label">Handed Over To User: </span>
-          <div>
-            <Form.Select
-              className="enhanced-select"
-              name="handedOver"
-              size="sm"
-              disabled={handedOverDataFromModel}
-              onChange={changeHandler}
-            >
-              <option value="true" selected={currentItem?.handedOver === true}>
-                Yes
-              </option>
-              <option value="false" selected={currentItem?.handedOver === false}>
-                No
-              </option>
-            </Form.Select>
-          </div>
-        </div>
+            <div className="d-flex">
+              <span className="dropdown-label">Handed Over To User: </span>
+              <div>
+                <Form.Select
+                  className="enhanced-select"
+                  name="handedOver"
+                  size="sm"
+                  disabled={handedOverDataFromModel}
+                  onChange={changeHandler}
+                >
+                  <option value="true" selected={currentItem?.handedOver === true}>
+                    Yes
+                  </option>
+                  <option value="false" selected={currentItem?.handedOver === false}>
+                    No
+                  </option>
+                </Form.Select>
+              </div>
+            </div>
 
-        <div className="d-flex">
-          <span className="dropdown-label">Got Back From User: </span>
-          <div>
-            <Form.Select
-              className="enhanced-select"
-              name="received"
-              size="sm"
-              onChange={changeHandler}
-              disabled={!handedOverToUser}
-              data-toggle="tooltip" 
-              data-placement="bottom"
-              title="WIl be enable if vehicle is Handed Over To User."
-            >
-              <option value="true" selected={currentItem?.received === true}>
-                Yes
-              </option>
-              <option value="false" selected={currentItem?.received === false}>
-                No
-              </option>
-            </Form.Select>
-          </div>
-        </div>
+            <div className="d-flex">
+              <span className="dropdown-label">Got Back From User: </span>
+              <div>
+                <Form.Select
+                  className="enhanced-select"
+                  name="received"
+                  size="sm"
+                  onChange={changeHandler}
+                  disabled={!handedOverToUser}
+                  data-toggle="tooltip" 
+                  data-placement="bottom"
+                  title="WIl be enable if vehicle is Handed Over To User."
+                >
+                  <option value="true" selected={currentItem?.received === true}>
+                    Yes
+                  </option>
+                  <option value="false" selected={currentItem?.received === false}>
+                    No
+                  </option>
+                </Form.Select>
+              </div>
+            </div>
+          </>
+        )}
+
+        {!props.isAdminPanel && (
+           <>
+            <div>
+              <span>Payment Status: </span>
+              <span className="enhanced-label">
+                {currentItem?.paid ? 'Paid' : 'Not Paid'}{' '}
+              </span>
+            </div>
+ 
+            <div>
+              <span>Recieved Vehicle: </span>
+              <span className="enhanced-label">
+                {currentItem?.handedOver ? 'Yes' : 'Not yet'}{' '}
+              </span>
+            </div>
+  
+            <div>
+              <span>Returned vehicle: </span>
+              <span className="enhanced-label">
+                {currentItem?.received ? 'Yes' : 'Not yet'}{' '}
+              </span>
+            </div>     
+           </>
+        )}
       </div>
 
       <UserDetailsModal

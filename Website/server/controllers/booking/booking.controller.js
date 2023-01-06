@@ -18,7 +18,22 @@ const createBooking = catchAsync(async (req, res, next) => {
 const getAllBookings = catchAsync(async (req, res, next) => {
     const bookings = await Booking.find({})
         .populate({ path: 'user', select: 'name email' })
-        .populate({ path: 'vehicle', select: 'model'});
+        .populate({ path: 'vehicle', select: 'model'})
+        .sort({ createdAt: -1 });;
+
+    res.status(200).json({
+        status: 'Success',
+        data: bookings,
+    });
+});
+
+const getAllMyBookings = catchAsync(async (req, res, next) => {
+    const user = await User.findOne({ email: req.user.email });
+
+    const bookings = await Booking.find({user: user._id})
+        .populate({ path: 'user', select: 'name email' })
+        .populate({ path: 'vehicle', select: 'model'})
+        .sort({ createdAt: -1 });;
 
     res.status(200).json({
         status: 'Success',
@@ -110,6 +125,7 @@ const getAllBookingDates = catchAsync(async (req, res, next) => {
 module.exports = {
     createBooking,
     getAllBookings,
+    getAllMyBookings,
     getABooking,
     updateABooking,
     deleteABooking,
