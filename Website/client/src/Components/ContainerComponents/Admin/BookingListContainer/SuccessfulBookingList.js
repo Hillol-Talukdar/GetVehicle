@@ -33,6 +33,7 @@ const SuccessfulBookingList = () => {
           (item) =>
             !item?.isTrashed &&
             !item?.isCanceled &&
+            item?.handedOver &&
             item?.received && (
               <BookingSingleItemDetails
                 item={item}

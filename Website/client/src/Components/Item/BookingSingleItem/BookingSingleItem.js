@@ -7,10 +7,11 @@ import UserDetailsModal from '../../Modal/UserDetailsModal';
 import './BookingSingleItem.css';
 
 const BookingSingleItem = (props) => {
-  const [isDataEdited, setIsDataEdited] = useState(false);
-  const [handedOverToUser, setSandedOverToUser] = useState(false);
-
   const currentItem = props.item;
+  const handedOverDataFromModel = currentItem?.handedOver;
+
+  const [isDataEdited, setIsDataEdited] = useState(false);
+  const [handedOverToUser, setSandedOverToUser] = useState(handedOverDataFromModel == true ? true: false);
 
   const initState = {
     paid: `${currentItem?.paid}`,
@@ -41,8 +42,8 @@ const BookingSingleItem = (props) => {
     setValues({ ...values, [e.target.name]: e.target.value });
     setIsDataEdited(true);
 
-    if(e.target.name == "handedOver"){
-        setSandedOverToUser(e.target.value)
+    if(e.target.name == "handedOver" && handedOverDataFromModel==false){
+        setSandedOverToUser(true)
     }
   };
 
@@ -193,7 +194,7 @@ const BookingSingleItem = (props) => {
               className="enhanced-select"
               name="handedOver"
               size="sm"
-              disabled={handedOverToUser}
+              disabled={handedOverDataFromModel}
               onChange={changeHandler}
             >
               <option value="true" selected={currentItem?.handedOver === true}>

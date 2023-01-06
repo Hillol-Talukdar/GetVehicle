@@ -29,7 +29,14 @@ const BookingList = () => {
       <h4>Booking List</h4>
       <div className="d-flex flex-wrap">
         {allBookings.map((item) => (
-          (!item?.isTrashed && !item?.isCanceled && !item?.received) && ( <BookingSingleItem item={item} loadAllBookings={loadAllBookings} setIsDataUpdated={setIsDataUpdated}></BookingSingleItem> )
+          (!item?.isTrashed &&
+            !item?.isCanceled &&
+            (!item?.handedOver || !item?.received)) && ( 
+              <BookingSingleItem 
+                item={item} 
+                loadAllBookings={loadAllBookings} 
+                setIsDataUpdated={setIsDataUpdated}
+              ></BookingSingleItem> )
         ))}
       </div>
     </Container>
