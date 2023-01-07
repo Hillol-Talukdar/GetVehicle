@@ -24,6 +24,14 @@ const ItemDetailsContainer = () => {
   const [reloadPage, setReloadPage] = useState(false);
 
   useEffect(() => {
+    if(vehicle && vehicle.data && vehicle.data.isTrashed) {
+      setTimeout(()=>{
+        window.location.replace('/');
+      }, 1000);
+    }
+  }, [data]);
+
+  useEffect(() => {
     dispatch(getVehicleDetails(id));
     setReloadPage(false);
   }, [dispatch, id, reloadPage]);
@@ -40,9 +48,14 @@ const ItemDetailsContainer = () => {
   const onClickStar = (newRating, name) => {
     setStar(newRating);
     vehicleStar(name, newRating, user.token).then((res) => {
-      // console.log('Rating clicked', res.data);
       toast.success("Thanks For Your Valuable Review!");
       dispatch(getVehicleDetails(id));
+    }).catch(err => {
+      toast.error(
+        err.response && err.response.data.message
+          ? err.response.data.message
+          : err.message
+      );
     });
   };
 
@@ -52,6 +65,8 @@ const ItemDetailsContainer = () => {
         <p>Loading...</p>
       ) : error ? (
         <p>{error}</p>
+      ) : !loading && vehicle?.data?.isTrashed ? (
+        <h5 className='text-danger'>This vehicle is deleted. Redirecting to Home...</h5>
       ) : (
         <>
           <DetailsSingleItem

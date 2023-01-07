@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Header from './Components/NavbarAndFooter/Header/Header';
 import HomeContainer from './Components/ContainerComponents/HomeContainer/HomeContainer';
@@ -27,84 +27,129 @@ import UserCanceledBookingList from './Components/ContainerComponents/Booking/Us
 const App = () => {
   const dispatch = useDispatch();
 
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      currentUser(user.accessToken, user.email)
-        .then((res) => {
-          createUserPayloadAndDispatch(dispatch, user.accessToken, res);
-        })
-        .catch((error) => {
-          console.log(error.message);
-        });
-    }
-  });
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged(async (user) => {
+      if (user) {
+        const idTokenResult = await user.getIdTokenResult();
+
+        currentUser(idTokenResult.token, user.email)
+          .then((res) => {
+            createUserPayloadAndDispatch(dispatch, idTokenResult.token, res);
+          })
+          .catch((error) => {
+            console.log(error.message);
+          });
+      }
+    });
+
+    // cleanup
+    return () => unsubscribe();
+  }, [dispatch]);
 
   return (
     <>
       <ToastContainer />
       <Header />
       <Routes>
-        <Route exact path="/" element={<HomeContainer/>} />
+        <Route exact path="/" element={<HomeContainer />} />
+
         <Route exact path="/details/:id" element={<ItemDetailsContainer />} />
+
         <Route
           exact
           path="/admin/create-or-update-vehicle"
-          element={<AdminPrivateRoute />}>
-            <Route exact path="/admin/create-or-update-vehicle" element={<CreateOrUpdateItemContainer/>}/>
+          element={<AdminPrivateRoute />}
+        >
+          <Route
+            exact
+            path="/admin/create-or-update-vehicle"
+            element={<CreateOrUpdateItemContainer />}
+          />
         </Route>
 
         <Route
           exact
           path="/admin/create-or-update-category"
-          element={<AdminPrivateRoute />}>
-            <Route exact path="/admin/create-or-update-category" element={<CreateOrUpdateCategoryContainer/>}/>
+          element={<AdminPrivateRoute />}
+        >
+          <Route
+            exact
+            path="/admin/create-or-update-category"
+            element={<CreateOrUpdateCategoryContainer />}
+          />
         </Route>
+
         <Route
           exact
           path="/admin/category/:categoryId/create-or-update-category"
-          element={<AdminPrivateRoute />}>
-            <Route exact path="/admin/category/:categoryId/create-or-update-category" element={<CreateOrUpdateSubCategoryContainer/>}/>
+          element={<AdminPrivateRoute />}
+        >
+          <Route
+            exact
+            path="/admin/category/:categoryId/create-or-update-category"
+            element={<CreateOrUpdateSubCategoryContainer />}
+          />
         </Route>
 
-        <Route
-          exact
-          path="/admin/booking-list"
-          element={<AdminPrivateRoute />}>
-            <Route exact path="/admin/booking-list" element={<BookingList/>}/>
+        <Route exact path="/admin/booking-list" element={<AdminPrivateRoute />}>
+          <Route exact path="/admin/booking-list" element={<BookingList />} />
         </Route>
+
         <Route
           exact
           path="/admin/cancled-booking-list"
-          element={<AdminPrivateRoute />}>
-            <Route exact path="/admin/cancled-booking-list" element={<CanceledBookingList/>}/>
+          element={<AdminPrivateRoute />}
+        >
+          <Route
+            exact
+            path="/admin/cancled-booking-list"
+            element={<CanceledBookingList />}
+          />
         </Route>
+
         <Route
           exact
           path="/admin/successful-booking-list"
-          element={<AdminPrivateRoute />}>
-            <Route exact path="/admin/successful-booking-list" element={<SuccessfulBookingList/>}/>
+          element={<AdminPrivateRoute />}
+        >
+          <Route
+            exact
+            path="/admin/successful-booking-list"
+            element={<SuccessfulBookingList />}
+          />
         </Route>
-        <Route exact path="/booking/:id" element={<Booking/>} />
 
-        <Route
-          exact
-          path="/booking-list"
-          element={<UserPrivateRoute />}>
-            <Route exact path="/booking-list" element={<UserBookingList/>}/>
+        <Route exact path="/booking/:id" element={<UserPrivateRoute />}>
+          <Route exact path="/booking/:id" element={<Booking />} />
         </Route>
+
+        <Route exact path="/booking-list" element={<UserPrivateRoute />}>
+          <Route exact path="/booking-list" element={<UserBookingList />} />
+        </Route>
+
         <Route
           exact
           path="/cancled-booking-list"
-          element={<UserPrivateRoute />}>
-            <Route exact path="/cancled-booking-list" element={<UserCanceledBookingList/>}/>
+          element={<UserPrivateRoute />}
+        >
+          <Route
+            exact
+            path="/cancled-booking-list"
+            element={<UserCanceledBookingList />}
+          />
         </Route>
+
         <Route
           exact
           path="/successful-booking-list"
-          element={<UserPrivateRoute />}>
-            <Route exact path="/successful-booking-list" element={<UserSuccessfulBookingList/>}/>
+          element={<UserPrivateRoute />}
+        >
+          <Route
+            exact
+            path="/successful-booking-list"
+            element={<UserSuccessfulBookingList />}
+          />
         </Route>
-
       </Routes>
       <Footer />
     </>

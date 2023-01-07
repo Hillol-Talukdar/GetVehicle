@@ -3,6 +3,7 @@ import { Dropdown, DropdownButton, Image } from 'react-bootstrap';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router";
 import { DropDownContants, TooltipConstants } from "../../../Constants/CommonConstants";
 import { googleLogout } from "../../../Services/GoogleAuthService";
 import UserDetailsModal from "../../Modal/UserDetailsModal";
@@ -11,6 +12,7 @@ import "./LoggedInUserInfoContainer.css";
 
 const LoggedInUserInfoContainer = ({ userInfo }) => {
     const dispatch = useDispatch();
+    let navigate = useNavigate();
 
     const [showUpdateModal, setShowUpdateModal] = useState(false);
 
@@ -29,6 +31,7 @@ const LoggedInUserInfoContainer = ({ userInfo }) => {
               break;
             case DropDownContants.LOGOUT.EVENT_KEY:
               googleLogout(dispatch);
+              navigate('/');
               break;
             default:
               break;
