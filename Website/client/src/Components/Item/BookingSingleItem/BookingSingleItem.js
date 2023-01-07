@@ -22,7 +22,7 @@ const BookingSingleItem = (props) => {
   const [showUpdateModal, setShowUpdateModal] = useState(false);
   const [values, setValues] = useState(initState);
   const [isDataEdited, setIsDataEdited] = useState(false);
-  const [handedOverToUser, setSandedOverToUser] = useState(handedOverDataFromModel == true ? true: false);
+  const [handedOverToUser, setHandedOverToUser] = useState(handedOverDataFromModel === true ? true: false);
 
   const handleUpdateModalClose = () => {
     setShowUpdateModal(false);
@@ -40,10 +40,6 @@ const BookingSingleItem = (props) => {
   const changeHandler = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
     setIsDataEdited(true);
-
-    if(e.target.name == "handedOver" && handedOverDataFromModel==false){
-        setSandedOverToUser(true)
-    }
   };
 
   const handleCancelBooking= (e) => {
@@ -78,6 +74,9 @@ const BookingSingleItem = (props) => {
         setIsDataEdited(false);
         props.setIsDataUpdated(true);
         toast.success(`Booking is updated!`);
+        if(res?.data?.data?.handedOver) {
+          setHandedOverToUser(true);
+        }
       })
       .catch((err) => {
         setLoading(false);
