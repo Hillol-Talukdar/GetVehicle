@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
-import { getAllBookings } from '../../../../Services/BookingDataService';
-import BookingSingleItem from '../../../Item/BookingSingleItem/BookingSingleItem';
-import './BookingList.css';
+import { getAllMyBookings } from '../../../Services/BookingDataService';
+import BookingSingleItem from '../../Item/BookingSingleItem/BookingSingleItem';
 
-const BookingList = () => {
+const UserBookingList = () => {
   const user = useSelector((state) => state.userReducer);
   const [allBookings, setAllBookings] = useState([]);
   const [isDataUpdated, setIsDataUpdated] = useState(false);
 
   const loadAllBookings = () => {
-    getAllBookings(user.token).then((res)=>{
+    getAllMyBookings(user.token).then((res)=>{
         setAllBookings(res.data.data);
         // console.log(res.data.data);
     }).catch((err)=>{
@@ -33,16 +32,17 @@ const BookingList = () => {
             !item?.isCanceled &&
             (!item?.handedOver || !item?.received) && ( 
               <BookingSingleItem
-                isAdminPanel={true}
+                isAdminPanel={false}
                 user={user} 
                 item={item} 
                 loadAllBookings={loadAllBookings} 
                 setIsDataUpdated={setIsDataUpdated}
-              ></BookingSingleItem> )
+              ></BookingSingleItem> 
+            )
         ))}
       </div>
     </Container>
   );
 };
 
-export default BookingList;
+export default UserBookingList;
