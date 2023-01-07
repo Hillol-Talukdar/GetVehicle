@@ -9,6 +9,10 @@ router
     .get(checkAuth, bookingController.getAllBookings);
 
 router
+    .route('/my')
+    .get(checkAuth, bookingController.getAllMyBookings);
+
+router
     .route('/:id')
     .get(checkAuth, bookingController.getABooking)
     .patch(checkAuth, bookingController.updateABooking)

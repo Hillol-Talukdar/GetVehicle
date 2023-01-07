@@ -86,6 +86,30 @@ const Header = () => {
 
               <NavDropdown.Item
                 className="p-2"
+                to="/admin/successful-booking-list"
+              >
+                <NavLink
+                  to="/admin/successful-booking-list"
+                  className="text-color-and-decoration"
+                >
+                  SuccessFul Booking List
+                </NavLink>
+              </NavDropdown.Item>
+              
+              <NavDropdown.Item
+                className="p-2"
+                to="/admin/cancled-booking-list"
+              >
+                <NavLink
+                  to="/admin/cancled-booking-list"
+                  className="text-color-and-decoration"
+                >
+                  Canceled Booking List
+                </NavLink>
+              </NavDropdown.Item>
+
+              <NavDropdown.Item
+                className="p-2"
                 to="/admin/user-list"
               >
                 <NavLink
@@ -93,6 +117,47 @@ const Header = () => {
                   className="text-color-and-decoration"
                 >
                   User List
+                </NavLink>
+              </NavDropdown.Item>
+            </NavDropdown>)
+          }
+
+          {loggedInUserDetails && 
+            (<NavDropdown title="User" id="basic-nav-dropdown">
+
+              <NavDropdown.Item
+                className="p-2"
+                to="/booking-list"
+              >
+                <NavLink
+                  to="/booking-list"
+                  className="text-color-and-decoration"
+                >
+                  {NavbarConstants.BOOKING_LIST}
+                </NavLink>
+              </NavDropdown.Item>
+
+              <NavDropdown.Item
+                className="p-2"
+                to="/successful-booking-list"
+              >
+                <NavLink
+                  to="/successful-booking-list"
+                  className="text-color-and-decoration"
+                >
+                  SuccessFul Booking List
+                </NavLink>
+              </NavDropdown.Item>
+              
+              <NavDropdown.Item
+                className="p-2"
+                to="/cancled-booking-list"
+              >
+                <NavLink
+                  to="/cancled-booking-list"
+                  className="text-color-and-decoration"
+                >
+                  Canceled Booking List
                 </NavLink>
               </NavDropdown.Item>
             </NavDropdown>)

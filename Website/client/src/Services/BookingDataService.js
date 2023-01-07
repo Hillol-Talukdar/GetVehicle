@@ -8,6 +8,14 @@ export const getAllBookings = async (authtoken) => {
   });
 };
 
+export const getAllMyBookings = async (authtoken) => {
+  return await axios.get(`${process.env.REACT_APP_API}/booking/my`, {
+    headers: {
+      authtoken,
+    },
+  });
+};
+
 export const getBookingDetailsByVehicleId = async (vehicleId) => {
   return await axios.get(
     `${process.env.REACT_APP_API}/booking/dates/${vehicleId}`

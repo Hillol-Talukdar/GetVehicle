@@ -27,9 +27,12 @@ const UserListContainer = () => {
     <Container>
       <h4>User List</h4>
       <div className="d-flex flex-wrap">
-        {allUsers.map((user) => (
-          <UserSingleItem userData={user}></UserSingleItem>
-        ))}
+        {allUsers.map(
+          (user) =>
+            user.role !== 'Admin' && (
+              <UserSingleItem userData={user}></UserSingleItem>
+            )
+        )}
       </div>
     </Container>
   );

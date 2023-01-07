@@ -64,6 +64,14 @@ public class VehicleDetailsActivity extends AppCompatActivity {
         binding.imageSliderVehicle.setImageList(imageList);
     }
 
+    private String getProperTextForInfo(String info) {
+        if(info.isEmpty()){
+            return "N/A";
+        } else {
+            return info;
+        }
+    }
+
     @SuppressLint("SetTextI18n")
     private void setVehicleDetailsToView() throws JSONException {
         setupImageSlider();
@@ -73,14 +81,14 @@ public class VehicleDetailsActivity extends AppCompatActivity {
         binding.tvRating.setText(getString(R.string.rating_out_of, currentSelectedVehicleData.getAverageRating(), 5.0));
         binding.tvLocation.setText(currentSelectedVehicleData.getCurrentLocationString());
         binding.tvEngine.setText(currentSelectedVehicleData.getEngine());
-        binding.tvMileage.setText(currentSelectedVehicleData.getMileage() + getString(R.string.km_per_hour));
+        binding.tvMileage.setText(currentSelectedVehicleData.getMileage() + getString(R.string.km_per_liter));
         binding.llFuelType.setText(currentSelectedVehicleData.getFuelType());
         binding.tvCategory.setText(currentSelectedVehicleData.getCategory().getString("name"));
         binding.tvSubCategory.setText(currentSelectedVehicleData.getSubCategory().getString("name"));
         binding.tvSeatCount.setText(Integer.toString(currentSelectedVehicleData.getSeatCount()));
-        binding.tvTransmission.setText(currentSelectedVehicleData.getTransmission());
-        binding.tvBootSpace.setText(currentSelectedVehicleData.getBootSpace());
-        binding.tvGroundClearance.setText(currentSelectedVehicleData.getGroundClearance());
+        binding.tvTransmission.setText(getProperTextForInfo(currentSelectedVehicleData.getTransmission()));
+        binding.tvBootSpace.setText(getProperTextForInfo(currentSelectedVehicleData.getBootSpace()));
+        binding.tvGroundClearance.setText(getProperTextForInfo(currentSelectedVehicleData.getGroundClearance()));
     }
 
     public void getSingleVehicle(String vehicleId, Context context) {
@@ -98,7 +106,7 @@ public class VehicleDetailsActivity extends AppCompatActivity {
             @Override
             public void onResponse(JSONObject response) {
                 try {
-                    currentSelectedVehicleData = VehicleUseCase.getVehicleDataFromJSONObject(response.getJSONObject("data"));
+                    currentSelectedVehicleData = VehicleUseCase.getVehicleDataFromJSONObject(response.getJSONObject("data"), true);
                     setVehicleDetailsToView();
                 } catch (JSONException e) {
                     e.printStackTrace();

@@ -91,7 +91,7 @@ const UserSingleItem = (props) => {
         </div>
 
         <div className="d-flex">
-          <span className="dropdown-label">Blocked Status: </span>
+          <span className="dropdown-label">Blocked User: </span>
           <div>
             <Form.Select
               className="enhanced-select"

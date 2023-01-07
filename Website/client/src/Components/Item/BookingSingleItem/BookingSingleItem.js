@@ -7,9 +7,8 @@ import UserDetailsModal from '../../Modal/UserDetailsModal';
 import './BookingSingleItem.css';
 
 const BookingSingleItem = (props) => {
-  const [isDataEdited, setIsDataEdited] = useState(false);
-
   const currentItem = props.item;
+  const handedOverDataFromModel = currentItem?.handedOver;
 
   const initState = {
     paid: `${currentItem?.paid}`,
@@ -22,6 +21,8 @@ const BookingSingleItem = (props) => {
   const [loading, setLoading] = useState(false);
   const [showUpdateModal, setShowUpdateModal] = useState(false);
   const [values, setValues] = useState(initState);
+  const [isDataEdited, setIsDataEdited] = useState(false);
+  const [handedOverToUser, setHandedOverToUser] = useState(handedOverDataFromModel === true ? true: false);
 
   const handleUpdateModalClose = () => {
     setShowUpdateModal(false);
@@ -30,6 +31,7 @@ const BookingSingleItem = (props) => {
   const handleUpdateModalShow = () => {
     setShowUpdateModal(true);
   };
+
 
   const getFormattedDate = (date) => {
     return new Date(date).toUTCString().substring(0, 16);
@@ -40,6 +42,27 @@ const BookingSingleItem = (props) => {
     setIsDataEdited(true);
   };
 
+  const handleCancelBooking= (e) => {
+    setLoading(true);
+
+    if (window.confirm("Are you sure you want to cancel?")) {
+      updateABooking(currentItem?._id, { isCanceled: true}, user.token)
+        .then((res) => {
+          setLoading(false);
+          toast.success(`Booking is Canceled!`);
+          props.setIsDataUpdated(true);
+        })
+        .catch((err) => {
+          setLoading(false);
+          toast.error(
+            err.response && err.response.data.message
+              ? err.response.data.message
+              : err.message
+          );
+        });
+    }
+  }
+
   const submitHandler = (e) => {
     e.preventDefault();
 
@@ -49,7 +72,11 @@ const BookingSingleItem = (props) => {
       .then((res) => {
         setLoading(false);
         setIsDataEdited(false);
+        props.setIsDataUpdated(true);
         toast.success(`Booking is updated!`);
+        if(res?.data?.data?.handedOver) {
+          setHandedOverToUser(true);
+        }
       })
       .catch((err) => {
         setLoading(false);
@@ -84,7 +111,19 @@ const BookingSingleItem = (props) => {
             >
               User Details
             </Button>
+
             <Button
+              size="sm"
+              style={{ fontSize: 'medium', marginRight: '10px' }}
+              variant="outline-danger"
+              onClick={(e) => {
+                handleCancelBooking();
+              }}
+            >
+              Cancel Booking
+            </Button>
+            
+            {props.isAdminPanel && user && user.role=='Admin' && (<Button
               size="sm"
               style={{ fontSize: 'medium' }}
               variant={isDataEdited ? "outline-primary" : "outline-secondary"}
@@ -94,7 +133,7 @@ const BookingSingleItem = (props) => {
               }}
             >
               Save Changes
-            </Button>
+            </Button>)}
           </div>
         </div>
 
@@ -129,62 +168,96 @@ const BookingSingleItem = (props) => {
           </span>
         </div>
 
-        <div className="d-flex">
-          <span className="dropdown-label">Payment Status: </span>
-          <div>
-            <Form.Select
-              className="enhanced-select"
-              name="paid"
-              size="sm"
-              onChange={changeHandler}
-            >
-              <option value="true" selected={currentItem?.paid === true}>
-                Paid
-              </option>
-              <option value="false" selected={currentItem?.paid === false}>
-                Unpaid
-              </option>
-            </Form.Select>
-          </div>
-        </div>
+        {props.isAdminPanel && (
+          <>
+            <div className="d-flex">
+              <span className="dropdown-label">Payment Status: </span>
+              <div>
+                <Form.Select
+                  className="enhanced-select"
+                  name="paid"
+                  size="sm"
+                  onChange={changeHandler}
+                >
+                  <option value="true" selected={currentItem?.paid === true}>
+                    Paid
+                  </option>
+                  <option value="false" selected={currentItem?.paid === false}>
+                    Unpaid
+                  </option>
+                </Form.Select>
+              </div>
+            </div>
 
-        <div className="d-flex">
-          <span className="dropdown-label">Handed Over To User: </span>
-          <div>
-            <Form.Select
-              className="enhanced-select"
-              name="handedOver"
-              size="sm"
-              onChange={changeHandler}
-            >
-              <option value="true" selected={currentItem?.handedOver === true}>
-                Yes
-              </option>
-              <option value="false" selected={currentItem?.handedOver === false}>
-                No
-              </option>
-            </Form.Select>
-          </div>
-        </div>
+            <div className="d-flex">
+              <span className="dropdown-label">Handed Over To User: </span>
+              <div>
+                <Form.Select
+                  className="enhanced-select"
+                  name="handedOver"
+                  size="sm"
+                  disabled={handedOverDataFromModel}
+                  onChange={changeHandler}
+                >
+                  <option value="true" selected={currentItem?.handedOver === true}>
+                    Yes
+                  </option>
+                  <option value="false" selected={currentItem?.handedOver === false}>
+                    No
+                  </option>
+                </Form.Select>
+              </div>
+            </div>
 
-        <div className="d-flex">
-          <span className="dropdown-label">Got Back From User: </span>
-          <div>
-            <Form.Select
-              className="enhanced-select"
-              name="received"
-              size="sm"
-              onChange={changeHandler}
-            >
-              <option value="true" selected={currentItem?.received === true}>
-                Yes
-              </option>
-              <option value="false" selected={currentItem?.received === false}>
-                No
-              </option>
-            </Form.Select>
-          </div>
-        </div>
+            <div className="d-flex">
+              <span className="dropdown-label">Got Back From User: </span>
+              <div>
+                <Form.Select
+                  className="enhanced-select"
+                  name="received"
+                  size="sm"
+                  onChange={changeHandler}
+                  disabled={!handedOverToUser}
+                  data-toggle="tooltip" 
+                  data-placement="bottom"
+                  title="WIl be enable if vehicle is Handed Over To User."
+                >
+                  <option value="true" selected={currentItem?.received === true}>
+                    Yes
+                  </option>
+                  <option value="false" selected={currentItem?.received === false}>
+                    No
+                  </option>
+                </Form.Select>
+              </div>
+            </div>
+          </>
+        )}
+
+        {!props.isAdminPanel && (
+           <>
+            <div>
+              <span>Payment Status: </span>
+              <span className="enhanced-label">
+                {currentItem?.paid ? 'Paid' : 'Not Paid'}
+              </span>
+            </div>
+ 
+            <div>
+              <span>Recieved Vehicle: </span>
+              <span className="enhanced-label">
+                {currentItem?.handedOver ? 'Yes' : 'Not yet'}
+              </span>
+            </div>
+  
+            <div>
+              <span>Returned vehicle: </span>
+              <span className="enhanced-label">
+                {currentItem?.received ? 'Yes' : 'Not yet'}
+              </span>
+            </div>     
+           </>
+        )}
       </div>
 
       <UserDetailsModal
