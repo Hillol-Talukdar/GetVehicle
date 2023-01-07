@@ -5,6 +5,9 @@ const router = express.Router();
 
 router.route('/').get(checkAuth, userController.getAllUser);
 
-router.route('/:id').get(checkAuth, userController.getAUser);
+router
+    .route('/:id')
+    .get(checkAuth, userController.getAUser)
+    .patch(checkAuth, userController.updateAuser);
 
 module.exports = router;

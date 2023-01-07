@@ -24,3 +24,15 @@ exports.getAllUser = catchAsync(async (req, res, next) => {
         data: users,
     });
 });
+
+exports.updateAuser = catchAsync(async (req, res, next) => {
+    const users = await User.findByIdAndUpdate(req.params.id, req.body, {
+        new: true,
+    });
+
+    res.status(200).json({
+        status: 'Success',
+        result: users.length,
+        data: users,
+    });
+});

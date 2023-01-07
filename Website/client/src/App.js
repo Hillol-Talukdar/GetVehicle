@@ -20,6 +20,7 @@ import BookingList from './Components/ContainerComponents/Admin/BookingListConta
 import CanceledBookingList from './Components/ContainerComponents/Admin/BookingListContainer/CanceledBookingList';
 import SuccessfulBookingList from './Components/ContainerComponents/Admin/BookingListContainer/SuccessfulBookingList';
 import UserPrivateRoute from './Components/Route/UserPrivateRoute';
+import UserListContainer from './Components/ContainerComponents/Admin/User/UserListContainer';
 import UserBookingList from './Components/ContainerComponents/Booking/UserBookingList';
 import UserSuccessfulBookingList from './Components/ContainerComponents/Booking/UserSuccessfulBookingList';
 import UserCanceledBookingList from './Components/ContainerComponents/Booking/UserCanceledBookingList';
@@ -149,6 +150,13 @@ const App = () => {
             path="/successful-booking-list"
             element={<UserSuccessfulBookingList />}
           />
+        </Route>
+
+        <Route
+          exact
+          path="/admin/user-list"
+          element={<AdminPrivateRoute />}>
+            <Route exact path="/admin/user-list" element={<UserListContainer/>}/>
         </Route>
       </Routes>
       <Footer />
