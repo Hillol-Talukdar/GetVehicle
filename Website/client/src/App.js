@@ -18,6 +18,7 @@ import AdminPrivateRoute from './Components/Route/AdminPrivateRoute';
 import Booking from './Components/ContainerComponents/Booking/Booking';
 import BookingList from './Components/ContainerComponents/Admin/BookingListContainer/BookingList';
 import UserPrivateRoute from './Components/Route/UserPrivateRoute';
+import UserListContainer from './Components/ContainerComponents/Admin/User/UserListContainer';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -77,6 +78,13 @@ const App = () => {
           path="/booking/:id"
           element={<UserPrivateRoute/>} >
             <Route exact path="/booking/:id" element={<Booking/>} />
+        </Route>
+
+        <Route
+          exact
+          path="/admin/user-list"
+          element={<AdminPrivateRoute />}>
+            <Route exact path="/admin/user-list" element={<UserListContainer/>}/>
         </Route>
       </Routes>
       <Footer />
