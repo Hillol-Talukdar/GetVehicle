@@ -156,6 +156,7 @@ public class HomeScreenActivity extends AppCompatActivity {
                 .addOnCompleteListener(this, new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
+                        account = null;
                         updateLoginUI(null);
                     }
                 });
@@ -180,8 +181,7 @@ public class HomeScreenActivity extends AppCompatActivity {
                         signIn();
                     }
                 });
-
-                updateLoginUI(account);
+                updateLoginUI(GoogleSignIn.getLastSignedInAccount(getApplicationContext()));
             }
         };
 
@@ -195,7 +195,6 @@ public class HomeScreenActivity extends AppCompatActivity {
                         closeDrawer();
                         break;
                     case R.id.itemHome:
-                        navDrawerActions.goToHomeScreen();
                         closeDrawer();
                         break;
                     case R.id.itemAbout:
@@ -225,7 +224,7 @@ public class HomeScreenActivity extends AppCompatActivity {
     }
 
     private void closeDrawer() {
-//        navigation_view.closeDrawer(GravityCompat.START);
+        navigationDrawerLayout.closeDrawer(GravityCompat.START);
     }
 
     public void startVehicleDetailActivity(String vehicleId) {
