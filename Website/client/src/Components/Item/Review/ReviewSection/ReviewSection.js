@@ -23,11 +23,11 @@ const ReviewSection = ({ vehicleData, star, setReloadPage }) => {
         rating: star,
         comment: comment,
         deleted: false,
-        user: `${user._id}`,
+        user: `${user?._id}`,
         vehicle: `${vehicleData?._id}`,
         isTrashed: false,
       },
-      user.token
+      user?.token
     )
       .then((res) => {
         toast.success(`Review posted successfully!`);
