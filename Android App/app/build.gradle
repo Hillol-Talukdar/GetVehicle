@@ -52,4 +52,6 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.14.2'
     //imageSlider
     implementation 'com.github.denzcoskun:ImageSlideshow:0.1.0'
+    //google
+    implementation 'com.google.android.gms:play-services-auth:20.4.0'
 }
