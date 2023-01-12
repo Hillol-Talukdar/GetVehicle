@@ -10,10 +10,17 @@ import RatingModal from '../../Modal/RatingModal';
 import { googleLogin } from '../../../Services/GoogleAuthService';
 import { useDispatch, useSelector } from 'react-redux';
 
-const DetailsSingleItem = ({ data, onClickStar, star }) => {
+const DetailsSingleItem = ({ 
+  data,
+  user,
+  onClickStar,
+  star,
+  showModal,
+  handleShowModal,
+  handleCloseModal,
+}) => {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.userReducer);
-
+  
   const handleGoogleLogin = () => {
     googleLogin(dispatch);
   };
@@ -70,16 +77,21 @@ const DetailsSingleItem = ({ data, onClickStar, star }) => {
             <ListGroup className="list-group-flush">
               <ListGroup.Item>
                 <div className="d-flex justify-content-around">
-                  <RatingModal>
-                    <Rating
-                      name={data?._id}
-                      numberOfStars={5}
-                      rating={star}
-                      isSelectable={true}
-                      starRatedColor="#ffd700"
-                      starHoverColor="#ffd700"
-                      changeRating={onClickStar}
-                    />
+                  <RatingModal
+                    user = {user}  
+                    showModal = {showModal}
+                    handleShowModal = {handleShowModal}
+                    handleCloseModal = {handleCloseModal}
+                    >
+                      <Rating
+                        name={data?._id}
+                        numberOfStars={5}
+                        rating={star}
+                        isSelectable={true}
+                        starRatedColor="#ffd700"
+                        starHoverColor="#ffd700"
+                        changeRating={onClickStar}
+                      />
                   </RatingModal>
 
                   {user ? (
