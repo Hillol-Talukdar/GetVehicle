@@ -92,9 +92,7 @@ exports.vehicleStar = catchAsync(async (req, res, next) => {
     const { star } = req.body;
 
     if (!user) {
-        return next(
-            new AppError('You are not logged in!', 404)
-        );
+        return next(new AppError('You are not logged in!', 404));
     }
 
     const booking = await Booking.findOne({
@@ -109,7 +107,7 @@ exports.vehicleStar = catchAsync(async (req, res, next) => {
             new AppError('You can review after a successful booking!', 404)
         );
     }
-    
+
     //check if logged in uuser have already added rating to this product
     let existingRatingObject = vehicle.ratings.find(
         (element) => element.postedBy.toString() === user._id.toString()
@@ -125,7 +123,7 @@ exports.vehicleStar = catchAsync(async (req, res, next) => {
             { new: true }
         ).exec();
 
-        await Review.updateMany({user: user}, {rating: star} );
+        await Review.updateMany({ user: user }, { rating: star });
 
         // console.log("RatingAdded", ratingAdded);
         res.status(200).json(ratingAdded);
@@ -139,7 +137,7 @@ exports.vehicleStar = catchAsync(async (req, res, next) => {
             { new: true }
         ).exec();
 
-        await Review.updateMany({user: user}, {rating: star} );
+        await Review.updateMany({ user: user }, { rating: star });
 
         // console.log("RatingUpdated", ratingUpdated);
         res.status(200).json(ratingUpdated);
