@@ -22,7 +22,7 @@ const createReview = catchAsync(async (req, res, next) => {
 
     if (!booking) {
         return next(
-            new AppError('You can review only after using it. Book this vehicle now!', 404)
+            new AppError('You can post review only after using it. Book this vehicle now!', 404)
         );
     }
 
