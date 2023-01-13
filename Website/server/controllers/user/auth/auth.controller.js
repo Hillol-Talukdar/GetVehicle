@@ -15,7 +15,7 @@ exports.userCreateOrUpdate = catchAsync(async (req, res, next) => {
 
     if (user) {
         if(user.blocked === true) {
-            return next(new AppError('User not found!', 404));
+            return next(new AppError('Your Account Has Been Blocked By GetVehicle!', 404));
         } else {
             res.status(200).json({
                 status: 'Success',
@@ -42,7 +42,7 @@ exports.currentUser = catchAsync(async (req, res, next) => {
 
     if(user) {
         if(user.blocked === true) {
-            return next(new AppError('User not found!', 404));
+            return next(new AppError('Your Account Has Been Blocked By GetVehicle!', 404));
         } else {
             res.status(200).json({
                 status: 'Success',

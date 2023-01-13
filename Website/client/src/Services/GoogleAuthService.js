@@ -31,13 +31,13 @@ export const googleLogin = async (dispatch) => {
                     );
                 })
                 .catch(err => {
-                    toast.error(`something went wrong!`);
+                    toast.error(err.response.data.message);
                 });
 
             
         }).catch((error) => {
             const credential = GoogleAuthProvider.credentialFromError(error);
-            toast.error(`something went wrong!`);
+            toast.error(error.response.data.message);
         });
 
 };
