@@ -25,15 +25,19 @@ export const googleLogin = async (dispatch) => {
             userCreateOrUpdate(idTokenResult.token, userData)
                 .then((res) => {
                     createUserPayloadAndDispatch(dispatch, idTokenResult.token, res);
+
+                    toast.success(
+                        `Hi ${user.displayName}, Welcome to GetVehicle again!`
+                    );
                 })
-                .catch();
+                .catch(err => {
+                    toast.error(`something went wrong!`);
+                });
 
-            toast.success(
-                `Hi ${user.displayName}, Welcome to GetVehicle again!`
-            );
-
+            
         }).catch((error) => {
             const credential = GoogleAuthProvider.credentialFromError(error);
+            toast.error(`something went wrong!`);
         });
 
 };
