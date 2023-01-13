@@ -17,6 +17,7 @@ import {
   getBookingDetailsByVehicleId,
 } from '../../../Services/BookingDataService';
 import StripeContainer from '../StripeContainer/StripeContainer';
+import { PaymentMethod } from '../../../Constants/CommonConstants';
 
 const Booking = () => {
   const { id } = useParams();
@@ -39,6 +40,38 @@ const Booking = () => {
   const [endDate, setEndDate] = useState(null);
   const [showStripePayment, setShowStripePayment] = useState(false);
   const [stripePaymentSuccess, setStripePaymentSuccess] = useState(false);
+
+  const getBookingPayload = (selectedPaymentMethod, isPaid) => {
+    return {
+      totalAmount: totalPayableAmount,
+      totalDays: dayDifference,
+      paid: isPaid,
+      paymentMethod: selectedPaymentMethod,
+      handedOver: false,
+      received: false,
+      handOverDate: startDate,
+      receiveDate: endDate,
+      user: `${user._id}`,
+      userPhoneNumber: phoneNumber,
+      vehicle: `${vehicleData._id}`,
+      isTrashed: false,
+    }
+  }
+
+  const createBookingWithSelectedPaymentMethod = (paymentMethod, isPaid) => {
+    createBooking(getBookingPayload(paymentMethod, isPaid), user.token)
+    .then((res) => {
+      toast.success("Payment successful!");
+      window.location.replace('/booking-list');
+    })
+    .catch((err) => {
+      toast.error(
+        err.response && err.response.data.message
+          ? err.response.data.message
+          : err.message
+      );
+    });
+  }
 
   useEffect(() => {
     setShowLoginModal(user == null ? true : false);
@@ -64,35 +97,7 @@ const Booking = () => {
 
   useEffect(() => {
     if (stripePaymentSuccess) {
-      createBooking(
-        {
-          totalAmount: totalPayableAmount,
-          totalDays: dayDifference,
-          paid: true,
-          paymentMethod: 'Online',
-          handedOver: false,
-          received: false,
-          handOverDate: startDate,
-          receiveDate: endDate,
-          user: `${user._id}`,
-          userPhoneNumber: phoneNumber,
-          vehicle: `${vehicleData._id}`,
-          isTrashed: false,
-        },
-        user.token
-      )
-        .then((res) => {
-          toast.success("Payment successful!");
-          // window.alert(`Payment successful`);
-          window.location.replace('/');
-        })
-        .catch((err) => {
-          toast.error(
-            err.response && err.response.data.message
-              ? err.response.data.message
-              : err.message
-          );
-        });
+      createBookingWithSelectedPaymentMethod(PaymentMethod.ONLINE, true);
     }
   }, [stripePaymentSuccess]);
 
@@ -136,7 +141,15 @@ const Booking = () => {
     return validNumberPattern.test(phoneNumber);
   };
 
-  const startPaymentProcess = () => {
+  const continueBookingProcess = (paymentMethod) => {
+    if(paymentMethod === PaymentMethod.ONLINE) {
+      setShowStripePayment(true);
+    } else {
+      createBookingWithSelectedPaymentMethod(paymentMethod, false);
+    }
+  }
+
+  const startPaymentProcess = (paymentMethod) => {
     if (!isValidNumber() && !acknowledgement) {
       alert('Please fill up the required fields correctly.');
     } else if (!isValidNumber()) {
@@ -169,10 +182,10 @@ const Booking = () => {
             'This vehicle is already booked! Please check all booked dates of this vehicle.'
           );
         } else {
-          setShowStripePayment(true);
+          continueBookingProcess(paymentMethod);
         }
       } else {
-        setShowStripePayment(true);
+        continueBookingProcess(paymentMethod);
       }
     }
   };
@@ -323,14 +336,22 @@ const Booking = () => {
                 </span>
               </div>
               <div className="button-container-div">
+              <Button
+                  size="sm"
+                  variant="outline-primary"
+                  className="w-100 mb-2"
+                  onClick={()=>startPaymentProcess(PaymentMethod.CASH)}
+                >
+                  Pay Cash When Receiving
+                </Button>
                 {!showStripePayment && (
                 <Button
                   size="sm"
-                  variant="outline-success"
+                  variant="outline-primary"
                   className="w-100"
-                  onClick={startPaymentProcess}
+                  onClick={()=>startPaymentProcess(PaymentMethod.ONLINE)}
                 >
-                  Make Payment
+                  Make Payment Online
                 </Button>
                 )}
               </div>

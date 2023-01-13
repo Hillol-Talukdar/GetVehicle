@@ -20,10 +20,10 @@ import BookingList from './Components/ContainerComponents/Admin/BookingListConta
 import CanceledBookingList from './Components/ContainerComponents/Admin/BookingListContainer/CanceledBookingList';
 import SuccessfulBookingList from './Components/ContainerComponents/Admin/BookingListContainer/SuccessfulBookingList';
 import UserPrivateRoute from './Components/Route/UserPrivateRoute';
-import UserListContainer from './Components/ContainerComponents/Admin/User/UserListContainer';
 import UserBookingList from './Components/ContainerComponents/Booking/UserBookingList';
 import UserSuccessfulBookingList from './Components/ContainerComponents/Booking/UserSuccessfulBookingList';
 import UserCanceledBookingList from './Components/ContainerComponents/Booking/UserCanceledBookingList';
+import UserListContainer from './Components/ContainerComponents/Admin/User/UserListContainer';
 
 const App = () => {
   const dispatch = useDispatch();

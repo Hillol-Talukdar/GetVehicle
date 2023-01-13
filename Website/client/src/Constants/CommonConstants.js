@@ -140,3 +140,8 @@ export const AskForLoginModalConstants = {
   HEADER: 'Login To Continue...',
   BODY: 'You need to login before booking the vehicle.'
 }
+
+export const PaymentMethod = {
+  CASH: 'Cash',
+  ONLINE: 'Online'
+}
