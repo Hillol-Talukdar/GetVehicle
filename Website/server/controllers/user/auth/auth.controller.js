@@ -1,5 +1,6 @@
 const catchAsync = require('../../../utils/catchAsync');
 const User = require('../../../models/user');
+const AppError = require('../../../utils/appError');
 
 exports.userCreateOrUpdate = catchAsync(async (req, res, next) => {
     const { photoUrl, email, displayName } = req.body.data;
@@ -10,11 +11,17 @@ exports.userCreateOrUpdate = catchAsync(async (req, res, next) => {
         { new: true }
     );
 
+    console.log(user)
+
     if (user) {
-        res.status(200).json({
-            status: 'Success',
-            user,
-        });
+        if(user.blocked === true) {
+            return next(new AppError('Your Account Has Been Blocked By GetVehicle!', 404));
+        } else {
+            res.status(200).json({
+                status: 'Success',
+                user,
+            });
+        }
     } else {
         const newUser = await new User({
             name: displayName,
@@ -29,14 +36,20 @@ exports.userCreateOrUpdate = catchAsync(async (req, res, next) => {
     }
 });
 
-exports.currentUser = async (req, res) => {
-    User.findOne({ email: req.body.data.email }).exec((error, user) => {
-        if (error) {
-            throw new Error(error);
+exports.currentUser = catchAsync(async (req, res, next) => {
+    
+    const user = await  User.findOne({ email: req.body.data.email });
+
+    if(user) {
+        if(user.blocked === true) {
+            return next(new AppError('Your Account Has Been Blocked By GetVehicle!', 404));
+        } else {
+            res.status(200).json({
+                status: 'Success',
+                user: user,
+            });
         }
-        res.status(200).json({
-            status: 'Success',
-            user: user,
-        });
-    });
-};
+    } else {
+        return next(new AppError('User not found!', 404));
+    }
+});
