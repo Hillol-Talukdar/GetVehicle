@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import {
   getVehicleDetails,
   vehicleStar,
@@ -13,6 +13,7 @@ import { toast } from 'react-toastify';
 const ItemDetailsContainer = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
+  let navigate = useNavigate();
 
   const user = useSelector((state) => state.userReducer);
 
@@ -22,6 +23,7 @@ const ItemDetailsContainer = () => {
 
   const [star, setStar] = useState(0);
   const [reloadPage, setReloadPage] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     if(vehicle && vehicle.data && vehicle.data.isTrashed) {
@@ -34,6 +36,7 @@ const ItemDetailsContainer = () => {
   useEffect(() => {
     dispatch(getVehicleDetails(id));
     setReloadPage(false);
+    setStar(0);
   }, [dispatch, id, reloadPage]);
 
   useEffect(() => {
@@ -45,9 +48,21 @@ const ItemDetailsContainer = () => {
     }
   });
 
+  const handleShowModal = () => {
+    if (user && user.token) {
+      setShowModal(true);
+    } else {
+      navigate('/login');
+    }
+  };
+
+  const handleCloseModal = () => setShowModal(false);
+
   const onClickStar = (newRating, name) => {
-    setStar(newRating);
+    handleCloseModal();
+
     vehicleStar(name, newRating, user.token).then((res) => {
+      setStar(newRating);
       toast.success("Thanks For Your Valuable Review!");
       dispatch(getVehicleDetails(id));
     }).catch(err => {
@@ -71,8 +86,12 @@ const ItemDetailsContainer = () => {
         <>
           <DetailsSingleItem
             data={data}
+            user = {user}
             onClickStar={onClickStar}
             star={star}
+            showModal= {showModal}
+            handleShowModal = {handleShowModal}
+            handleCloseModal = {handleCloseModal}
           />
 
           <ReviewSection

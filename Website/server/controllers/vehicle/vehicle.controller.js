@@ -2,6 +2,8 @@ const catchAsync = require('../../utils/catchAsync');
 const Vehicle = require('../../models/vehicle');
 const Review = require('../../models/review');
 const User = require('../../models/user');
+const Booking = require('../../models/booking');
+const AppError = require('../../utils/appError');
 
 exports.createAVehicle = catchAsync(async (req, res, next) => {
     const newVehicle = await Vehicle.create(req.body);
@@ -88,7 +90,24 @@ exports.vehicleStar = catchAsync(async (req, res, next) => {
     const vehicle = await Vehicle.findById(req.params.id);
     const user = await User.findOne({ email: req.user.email });
     const { star } = req.body;
-    
+
+    if (!user) {
+        return next(new AppError('You are not logged in!', 404));
+    }
+
+    const booking = await Booking.findOne({
+        vehicle: req.params.id,
+        user: user._id,
+        received: true,
+        handedOver: true,
+    });
+
+    if (!booking) {
+        return next(
+            new AppError('You can rate only after using it. Book this vehicle now!', 404)
+        );
+    }
+
     //check if logged in uuser have already added rating to this product
     let existingRatingObject = vehicle.ratings.find(
         (element) => element.postedBy.toString() === user._id.toString()
@@ -104,7 +123,7 @@ exports.vehicleStar = catchAsync(async (req, res, next) => {
             { new: true }
         ).exec();
 
-        await Review.updateMany({user: user}, {rating: star} );
+        await Review.updateMany({ user: user }, { rating: star });
 
         // console.log("RatingAdded", ratingAdded);
         res.status(200).json(ratingAdded);
@@ -118,7 +137,7 @@ exports.vehicleStar = catchAsync(async (req, res, next) => {
             { new: true }
         ).exec();
 
-        await Review.updateMany({user: user}, {rating: star} );
+        await Review.updateMany({ user: user }, { rating: star });
 
         // console.log("RatingUpdated", ratingUpdated);
         res.status(200).json(ratingUpdated);

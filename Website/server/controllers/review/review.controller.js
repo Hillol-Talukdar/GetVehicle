@@ -1,11 +1,31 @@
 const Review = require('../../models/review');
 const User = require('../../models/user');
+const Booking = require('../../models/booking');
 const catchAsync = require('../../utils/catchAsync');
 const AppError = require('../../utils/appError');
 
 const createReview = catchAsync(async (req, res, next) => {
     const loggedInUser = await User.findOne({ email: req.user.email });
-   
+
+    if (!loggedInUser) {
+        return next(
+            new AppError('You are not logged in!', 404)
+        );
+    }
+
+    const booking = await Booking.findOne({
+        vehicle: req.body.vehicle,
+        user: loggedInUser,
+        received: true,
+        handedOver: true,
+    });
+
+    if (!booking) {
+        return next(
+            new AppError('You can post review only after using it. Book this vehicle now!', 404)
+        );
+    }
+
     req.body.user = loggedInUser._id;
     const newReview = await Review.create(req.body);
 
