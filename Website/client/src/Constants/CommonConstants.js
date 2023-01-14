@@ -13,11 +13,12 @@ export const ButtonConstants = {
 
 export const NavbarConstants = {
   HOME: 'Home',
+  ADMIN_PANEL: 'Admin Panel',
   SEARCH: 'Search',
   LOGIN: 'Login',
-  CREATE_VEHICLE: 'Create Vehicle',
-  CREATE_CATEGORY: 'Create Category',
-  BOOKING_LIST: 'Booking List'
+  CREATE_VEHICLE: 'Add A New Vehicle',
+  CREATE_CATEGORY: 'Category and Sub-category',
+  BOOKING_LIST: 'Current Bookings'
 };
 
 export const VehicleInfoConstants = {
