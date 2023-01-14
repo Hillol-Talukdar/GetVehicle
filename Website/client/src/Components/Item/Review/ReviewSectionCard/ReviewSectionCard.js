@@ -66,7 +66,7 @@ const ReviewSectionCard = ({ review, setReloadPage }) => {
   };
 
   const getFormattedDate = (date) => {
-    return new Date(date).toUTCString();
+    return new Date(date).toLocaleString();
   };
 
   return (

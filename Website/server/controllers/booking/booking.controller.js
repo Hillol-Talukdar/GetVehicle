@@ -82,7 +82,8 @@ const deleteABooking = catchAsync(async (req, res, next) => {
 });
 
 const getFormattedDate = (date) => {
-    return new Date(date).toUTCString().substring(0, 16);
+    // return new Date(date).toUTCString().substring(0, 16);
+    return new Date(date).toLocaleString().substring(0, 9);
 };
 
 var isBeforeOrEqualToCurrentDate = function (date) {
