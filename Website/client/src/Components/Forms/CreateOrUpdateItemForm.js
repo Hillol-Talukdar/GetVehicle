@@ -305,7 +305,7 @@ const CreateOrUpdateItemForm = ({
               images.map((image) => (
 
 
-                <div class="mb-3 col-auto">
+                <div className="mb-3 col-auto">
                     <div className="image-item-and-badge">
                         <span 
                           className="notify-badge"

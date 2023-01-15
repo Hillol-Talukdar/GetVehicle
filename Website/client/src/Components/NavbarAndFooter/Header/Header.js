@@ -170,7 +170,7 @@ const Header = () => {
             ></LoggedInUserInfoContainer>
           )}
           {!loggedInUserDetails && (
-            <button class="content" onClick={handleGoogleLogin}> 
+            <button className="content" onClick={handleGoogleLogin}> 
               <div className='google-icon'><FcGoogle/></div>
               <span className="google-button-text">Sign in with Google</span>
             </button>   

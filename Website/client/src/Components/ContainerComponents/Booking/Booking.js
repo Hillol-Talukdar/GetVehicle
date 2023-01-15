@@ -36,8 +36,9 @@ const Booking = () => {
   const [phoneNumber, setPhoneNumber] = useState('+880');
   const [dayDifference, setDayDifference] = useState(1);
   const [totalPayableAmount, setTotalPayableAmount] = useState(0);
+  const [today, setToday] = useState(new Date().setHours(0,0,0,0));
   const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(null);
+  const [endDate, setEndDate] = useState(new Date());
   const [showStripePayment, setShowStripePayment] = useState(false);
   const [stripePaymentSuccess, setStripePaymentSuccess] = useState(false);
 
@@ -158,6 +159,8 @@ const Booking = () => {
       alert(
         'Please read about the required documents and check the acknowledgement.'
       );
+    } else if(startDate.getTime() < today || endDate.getTime() < today) {
+      alert('You can not book in the previous dates.');
     } else {
       //start payment process
       if (scheduledBookings.length) {
