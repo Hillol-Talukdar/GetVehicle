@@ -24,6 +24,7 @@ import UserBookingList from './Components/ContainerComponents/Booking/UserBookin
 import UserSuccessfulBookingList from './Components/ContainerComponents/Booking/UserSuccessfulBookingList';
 import UserCanceledBookingList from './Components/ContainerComponents/Booking/UserCanceledBookingList';
 import UserListContainer from './Components/ContainerComponents/Admin/User/UserListContainer';
+import AdminPanel from './Components/ContainerComponents/Admin/AdminPanel/AdminPanel';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -157,6 +158,10 @@ const App = () => {
           path="/admin/user-list"
           element={<AdminPrivateRoute />}>
             <Route exact path="/admin/user-list" element={<UserListContainer/>}/>
+        </Route>
+
+        <Route exact path="/admin/admin-panel" element={<AdminPrivateRoute />}>
+          <Route exact path="/admin/admin-panel" element={<AdminPanel />} />
         </Route>
       </Routes>
       <Footer />
