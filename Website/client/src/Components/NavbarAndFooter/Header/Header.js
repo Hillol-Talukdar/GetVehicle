@@ -38,7 +38,7 @@ const Header = () => {
             style={{ maxHeight: '100px' }}
             navbarScroll
           >
-            <Navbar.Text style={{ marginRight: '20px', marginLeft: '10px' }}>
+            <Navbar.Text style={{ marginRight: '25px', marginLeft: '10px' }}>
               <NavLink
                 to="/"
                 className={({ isActive }) =>
@@ -53,7 +53,7 @@ const Header = () => {
 
             {loggedInUserDetails &&
               loggedInUserDetails.role === UserRole.ADMIN && (
-                <Navbar.Text style={{ marginRight: '20px' }}>
+                <Navbar.Text style={{ marginRight: '23px' }}>
                   <NavLink
                     to="/admin/admin-panel"
                     className={({ isActive }) =>
@@ -67,8 +67,24 @@ const Header = () => {
                 </Navbar.Text>
               )}
 
+            {loggedInUserDetails &&
+              loggedInUserDetails.role === UserRole.ADMIN && (
+                <Navbar.Text style={{ marginRight: '20px' }}>
+                  <NavLink
+                    to="/admin/booking-list"
+                    className={({ isActive }) =>
+                      isActive
+                        ? 'active-text-color-and-decoration'
+                        : 'text-color-and-decoration'
+                    }
+                  >
+                    {NavbarConstants.BOOKING_LIST}
+                  </NavLink>
+                </Navbar.Text>
+              )}
+
             {loggedInUserDetails && loggedInUserDetails.role === UserRole.USER && (
-              <Navbar.Text style={{ marginRight: '10px' }}>
+              <Navbar.Text style={{ marginRight: '20px' }}>
                 <NavLink
                   to="/booking-list"
                   className={({ isActive }) =>
@@ -83,25 +99,26 @@ const Header = () => {
             )}
 
             {loggedInUserDetails && loggedInUserDetails.role === UserRole.USER && (
+              <Navbar.Text style={{ marginRight: '15px' }}>
+                <NavLink
+                  to="/successful-booking-list"
+                  className={({ isActive }) =>
+                    isActive
+                      ? 'active-text-color-and-decoration'
+                      : 'text-color-and-decoration'
+                  }
+                >
+                  Completed Rides
+                </NavLink>
+              </Navbar.Text>
+            )}
+
+            {loggedInUserDetails && loggedInUserDetails.role === UserRole.USER && (
               <NavDropdown
                 title={NavbarConstants.OTHERS}
                 id="nav-dropdown"
                 style={{ marginRight: '10px' }}
               >
-                <NavDropdown.Item className="p-2" to="/successful-booking-list">
-                  <NavLink
-                    to="/successful-booking-list"
-                    className={({ isActive }) =>
-                      isActive
-                        ? 'active-text-color-and-decoration'
-                        : 'text-color-and-decoration'
-                    }
-                    style={{ marginLeft: '10px', marginRight: '10px' }}
-                  >
-                    SuccessFul Booking List
-                  </NavLink>
-                </NavDropdown.Item>
-
                 <NavDropdown.Item className="p-2" to="/cancled-booking-list">
                   <NavLink
                     to="/cancled-booking-list"

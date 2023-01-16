@@ -7,7 +7,7 @@ import './AdminPanel.css';
 const AdminPanel = () => {
   return (
     <Container>
-      <h4 className="text-center enhanced-div">Admin Panel</h4>
+      <h4 className="text-center enhanced-div" style={{marginTop: '15px', marginBottom: '15px'}}>Admin Panel</h4>
       <div className="d-flex justify-content-center align-items-center flex-wrap">
         <Link
           to="/admin/create-or-update-vehicle"
@@ -25,13 +25,6 @@ const AdminPanel = () => {
 
         <Link to="/admin/user-list" className="admin-panel-item btn btn-info">
           List of All Users
-        </Link>
-
-        <Link
-          to="/admin/booking-list"
-          className="admin-panel-item btn btn-info"
-        >
-          {NavbarConstants.BOOKING_LIST}
         </Link>
 
         <Link

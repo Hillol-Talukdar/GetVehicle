@@ -82,7 +82,8 @@ const deleteABooking = catchAsync(async (req, res, next) => {
 });
 
 const getFormattedDate = (date) => {
-    return new Date(date).toUTCString().substring(0, 16);
+    const options = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' };
+    return new Date(date).toLocaleString('en-us', options);
 };
 
 var isBeforeOrEqualToCurrentDate = function (date) {
@@ -98,7 +99,7 @@ const getSanitizedBookingDates = (bookingDatesDetails) => {
     bookingDatesDetails.forEach((bookingDates) => {
         if (
             isBeforeOrEqualToCurrentDate(bookingDates?.receiveDate) &&
-            !bookingDates?.isTrashed
+            !bookingDates?.isTrashed && !bookingDates?.isCanceled
         ) {
             sanitizedBookingDates.push({
                 handOverDate: getFormattedDate(bookingDates?.handOverDate),
@@ -112,7 +113,7 @@ const getSanitizedBookingDates = (bookingDatesDetails) => {
 const getAllBookingDates = catchAsync(async (req, res, next) => {
     const bookingDates = await Booking.find({
         vehicle: req.params.vehicleId,
-    }).select('handOverDate receiveDate isTrashed');
+    }).select('handOverDate receiveDate isTrashed isCanceled');
 
     const sanitizedBookingDates = getSanitizedBookingDates(bookingDates);
 

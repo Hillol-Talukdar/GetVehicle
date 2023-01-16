@@ -2,7 +2,6 @@
   margin: 0px auto;
   margin-bottom: 10px;
   box-shadow: 0px 2px 4px 0 rgba(0, 0, 0, 0.2);
-  /* border-radius: 6px; */
   height: 100%;
   transition: 0.3s;
 }
@@ -33,11 +32,20 @@ a.active-text-color-and-decoration {
 a.active-text-color-and-decoration:hover {
   cursor: pointer;
   color: #FF8B13;
+  font-size: large;
+  transition: 0.3s;
+}
+
+a.active-text-color-and-decoration:focus {
+  cursor: pointer;
+  color: #FF8B13;
 }
 
 a.text-color-and-decoration:hover {
   cursor: pointer;
   color: #FF8B13;
+  font-size: large;
+  transition: 0.3s;
 }
 
 .nav-link {
