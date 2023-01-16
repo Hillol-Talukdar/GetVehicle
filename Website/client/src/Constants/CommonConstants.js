@@ -18,7 +18,9 @@ export const NavbarConstants = {
   LOGIN: 'Login',
   CREATE_VEHICLE: 'Add A New Vehicle',
   CREATE_CATEGORY: 'Category and Sub-category',
-  BOOKING_LIST: 'Current Bookings'
+  BOOKING_LIST: 'Current Bookings',
+  MY_BOOKINGS: 'My Bookings',
+  OTHERS: 'Others'
 };
 
 export const VehicleInfoConstants = {

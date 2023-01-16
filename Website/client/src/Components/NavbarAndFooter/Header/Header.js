@@ -41,35 +41,31 @@ const Header = () => {
             style={{ maxHeight: '100px' }}
             navbarScroll
           >
-            <Navbar.Text>
+            <Navbar.Text style={{marginRight: '20px', marginLeft: '10px'}}>
               <NavLink to="/" className="text-color-and-decoration">
                 {NavbarConstants.HOME}
               </NavLink>
             </Navbar.Text>
 
           {loggedInUserDetails && loggedInUserDetails.role === UserRole.ADMIN && 
-            (<Navbar.Text>
-              <NavLink to="/admin/admin-panel" className="text-color-and-decoration" style={{marginRight: '10px', marginLeft: '15px'}}>
+            (<Navbar.Text style={{marginRight: '20px'}}>
+              <NavLink to="/admin/admin-panel" className="text-color-and-decoration">
                 {NavbarConstants.ADMIN_PANEL}
               </NavLink>
             </Navbar.Text>)
           }
 
           {loggedInUserDetails && 
-            (<NavDropdown title="User" id="basic-nav-dropdown">
-
-              <NavDropdown.Item
-                className="p-2"
-                to="/booking-list"
-              >
-                <NavLink
-                  to="/booking-list"
-                  className="text-color-and-decoration"
-                >
-                  {NavbarConstants.BOOKING_LIST}
-                </NavLink>
-              </NavDropdown.Item>
-
+            (
+              <Navbar.Text style={{marginRight: '10px'}}>
+              <NavLink to="/booking-list" className="text-color-and-decoration">
+                {NavbarConstants.MY_BOOKINGS}
+              </NavLink>
+            </Navbar.Text>
+            )
+          } 
+            
+          {loggedInUserDetails && (<NavDropdown title={NavbarConstants.OTHERS} id="nav-dropdown" style={{marginRight: '10px'}}>
               <NavDropdown.Item
                 className="p-2"
                 to="/successful-booking-list"
@@ -77,6 +73,7 @@ const Header = () => {
                 <NavLink
                   to="/successful-booking-list"
                   className="text-color-and-decoration"
+                  style={{marginLeft: '10px', marginRight: '10px'}}
                 >
                   SuccessFul Booking List
                 </NavLink>
@@ -89,6 +86,7 @@ const Header = () => {
                 <NavLink
                   to="/cancled-booking-list"
                   className="text-color-and-decoration"
+                  style={{marginLeft: '10px', marginRight: '10px'}}
                 >
                   Canceled Booking List
                 </NavLink>
