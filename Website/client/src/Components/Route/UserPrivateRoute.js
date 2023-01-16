@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import {  Outlet } from 'react-router-dom';
+import { UserRole } from '../../Constants/CommonConstants';
 import LoadingToRedirect from './LoadingToRedirect';
 
 const UserPrivateRoute = () => {
@@ -8,7 +9,7 @@ const UserPrivateRoute = () => {
   const [ok, setOk] = useState(false);
 
   useEffect(() => {
-    if (user && user.token) {
+    if (user && user.token && user.role === UserRole.USER) {
       setOk(true);
     }
   }, [user]);

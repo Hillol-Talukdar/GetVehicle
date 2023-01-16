@@ -1,16 +1,13 @@
-import React from 'react';
-import {
-  Button,
-  Container, Nav,
-  Navbar,
-  NavDropdown
-} from 'react-bootstrap';
+import React, { useEffect } from 'react';
+import { Button, Container, Navbar, NavDropdown } from 'react-bootstrap';
+import Nav from 'react-bootstrap/Nav';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, NavLink } from 'react-router-dom';
 import {
   AppConstants,
   NavbarConstants,
-  UserRole
+  URL,
+  UserRole,
 } from '../../../Constants/CommonConstants';
 import { googleLogin } from '../../../Services/GoogleAuthService';
 import LoggedInUserInfoContainer from '../../ContainerComponents/LoggedInUserInfoContainer/LoggedInUserInfoContainer';
@@ -30,7 +27,7 @@ const Header = () => {
     <Container fluid id="navbarTop">
       <Navbar>
         <Navbar.Brand>
-          <Link to="/" className="text-color-and-decoration">
+          <Link to="/" className="app-name-text-color-and-decoration">
             {AppConstants.APP_NAME}
           </Link>
         </Navbar.Brand>
@@ -41,58 +38,85 @@ const Header = () => {
             style={{ maxHeight: '100px' }}
             navbarScroll
           >
-            <Navbar.Text style={{marginRight: '20px', marginLeft: '10px'}}>
-              <NavLink to="/" className="text-color-and-decoration">
+            <Navbar.Text style={{ marginRight: '20px', marginLeft: '10px' }}>
+              <NavLink
+                to="/"
+                className={({ isActive }) =>
+                  isActive
+                    ? 'active-text-color-and-decoration'
+                    : 'text-color-and-decoration'
+                }
+              >
                 {NavbarConstants.HOME}
               </NavLink>
             </Navbar.Text>
 
-          {loggedInUserDetails && loggedInUserDetails.role === UserRole.ADMIN && 
-            (<Navbar.Text style={{marginRight: '20px'}}>
-              <NavLink to="/admin/admin-panel" className="text-color-and-decoration">
-                {NavbarConstants.ADMIN_PANEL}
-              </NavLink>
-            </Navbar.Text>)
-          }
+            {loggedInUserDetails &&
+              loggedInUserDetails.role === UserRole.ADMIN && (
+                <Navbar.Text style={{ marginRight: '20px' }}>
+                  <NavLink
+                    to="/admin/admin-panel"
+                    className={({ isActive }) =>
+                      isActive
+                        ? 'active-text-color-and-decoration'
+                        : 'text-color-and-decoration'
+                    }
+                  >
+                    {NavbarConstants.ADMIN_PANEL}
+                  </NavLink>
+                </Navbar.Text>
+              )}
 
-          {loggedInUserDetails && 
-            (
-              <Navbar.Text style={{marginRight: '10px'}}>
-              <NavLink to="/booking-list" className="text-color-and-decoration">
-                {NavbarConstants.MY_BOOKINGS}
-              </NavLink>
-            </Navbar.Text>
-            )
-          } 
-            
-          {loggedInUserDetails && (<NavDropdown title={NavbarConstants.OTHERS} id="nav-dropdown" style={{marginRight: '10px'}}>
-              <NavDropdown.Item
-                className="p-2"
-                to="/successful-booking-list"
-              >
+            {loggedInUserDetails && loggedInUserDetails.role === UserRole.USER && (
+              <Navbar.Text style={{ marginRight: '10px' }}>
                 <NavLink
-                  to="/successful-booking-list"
-                  className="text-color-and-decoration"
-                  style={{marginLeft: '10px', marginRight: '10px'}}
+                  to="/booking-list"
+                  className={({ isActive }) =>
+                    isActive
+                      ? 'active-text-color-and-decoration'
+                      : 'text-color-and-decoration'
+                  }
                 >
-                  SuccessFul Booking List
+                  {NavbarConstants.MY_BOOKINGS}
                 </NavLink>
-              </NavDropdown.Item>
-              
-              <NavDropdown.Item
-                className="p-2"
-                to="/cancled-booking-list"
+              </Navbar.Text>
+            )}
+
+            {loggedInUserDetails && loggedInUserDetails.role === UserRole.USER && (
+              <NavDropdown
+                title={NavbarConstants.OTHERS}
+                id="nav-dropdown"
+                style={{ marginRight: '10px' }}
               >
-                <NavLink
-                  to="/cancled-booking-list"
-                  className="text-color-and-decoration"
-                  style={{marginLeft: '10px', marginRight: '10px'}}
-                >
-                  Canceled Booking List
-                </NavLink>
-              </NavDropdown.Item>
-            </NavDropdown>)
-          }
+                <NavDropdown.Item className="p-2" to="/successful-booking-list">
+                  <NavLink
+                    to="/successful-booking-list"
+                    className={({ isActive }) =>
+                      isActive
+                        ? 'active-text-color-and-decoration'
+                        : 'text-color-and-decoration'
+                    }
+                    style={{ marginLeft: '10px', marginRight: '10px' }}
+                  >
+                    SuccessFul Booking List
+                  </NavLink>
+                </NavDropdown.Item>
+
+                <NavDropdown.Item className="p-2" to="/cancled-booking-list">
+                  <NavLink
+                    to="/cancled-booking-list"
+                    className={({ isActive }) =>
+                      isActive
+                        ? 'active-text-color-and-decoration'
+                        : 'text-color-and-decoration'
+                    }
+                    style={{ marginLeft: '10px', marginRight: '10px' }}
+                  >
+                    Canceled Booking List
+                  </NavLink>
+                </NavDropdown.Item>
+              </NavDropdown>
+            )}
           </Nav>
 
           {loggedInUserDetails && (
@@ -101,10 +125,12 @@ const Header = () => {
             ></LoggedInUserInfoContainer>
           )}
           {!loggedInUserDetails && (
-            <button class="content" onClick={handleGoogleLogin}> 
-              <div className='google-icon'><FcGoogle/></div>
+            <button class="content" onClick={handleGoogleLogin}>
+              <div className="google-icon">
+                <FcGoogle />
+              </div>
               <span className="google-button-text">Sign in with Google</span>
-            </button>   
+            </button>
           )}
         </Navbar.Collapse>
       </Navbar>

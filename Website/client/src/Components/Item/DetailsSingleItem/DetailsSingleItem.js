@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom';
 import RatingModal from '../../Modal/RatingModal';
 import { googleLogin } from '../../../Services/GoogleAuthService';
 import { useDispatch, useSelector } from 'react-redux';
+import { UserRole } from '../../../Constants/CommonConstants';
 
 const DetailsSingleItem = ({ 
   data,
@@ -94,7 +95,7 @@ const DetailsSingleItem = ({
                       />
                   </RatingModal>
 
-                  {user ? (
+                  {user && user?.role === UserRole.USER ? (
                     <Link style={{width: '65%'}} className='btn btn-success' to={'/booking/' + data?._id}>Book Now</Link>
                   ) : (
                     <Button
@@ -102,7 +103,7 @@ const DetailsSingleItem = ({
                       onClick={handleGoogleLogin}
                       style={{width: '65%'}}
                     >
-                      Login to Book
+                      Login as a User to Book
                     </Button>
                   )}
                 </div>

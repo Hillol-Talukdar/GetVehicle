@@ -7,14 +7,46 @@
   transition: 0.3s;
 }
 
+.app-name-text-color-and-decoration {
+  text-decoration: none;
+  color: #067575;
+}
+
+a.app-name-text-color-and-decoration:hover {
+  text-decoration: none;
+  color: #067575;
+  cursor: default;
+}
+
 .text-color-and-decoration {
   text-decoration: none;
   color: black;
+  cursor: pointer;
+}
+
+a.active-text-color-and-decoration {
+  text-decoration: none;
+  color: #FF8B13;
+  cursor: pointer;
+}
+
+a.active-text-color-and-decoration:hover {
+  cursor: pointer;
+  color: #FF8B13;
 }
 
 a.text-color-and-decoration:hover {
   cursor: pointer;
-  color: gray;
+  color: #FF8B13;
+}
+
+.nav-link {
+  color: black;
+}
+
+.nav-link:hover {
+  cursor: pointer;
+  color: #FF8B13;
 }
 
 .content {
