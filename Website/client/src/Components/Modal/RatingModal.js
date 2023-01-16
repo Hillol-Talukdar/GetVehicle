@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, Modal } from 'react-bootstrap';
+import { UserRole } from '../../Constants/CommonConstants';
 
 const RatingModal = ({ 
   children,
@@ -12,10 +13,10 @@ const RatingModal = ({
   return (
     <>
       <div>
-        {user ? (
+        {user && user?.role === UserRole.USER ? (
           <Button variant='warning' onClick={handleShowModal}>Rate Now</Button>
         ) : (
-          <Button variant='warning' disabled>Login To Rate</Button>
+          <Button variant='warning' disabled>Rate Now</Button>
         )}
       </div>
 
