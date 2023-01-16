@@ -34,7 +34,8 @@ const BookingSingleItem = (props) => {
 
 
   const getFormattedDate = (date) => {
-    return new Date(date).toUTCString().substring(0, 16);
+    const options = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' };
+    return new Date(date).toLocaleString('en-us', options);
   };
 
   const changeHandler = (e) => {
@@ -46,7 +47,7 @@ const BookingSingleItem = (props) => {
     setLoading(true);
 
     if (window.confirm("Are you sure you want to cancel?")) {
-      updateABooking(currentItem?._id, { isCanceled: true}, user.token)
+      updateABooking(currentItem?._id, { isCanceled: true }, user.token)
         .then((res) => {
           setLoading(false);
           toast.success(`Booking is Canceled!`);
