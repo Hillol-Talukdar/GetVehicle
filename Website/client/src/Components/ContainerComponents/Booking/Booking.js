@@ -339,14 +339,15 @@ const Booking = () => {
                 </span>
               </div>
               <div className="button-container-div">
-              <Button
-                  size="sm"
-                  variant="outline-primary"
-                  className="w-100 mb-2"
-                  onClick={()=>startPaymentProcess(PaymentMethod.CASH)}
-                >
-                  Pay Cash When Receiving
-                </Button>
+                {!showStripePayment && (<Button
+                    size="sm"
+                    variant="outline-primary"
+                    className="w-100 mb-2"
+                    onClick={()=>startPaymentProcess(PaymentMethod.CASH)}
+                  >
+                    Pay Cash When Receiving
+                  </Button>
+                )}
                 {!showStripePayment && (
                 <Button
                   size="sm"
