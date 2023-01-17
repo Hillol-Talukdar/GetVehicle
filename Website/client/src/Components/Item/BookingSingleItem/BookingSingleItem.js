@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { updateABooking } from '../../../Services/BookingDataService';
 import UserDetailsModal from '../../Modal/UserDetailsModal';
 import './BookingSingleItem.css';
+import { GoLinkExternal } from 'react-icons/go';
 
 const BookingSingleItem = (props) => {
   const currentItem = props.item;
@@ -22,7 +24,9 @@ const BookingSingleItem = (props) => {
   const [showUpdateModal, setShowUpdateModal] = useState(false);
   const [values, setValues] = useState(initState);
   const [isDataEdited, setIsDataEdited] = useState(false);
-  const [handedOverToUser, setHandedOverToUser] = useState(handedOverDataFromModel === true ? true: false);
+  const [handedOverToUser, setHandedOverToUser] = useState(
+    handedOverDataFromModel === true ? true : false
+  );
 
   const handleUpdateModalClose = () => {
     setShowUpdateModal(false);
@@ -32,9 +36,13 @@ const BookingSingleItem = (props) => {
     setShowUpdateModal(true);
   };
 
-
   const getFormattedDate = (date) => {
-    const options = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' };
+    const options = {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+    };
     return new Date(date).toLocaleString('en-us', options);
   };
 
@@ -43,10 +51,10 @@ const BookingSingleItem = (props) => {
     setIsDataEdited(true);
   };
 
-  const handleCancelBooking= (e) => {
+  const handleCancelBooking = (e) => {
     setLoading(true);
 
-    if (window.confirm("Are you sure you want to cancel?")) {
+    if (window.confirm('Are you sure you want to cancel?')) {
       updateABooking(currentItem?._id, { isCanceled: true }, user.token)
         .then((res) => {
           setLoading(false);
@@ -62,7 +70,7 @@ const BookingSingleItem = (props) => {
           );
         });
     }
-  }
+  };
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -75,7 +83,7 @@ const BookingSingleItem = (props) => {
         setIsDataEdited(false);
         props.setIsDataUpdated(true);
         toast.success(`Booking is updated!`);
-        if(res?.data?.data?.handedOver) {
+        if (res?.data?.data?.handedOver) {
           setHandedOverToUser(true);
         }
       })
@@ -85,20 +93,22 @@ const BookingSingleItem = (props) => {
           err.response && err.response.data.message
             ? err.response.data.message
             : err.message
-         );
+        );
       });
-    
   };
-  
 
   return (
     <>
       <div className="booking-single-item-container d-flex justify-content-between">
         <div className="w-100 d-flex mb-4">
           <div>
-            <span className="enhanced-label">
-              {currentItem?.vehicle?.model} ({currentItem?.vehicle?._id})
-            </span>
+            <Link
+              target="_blank"
+              to={'/details/' + currentItem?.vehicle?._id}
+              style={{ textDecoration: 'none', color: '#0d6efd', fontSize: 'large' }}
+            >
+              {currentItem?.vehicle?.model} &nbsp; <GoLinkExternal style={{color: '#0275d8'}} />
+            </Link>
           </div>
 
           <div style={{ marginLeft: 'auto' }}>
@@ -123,31 +133,36 @@ const BookingSingleItem = (props) => {
             >
               Cancel Booking
             </Button>
-            
-            {props.isAdminPanel && user && user.role=='Admin' && (<Button
-              size="sm"
-              style={{ fontSize: 'medium' }}
-              variant={isDataEdited ? "outline-primary" : "outline-secondary"}
-              disabled={!isDataEdited}
-              onClick={e=> {
-                submitHandler(e)
-              }}
-            >
-              Save Changes
-            </Button>)}
+
+            {props.isAdminPanel && user && user.role == 'Admin' && (
+              <Button
+                size="sm"
+                style={{ fontSize: 'medium' }}
+                variant={isDataEdited ? 'outline-primary' : 'outline-secondary'}
+                disabled={!isDataEdited}
+                onClick={(e) => {
+                  submitHandler(e);
+                }}
+              >
+                Save Changes
+              </Button>
+            )}
           </div>
         </div>
 
         <div>
           <span>Booked For: </span>
           <span className="enhanced-label">
-            {currentItem?.totalDays} {currentItem?.totalDays > 1 ? 'Days' : 'Day'}
+            {currentItem?.totalDays}{' '}
+            {currentItem?.totalDays > 1 ? 'Days' : 'Day'}
           </span>
         </div>
 
         <div>
           <span>Total Amount: </span>
-          <span className="enhanced-label">{currentItem?.totalAmount} Taka</span>
+          <span className="enhanced-label">
+            {currentItem?.totalAmount} Taka
+          </span>
         </div>
 
         <div>
@@ -200,10 +215,16 @@ const BookingSingleItem = (props) => {
                   disabled={handedOverDataFromModel}
                   onChange={changeHandler}
                 >
-                  <option value="true" selected={currentItem?.handedOver === true}>
+                  <option
+                    value="true"
+                    selected={currentItem?.handedOver === true}
+                  >
                     Yes
                   </option>
-                  <option value="false" selected={currentItem?.handedOver === false}>
+                  <option
+                    value="false"
+                    selected={currentItem?.handedOver === false}
+                  >
                     No
                   </option>
                 </Form.Select>
@@ -219,14 +240,20 @@ const BookingSingleItem = (props) => {
                   size="sm"
                   onChange={changeHandler}
                   disabled={!handedOverToUser}
-                  data-toggle="tooltip" 
+                  data-toggle="tooltip"
                   data-placement="bottom"
                   title="WIl be enable if vehicle is Handed Over To User."
                 >
-                  <option value="true" selected={currentItem?.received === true}>
+                  <option
+                    value="true"
+                    selected={currentItem?.received === true}
+                  >
                     Yes
                   </option>
-                  <option value="false" selected={currentItem?.received === false}>
+                  <option
+                    value="false"
+                    selected={currentItem?.received === false}
+                  >
                     No
                   </option>
                 </Form.Select>
@@ -236,28 +263,28 @@ const BookingSingleItem = (props) => {
         )}
 
         {!props.isAdminPanel && (
-           <>
+          <>
             <div>
               <span>Payment Status: </span>
               <span className="enhanced-label">
                 {currentItem?.paid ? 'Paid' : 'Not Paid'}
               </span>
             </div>
- 
+
             <div>
               <span>Recieved Vehicle: </span>
               <span className="enhanced-label">
                 {currentItem?.handedOver ? 'Yes' : 'Not yet'}
               </span>
             </div>
-  
+
             <div>
               <span>Returned vehicle: </span>
               <span className="enhanced-label">
                 {currentItem?.received ? 'Yes' : 'Not yet'}
               </span>
-            </div>     
-           </>
+            </div>
+          </>
         )}
       </div>
 

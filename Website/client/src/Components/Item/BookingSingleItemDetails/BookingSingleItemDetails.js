@@ -3,6 +3,8 @@ import { Button } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import UserDetailsModal from '../../Modal/UserDetailsModal';
 import './BookingSingleItemDetails.css';
+import { GoLinkExternal } from 'react-icons/go';
+import { Link } from 'react-router-dom';
 
 const BookingSingleItemDetails = (props) => {
   const currentItem = props.item;
@@ -26,21 +28,30 @@ const BookingSingleItemDetails = (props) => {
       <div className="booking-single-item-container d-flex justify-content-between">
         <div className="w-100 d-flex mb-4">
           <div>
-            <span className="enhanced-label">
-              {currentItem?.vehicle?.model} ({currentItem?.vehicle?._id})
-            </span>
+            <Link
+              target="_blank"
+              to={'/details/' + currentItem?.vehicle?._id}
+              style={{
+                textDecoration: 'none',
+                color: '#0d6efd',
+                fontSize: 'large',
+              }}
+            >
+              {currentItem?.vehicle?.model} &nbsp;{' '}
+              <GoLinkExternal style={{ color: '#0275d8' }} />
+            </Link>
           </div>
-          
+
           <div style={{ marginLeft: 'auto' }}>
             <Button
               size="sm"
               style={{ fontSize: 'medium', marginRight: '10px' }}
               variant="outline-primary"
-                onClick={(e) => {
-                  handleUpdateModalShow();
-                }}
-              >
-                User Details
+              onClick={(e) => {
+                handleUpdateModalShow();
+              }}
+            >
+              User Details
             </Button>
           </div>
         </div>
@@ -105,21 +116,21 @@ const BookingSingleItemDetails = (props) => {
         )}
 
         {!props.isAdminPanel && (
-           <>
+          <>
             <div>
               <span>Recieved Vehicle: </span>
               <span className="enhanced-label">
                 {currentItem?.handedOver ? 'Yes' : 'Not yet'}
               </span>
             </div>
-  
+
             <div>
               <span>Returned vehicle: </span>
               <span className="enhanced-label">
                 {currentItem?.received ? 'Yes' : 'Not yet'}
               </span>
-            </div>     
-           </>
+            </div>
+          </>
         )}
       </div>
 
