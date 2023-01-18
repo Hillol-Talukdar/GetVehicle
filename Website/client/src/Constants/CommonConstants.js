@@ -148,3 +148,16 @@ export const PaymentMethod = {
   CASH: 'Cash',
   ONLINE: 'Online'
 }
+
+export const FilterConstants = {
+  ANY_RATING: 'Any Rating',
+  
+}
+
+export const RatingFilterOptionsConstant = [
+  {star: 5, label: '5 Stars'},
+  {star: 4, label: '4 Stars & Above'},
+  {star: 3, label: '3 Stars & Above'},
+  {star: 2, label: '2 Stars & Above'},
+  {star: 1, label: '1 Star & Above'},
+]
