@@ -6,7 +6,6 @@ export const showAverageRating = (data) => {
         let ratingsArray = data && data?.ratings;
         let totalRating = [];
         let length = ratingsArray.length;
-        // console.log("len ", length);
         ratingsArray.map((rat) => totalRating.push(rat.star));
         let totalReduced = totalRating.reduce((p, n) => p + n, 0);
         let heighest = length * 5;

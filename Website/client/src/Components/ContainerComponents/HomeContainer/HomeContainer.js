@@ -1,12 +1,14 @@
 import { React, useEffect, useState } from 'react';
 import { Button, Container, Form } from 'react-bootstrap';
-import { CategoryInfoConstants, NavbarConstants } from '../../../Constants/CommonConstants';
+import { CategoryInfoConstants, FilterConstants, NavbarConstants, RatingFilterOptionsConstant } from '../../../Constants/CommonConstants';
 import { getAllCategories } from '../../../Services/CategoryDataService';
 import { getAllVehicleList } from '../../../Services/VehicleDataService';
 import HomeItem from '../../Item/HomeItem/HomeItem';
+import { FcClearFilters, FcFilledFilter } from 'react-icons/fc';
 import './HomeContainer.css';
 
 const HomeContainer = () => {
+  const ratingFilterOptions = RatingFilterOptionsConstant;
   const [allItems, setAllItems] = useState([]);
   const [filteredItems, setFilteredItems] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -27,14 +29,27 @@ const HomeContainer = () => {
   const resetFilters = (e) => {
     document.getElementById("search").value = "";
     document.getElementById("category-filter").selectedIndex = 0;
+    document.getElementById("rating-filter").selectedIndex = 0;
     setSearchedItems();
   }
 
+  const getAverageRatingFromItem = (currentItem) => {
+    let ratingsArray = currentItem && currentItem?.ratings;
+    let totalRating = [];
+    let length = ratingsArray.length;
+    ratingsArray.map((rat) => totalRating.push(rat.star));
+    let totalReduced = totalRating.reduce((p, n) => p + n, 0);
+    let heighest = length * 5;
+    return (totalReduced * 5) / heighest;
+  }
+
   const setSearchedItems = (e) => {
-    let searchField = document.getElementById("search").value;
-    let isSearchFilterApplied = searchField !== "";
-    let categoryFilterField = document.getElementById("category-filter").value;
-    let isCategoryFilterApplied = categoryFilterField !== CategoryInfoConstants.ALL_CATEGORIES;
+    let searchFieldValue = document.getElementById("search").value;
+    let isSearchFilterApplied = searchFieldValue !== "";
+    let categoryFilterFieldValue = document.getElementById("category-filter").value;
+    let ratingFilterFieldValue = document.getElementById("rating-filter").value;
+    let isCategoryFilterApplied = categoryFilterFieldValue !== CategoryInfoConstants.ALL_CATEGORIES;
+    let isRatingFilterApplied = ratingFilterFieldValue !== FilterConstants.ANY_RATING;
     let filteredItems = allItems;
 
     if(isCategoryFilterApplied) {
@@ -42,7 +57,7 @@ const HomeContainer = () => {
         return (
             item
             .category
-            .name === categoryFilterField
+            .name === categoryFilterFieldValue
           )
       });
     }
@@ -53,7 +68,15 @@ const HomeContainer = () => {
           item
           .model
           .toLowerCase()
-          .includes(searchField.toLowerCase())
+          .includes(searchFieldValue.toLowerCase())
+        )
+      });
+    }
+
+    if(isRatingFilterApplied) {
+      filteredItems = filteredItems.filter((item) => {
+        return (
+          getAverageRatingFromItem(item) >= ratingFilterFieldValue
         )
       });
     }
@@ -69,16 +92,24 @@ const HomeContainer = () => {
   return (
     <Container fluid>
       <div className="filters-div">
-        <div className='filters-lable'>Filters: </div>
-        <Form.Group className="category-filter-form-group">
-          <Form.Select id="category-filter" size='sm' className="category-filter" onChange={setSearchedItems}>
+      
+        <div className='filters-lable'><FcFilledFilter size={20}/> Filters </div>
+        <Form.Group className="filter-form-group">
+          <Form.Select id="category-filter" size='sm' style={{color: '#FF8B13'}} className="filter-enhancement" onChange={setSearchedItems}>
             <option value={CategoryInfoConstants.ALL_CATEGORIES}>{CategoryInfoConstants.ALL_CATEGORIES}</option>
             {categories.map((category) => (<option value={category.name}>{category.name}</option>))}
           </Form.Select>
         </Form.Group>
+        <Form.Group className="filter-form-group">
+          <Form.Select id="rating-filter" size='sm' style={{color: '#FF8B13'}} className="filter-enhancement" onChange={setSearchedItems}>
+            <option value={CategoryInfoConstants.ANY_RATING}>{FilterConstants.ANY_RATING}</option>
+            {ratingFilterOptions.map((ratingFilterOption) => (<option value={ratingFilterOption.star}>{ratingFilterOption.label}</option>))}
+          </Form.Select>
+        </Form.Group>
         <Form.Control onChange={setSearchedItems} id="search" className="search-input" size="sm" type="search" placeholder={NavbarConstants.SEARCH} aria-label="Search"/>
-        <Button className="reset-filters-button" variant="light" size="sm" onClick={resetFilters}>Reset Filters</Button>
+        <Button className="reset-filters-button d-flex" variant="outline-danger" size="sm" onClick={resetFilters}><FcClearFilters className='mx-auto' size={17}/></Button>
       </div>
+      
       <div className="d-flex flex-wrap">
         {filteredItems.map((item) => (
           !item.isTrashed && ( <HomeItem item={item} loadAllVehicles={loadAllVehicles}></HomeItem> )
