@@ -1,15 +1,15 @@
 import React from 'react';
-import { Row, Col, Image, Card, ListGroup, Button } from 'react-bootstrap';
+import { Button, Card, Col, Image, ListGroup, Row } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
-import './DetailsSingleItem.css';
-import Rating from 'react-star-ratings';
-import VehicleDatalistItem from '../VehicleDatalistItem';
 import { Link } from 'react-router-dom';
-import RatingModal from '../../Modal/RatingModal';
-import { googleLogin } from '../../../Services/GoogleAuthService';
-import { useDispatch, useSelector } from 'react-redux';
+import Rating from 'react-star-ratings';
 import { UserRole } from '../../../Constants/CommonConstants';
+import { googleLogin } from '../../../Services/GoogleAuthService';
+import RatingModal from '../../Modal/RatingModal';
+import VehicleDatalistItem from '../VehicleDatalistItem';
+import './DetailsSingleItem.css';
 
 const DetailsSingleItem = ({ 
   data,
@@ -21,7 +21,7 @@ const DetailsSingleItem = ({
   handleCloseModal,
 }) => {
   const dispatch = useDispatch();
-  
+
   const handleGoogleLogin = () => {
     googleLogin(dispatch);
   };

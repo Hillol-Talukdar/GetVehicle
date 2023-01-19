@@ -1,32 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { Button, ListGroup } from 'react-bootstrap';
+import React from 'react';
+import { ListGroup } from 'react-bootstrap';
 import {
-  BookingStatus,
-  VehicleInfoConstants,
+  VehicleInfoConstants
 } from '../../Constants/CommonConstants';
-import { useDispatch } from 'react-redux';
-import { getBookingDetailsByVehicleId } from '../../Services/BookingDataService';
-import { getVehicleDetails } from '../../Services/VehicleDataService';
 import { showAverageRating } from '../showAverageRating';
-import BookedSchedulesModal from '../Modal/BookedSchedulesModal';
 
-const VehicleDatalistItem = ({ data }) => {
-  const dispatch = useDispatch();
-  const [showBookedSchedulesModal, setShowBookedSchedulesModal] = useState(false);
-  const [scheduledBookings, setScheduledBookings] = useState([]);
-
-  useEffect(() => {
-    dispatch(getVehicleDetails(data?._id));
-
-    getBookingDetailsByVehicleId(data?._id)
-      .then((res) => {
-        setScheduledBookings(res.data.data);
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
-  }, [dispatch, data]);
-
+const VehicleDatalistItem = ({ data, scheduledBookings }) => {
+  
   const checkAndShowProperVehicleInfo = (currentInfo) => {
     return currentInfo === ''
       ? VehicleInfoConstants.NOT_APPLICABLE
@@ -94,28 +74,10 @@ const VehicleDatalistItem = ({ data }) => {
         </ListGroup.Item>
 
         <ListGroup.Item className="d-flex justify-content-between">
-          {VehicleInfoConstants.BOOKED_DATES}:
-          <Button
-            onClick={() => setShowBookedSchedulesModal(true)}
-            size="sm"
-            variant="outline-info"
-            style={{ border: 'none' }}
-            className="check-booked-date-button"
-          >
-            Check Booked Dates
-          </Button>
-        </ListGroup.Item>
-
-        <ListGroup.Item className="d-flex justify-content-between">
           {VehicleInfoConstants.CURRENT_LOCATION}:
           <span>{data?.currentLocationString}</span>
         </ListGroup.Item>
       </ListGroup>
-      <BookedSchedulesModal
-        show={showBookedSchedulesModal}
-        handleClose={() => setShowBookedSchedulesModal(false)}
-        scheduledBookings={scheduledBookings ? scheduledBookings : []}
-      ></BookedSchedulesModal>
     </>
   );
 };
