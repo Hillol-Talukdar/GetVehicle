@@ -63,6 +63,7 @@ export const VehicleInfoConstants = {
   NONE_FUEL_TYPE_IN_MODEL: 'None',
   VEHICLE_TYPE: 'Vehicle Type',
   NOT_APPLICABLE: 'N/A',
+  BOOKED_DATES: 'Booked Dates',
 };
 
 export const CategoryInfoConstants = {
