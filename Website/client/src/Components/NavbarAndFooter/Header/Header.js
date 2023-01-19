@@ -25,7 +25,7 @@ const Header = () => {
 
   return (
     <Container fluid id="navbarTop">
-      <Navbar>
+      <Navbar style={{padding: '2px'}}>
         <Navbar.Brand>
           <Link to="/" className="app-name-text-color-and-decoration">
             {AppConstants.APP_NAME}

@@ -52,7 +52,7 @@ const HomeItem = (props) => {
 
   return (
     <Card
-      style={{ width: '13rem', margin: '8px' }}
+      style={{ width: '12rem', margin: '5px' }}
       className="home-item-card flex-fill"
     >
       <Link
@@ -79,7 +79,7 @@ const HomeItem = (props) => {
           ></Card.Img>
         )}
 
-        <Card.Body>
+        <Card.Body style={{paddingTop: '10px', paddingBottom: '10px', marginTop: 'auto'}}>
           <Card.Title style={{ fontSize: 'medium' }}>
             {currentItem.model}
           </Card.Title>
@@ -89,19 +89,19 @@ const HomeItem = (props) => {
           </Card.Text>
           <Card.Text>
             {currentItem?.ratings && currentItem?.ratings?.length > 0 ? (
-              showAverageRating(currentItem)
+              showAverageRating(currentItem, true)
             ) : (
               <div className="text-center d-flex">
                 <span>
                   <Rating
                     starDimension="15px"
-                    starSpacing="2px"
+                    starSpacing="1px"
                     starRatedColor="#ffd700"
                     editing={false}
                     rating={0}
                   />
                 </span>
-                <span>&nbsp;(0)</span>
+                <span style={{color: '#666666'}}>&nbsp;(0)</span>
               </div>
             )}
           </Card.Text>

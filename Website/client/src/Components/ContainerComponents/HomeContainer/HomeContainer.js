@@ -91,7 +91,7 @@ const HomeContainer = () => {
 
   return (
     <Container fluid>
-      <div className="filters-div">
+      <div className="filters-div" style={{marginBottom: '5px'}}>
       
         <div className='filters-lable'><FcFilledFilter size={20}/> Filters </div>
         <Form.Group className="filter-form-group">
