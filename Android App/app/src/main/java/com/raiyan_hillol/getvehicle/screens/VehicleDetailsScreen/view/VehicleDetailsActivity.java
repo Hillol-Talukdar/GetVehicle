@@ -1,6 +1,7 @@
 package com.raiyan_hillol.getvehicle.screens.VehicleDetailsScreen.view;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -25,6 +26,8 @@ import com.raiyan_hillol.getvehicle.constants.AppUriConstants;
 import com.raiyan_hillol.getvehicle.data.model.VehicleData;
 import com.raiyan_hillol.getvehicle.data.usecase.VehicleUseCase;
 import com.raiyan_hillol.getvehicle.databinding.ActivityVehicleDetailsBinding;
+import com.raiyan_hillol.getvehicle.screens.VehicleDetailsScreen.controller.VehicleDetailsController;
+import com.raiyan_hillol.getvehicle.screens.homeScreen.controller.HomeScreenController;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -34,6 +37,7 @@ import java.util.ArrayList;
 public class VehicleDetailsActivity extends AppCompatActivity {
     private static final String TAG = "VehicleDetailsActivity";
     private static VehicleData currentSelectedVehicleData;
+    private VehicleDetailsController vehicleDetailsController;
 
     private ActivityVehicleDetailsBinding binding;
 
@@ -44,6 +48,8 @@ public class VehicleDetailsActivity extends AppCompatActivity {
         binding = ActivityVehicleDetailsBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
+
+        vehicleDetailsController = new VehicleDetailsController(this);
 
         getCurrentVehicleDetails();
 
@@ -103,6 +109,9 @@ public class VehicleDetailsActivity extends AppCompatActivity {
         binding.tvTransmission.setText(getProperTextForInfo(currentSelectedVehicleData.getTransmission()));
         binding.tvBootSpace.setText(getProperTextForInfo(currentSelectedVehicleData.getBootSpace()));
         binding.tvGroundClearance.setText(getProperTextForInfo(currentSelectedVehicleData.getGroundClearance()));
+
+        RecyclerView recyclerView = findViewById(R.id.rvReviews);
+        vehicleDetailsController.setRecyclerViewAdapter(currentSelectedVehicleData, recyclerView, this);
     }
 
     public void getSingleVehicle(String vehicleId, Context context) {

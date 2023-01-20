@@ -20,6 +20,7 @@ public class VehicleData {
     private int costPerDay;
     private int seatCount;
     private int mileage;
+    private ArrayList<Review> reviews;
     private ArrayList<Rating> rating;
     private double averageRating;
     private boolean bookingStatus;
@@ -298,5 +299,14 @@ public class VehicleData {
 
     public void setRating(ArrayList<Rating> rating) {
         this.rating = rating;
+    }
+
+
+    public void setReviews(ArrayList<Review> reviews) {
+        this.reviews = reviews;
+    }
+
+    public ArrayList<Review> getReviews() {
+        return reviews;
     }
 }
