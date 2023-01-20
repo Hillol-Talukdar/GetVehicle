@@ -100,8 +100,8 @@ const BookingSingleItem = (props) => {
   return (
     <>
       <div className="booking-single-item-container d-flex justify-content-between">
-        <div className="w-100 d-flex mb-4">
-          <div>
+        <div className="w-100 d-flex mb-3">
+          <div style={{ marginRight: '20px' }}>
             <Link
               target="_blank"
               to={'/details/' + currentItem?.vehicle?._id}
@@ -114,18 +114,19 @@ const BookingSingleItem = (props) => {
           <div style={{ marginLeft: 'auto' }}>
             <Button
               size="sm"
-              style={{ fontSize: 'medium', marginRight: '10px' }}
+              style={{ fontSize: 'medium', marginRight: '10px', marginBottom: '5px' }}
               variant="outline-primary"
               onClick={(e) => {
                 handleUpdateModalShow();
               }}
             >
-              User Details
+              {props.isAdminPanel && user && user.role == 'Admin' && ("User Details")}
+              {!props.isAdminPanel && user && user.role == 'User' && ("My Details")}
             </Button>
 
             <Button
               size="sm"
-              style={{ fontSize: 'medium', marginRight: '10px' }}
+              style={{ fontSize: 'medium', marginRight: '10px',  marginBottom: '5px' }}
               variant="outline-danger"
               onClick={(e) => {
                 handleCancelBooking();
@@ -137,7 +138,7 @@ const BookingSingleItem = (props) => {
             {props.isAdminPanel && user && user.role == 'Admin' && (
               <Button
                 size="sm"
-                style={{ fontSize: 'medium' }}
+                style={{ fontSize: 'medium',  marginBottom: '5px' }}
                 variant={isDataEdited ? 'outline-primary' : 'outline-secondary'}
                 disabled={!isDataEdited}
                 onClick={(e) => {
