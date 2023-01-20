@@ -5,13 +5,17 @@
     font-size: small;
 }
 
+.home-item-card > .card {
+  --bs-card-spacer-y: 0px;
+}
+
 .card-button-div {
   bottom: 0;
   
 }
 
 .card-text-color {
-  color: rgb(102, 102, 102);
+  color: #666666;
 }
 
 .home-item-card:hover {

@@ -42,6 +42,16 @@
     transition: 0.3s;
 }
 
+.type-writer-div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: xx-large;
+    background-color: #FF8B13;
+    width: 100%;
+    
+}
+
 @media (max-width:801px) {
     .filters-div {
         flex-direction: column;
@@ -54,5 +64,8 @@
     }
     .filter-form-group {
         margin-top: 10px;
+    }
+    .type-writer-div {
+        padding: 15px;
     }
 }

@@ -25,7 +25,7 @@ const Header = () => {
 
   return (
     <Container fluid id="navbarTop">
-      <Navbar>
+      <Navbar className='nav-bar-div' style={{padding: '2px'}}>
         <Navbar.Brand>
           <Link to="/" className="app-name-text-color-and-decoration">
             {AppConstants.APP_NAME}
@@ -34,7 +34,7 @@ const Header = () => {
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav
-            className="me-auto my-2 my-lg-0 "
+            className="me-auto my-2 my-lg-0 nav-element-container"
             style={{ maxHeight: '100px' }}
             navbarScroll
           >
