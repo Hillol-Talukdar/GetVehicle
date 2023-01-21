@@ -21,9 +21,7 @@ public class VehicleUseCase {
         try {
             formattedShortDetails = vehicleData.getCategory().getString("name");
             formattedShortDetails += " | ";
-            formattedShortDetails += vehicleData.getSeatCount() + " Seater ";
-            formattedShortDetails += " | ";
-            formattedShortDetails += vehicleData.getTransmission();
+            formattedShortDetails += "Engine " + vehicleData.getEngine();
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
@@ -135,7 +133,9 @@ public class VehicleUseCase {
         try {
             JSONArray responseData = jsonObject.getJSONArray("data");
             for (int i = 0; i < responseData.length(); i++) {
-                allVehicleData.add(getVehicleDataFromJSONObject(responseData.getJSONObject(i), false));
+                if(!responseData.getJSONObject(i).getBoolean("isTrashed")) {
+                    allVehicleData.add(getVehicleDataFromJSONObject(responseData.getJSONObject(i), false));
+                }
             }
         } catch (JSONException e) {
             e.printStackTrace();

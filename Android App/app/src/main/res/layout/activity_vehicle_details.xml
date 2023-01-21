@@ -37,7 +37,7 @@
                 android:id="@+id/tvModel"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="12dp"
                 android:text="@string/model_name"
                 android:textColor="@color/colorAccent"
                 android:textSize="20sp"
@@ -94,8 +94,7 @@
                         android:id="@+id/tvEngineTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/engine"
-                        android:textStyle="bold" />
+                        android:text="@string/engine" />
 
                     <TextView
                         android:id="@+id/tvEngine"
@@ -118,8 +117,7 @@
                         android:id="@+id/tvMileageTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/mileage"
-                        android:textStyle="bold" />
+                        android:text="@string/mileage" />
 
                     <TextView
                         android:id="@+id/tvMileage"
@@ -142,8 +140,7 @@
                         android:id="@+id/tvFuelTypeTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/fuel_type"
-                        android:textStyle="bold" />
+                        android:text="@string/fuel_type" />
 
                     <TextView
                         android:id="@+id/llFuelType"
@@ -326,10 +323,14 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
+                android:backgroundTint="@color/teal_200"
+
+                android:drawableRight="@drawable/ic_baseline_date_range_24"
                 android:text="Check booked dates"
                 android:textColor="@color/white"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:textStyle="bold"
+                app:iconTint="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvLocationTitle" />
@@ -338,10 +339,12 @@
                 android:id="@+id/btBookNow"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+                android:backgroundTint="@color/colorAccent"
+
+                android:drawableRight="@drawable/ic_baseline_book_24"
                 android:text="Book now"
                 android:textColor="@color/white"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -352,7 +355,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:text="@string/reviews"
+                android:text="@string/ratings_and_reviews"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:textStyle="bold"

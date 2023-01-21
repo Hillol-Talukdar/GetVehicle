@@ -51,8 +51,8 @@ public class HomeScreenActivityRecyclerViewAdapter extends RecyclerView.Adapter<
         }
         holder.vehicleModel.setText(allVehicleData.get(position).getModel());
         holder.vehicleShortDetails.setText(VehicleUseCase.getVehicleFormattedShortDetails(allVehicleData.get(position)));
-        holder.tvVehiclePrice.setText(Integer.toString(allVehicleData.get(position).getCostPerDay()));
-        holder.vehicleLocation.setText(allVehicleData.get(position).getCurrentLocationString());
+        holder.tvVehiclePrice.setText(allVehicleData.get(position).getCostPerDay() + " BDT / Day");
+//        holder.vehicleLocation.setText(allVehicleData.get(position).getCurrentLocationString());
     }
 
     @Override
@@ -75,12 +75,12 @@ public class HomeScreenActivityRecyclerViewAdapter extends RecyclerView.Adapter<
             vehicleThumbnail = itemView.findViewById(R.id.vehicle_thumbnail);
             vehicleModel = itemView.findViewById(R.id.tvVehicleModel);
             vehicleShortDetails = itemView.findViewById(R.id.tvVehicleShortDetail);
-            vehicleLocation = itemView.findViewById(R.id.tvVehicleLocation);
+//            vehicleLocation = itemView.findViewById(R.id.tvVehicleLocation);
             tvVehiclePrice = itemView.findViewById(R.id.tvVehiclePrice);
-            vehicleDetailsButton = itemView.findViewById(R.id.btnViewItemDetailsButton);
+//            vehicleDetailsButton = itemView.findViewById(R.id.btnViewItemDetailsButton);
 
 //            itemView.setOnClickListener(this::onClick);
-            vehicleDetailsButton.setOnClickListener(this::onClick);
+            itemView.setOnClickListener(this::onClick);
 
         }
 
