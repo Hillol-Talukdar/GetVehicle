@@ -1,7 +1,10 @@
 package com.raiyan_hillol.getvehicle.data.usecase;
 
+import android.util.Log;
+
 import com.raiyan_hillol.getvehicle.R;
 import com.raiyan_hillol.getvehicle.data.model.Rating;
+import com.raiyan_hillol.getvehicle.data.model.Review;
 import com.raiyan_hillol.getvehicle.data.model.VehicleData;
 
 import org.json.JSONArray;
@@ -59,6 +62,26 @@ public class VehicleUseCase {
         return rating;
     }
 
+    public static Review getReviewObject(JSONObject reviewObject) throws JSONException {
+        Review review = new Review();
+
+        Log.d(TAG, "getReviewObject: " + reviewObject);
+        review.setId(reviewObject.getString("_id"));
+        review.setStar(reviewObject.getInt("rating"));
+        review.setPostedBy(reviewObject.getJSONObject("user"));
+        review.setComment(reviewObject.getString("comment"));
+        review.setPostedDate(reviewObject.getString("createdAt"));
+        return review;
+    }
+
+    public static ArrayList<Review> getReviewObjectArray(JSONArray reviewJsonArray) throws JSONException {
+        ArrayList<Review> reviews = new ArrayList<>();
+        for (int i = 0; i < reviewJsonArray.length(); i++) {
+            reviews.add(getReviewObject((JSONObject) reviewJsonArray.get(i)));
+        }
+        return reviews;
+    }
+
     public static ArrayList<Rating> getRatingObjectArray(JSONArray ratingsJsonArray) throws JSONException {
         ArrayList<Rating> ratings = new ArrayList<>();
         for (int i = 0; i < ratingsJsonArray.length(); i++) {
@@ -83,6 +106,7 @@ public class VehicleUseCase {
             vehicleData.setCategory(vehicleObject.getJSONObject("category"));
             if(isGettingSingleData) {
                 vehicleData.setSubCategory(vehicleObject.getJSONObject("subCategory"));
+                vehicleData.setReviews(getReviewObjectArray(vehicleObject.getJSONArray("reviews")));
             } else {
                 vehicleData.setSubCategoryId(vehicleObject.getString("subCategory"));
             }

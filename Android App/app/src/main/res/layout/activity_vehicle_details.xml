@@ -39,9 +39,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="@string/model_name"
+                android:textColor="@color/colorAccent"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:textColor="@color/colorAccent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/imageSliderVehicle" />
@@ -52,8 +52,8 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="12dp"
                 android:text="BDT. 1000 per day"
-                android:textSize="14sp"
                 android:textColor="@color/teal_200"
+                android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="@+id/tvModel"
                 app:layout_constraintTop_toBottomOf="@+id/tvModel" />
 
@@ -62,8 +62,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="5.0/5.0"
-                android:textSize="14sp"
                 android:textColor="@color/rating_color"
+                android:textSize="14sp"
                 app:layout_constraintBottom_toTopOf="@+id/clShortOverView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1"
@@ -101,8 +101,8 @@
                         android:id="@+id/tvEngine"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/black_title"
-                        android:text="1800cc" />
+                        android:text="1800cc"
+                        android:textColor="@color/black_title" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -126,7 +126,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="55km/h"
-                        android:textColor="@color/black_title"/>
+                        android:textColor="@color/black_title" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -158,11 +158,11 @@
                 android:id="@+id/tvOverview"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
                 android:text="@string/overview"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:layout_marginTop="15dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/clShortOverView" />
@@ -291,8 +291,8 @@
                 android:id="@+id/tvLocationTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/location"
                 android:layout_marginTop="10dp"
+                android:text="@string/location"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvGroundClearanceTitle" />
 
@@ -300,8 +300,8 @@
                 android:id="@+id/locationLayout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_marginTop="10dp"
+                android:orientation="horizontal"
                 app:layout_constraintBottom_toBottomOf="@+id/tvLocationTitle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvGroundClearanceTitle">
@@ -321,18 +321,53 @@
                     android:textColor="@color/black_title" />
             </LinearLayout>
 
+            <Button
+                android:id="@+id/btCheckBookedDates"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="Check booked dates"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvLocationTitle" />
+
+            <Button
+                android:id="@+id/btBookNow"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="Book now"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btCheckBookedDates" />
+
             <TextView
                 android:id="@+id/tvReviews"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:text="@string/reviews"
+                android:textColor="@color/black"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:textColor="@color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvLocationTitle" />
+                app:layout_constraintTop_toBottomOf="@id/btBookNow" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvReviews"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvReviews"
+                tools:itemCount="4" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
