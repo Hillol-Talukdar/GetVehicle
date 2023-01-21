@@ -5,6 +5,7 @@
     android:id="@+id/navigation_drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/near_to_white"
     tools:context=".screens.homeScreen.view.HomeScreenActivity"
     tools:ignore="HardcodedText">
 
@@ -16,7 +17,6 @@
             android:id="@+id/rvHomeScreenActivity"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#D1FFD3"
             android:padding="2dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

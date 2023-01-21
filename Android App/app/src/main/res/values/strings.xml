@@ -29,6 +29,7 @@
     <string name="bootSpace">Boot Space</string>
     <string name="groundClearance">Ground Clearance</string>
     <string name="reviews">Reviews</string>
+    <string name="ratings_and_reviews">Ratings and Reviews</string>
     <string name="rating_out_of">%.1f/%.1f</string>
     <string name="km_per_liter">kmpl</string>
     <string name="cost_per_day"><b>\u09F3</b> %d per day</string>

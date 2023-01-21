@@ -18,4 +18,6 @@
     <color name="black_title">#F7000000</color>
     <color name="approx_azure">#EFF1F1</color>
     <color name="rating_color">#FFD700</color>
+    <color name="near_white">#CCCCCC</color>
+    <color name="near_to_white">#EBEBEB</color>
 </resources>
