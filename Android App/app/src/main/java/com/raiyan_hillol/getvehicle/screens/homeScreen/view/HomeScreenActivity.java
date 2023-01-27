@@ -31,6 +31,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
 import com.raiyan_hillol.getvehicle.R;
 import com.raiyan_hillol.getvehicle.screens.VehicleDetailsScreen.view.VehicleDetailsActivity;
+import com.raiyan_hillol.getvehicle.screens.bookingScreen.myBookingScreen.view.MyBookingScreenActivity;
 import com.raiyan_hillol.getvehicle.screens.homeScreen.controller.HomeScreenController;
 import com.raiyan_hillol.getvehicle.utils.NavDrawerActions;
 
@@ -203,6 +204,9 @@ public class HomeScreenActivity extends AppCompatActivity {
                     case R.id.itemLogOut:
                         signOut();
                         break;
+                    case R.id.itemMyBooking:
+                        goToMyBookingScreen();
+                        break;
                     default:
                         break;
                 }
@@ -225,6 +229,11 @@ public class HomeScreenActivity extends AppCompatActivity {
 
     private void closeDrawer() {
         navigationDrawerLayout.closeDrawer(GravityCompat.START);
+    }
+
+    private void goToMyBookingScreen() {
+        Intent intent = new Intent(this, MyBookingScreenActivity.class);
+        startActivity(intent);
     }
 
     public void startVehicleDetailActivity(String vehicleId) {
