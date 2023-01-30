@@ -99,7 +99,7 @@ public class HomeScreenActivity extends AppCompatActivity {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
             updateLoginUI(account);
         } catch (ApiException e) {
-            Log.w(TAG, "signInResult:failed code=" + e.getStatusCode());
+            Log.d(TAG, "signInResult:failed code=" + e);
             updateLoginUI(null);
         }
     }
@@ -110,6 +110,8 @@ public class HomeScreenActivity extends AppCompatActivity {
         tvUserName = findViewById(R.id.tvUserName);
         tvUserEmail = findViewById(R.id.tvUserEmail);
         userImage = findViewById(R.id.userImage);
+
+        Log.d(TAG, "updateLoginUI: account " + account);
 
         if(account != null) {
             if(signInButton!=null) {
