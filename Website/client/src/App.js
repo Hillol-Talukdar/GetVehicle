@@ -8,7 +8,6 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { currentUser } from './Services/AuthService';
 import { auth } from './Authentication/FirebaseConfig';
-import { onAuthStateChanged } from 'firebase/auth';
 import { createUserPayloadAndDispatch } from './Services/ReduxService';
 import Footer from './Components/NavbarAndFooter/Footer/Footer';
 import CreateOrUpdateItemContainer from './Components/ContainerComponents/Admin/Item/CreateOrUpdateItem/CreateOrUpdateItem';
@@ -28,6 +27,7 @@ import AdminPanel from './Components/ContainerComponents/Admin/AdminPanel/AdminP
 import Register from './Components/ContainerComponents/Auth/Register';
 import RegistrationDone from './Components/ContainerComponents/Auth/RegistrationDone';
 import Login from './Components/ContainerComponents/Auth/Login';
+import ResetPassword from './Components/ContainerComponents/Auth/ResetPassword';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -62,6 +62,7 @@ const App = () => {
         <Route exact path="/register/done" element={<RegistrationDone />} />
 
         <Route exact path="/login" element={<Login />} />
+        <Route exact path="/reset/password" element={<ResetPassword />} />
 
         <Route exact path="/details/:id" element={<ItemDetailsContainer />} />
 
