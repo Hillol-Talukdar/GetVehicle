@@ -25,6 +25,9 @@ import UserSuccessfulBookingList from './Components/ContainerComponents/Booking/
 import UserCanceledBookingList from './Components/ContainerComponents/Booking/UserCanceledBookingList';
 import UserListContainer from './Components/ContainerComponents/Admin/User/UserListContainer';
 import AdminPanel from './Components/ContainerComponents/Admin/AdminPanel/AdminPanel';
+import Register from './Components/ContainerComponents/Auth/Register';
+import RegistrationDone from './Components/ContainerComponents/Auth/RegistrationDone';
+import Login from './Components/ContainerComponents/Auth/Login';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -54,6 +57,11 @@ const App = () => {
       <Header />
       <Routes>
         <Route exact path="/" element={<HomeContainer />} />
+
+        <Route exact path="/register" element={<Register />} />
+        <Route exact path="/register/done" element={<RegistrationDone />} />
+
+        <Route exact path="/login" element={<Login />} />
 
         <Route exact path="/details/:id" element={<ItemDetailsContainer />} />
 

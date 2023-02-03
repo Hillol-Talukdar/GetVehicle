@@ -13,6 +13,8 @@ import { googleLogin } from '../../../Services/GoogleAuthService';
 import LoggedInUserInfoContainer from '../../ContainerComponents/LoggedInUserInfoContainer/LoggedInUserInfoContainer';
 import './Header.css';
 import { FcGoogle } from 'react-icons/fc';
+import { BiLogIn } from 'react-icons/bi';
+import { HiOutlineUserAdd } from 'react-icons/hi';
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -142,12 +144,28 @@ const Header = () => {
             ></LoggedInUserInfoContainer>
           )}
           {!loggedInUserDetails && (
-            <button class="content" onClick={handleGoogleLogin}>
+            <button className="content" onClick={handleGoogleLogin}>
               <div className="google-icon">
                 <FcGoogle />
               </div>
               <span className="google-button-text">Sign in with Google</span>
             </button>
+          )}
+
+          {!loggedInUserDetails && (
+            <NavLink to="/register" style={{ color: "white", float: "right"  }}>
+              <Button className="content">
+                <HiOutlineUserAdd/> &nbsp;Register
+              </Button>
+            </NavLink>
+          )}
+
+          {!loggedInUserDetails && (  
+            <NavLink to="/login" style={{ color: "white", float: "right"  }}>
+              <Button className="content">
+                <BiLogIn/> &nbsp;Login
+              </Button>
+            </NavLink>
           )}
         </Navbar.Collapse>
       </Navbar>
