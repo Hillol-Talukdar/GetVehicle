@@ -20,16 +20,10 @@ const Login = () => {
     const user = useSelector((state) => state.userReducer);
 
     useEffect(() => {
-        // let intent = navigate;
-
-        // if (intent) {
-            // return;
-        // } else {
-            if (user && user.token) {
-                navigate("/");
-            }
-        // }
-    }, [user, navigate]);
+         if(user && user.token) {
+            navigate("/");
+        }
+    }, [user]);
 
 
 
@@ -59,26 +53,13 @@ const Login = () => {
 
             userCreateOrUpdate(idTokenResult.token, userData)
                 .then((res) => {
-
                     createUserPayloadAndDispatch(dispatch, idTokenResult.token, res);
-
-                    // console.log("create or up response", res) // for checking if data is coming from the backend or not
-                    // dispatch({
-                    //     type: "LOGGED_IN_USER",
-                    //     payload: {
-                    //         name: res.data.name,
-                    //         email: res.data.email,
-                    //         token: idTokenResult.token,
-                    //         role: res.data.role,
-                    //         _id: res.data._id,
-                    //     },
-                    // });
-
-                    navigate("/")
+                    // navigate(-1)
                 })
                 .catch();
+                
+                navigate(-1)
 
-            // history.push("/");
             toast.success(
                 `Hi ${user.email}, Welcome to getVehicle again!`
             );

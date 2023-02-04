@@ -98,13 +98,16 @@ const DetailsSingleItem = ({
                   {user && user?.role === UserRole.USER ? (
                     <Link style={{width: '65%'}} className='btn btn-success' to={'/booking/' + data?._id}>Book Now</Link>
                   ) : (
-                    <Button
-                      variant='success'
-                      onClick={handleGoogleLogin}
-                      style={{width: '65%'}}
-                    >
-                      Login as a User to Book
-                    </Button>
+                    <Link style={{width: '65%'}} className='btn btn-success' to='/login'>Login as a User to Book</Link>
+
+
+                    // <Button
+                    //   variant='success'
+                    //   onClick={handleGoogleLogin}
+                    // >
+                    //   Login as a User to Book
+                    // </Button>
+
                   )}
                 </div>
               </ListGroup.Item>

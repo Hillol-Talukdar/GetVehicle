@@ -56,7 +56,6 @@ const RegistrationDone = () => {
                 //getting current user and token
                 let user = auth.currentUser;
                 await updatePassword(user,password);
-                // const idTokenResult = await user.getIdTokenResult();
                 //deleting email
                 window.localStorage.removeItem("emailForSignIn");
 
@@ -77,22 +76,6 @@ const RegistrationDone = () => {
                     .catch(err => {
                         toast.error(err.response.data.message);
                     });
-    
-
-                // userCreateOrUpdate(idTokenResult.token)
-                //     .then((res) => {
-                //         dispatch({
-                //             type: "LOGGED_IN_USER",
-                //             payload: {
-                //                 name: res.data.name,
-                //                 email: res.data.email,
-                //                 token: idTokenResult.token,
-                //                 role: res.data.role,
-                //                 _id: res.data._id,
-                //             },
-                //         });
-                //     })
-                //     .catch();
 
                 //redirecting to the expected page
                 navigate("/");
@@ -135,7 +118,7 @@ const RegistrationDone = () => {
         <div className="d-flex p-5 justify-content-center">
             <div className="row align-items-center">
                 <div className="d-flex justify-content-center">
-                    <h1 className="text-primary">eMedicine</h1>
+                    <h1 className="text-primary">GetVehicle</h1>
                 </div>
                 <div className="mt-3">
                     <h4 className="d-flex justify-content-center">

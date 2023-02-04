@@ -42,9 +42,10 @@ export const googleLogin = async (dispatch) => {
 
 };
 
-export const googleLogout = async (dispatch) => {
+export const googleLogout = async (dispatch, navigate) => {
     signOut(auth).then(() => {
         removeUserAndDispatch(dispatch);
+        navigate("/login")
     }).catch((error) => {
         
     });
