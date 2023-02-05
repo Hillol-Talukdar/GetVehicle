@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "548775009365",
+    "project_id": "getvehicle",
+    "storage_bucket": "getvehicle.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:548775009365:android:0dbba2782d732d34bbc8dc",
+        "android_client_info": {
+          "package_name": "com.raiyan_hillol.getvehicle"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "548775009365-d1ceb0678ss6pip8fbdbfbrbse3b6l39.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.raiyan_hillol.getvehicle",
+            "certificate_hash": "46cdf4bfe958e3fcefaf7a18f6afea38197bb4f2"
+          }
+        },
+        {
+          "client_id": "548775009365-hkm2j6798sbeu82362ogotgrurs9iqa1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAG1KaSpGA3DVT-dJXpmemGxgEu4rgkshg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "548775009365-dn6ql0c3t9gvrkrtk33il0becdvi95ee.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
