@@ -38,6 +38,8 @@ import com.raiyan_hillol.getvehicle.utils.NavDrawerActions;
 public class HomeScreenActivity extends AppCompatActivity {
     private static final String TAG = "HomeScreenActivity";
 
+    public static String idToken;
+
     ActionBarDrawerToggle actionBarNavigationDrawerToggle;
     private RecyclerView homeRecycleView;
     private HomeScreenController homeScreenController;
@@ -66,6 +68,7 @@ public class HomeScreenActivity extends AppCompatActivity {
         setUpNavigationDrawer();
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
 
@@ -98,6 +101,9 @@ public class HomeScreenActivity extends AppCompatActivity {
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
         try {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
+            idToken = account.getIdToken();
+
+            Log.d(TAG, "handleSignInResult: " + idToken);
             updateLoginUI(account);
         } catch (ApiException e) {
             Log.d(TAG, "signInResult:failed code=" + e);
