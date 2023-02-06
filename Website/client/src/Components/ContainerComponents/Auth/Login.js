@@ -21,7 +21,8 @@ const Login = () => {
 
     useEffect(() => {
          if(user && user.token) {
-            navigate("/");
+            // navigate("/");
+            navigate(-1);
         }
     }, [user]);
 
@@ -58,7 +59,7 @@ const Login = () => {
                 })
                 .catch();
                 
-                navigate(-1)
+                // navigate(-1)
 
             toast.success(
                 `Hi ${user.email}, Welcome to getVehicle again!`
