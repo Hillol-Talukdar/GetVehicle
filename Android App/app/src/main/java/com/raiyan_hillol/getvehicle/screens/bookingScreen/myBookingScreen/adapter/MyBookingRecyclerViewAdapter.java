@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.raiyan_hillol.getvehicle.R;
+import com.raiyan_hillol.getvehicle.data.model.BookingData;
 import com.raiyan_hillol.getvehicle.data.model.Review;
 import com.raiyan_hillol.getvehicle.data.model.VehicleData;
 import com.raiyan_hillol.getvehicle.data.usecase.VehicleUseCase;
@@ -30,11 +31,11 @@ import java.util.Date;
 import java.util.TimeZone;
 
 public class MyBookingRecyclerViewAdapter  extends RecyclerView.Adapter<MyBookingRecyclerViewAdapter.ViewHolder>{
-    ArrayList<VehicleData> allVehicleData;
+    ArrayList<BookingData> allBookingData;
     Context context;
 
-    public MyBookingRecyclerViewAdapter(ArrayList<VehicleData> vehicleData, Context context) {
-        this.allVehicleData = vehicleData;
+    public MyBookingRecyclerViewAdapter(ArrayList<BookingData> allBookingData, Context context) {
+        this.allBookingData = allBookingData;
         this.context = context;
     }
 
@@ -42,33 +43,24 @@ public class MyBookingRecyclerViewAdapter  extends RecyclerView.Adapter<MyBookin
     @Override
     public MyBookingRecyclerViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.home_screen_item_layout, parent, false);
-        return new MyBookingRecyclerViewAdapter.ViewHolder(view);
+        return new ViewHolder(view);
     }
 
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull MyBookingRecyclerViewAdapter.ViewHolder holder, int position) {
-        if(!allVehicleData.get(position).getPhoto().isEmpty()) {
-            String image = allVehicleData.get(position).getPhoto().get(0);
-            boolean isImage = image.endsWith(".jpg");
-            if(isImage) {
-                Glide.with(this.context).load(image).into(holder.vehicleThumbnail);
-            } else {
-                holder.vehicleThumbnail.setImageResource(Integer.parseInt(image));
-            }
-        }
-        holder.vehicleModel.setText(allVehicleData.get(position).getModel());
-        holder.vehicleShortDetails.setText(VehicleUseCase.getVehicleFormattedShortDetails(allVehicleData.get(position)));
-        holder.tvVehiclePrice.setText(allVehicleData.get(position).getCostPerDay() + " BDT / Day");
-//        holder.vehicleLocation.setText(allVehicleData.get(position).getCurrentLocationString());
+
+//        holder.vehicleModel.setText(allBookingData.get(position).getVehicle().model);
+        holder.vehicleShortDetails.setText(String.valueOf(allBookingData.get(position).getTotalAmount()));
+//        holder.tvVehiclePrice.setText(allVehicleData.get(position).getCostPerDay() + " BDT / Day");
     }
 
     @Override
     public int getItemCount() {
-        return this.allVehicleData.size();
+        return this.allBookingData.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
 
         ImageView vehicleThumbnail;
         TextView vehicleModel;
@@ -84,13 +76,6 @@ public class MyBookingRecyclerViewAdapter  extends RecyclerView.Adapter<MyBookin
             vehicleModel = itemView.findViewById(R.id.tvVehicleModel);
             vehicleShortDetails = itemView.findViewById(R.id.tvVehicleShortDetail);
             tvVehiclePrice = itemView.findViewById(R.id.tvVehiclePrice);
-        }
-
-        @Override
-        public void onClick(View v) {
-            if (context instanceof HomeScreenActivity) {
-                ((HomeScreenActivity) context).startVehicleDetailActivity(allVehicleData.get(this.getAbsoluteAdapterPosition()).getId());
-            }
         }
     }
 }

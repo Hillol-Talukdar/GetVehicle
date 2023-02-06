@@ -18,6 +18,7 @@ import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.raiyan_hillol.getvehicle.R;
 import com.raiyan_hillol.getvehicle.constants.AppUriConstants;
+import com.raiyan_hillol.getvehicle.data.usecase.BookingUseCase;
 import com.raiyan_hillol.getvehicle.data.usecase.VehicleUseCase;
 import com.raiyan_hillol.getvehicle.screens.bookingScreen.myBookingScreen.adapter.MyBookingRecyclerViewAdapter;
 import com.raiyan_hillol.getvehicle.screens.homeScreen.adapter.HomeScreenActivityRecyclerViewAdapter;
@@ -40,7 +41,7 @@ public class MyBookingScreenController {
 
         requestQueue.start();
 
-        String url = AppUriConstants.GET_ALL_VEHICLE_URI;
+        String url = AppUriConstants.GET_ALL_MY_URI;
 
         JsonObjectRequest jsonArrayRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
@@ -49,7 +50,7 @@ public class MyBookingScreenController {
                 MyBookingRecyclerViewAdapter recyclerViewAdapter;
 
                 recyclerView = view.findViewById(R.id.rvMyBooking);
-                recyclerViewAdapter = new MyBookingRecyclerViewAdapter(VehicleUseCase.getAllVehiclesFromJSONObject(response), context);
+                recyclerViewAdapter = new MyBookingRecyclerViewAdapter(BookingUseCase.getAllBookingsFromJSONObject(response), context);
                 recyclerView.setAdapter(recyclerViewAdapter);
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
             }

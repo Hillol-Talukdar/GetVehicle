@@ -30,6 +30,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
 import com.raiyan_hillol.getvehicle.R;
+import com.raiyan_hillol.getvehicle.constants.AppUriConstants;
 import com.raiyan_hillol.getvehicle.screens.VehicleDetailsScreen.view.VehicleDetailsActivity;
 import com.raiyan_hillol.getvehicle.screens.bookingScreen.myBookingScreen.view.MyBookingScreenActivity;
 import com.raiyan_hillol.getvehicle.screens.homeScreen.controller.HomeScreenController;
@@ -101,7 +102,7 @@ public class HomeScreenActivity extends AppCompatActivity {
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
         try {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
-            idToken = account.getIdToken();
+            AppUriConstants.ID_TOKEN = account.getIdToken();
 
             Log.d(TAG, "handleSignInResult: " + idToken);
             updateLoginUI(account);
@@ -240,8 +241,8 @@ public class HomeScreenActivity extends AppCompatActivity {
     }
 
     private void goToMyBookingScreen() {
-        Intent intent = new Intent(this, MyBookingScreenActivity.class);
-        startActivity(intent);
+//        Intent intent = new Intent(this, MyBookingScreenActivity.class);
+//        startActivity(intent);
     }
 
     public void startVehicleDetailActivity(String vehicleId) {
