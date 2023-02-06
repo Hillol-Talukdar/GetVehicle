@@ -143,26 +143,27 @@ const Header = () => {
               userInfo={loggedInUserDetails}
             ></LoggedInUserInfoContainer>
           )}
-          {!loggedInUserDetails && (
+
+          {/* {!loggedInUserDetails && (
             <button className="content" onClick={handleGoogleLogin}>
               <div className="google-icon">
                 <FcGoogle />
               </div>
               <span className="google-button-text">Sign in with Google</span>
             </button>
-          )}
+          )} */}
 
           {!loggedInUserDetails && (
             <NavLink to="/register" style={{ color: "white", float: "right"  }}>
-              <Button className="content">
+              <Button className="btn-danger btn-sm">
                 <HiOutlineUserAdd/> &nbsp;Register
               </Button>
             </NavLink>
           )}
 
-          {!loggedInUserDetails && (  
-            <NavLink to="/login" style={{ color: "white", float: "right"  }}>
-              <Button className="content">
+          {!loggedInUserDetails && ( 
+            <NavLink to="/login" className="mx-2" style={{ color: "white", float: "right"  }}>
+              <Button className="btn-sm">
                 <BiLogIn/> &nbsp;Login
               </Button>
             </NavLink>
