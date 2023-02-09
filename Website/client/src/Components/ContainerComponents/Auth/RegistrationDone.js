@@ -6,6 +6,7 @@ import { userCreateOrUpdate } from "../../../Services/AuthService";
 import { useNavigate } from 'react-router-dom';
 import { signInWithEmailLink, updatePassword } from "firebase/auth";
 import { createUserPayloadAndDispatch } from "../../../Services/ReduxService";
+import { CgProfile } from 'react-icons/cg';
 
 const RegistrationDone = () => {
     const [email, setEmail] = useState("");
@@ -21,9 +22,17 @@ const RegistrationDone = () => {
     const getUserData = function (user) {
         return {
             email: user.email,
-            displayName: user.email.split("@")[0],
-            photoUrl: user.photoURL
+            displayName: getUserName(user),
+            photoUrl: getUserPicture(user) 
         };
+    }
+
+    const getUserPicture = (user) => {
+        return user.photoURL ==null ? user.photoURL : '/UserProfileIcon.png';
+    }
+
+    const getUserName = (user) => {
+        return user.email.split("@")[0];
     }
 
     const submitHandler = async (e) => {
@@ -70,7 +79,7 @@ const RegistrationDone = () => {
                         createUserPayloadAndDispatch(dispatch, idTokenResult.token, res);
     
                         toast.success(
-                            `Hi ${user.email}, Your registration is done! Welcome to GetVehicle!`
+                            `Hi ${getUserName(user)}, Your registration is done! Welcome to GetVehicle!`
                         );
                     })
                     .catch(err => {

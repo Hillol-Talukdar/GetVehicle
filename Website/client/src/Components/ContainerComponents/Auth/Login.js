@@ -31,9 +31,18 @@ const Login = () => {
     const getUserData = function (user) {
         return {
             email: user.email,
-            displayName: user.displayName,
-            photoUrl: user.photoURL
+            // displayName: user.displayName,
+            displayName: getUserName(user),
+            photoUrl: getUserPicture(user) 
         };
+    }
+
+    const getUserPicture = (user) => {
+        return user.photoURL !=null ? user.photoURL : '/UserProfileIcon.png';
+    }
+
+    const getUserName = (user) => {
+        return user.email.split("@")[0];
     }
 
     const submitHandler = async (e) => {
@@ -62,7 +71,7 @@ const Login = () => {
                 // navigate(-1)
 
             toast.success(
-                `Hi ${user.email}, Welcome to getVehicle again!`
+                `Hi ${getUserName(user)}, Welcome to getVehicle again!`
             );
         } catch (error) {
             toast.error(error.message);
