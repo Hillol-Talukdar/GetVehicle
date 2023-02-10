@@ -155,16 +155,16 @@ const Header = () => {
 
           {!loggedInUserDetails && (
             <NavLink to="/register" style={{ color: "white", float: "right"  }}>
-              <Button className="btn-danger btn-sm">
-                <HiOutlineUserAdd/> &nbsp;Register
+              <Button className="btn-info btn-sm px-3">
+                <HiOutlineUserAdd/> &nbsp;Sign Up
               </Button>
             </NavLink>
           )}
 
           {!loggedInUserDetails && ( 
             <NavLink to="/login" className="mx-2" style={{ color: "white", float: "right"  }}>
-              <Button className="btn-sm">
-                <BiLogIn/> &nbsp;Login
+              <Button className="btn-success btn-sm px-3 sign-in-button">
+                <BiLogIn/> &nbsp;Sign In
               </Button>
             </NavLink>
           )}

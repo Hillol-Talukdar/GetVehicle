@@ -105,7 +105,7 @@ const Login = () => {
                 onChange={(e) => setPassword(e.target.value)}
             />
             <div
-                className="d-grid gap-2 col-6 mx-auto mt-3"
+                className="d-grid gap-2 col-12 mx-auto mt-3"
                 data-toggle="tooltip"
                 data-placement="top"
                 title="Email and Password which contains atleast 6 character will enable this button"
@@ -125,14 +125,14 @@ const Login = () => {
                     >
                         <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555zM0 4.697v7.104l5.803-3.558L0 4.697zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757zm3.436-.586L16 11.801V4.697l-5.803 3.546z" />
                     </svg>
-                    &nbsp;&nbsp;Continue with Email
+                    &nbsp;&nbsp;Login with email and password
                 </button>
             </div>
         </form>
     );
 
     const googleLoginButton = () => (
-        <div class="d-grid gap-2 col-6 mx-auto mt-3">
+        <div class="d-grid gap-2 col-12 mx-auto mt-3">
             <button class="btn btn-danger" type="submit" onClick={handleGoogleLogin}>
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -160,7 +160,7 @@ const Login = () => {
     );
 
     const resetPassword = () => (
-        <div class="d-grid gap-2 col-6 mx-auto mt-3">
+        <div class="d-grid gap-2 col-12 mx-auto mt-3">
             <Link class="btn btn-dark" to="/reset/password">
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
