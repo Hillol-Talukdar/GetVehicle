@@ -129,7 +129,10 @@ public class HomeScreenActivity extends AppCompatActivity {
             tvUserName.setVisibility(View.VISIBLE);
             tvUserEmail.setVisibility(View.VISIBLE);
 
-            tvUserName.setText(account.getDisplayName());
+            String userName= account.getEmail();
+            int lastIndexOf = userName.lastIndexOf("@");
+
+            tvUserName.setText(userName.substring(0,lastIndexOf));
             tvUserEmail.setText(account.getEmail());
             Glide.with(this)
                     .load(account.getPhotoUrl())
