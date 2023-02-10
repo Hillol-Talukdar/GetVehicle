@@ -30,8 +30,7 @@ const LoggedInUserInfoContainer = ({ userInfo }) => {
               //TODO
               break;
             case DropDownContants.LOGOUT.EVENT_KEY:
-              googleLogout(dispatch);
-              navigate('/');
+              googleLogout(dispatch, navigate)
               break;
             default:
               break;

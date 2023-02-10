@@ -7,9 +7,19 @@ import { createUserPayloadAndDispatch, removeUserAndDispatch } from "./ReduxServ
 const getUserData = function (user) {
     return {
         email: user.email,
-        displayName: user.displayName,
-        photoUrl: user.photoURL
+        // displayName: user.displayName,
+        displayName: getUserName(user),
+        photoUrl: getUserPicture(user)
     };
+}
+
+const getUserPicture = (user) => {
+    return user.photoURL !=null ? user.photoURL : '/UserProfileIcon.png';
+}
+
+
+const getUserName = (user) => {
+    return user.email.split("@")[0];
 }
 
 export const googleLogin = async (dispatch) => {
@@ -27,7 +37,7 @@ export const googleLogin = async (dispatch) => {
                     createUserPayloadAndDispatch(dispatch, idTokenResult.token, res);
 
                     toast.success(
-                        `Hi ${user.displayName}, Welcome to GetVehicle again!`
+                        `Hi ${getUserName(user)}, Welcome to GetVehicle again!`
                     );
                 })
                 .catch(err => {
@@ -42,9 +52,10 @@ export const googleLogin = async (dispatch) => {
 
 };
 
-export const googleLogout = async (dispatch) => {
+export const googleLogout = async (dispatch, navigate) => {
     signOut(auth).then(() => {
         removeUserAndDispatch(dispatch);
+        navigate("/login")
     }).catch((error) => {
         
     });
