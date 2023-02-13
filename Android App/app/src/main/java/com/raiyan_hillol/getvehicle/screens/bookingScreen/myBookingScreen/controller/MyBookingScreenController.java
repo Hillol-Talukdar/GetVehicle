@@ -1,6 +1,7 @@
 package com.raiyan_hillol.getvehicle.screens.bookingScreen.myBookingScreen.controller;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -19,9 +20,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.raiyan_hillol.getvehicle.R;
 import com.raiyan_hillol.getvehicle.constants.AppUriConstants;
 import com.raiyan_hillol.getvehicle.data.usecase.BookingUseCase;
-import com.raiyan_hillol.getvehicle.data.usecase.VehicleUseCase;
 import com.raiyan_hillol.getvehicle.screens.bookingScreen.myBookingScreen.adapter.MyBookingRecyclerViewAdapter;
-import com.raiyan_hillol.getvehicle.screens.homeScreen.adapter.HomeScreenActivityRecyclerViewAdapter;
 
 import org.json.JSONObject;
 
@@ -41,7 +40,7 @@ public class MyBookingScreenController {
 
         requestQueue.start();
 
-        String url = AppUriConstants.GET_ALL_MY_URI;
+        String url = AppUriConstants.GET_ALL_MY_BOOKIN_URI;
 
         JsonObjectRequest jsonArrayRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
