@@ -7,6 +7,7 @@ import android.view.View;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Cache;
 import com.android.volley.Network;
 import com.android.volley.Request;
@@ -24,6 +25,9 @@ import com.raiyan_hillol.getvehicle.screens.bookingScreen.myBookingScreen.adapte
 
 import org.json.JSONObject;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class MyBookingScreenController {
     private static final String TAG = "MyBookingScreenControll";
     private Context context;
@@ -40,7 +44,9 @@ public class MyBookingScreenController {
 
         requestQueue.start();
 
-        String url = AppUriConstants.GET_ALL_MY_BOOKIN_URI;
+        String url = AppUriConstants.GET_ALL_MY_BOOKING_URI;
+
+        Log.d(TAG, "setRecyclerViewAdapter: " + AppUriConstants.ID_TOKEN);
 
         JsonObjectRequest jsonArrayRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
@@ -56,10 +62,19 @@ public class MyBookingScreenController {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                setRecyclerViewAdapter(view, context);
+//                setRecyclerViewAdapter(view, context);
                 error.printStackTrace();
             }
-        });
+        }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> headers = new HashMap<>();
+//                headers.put("Content-Type", "application/json");
+//                headers.put("Authorization", "Bearer " + AppUriConstants.ID_TOKEN);
+                headers.put("Authorization",  AppUriConstants.ID_TOKEN);
+                return headers;
+            }
+        };
         requestQueue.add(jsonArrayRequest);
     }
 }

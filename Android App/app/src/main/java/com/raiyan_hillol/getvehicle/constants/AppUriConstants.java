@@ -12,6 +12,6 @@ public class AppUriConstants {
     public static final String URL = HTTP + IP4_ADDRESS + SERVER_PORT;
 
     public static final String GET_ALL_VEHICLE_URI =  URL + "/api/vehicle/";
-    public static final String GET_ALL_MY_BOOKIN_URI =  URL + "/api/booking/my";
+    public static final String GET_ALL_MY_BOOKING_URI =  URL + "/api/booking/my";
     public static final String CREATE_OR_UPDATE_USER_URI =  URL + "/api/auth/user-create-or-update/";
 }

@@ -323,8 +323,8 @@ public class HomeScreenActivity extends AppCompatActivity {
     }
 
     private void goToMyBookingScreen() {
-        Intent intent = new Intent(this, MyBookingScreenActivity.class);
-        startActivity(intent);
+//        Intent intent = new Intent(this, MyBookingScreenActivity.class);
+//        startActivity(intent);
     }
 
     public void startVehicleDetailActivity(String vehicleId) {
