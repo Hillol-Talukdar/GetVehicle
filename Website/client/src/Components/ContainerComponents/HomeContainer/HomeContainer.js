@@ -19,10 +19,21 @@ const HomeContainer = () => {
   const [filteredItems, setFilteredItems] = useState([]);
   const [categories, setCategories] = useState([]);
 
+  const getAvailableVehicles = (allVehicles) => {
+    let availableVehicles = [];
+    allVehicles.forEach(vehicle => {
+      if(!vehicle.isTrashed) {
+        availableVehicles.push(vehicle);
+      }
+    });
+    return availableVehicles;
+  }
+
   const loadAllVehicles = () => {
     getAllVehicleList().then((response) => {
-      setAllItems(response.data.data);
-      setFilteredItems(response.data.data);
+      let availableVehicles = getAvailableVehicles(response.data.data);
+      setAllItems(availableVehicles);
+      setFilteredItems(availableVehicles);
     });
   };
 
@@ -63,6 +74,10 @@ const HomeContainer = () => {
 
     if (isCategoryFilterApplied) {
       filteredItems = filteredItems.filter((item) => {
+        if(item.category === null || item.category === undefined) {
+          return false;
+        }
+
         return item.category.name === categoryFilterFieldValue;
       });
     }
