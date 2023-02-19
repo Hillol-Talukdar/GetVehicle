@@ -136,6 +136,20 @@ const Header = () => {
                 </NavDropdown.Item>
               </NavDropdown>
             )}
+
+
+            <Navbar.Text>
+              <NavLink
+                to="/about"
+                className={({ isActive }) =>
+                  isActive
+                    ? 'active-text-color-and-decoration'
+                    : 'text-color-and-decoration'
+                }
+              >
+                {NavbarConstants.ABOUT}
+              </NavLink>
+            </Navbar.Text>
           </Nav>
 
           {loggedInUserDetails && (

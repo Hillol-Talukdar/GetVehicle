@@ -28,6 +28,7 @@ import Register from './Components/ContainerComponents/Auth/Register';
 import RegistrationDone from './Components/ContainerComponents/Auth/RegistrationDone';
 import Login from './Components/ContainerComponents/Auth/Login';
 import ResetPassword from './Components/ContainerComponents/Auth/ResetPassword';
+import AboutUs from './Components/ContainerComponents/About/About';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -172,6 +173,8 @@ const App = () => {
         <Route exact path="/admin/admin-panel" element={<AdminPrivateRoute />}>
           <Route exact path="/admin/admin-panel" element={<AdminPanel />} />
         </Route>
+
+        <Route exact path="/about" element={<AboutUs />} />
       </Routes>
       <Footer />
     </>

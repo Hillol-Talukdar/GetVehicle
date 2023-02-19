@@ -20,7 +20,8 @@ export const NavbarConstants = {
   CREATE_CATEGORY: 'Category and Sub-category',
   BOOKING_LIST: 'Current Bookings',
   MY_BOOKINGS: 'My Bookings',
-  OTHERS: 'Others'
+  OTHERS: 'Others',
+  ABOUT: 'About'
 };
 
 export const VehicleInfoConstants = {
