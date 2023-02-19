@@ -14,6 +14,10 @@
         android:theme="@style/Theme.GetVehicle"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".screens.about.AboutActivity"
+            android:exported="false" />
+
+        <activity
             android:name=".screens.bookingScreen.myBookingScreen.view.MyBookingScreenActivity"
             android:exported="false" />
         <activity

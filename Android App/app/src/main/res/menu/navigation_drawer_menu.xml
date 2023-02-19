@@ -20,7 +20,8 @@
 
     <item
         android:id="@+id/itemMyBooking"
-        android:icon="@drawable/ic_baseline_info_24"
+        android:icon="@drawable/ic_baseline_book_24"
+        android:iconTint="@color/black"
         android:title="@string/my_booking" />
 
     <item

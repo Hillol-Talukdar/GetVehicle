@@ -45,6 +45,7 @@ import com.raiyan_hillol.getvehicle.R;
 import com.raiyan_hillol.getvehicle.constants.AppUriConstants;
 import com.raiyan_hillol.getvehicle.data.usecase.VehicleUseCase;
 import com.raiyan_hillol.getvehicle.screens.VehicleDetailsScreen.view.VehicleDetailsActivity;
+import com.raiyan_hillol.getvehicle.screens.about.AboutActivity;
 import com.raiyan_hillol.getvehicle.screens.bookingScreen.myBookingScreen.view.MyBookingScreenActivity;
 import com.raiyan_hillol.getvehicle.screens.homeScreen.adapter.HomeScreenActivityRecyclerViewAdapter;
 import com.raiyan_hillol.getvehicle.screens.homeScreen.controller.HomeScreenController;
@@ -290,6 +291,7 @@ public class HomeScreenActivity extends AppCompatActivity {
                         closeDrawer();
                         break;
                     case R.id.itemAbout:
+                        goToMyAboutScreen();
                         closeDrawer();
                         break;
                     case R.id.itemLogOut:
@@ -330,6 +332,11 @@ public class HomeScreenActivity extends AppCompatActivity {
     public void startVehicleDetailActivity(String vehicleId) {
         Intent intent = new Intent(this, VehicleDetailsActivity.class);
         intent.putExtra("selected_vehicle_id", vehicleId);
+        startActivity(intent);
+    }
+
+    public void goToMyAboutScreen() {
+        Intent intent = new Intent(this, AboutActivity.class);
         startActivity(intent);
     }
 
