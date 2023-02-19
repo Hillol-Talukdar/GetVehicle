@@ -71,7 +71,7 @@ const ResetPassword = ( ) => {
         <div className="d-flex p-5 justify-content-center">
             <div className="row align-items-center">
                 <div className="d-flex justify-content-center">
-                    <h1 className="text-primary">getVehicle</h1>
+                    <h1 className="text-primary">GetVehicle</h1>
                 </div>
 
                 <div className="mt-3">

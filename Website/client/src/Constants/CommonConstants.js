@@ -76,10 +76,10 @@ export const CategoryInfoConstants = {
 }
 
 export const SubCategoryInfoConstants = {
-  CREATING_SUB_CATEGORY_OF: 'Createing subCategory of ',
-  CREATE_NEW_SUB_CATEGORY_OF: 'Create New subCategory of ',
-  ALL_SUB_CATEGORY_OF: 'All SubCategories of ',
-  UPDATE_SUB_CATEGORY: 'Update SubCategory'
+  CREATING_SUB_CATEGORY_OF: 'Createing Sub-Category of ',
+  CREATE_NEW_SUB_CATEGORY_OF: 'Create New Sub-Category of ',
+  ALL_SUB_CATEGORY_OF: 'All Sub-Categories of ',
+  UPDATE_SUB_CATEGORY: 'Update Sub-Category'
 }
 
 export const ColorConstants = {
