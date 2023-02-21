@@ -19,12 +19,24 @@ const Login = () => {
 
     const user = useSelector((state) => state.userReducer);
 
+    const [count, setCount] = useState(2);
+
     useEffect(() => {
-         if(user && user.token) {
-            // navigate("/");
-            navigate(-1);
+        if(user && user.token) {
+            const interval = setInterval(() => {
+                setCount((currentCount) => --currentCount);
+            }, 1000);
+            count === 0 && navigate(-1);
+            return () => clearInterval(interval);
         }
-    }, [user]);
+    }, [count, navigate,user]);
+
+    // useEffect(() => {
+    //      if(user && user.token) {
+    //         // navigate("/");
+    //         navigate(-1);
+    //     }
+    // }, [user]);
 
 
 
