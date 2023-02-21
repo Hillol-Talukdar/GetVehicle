@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
@@ -19,6 +20,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Cache;
+import com.android.volley.Network;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.BasicNetwork;
+import com.android.volley.toolbox.DiskBasedCache;
+import com.android.volley.toolbox.HurlStack;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -30,12 +42,24 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
 import com.raiyan_hillol.getvehicle.R;
+import com.raiyan_hillol.getvehicle.constants.AppUriConstants;
+import com.raiyan_hillol.getvehicle.data.usecase.VehicleUseCase;
 import com.raiyan_hillol.getvehicle.screens.VehicleDetailsScreen.view.VehicleDetailsActivity;
+import com.raiyan_hillol.getvehicle.screens.about.AboutActivity;
+import com.raiyan_hillol.getvehicle.screens.bookingScreen.myBookingScreen.view.MyBookingScreenActivity;
+import com.raiyan_hillol.getvehicle.screens.homeScreen.adapter.HomeScreenActivityRecyclerViewAdapter;
 import com.raiyan_hillol.getvehicle.screens.homeScreen.controller.HomeScreenController;
 import com.raiyan_hillol.getvehicle.utils.NavDrawerActions;
 
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class HomeScreenActivity extends AppCompatActivity {
     private static final String TAG = "HomeScreenActivity";
+
+    public static String idToken;
 
     ActionBarDrawerToggle actionBarNavigationDrawerToggle;
     private RecyclerView homeRecycleView;
@@ -65,6 +89,7 @@ public class HomeScreenActivity extends AppCompatActivity {
         setUpNavigationDrawer();
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
 
@@ -97,9 +122,13 @@ public class HomeScreenActivity extends AppCompatActivity {
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
         try {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
+            AppUriConstants.ID_TOKEN = account.getIdToken();
+            AppUriConstants.USER_DATA = account;
+
+            Log.d(TAG, "handleSignInResult: " + idToken);
             updateLoginUI(account);
         } catch (ApiException e) {
-            Log.w(TAG, "signInResult:failed code=" + e.getStatusCode());
+            Log.d(TAG, "signInResult:failed code=" + e);
             updateLoginUI(null);
         }
     }
@@ -111,15 +140,22 @@ public class HomeScreenActivity extends AppCompatActivity {
         tvUserEmail = findViewById(R.id.tvUserEmail);
         userImage = findViewById(R.id.userImage);
 
-        if(account != null) {
-            if(signInButton!=null) {
+        Log.d(TAG, "updateLoginUI: account " + account);
+
+        if (account != null) {
+            createOrUpdateUser(account);
+
+            if (signInButton != null) {
                 signInButton.setVisibility(View.GONE);
             }
             userGmailDetails.setVisibility(View.VISIBLE);
             tvUserName.setVisibility(View.VISIBLE);
             tvUserEmail.setVisibility(View.VISIBLE);
 
-            tvUserName.setText(account.getDisplayName());
+            String userName = account.getEmail();
+            int lastIndexOf = userName.lastIndexOf("@");
+
+            tvUserName.setText(userName.substring(0, lastIndexOf));
             tvUserEmail.setText(account.getEmail());
             Glide.with(this)
                     .load(account.getPhotoUrl())
@@ -128,10 +164,66 @@ public class HomeScreenActivity extends AppCompatActivity {
         } else {
             userGmailDetails.setVisibility(View.GONE);
             setDefaultDrawableOnUserImageView();
-            if(signInButton!=null) {
+            if (signInButton != null) {
                 signInButton.setVisibility(View.VISIBLE);
             }
         }
+    }
+
+    private void createOrUpdateUser(GoogleSignInAccount account) {
+        RequestQueue requestQueue;
+        Cache cache = new DiskBasedCache(this.getCacheDir(), 1024 * 1024); // 1MB cap
+        Network network = new BasicNetwork(new HurlStack());
+        requestQueue = new RequestQueue(cache, network);
+
+        requestQueue.start();
+
+        String url = AppUriConstants.CREATE_OR_UPDATE_USER_URI;
+
+        String userName = account.getEmail();
+        int lastIndexOf = userName.lastIndexOf("@");
+
+        JSONObject userData = new JSONObject();
+        try {
+            userData.put("photoUrl", account.getPhotoUrl());
+            userData.put("email", account.getEmail());
+            userData.put("displayName", userName.substring(0, lastIndexOf));
+        } catch (Exception ex) {
+            Log.e(TAG, "createOrUpdateUser: ex ", ex);
+        }
+
+        JSONObject requestBody = new JSONObject();
+        try {
+            requestBody.put("token", account.getIdToken());
+            requestBody.put("data", userData);
+        } catch (Exception ex) {
+            Log.e(TAG, "createOrUpdateUser: ex ", ex);
+        }
+
+        JsonObjectRequest jsonArrayRequest = new JsonObjectRequest(Request.Method.POST, url, requestBody, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                Toast.makeText(HomeScreenActivity.this,
+                        "Hi " + userName.substring(0, lastIndexOf) + ", Welcome to GetVehicle again!",
+                        Toast.LENGTH_SHORT)
+                        .show();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d(TAG, "onErrorResponse: error " + error);
+                error.printStackTrace();
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> headers = new HashMap<>();
+                headers.put("Content-Type", "application/json");
+                return headers;
+            }
+        };
+
+        requestQueue.add(jsonArrayRequest);
     }
 
     private void setDefaultDrawableOnUserImageView() {
@@ -171,6 +263,7 @@ public class HomeScreenActivity extends AppCompatActivity {
                 super.onDrawerClosed(view);
                 // Do whatever you want here
             }
+
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
                 signInButton = findViewById(R.id.sign_in_button);
@@ -198,10 +291,14 @@ public class HomeScreenActivity extends AppCompatActivity {
                         closeDrawer();
                         break;
                     case R.id.itemAbout:
+                        goToMyAboutScreen();
                         closeDrawer();
                         break;
                     case R.id.itemLogOut:
                         signOut();
+                        break;
+                    case R.id.itemMyBooking:
+                        goToMyBookingScreen();
                         break;
                     default:
                         break;
@@ -227,9 +324,19 @@ public class HomeScreenActivity extends AppCompatActivity {
         navigationDrawerLayout.closeDrawer(GravityCompat.START);
     }
 
+    private void goToMyBookingScreen() {
+//        Intent intent = new Intent(this, MyBookingScreenActivity.class);
+//        startActivity(intent);
+    }
+
     public void startVehicleDetailActivity(String vehicleId) {
         Intent intent = new Intent(this, VehicleDetailsActivity.class);
         intent.putExtra("selected_vehicle_id", vehicleId);
+        startActivity(intent);
+    }
+
+    public void goToMyAboutScreen() {
+        Intent intent = new Intent(this, AboutActivity.class);
         startActivity(intent);
     }
 
