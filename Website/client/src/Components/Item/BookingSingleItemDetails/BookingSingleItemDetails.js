@@ -9,6 +9,8 @@ import { Link } from 'react-router-dom';
 const BookingSingleItemDetails = (props) => {
   const currentItem = props.item;
 
+  const user = useSelector((state) => state.userReducer);
+
   const [showUpdateModal, setShowUpdateModal] = useState(false);
 
   const handleUpdateModalClose = () => {
@@ -51,7 +53,8 @@ const BookingSingleItemDetails = (props) => {
                 handleUpdateModalShow();
               }}
             >
-              User Details
+              {props.isAdminPanel && user && user.role == 'Admin' && ("User Details")}
+              {!props.isAdminPanel && user && user.role == 'User' && ("My Details")}
             </Button>
           </div>
         </div>

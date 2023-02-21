@@ -95,17 +95,16 @@ const DetailsSingleItem = ({
                       />
                   </RatingModal>
 
-                  {user && user?.role === UserRole.USER ? (
-                    <Link style={{width: '65%'}} className='btn btn-success' to={'/booking/' + data?._id}>Book Now</Link>
+                  {user ? (
+                    user?.role === UserRole.USER ? (
+                      <Link style={{width: '65%'}} className='btn btn-success' to={'/booking/' + data?._id}>Book Now</Link>
+                    ) : (
+                      <Link style={{width: '65%', pointerEvents: "none"}} className='btn btn-success' to='/login' disabled>Login as a User to Book</Link>
+                    )  
                   ) : (
-                    <Button
-                      variant='success'
-                      onClick={handleGoogleLogin}
-                      style={{width: '65%'}}
-                    >
-                      Login as a User to Book
-                    </Button>
+                    <Link style={{width: '65%'}} className='btn btn-success' to='/login'>Login to Book</Link>
                   )}
+
                 </div>
               </ListGroup.Item>
             </ListGroup>

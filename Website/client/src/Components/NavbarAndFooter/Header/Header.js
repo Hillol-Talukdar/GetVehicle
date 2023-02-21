@@ -13,6 +13,8 @@ import { googleLogin } from '../../../Services/GoogleAuthService';
 import LoggedInUserInfoContainer from '../../ContainerComponents/LoggedInUserInfoContainer/LoggedInUserInfoContainer';
 import './Header.css';
 import { FcGoogle } from 'react-icons/fc';
+import { BiLogIn } from 'react-icons/bi';
+import { HiOutlineUserAdd } from 'react-icons/hi';
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -134,6 +136,20 @@ const Header = () => {
                 </NavDropdown.Item>
               </NavDropdown>
             )}
+
+
+            <Navbar.Text>
+              <NavLink
+                to="/about"
+                className={({ isActive }) =>
+                  isActive
+                    ? 'active-text-color-and-decoration'
+                    : 'text-color-and-decoration'
+                }
+              >
+                {NavbarConstants.ABOUT}
+              </NavLink>
+            </Navbar.Text>
           </Nav>
 
           {loggedInUserDetails && (
@@ -141,13 +157,30 @@ const Header = () => {
               userInfo={loggedInUserDetails}
             ></LoggedInUserInfoContainer>
           )}
-          {!loggedInUserDetails && (
-            <button class="content" onClick={handleGoogleLogin}>
+
+          {/* {!loggedInUserDetails && (
+            <button className="content" onClick={handleGoogleLogin}>
               <div className="google-icon">
                 <FcGoogle />
               </div>
               <span className="google-button-text">Sign in with Google</span>
             </button>
+          )} */}
+
+          {!loggedInUserDetails && (
+            <NavLink to="/register" style={{ color: "white", float: "right"  }}>
+              <Button className="btn-info btn-sm px-3">
+                <HiOutlineUserAdd/> &nbsp;Sign Up
+              </Button>
+            </NavLink>
+          )}
+
+          {!loggedInUserDetails && ( 
+            <NavLink to="/login" className="mx-2" style={{ color: "white", float: "right"  }}>
+              <Button className="btn-success btn-sm px-3 sign-in-button">
+                <BiLogIn/> &nbsp;Sign In
+              </Button>
+            </NavLink>
           )}
         </Navbar.Collapse>
       </Navbar>

@@ -148,7 +148,11 @@ const CreateOrUpdateItemForm = ({
           className="form-group col-sm-4 flex-column d-flex mb-3"
           controlId="formBasicMileage"
         >
-          <Form.Label>{VehicleInfoConstants.MILEAGE}</Form.Label>
+          <Form.Label>
+            {VehicleInfoConstants.MILEAGE}
+            <span className="text-danger"> *</span>
+          </Form.Label>
+          
           <Form.Control
             type="Number"
             name={VehicleInfoConstants.MILEAGE_IN_MODEL}
@@ -181,7 +185,7 @@ const CreateOrUpdateItemForm = ({
           </Form.Select>
         </Form.Group>
 
-        <Form.Group className="form-group col-sm-4 flex-column d-flex mb-3">
+        {/* <Form.Group className="form-group col-sm-4 flex-column d-flex mb-3">
           <Form.Label>{VehicleInfoConstants.BOOKING_STATUS}</Form.Label>
 
           <Form.Select name="bookingStatus" onChange={changeHandler}>
@@ -192,7 +196,7 @@ const CreateOrUpdateItemForm = ({
               {BookingStatus.RESERVED}
             </option>
           </Form.Select>
-        </Form.Group>
+        </Form.Group> */}
 
         <Form.Group
           className="form-group col-sm-4 flex-column d-flex mb-3"
@@ -218,9 +222,7 @@ const CreateOrUpdateItemForm = ({
             </option>
           </Form.Select>
         </Form.Group>
-      </div>
 
-      <div className="row justify-content-between text-left">
         <Form.Group
           className="form-group col-sm-4 flex-column d-flex mb-3"
           controlId="formBasicCurrentLocationString"
@@ -237,7 +239,9 @@ const CreateOrUpdateItemForm = ({
             onChange={changeHandler}
           />
         </Form.Group>
+      </div>
 
+      <div className="row justify-content-between text-left">
         <Form.Group
           className="form-group col-sm-4 flex-column d-flex mb-3"
           controlId="formBasicGroundClearance"
@@ -272,31 +276,30 @@ const CreateOrUpdateItemForm = ({
               ))}
           </Form.Select>
         </Form.Group>
-      </div>
 
-      <div className="row justify-content-between text-left mb-3">
-        {showSubCategory && (
-          <Form.Group className="form-group col-sm-4 flex-column d-flex mb-3">
-            <Form.Label>{VehicleInfoConstants.SUB_CATEGORY}</Form.Label>
+        <Form.Group className="form-group col-sm-4 flex-column d-flex mb-3">
+          {showSubCategory && (
+            <>
+              <Form.Label>{VehicleInfoConstants.SUB_CATEGORY}</Form.Label>
 
-            <Form.Select
-              name={VehicleInfoConstants.SUB_CATEGORY_IN_MODEL}
-              onChange={changeHandler}
-            >
-              <option selected={values[VehicleInfoConstants.SUB_CATEGORY_IN_MODEL] === ''} disabled>
-                Select {VehicleInfoConstants.SUB_CATEGORY}
-              </option>
+              <Form.Select
+                name={VehicleInfoConstants.SUB_CATEGORY_IN_MODEL}
+                onChange={changeHandler}
+              >
+                <option selected={values[VehicleInfoConstants.SUB_CATEGORY_IN_MODEL] === ''} disabled>
+                  Select {VehicleInfoConstants.SUB_CATEGORY}
+                </option>
 
-              {values?.subCategories?.length > 0 &&
-                values?.subCategories?.map((subCat) => (
-                  <option keys={subCat._id} value={subCat._id} selected={values[VehicleInfoConstants.SUB_CATEGORY_IN_MODEL] === subCat._id}>
-                    {subCat.name}
-                  </option>
-                ))}
-            </Form.Select>
-          </Form.Group>
-        
-        )}
+                {values?.subCategories?.length > 0 &&
+                  values?.subCategories?.map((subCat) => (
+                    <option keys={subCat._id} value={subCat._id} selected={values[VehicleInfoConstants.SUB_CATEGORY_IN_MODEL] === subCat._id}>
+                      {subCat.name}
+                    </option>
+                  ))}
+              </Form.Select>
+            </>
+          )}
+        </Form.Group>
       </div>
 
       <Form.Group>

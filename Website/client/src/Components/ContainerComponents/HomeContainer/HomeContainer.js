@@ -19,10 +19,21 @@ const HomeContainer = () => {
   const [filteredItems, setFilteredItems] = useState([]);
   const [categories, setCategories] = useState([]);
 
+  const getAvailableVehicles = (allVehicles) => {
+    let availableVehicles = [];
+    allVehicles.forEach(vehicle => {
+      if(!vehicle.isTrashed) {
+        availableVehicles.push(vehicle);
+      }
+    });
+    return availableVehicles;
+  }
+
   const loadAllVehicles = () => {
     getAllVehicleList().then((response) => {
-      setAllItems(response.data.data);
-      setFilteredItems(response.data.data);
+      let availableVehicles = getAvailableVehicles(response.data.data);
+      setAllItems(availableVehicles);
+      setFilteredItems(availableVehicles);
     });
   };
 
@@ -63,6 +74,10 @@ const HomeContainer = () => {
 
     if (isCategoryFilterApplied) {
       filteredItems = filteredItems.filter((item) => {
+        if(item.category === null || item.category === undefined) {
+          return false;
+        }
+
         return item.category.name === categoryFilterFieldValue;
       });
     }
@@ -106,9 +121,9 @@ const HomeContainer = () => {
             multiText={[
               'Planning for a trip and need a vehicle?',
               'Then you are in the right place.....',
-              'We are giving you the best deals...',
+              'GetVehicle is giving you the best deals...',
               'Get your dream vehicle and enjoy a trip!',
-              'Book Now.......!',
+              'Book Now From GetVehicle.......!',
             ]}
             multiTextDelay={1000}
             multiTextLoop
